@@ -88,8 +88,15 @@ leurs notes, et le téléchargement GPX ou KML.
 
 ### Sur le NAS
 
+Depuis Portainer : **Stacks → Add stack → Web editor**, coller
+`docker-compose.yml`, déployer. Puis <http://votre-nas:8137>. L'image est
+construite par GitHub à chaque push et publiée sur `ghcr.io`, pour amd64 et
+arm64.
+
+En ligne de commande :
+
 ```bash
-docker compose up -d --build
+docker compose up -d
 ```
 
 Le service ne calcule rien et n'appelle aucun routeur : il sert ce que
@@ -97,7 +104,7 @@ Le service ne calcule rien et n'appelle aucun routeur : il sert ce que
 emportées cessent d'exister, et le remettre debout ne dépend d'aucun service
 extérieur. Leaflet est servi par le conteneur, pas par un CDN.
 
-Le volume `./carnet` contient ce qui naît de l'usage — les sorties notées et les
+Le volume nommé `carnet` contient ce qui naît de l'usage — les sorties notées et les
 traces réellement suivies. Une mise à jour de l'image n'y touche pas.
 
 ### Sur le terrain
