@@ -1,14 +1,14 @@
 # Olifant sur le NAS.
 #
-#   docker compose up -d --build
+# Depuis Portainer : Stacks > Add stack > Repository
+#   URL        https://github.com/davidp57/olifant
+#   Compose    docker-compose.yml
+# Portainer clone le depot et construit l'image lui-meme. Rien a pousser
+# ailleurs, rien a telecharger a la main.
 #
-# Le service ne sert que des fichiers deja calcules : il n'appelle aucun
-# routeur et ne depend d'aucun service exterieur pour demarrer. Seul le fond
-# de carte vient d'OpenStreetMap, cote navigateur.
-#
-# Pour ajouter ou corriger un parcours, on modifie data/parcours.yaml sur le
-# poste, on lance `python -m olifant calcule`, on reconstruit l'image. Le
-# volume, lui, n'est jamais touche : le carnet et les traces suivies restent.
+# Le service ne calcule rien et n'appelle aucun routeur : il sert ce que la
+# commande `calcule` a produit et qui voyage dans le depot. Seul le fond de
+# carte vient d'OpenStreetMap, cote navigateur.
 
 services:
   olifant:
@@ -17,9 +17,16 @@ services:
     container_name: olifant
     restart: unless-stopped
     ports:
+      # Changer le port de gauche si 8137 est deja pris sur le NAS.
       - "8137:8137"
     volumes:
-      # Le carnet de sorties et les traces reellement suivies.
-      - ./carnet:/data
+      # Le carnet de sorties et les traces reellement suivies. Volume nomme
+      # plutot qu'un dossier du NAS : Docker recopie alors les droits du
+      # conteneur dedans, sans quoi le service (qui ne tourne pas en root)
+      # ne pourrait pas y ecrire.
+      - carnet:/data
     environment:
       TZ: Europe/Paris
+
+volumes:
+  carnet:

@@ -1,0 +1,11 @@
+.git
+.github
+.claude
+tests
+data/cache
+data/traces
+data/carnet.db
+carnet
+__pycache__
+**/__pycache__
+*.pyc
