@@ -1,0 +1,293 @@
+{
+ "titre": "Olifant",
+ "accroche": "Boucles de 10 a 15 km autour de Metz. Celles qui partent a pied se retrouvent sur le parvis de la gare. Les autres demandent une demi-heure de voiture.",
+ "parcours": [
+  {
+   "id": "seille-queuleu",
+   "nom": "La Seille et le fort de Queuleu",
+   "resume": "La plus courte, et deja presque moitie chemin : les roselieres de la Seille, le bois du fort de Queuleu, le coteau du Pas du Loup, retour par les jardins de Montigny.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "eau",
+    "foret",
+    "patrimoine"
+   ],
+   "couleur": "#1E3B34",
+   "km": 10.3,
+   "montee": 61,
+   "chemin": 47,
+   "bitume": 24,
+   "route": 29,
+   "balise": 0,
+   "depart": "Gare de Metz, parvis",
+   "etapes": [
+    {
+     "nom": "Gare de Metz, parvis",
+     "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
+     "lon": 6.177013,
+     "lat": 49.109277,
+     "depart": true
+    },
+    {
+     "nom": "Parc de la Seille",
+     "note": "Prairies humides et roselieres au bord de la Seille. Herons.",
+     "lon": 6.184968,
+     "lat": 49.10661,
+     "depart": false
+    },
+    {
+     "nom": "Fort de Queuleu",
+     "note": "Fort du XIXe siecle, memorial de la Resistance. Le bois autour est ouvert et sillonne de chemins.",
+     "lon": 6.195434,
+     "lat": 49.098452,
+     "depart": false
+    },
+    {
+     "nom": "Parc du Pas du Loup",
+     "note": "Coteau boise au sud du fort de Queuleu, sentiers en terre.",
+     "lon": 6.190089,
+     "lat": 49.089365,
+     "depart": false
+    },
+    {
+     "nom": "Montigny-les-Metz",
+     "note": "Retour par le sud, jardins ouvriers et bord de Moselle.",
+     "lon": 6.163123,
+     "lat": 49.087475,
+     "depart": false
+    }
+   ]
+  },
+  {
+   "id": "bois-de-lest",
+   "nom": "Les bois de l'est",
+   "resume": "La meme entree en matiere, puis on pousse jusqu'au bois de la Macabee, le plus grand massif qu'on puisse atteindre a pied depuis la gare, et on rentre par les parcs de Borny.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "foret",
+    "eau"
+   ],
+   "couleur": "#3E6B4F",
+   "km": 12.3,
+   "montee": 71,
+   "chemin": 38,
+   "bitume": 35,
+   "route": 27,
+   "balise": 17,
+   "depart": "Gare de Metz, parvis",
+   "etapes": [
+    {
+     "nom": "Gare de Metz, parvis",
+     "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
+     "lon": 6.177013,
+     "lat": 49.109277,
+     "depart": true
+    },
+    {
+     "nom": "Parc de la Seille",
+     "note": "Prairies humides et roselieres au bord de la Seille. Herons.",
+     "lon": 6.184968,
+     "lat": 49.10661,
+     "depart": false
+    },
+    {
+     "nom": "Fort de Queuleu",
+     "note": "Fort du XIXe siecle, memorial de la Resistance. Le bois autour est ouvert et sillonne de chemins.",
+     "lon": 6.195434,
+     "lat": 49.098452,
+     "depart": false
+    },
+    {
+     "nom": "Bois de la Macabee",
+     "note": "Le plus grand massif accessible a pied depuis Metz, hetres et charmes.",
+     "lon": 6.232106,
+     "lat": 49.101397,
+     "depart": false
+    },
+    {
+     "nom": "Parc de Gloucester",
+     "note": "Allees en terre et pieces d'eau, a la lisiere est de Borny.",
+     "lon": 6.226121,
+     "lat": 49.113226,
+     "depart": false
+    },
+    {
+     "nom": "Parc de la Cheneau",
+     "note": "Grand parc boise a l'est de Metz, etang et allees en terre.",
+     "lon": 6.207915,
+     "lat": 49.113291,
+     "depart": false
+    }
+   ]
+  },
+  {
+   "id": "deux-rives",
+   "nom": "Les deux rives",
+   "resume": "La Moselle dans les deux sens : on descend par l'Esplanade et l'ile du Saulcy, on remonte par les bras morts de Longeville et le parc Schuman.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "eau",
+    "patrimoine"
+   ],
+   "couleur": "#316E7C",
+   "km": 13.1,
+   "montee": 20,
+   "chemin": 32,
+   "bitume": 29,
+   "route": 39,
+   "balise": 18,
+   "depart": "Gare de Metz, parvis",
+   "etapes": [
+    {
+     "nom": "Gare de Metz, parvis",
+     "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
+     "lon": 6.177013,
+     "lat": 49.109277,
+     "depart": true
+    },
+    {
+     "nom": "Jardin de l'Esplanade",
+     "note": "Terrasse au-dessus de la Moselle, vue sur le Mont Saint-Quentin.",
+     "lon": 6.170519,
+     "lat": 49.115968,
+     "depart": false
+    },
+    {
+     "nom": "Ile du Saulcy",
+     "note": "Ile universitaire, tres calme hors semestre. Cygnes sur les deux bras.",
+     "lon": 6.161249,
+     "lat": 49.120109,
+     "depart": false
+    },
+    {
+     "nom": "Le Grand Patural, Ban-Saint-Martin",
+     "note": "Prairie et promenade au bord de la Moselle, juste avant de quitter la ville.",
+     "lon": 6.151052,
+     "lat": 49.117929,
+     "depart": false
+    },
+    {
+     "nom": "Longeville-les-Metz",
+     "note": "Rive droite, entre les jardins et le bras de la Moselle.",
+     "lon": 6.136124,
+     "lat": 49.115245,
+     "depart": false
+    },
+    {
+     "nom": "Parc Robert Schuman, Montigny",
+     "note": "Bras mort de la Moselle et grands arbres, entre Longeville et Montigny.",
+     "lon": 6.140945,
+     "lat": 49.099878,
+     "depart": false
+    }
+   ]
+  },
+  {
+   "id": "seille-amont",
+   "nom": "La Seille en amont",
+   "resume": "La plus verte du lot : plein sud le long de la Seille jusqu'aux prairies inondables de Marly, retour par les jardins de Montigny. Plate de bout en bout.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "eau"
+   ],
+   "couleur": "#5A6E2F",
+   "km": 15.2,
+   "montee": 31,
+   "chemin": 54,
+   "bitume": 18,
+   "route": 28,
+   "balise": 0,
+   "depart": "Gare de Metz, parvis",
+   "etapes": [
+    {
+     "nom": "Gare de Metz, parvis",
+     "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
+     "lon": 6.177013,
+     "lat": 49.109277,
+     "depart": true
+    },
+    {
+     "nom": "Parc de la Seille",
+     "note": "Prairies humides et roselieres au bord de la Seille. Herons.",
+     "lon": 6.184968,
+     "lat": 49.10661,
+     "depart": false
+    },
+    {
+     "nom": "Bord de Seille, Marly",
+     "note": "La Seille en amont de Metz, prairies inondables et ripisylve.",
+     "lon": 6.155748,
+     "lat": 49.065114,
+     "depart": false
+    },
+    {
+     "nom": "Montigny-les-Metz",
+     "note": "Retour par le sud, jardins ouvriers et bord de Moselle.",
+     "lon": 6.163123,
+     "lat": 49.087475,
+     "depart": false
+    }
+   ]
+  },
+  {
+   "id": "cote-plappeville",
+   "nom": "Le versant de Plappeville",
+   "resume": "La plus longue, et la seule qui monte vraiment : on gagne la cote par le Ban-Saint-Martin, on traverse le village vigneron de Plappeville et les vergers de Lorry, on redescend plein est.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "relief",
+    "patrimoine"
+   ],
+   "couleur": "#B8862A",
+   "km": 15.8,
+   "montee": 160,
+   "chemin": 33,
+   "bitume": 25,
+   "route": 42,
+   "balise": 21,
+   "depart": "Gare de Metz, parvis",
+   "etapes": [
+    {
+     "nom": "Gare de Metz, parvis",
+     "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
+     "lon": 6.177013,
+     "lat": 49.109277,
+     "depart": true
+    },
+    {
+     "nom": "Ile du Saulcy",
+     "note": "Ile universitaire, tres calme hors semestre. Cygnes sur les deux bras.",
+     "lon": 6.161249,
+     "lat": 49.120109,
+     "depart": false
+    },
+    {
+     "nom": "Le Grand Patural, Ban-Saint-Martin",
+     "note": "Prairie et promenade au bord de la Moselle, juste avant de quitter la ville.",
+     "lon": 6.151052,
+     "lat": 49.117929,
+     "depart": false
+    },
+    {
+     "nom": "Plappeville",
+     "note": "Village vigneron du versant nord, ruelles et maisons de maitre.",
+     "lon": 6.125013,
+     "lat": 49.131014,
+     "depart": false
+    },
+    {
+     "nom": "Lorry-les-Metz",
+     "note": "Vergers et vignes en terrasse sur le versant nord de la cote.",
+     "lon": 6.12044,
+     "lat": 49.143109,
+     "depart": false
+    }
+   ]
+  }
+ ]
+}

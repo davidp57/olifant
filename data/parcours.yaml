@@ -1,0 +1,281 @@
+# Olifant - le fichier de reference.
+#
+# On n'ecrit ici que ce qu'un humain sait : des lieux nommes et l'ordre dans
+# lequel on les enchaine. La trace, la distance, le denivele et la part de
+# chemin sont calcules par `python -m olifant calcule`, jamais saisis.
+
+meta:
+  titre: Olifant
+  accroche: >-
+    Boucles de 10 a 15 km autour de Metz. Celles qui partent a pied se
+    retrouvent sur le parvis de la gare. Les autres demandent une demi-heure
+    de voiture.
+
+points:
+
+  # --- points de ralliement ---------------------------------------------
+  gare:
+    nom: Gare de Metz, parvis
+    lon: 6.177013
+    lat: 49.109277
+    note: >-
+      Point de ralliement des boucles a pied : a moins d'un quart d'heure de
+      marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.
+
+  # --- Metz et sa banlieue ----------------------------------------------
+  parc-seille:
+    nom: Parc de la Seille
+    lon: 6.184968
+    lat: 49.106610
+    note: Prairies humides et roselieres au bord de la Seille. Herons.
+  queuleu:
+    nom: Fort de Queuleu
+    lon: 6.195434
+    lat: 49.098452
+    note: >-
+      Fort du XIXe siecle, memorial de la Resistance. Le bois autour est ouvert
+      et sillonne de chemins.
+  cheneau:
+    nom: Parc de la Cheneau
+    lon: 6.207915
+    lat: 49.113291
+    note: Grand parc boise a l'est de Metz, etang et allees en terre.
+  esplanade:
+    nom: Jardin de l'Esplanade
+    lon: 6.170519
+    lat: 49.115968
+    note: Terrasse au-dessus de la Moselle, vue sur le Mont Saint-Quentin.
+  saulcy:
+    nom: Ile du Saulcy
+    lon: 6.161249
+    lat: 49.120109
+    note: Ile universitaire, tres calme hors semestre. Cygnes sur les deux bras.
+  ban:
+    nom: Le Ban-Saint-Martin
+    lon: 6.151158
+    lat: 49.122521
+    note: On quitte la ville, la promenade suit la Moselle.
+  longeville:
+    nom: Longeville-les-Metz
+    lon: 6.136124
+    lat: 49.115245
+    note: Rive droite, entre les jardins et le bras de la Moselle.
+  moulins:
+    nom: Moulins-les-Metz
+    lon: 6.107503
+    lat: 49.106851
+    note: On traverse la Moselle ici pour rentrer par l'autre rive. Boulangerie.
+  montigny:
+    nom: Montigny-les-Metz
+    lon: 6.163123
+    lat: 49.087475
+    note: Retour par le sud, jardins ouvriers et bord de Moselle.
+
+  # --- cotes de Moselle --------------------------------------------------
+  scy:
+    nom: Eglise fortifiee Saint-Quentin, Scy-Chazelles
+    lon: 6.111337
+    lat: 49.111092
+    note: >-
+      Eglise fortifiee du XIIe siecle, tombe de Robert Schuman a l'interieur,
+      sa maison a 200 m. C'est ici que commence la montee.
+  quentin:
+    nom: Mont Saint-Quentin, sommet
+    lon: 6.127302
+    lat: 49.121225
+    note: >-
+      358 m, ancien complexe fortifie en partie ruine, bois et prairies,
+      panorama sur toute la vallee. Les batiments sont interdits d'acces.
+  plappeville:
+    nom: Plappeville
+    lon: 6.125013
+    lat: 49.131014
+    note: Village vigneron du versant nord, ruelles et maisons de maitre.
+  lorry:
+    nom: Lorry-les-Metz
+    lon: 6.120440
+    lat: 49.143109
+    note: Vergers et vignes en terrasse sur le versant nord de la cote.
+  sainte-ruffine:
+    nom: Sainte-Ruffine
+    lon: 6.096321
+    lat: 49.105775
+    note: Petit village accroche a la cote, depart des sentiers du versant ouest.
+  jussy:
+    nom: Jussy
+    lon: 6.086060
+    lat: 49.101975
+    note: Village vigneron, vue sur la vallee depuis les hauts.
+  vaux:
+    nom: Vaux
+    lon: 6.080754
+    lat: 49.094109
+    note: Fond de vallon boise, source et lavoir.
+
+  # --- vallee de la Mance et Gorze ---------------------------------------
+  ars:
+    nom: Ars-sur-Moselle
+    lon: 6.076311
+    lat: 49.076968
+    note: Depart en voiture. Se garer pres de la gare ou du centre.
+  jouy-aqueduc:
+    nom: Aqueduc romain de Jouy-aux-Arches
+    lon: 6.080250
+    lat: 49.065293
+    note: >-
+      Sept arches encore debout d'un aqueduc du IIe siecle qui amenait l'eau
+      de Gorze a Metz. La suite de l'ouvrage se devine tout le long du vallon.
+  gorze:
+    nom: Gorze
+    lon: 5.998824
+    lat: 49.051625
+    note: >-
+      Village au fond de la vallee, ancienne abbaye benedictine et palais
+      abbatial. Boulangerie et cafe sur la place.
+  abbaye-gorze:
+    nom: Abbaye de Gorze
+    lon: 5.997058
+    lat: 49.055439
+    note: Le palais abbatial et son jardin en terrasses.
+
+  # --- vallee de la Canner -----------------------------------------------
+  kedange:
+    nom: Kedange-sur-Canner
+    lon: 6.341200
+    lat: 49.309500
+    note: Depart en voiture, 35 min de Metz. Se garer pres de la mairie.
+  hombourg:
+    nom: Hombourg-Budange
+    lon: 6.344634
+    lat: 49.295953
+    note: Chateau et parc, au bord de la Canner.
+  foret-hombourg:
+    nom: Foret de Hombourg-Budange
+    lon: 6.373180
+    lat: 49.284147
+    note: Grande hetraie, chemins forestiers larges et bien traces.
+
+  # --- pays des trois frontieres -----------------------------------------
+  sierck:
+    nom: Chateau des ducs de Lorraine, Sierck-les-Bains
+    lon: 6.359738
+    lat: 49.440098
+    note: Depart en voiture, 45 min de Metz. Parking sous le chateau.
+  montenach:
+    nom: Montenach
+    lon: 6.381197
+    lat: 49.420355
+    note: >-
+      Village au pied de la reserve naturelle des pelouses calcaires, orchidees
+      au printemps, vues sur la boucle de la Moselle.
+
+  # --- reperes verts reperes autour de Metz -------------------------------
+  grand-patural:
+    nom: Le Grand Patural, Ban-Saint-Martin
+    lon: 6.151052
+    lat: 49.117929
+    note: Prairie et promenade au bord de la Moselle, juste avant de quitter la ville.
+  pas-du-loup:
+    nom: Parc du Pas du Loup
+    lon: 6.190089
+    lat: 49.089365
+    note: Coteau boise au sud du fort de Queuleu, sentiers en terre.
+  bois-macabee:
+    nom: Bois de la Macabee
+    lon: 6.232106
+    lat: 49.101397
+    note: Le plus grand massif accessible a pied depuis Metz, hetres et charmes.
+  gloucester:
+    nom: Parc de Gloucester
+    lon: 6.226121
+    lat: 49.113226
+    note: Allees en terre et pieces d'eau, a la lisiere est de Borny.
+  schuman:
+    nom: Parc Robert Schuman, Montigny
+    lon: 6.140945
+    lat: 49.099878
+    note: Bras mort de la Moselle et grands arbres, entre Longeville et Montigny.
+  sansonnet:
+    nom: Parc du Sansonnet
+    lon: 6.153597
+    lat: 49.136765
+    note: Etang et boisement au nord de Metz, sur le retour de la cote.
+  port-metz:
+    nom: Port de Metz
+    lon: 6.190220
+    lat: 49.139982
+    note: Bassins et quais du port fluvial, ambiance industrielle au bord de l'eau.
+  bois-grimont:
+    nom: Bois de Grimont
+    lon: 6.219099
+    lat: 49.143424
+    note: Bois de coteau au nord-est, vue sur la vallee de la Moselle.
+  seille-marly:
+    nom: Bord de Seille, Marly
+    lon: 6.155748
+    lat: 49.065114
+    note: La Seille en amont de Metz, prairies inondables et ripisylve.
+  parc-nec:
+    nom: Parc du Nec, Marly
+    lon: 6.163181
+    lat: 49.061343
+    note: Point le plus au sud de la boucle, avant de remonter la Seille.
+
+parcours:
+
+  # Les cinq boucles ci-dessous sont calees sur des mesures, pas sur des
+  # estimations : distance reelle, denivele, part de chemin. Voir le README.
+
+  - id: seille-queuleu
+    nom: La Seille et le fort de Queuleu
+    acces: a pied
+    themes: [eau, foret, patrimoine]
+    couleur: 1E3B34
+    resume: >-
+      La plus courte, et deja presque moitie chemin : les roselieres de la
+      Seille, le bois du fort de Queuleu, le coteau du Pas du Loup, retour par
+      les jardins de Montigny.
+    etapes: [gare, parc-seille, queuleu, pas-du-loup, montigny, gare]
+
+  - id: bois-de-lest
+    nom: Les bois de l'est
+    acces: a pied
+    themes: [foret, eau]
+    couleur: 3E6B4F
+    resume: >-
+      La meme entree en matiere, puis on pousse jusqu'au bois de la Macabee,
+      le plus grand massif qu'on puisse atteindre a pied depuis la gare, et on
+      rentre par les parcs de Borny.
+    etapes: [gare, parc-seille, queuleu, bois-macabee, gloucester, cheneau, gare]
+
+  - id: deux-rives
+    nom: Les deux rives
+    acces: a pied
+    themes: [eau, patrimoine]
+    couleur: 316E7C
+    resume: >-
+      La Moselle dans les deux sens : on descend par l'Esplanade et l'ile du
+      Saulcy, on remonte par les bras morts de Longeville et le parc Schuman.
+    etapes: [gare, esplanade, saulcy, grand-patural, longeville, schuman, gare]
+
+  - id: seille-amont
+    nom: La Seille en amont
+    acces: a pied
+    themes: [eau]
+    couleur: 5A6E2F
+    resume: >-
+      La plus verte du lot : plein sud le long de la Seille jusqu'aux prairies
+      inondables de Marly, retour par les jardins de Montigny. Plate de bout
+      en bout.
+    etapes: [gare, parc-seille, seille-marly, montigny, gare]
+
+  - id: cote-plappeville
+    nom: Le versant de Plappeville
+    acces: a pied
+    themes: [relief, patrimoine]
+    couleur: B8862A
+    resume: >-
+      La plus longue, et la seule qui monte vraiment : on gagne la cote par le
+      Ban-Saint-Martin, on traverse le village vigneron de Plappeville et les
+      vergers de Lorry, on redescend plein est.
+    etapes: [gare, saulcy, grand-patural, plappeville, lorry, gare]

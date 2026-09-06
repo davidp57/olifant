@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "olifant",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "uvicorn", "olifant.api:app", "--port", "8137"],
+      "port": 8137
+    }
+  ]
+}

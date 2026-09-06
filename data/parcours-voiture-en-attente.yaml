@@ -1,0 +1,60 @@
+# Boucles a depart en voiture, mises de cote le temps de finir celles qui
+# partent a pied de Metz. Les points qu'elles utilisent sont dans
+# parcours.yaml ; les recoller demandera de verifier qu'ils y sont encore.
+
+parcours:
+
+  - id: mont-saint-quentin
+    nom: Le tour du Mont Saint-Quentin
+    acces: voiture
+    parking: Parking de l'eglise fortifiee, Scy-Chazelles (15 min de Metz)
+    themes: [relief, foret, patrimoine]
+    couleur: 8C4A2F
+    resume: >-
+      Le sommet et son fort en ruine, puis les deux villages vignerons du
+      versant nord.
+    etapes: [scy, quentin, plappeville, lorry, scy]
+
+  - id: cotes-jussy
+    nom: Les cotes de Jussy
+    acces: voiture
+    parking: Sainte-Ruffine, centre du village (15 min de Metz)
+    themes: [relief, foret]
+    couleur: 5A6E2F
+    resume: >-
+      Le versant ouest des cotes de Moselle, vignes en bas, hetraie en haut,
+      vue sur la vallee tout du long.
+    etapes: [sainte-ruffine, jussy, vaux, scy, sainte-ruffine]
+
+  - id: mance-gorze
+    nom: L'aqueduc et la vallee de Gorze
+    acces: voiture
+    parking: Ars-sur-Moselle, pres de la gare (20 min de Metz)
+    themes: [patrimoine, foret, eau]
+    couleur: 7A4A6B
+    resume: >-
+      Les arches romaines de Jouy, puis le vallon boise qui remonte jusqu'a
+      l'abbaye de Gorze en suivant le trace de l'aqueduc.
+    etapes: [ars, jouy-aqueduc, gorze, abbaye-gorze, ars]
+
+  - id: canner
+    nom: La vallee de la Canner
+    acces: voiture
+    parking: Kedange-sur-Canner, pres de la mairie (35 min de Metz)
+    themes: [foret, eau]
+    couleur: 2F5F6B
+    resume: >-
+      Une hetraie et une riviere tranquille, le plus forestier du lot et le
+      plus plat.
+    etapes: [kedange, hombourg, foret-hombourg, kedange]
+
+  - id: montenach
+    nom: Les pelouses de Montenach
+    acces: voiture
+    parking: Sous le chateau de Sierck-les-Bains (45 min de Metz)
+    themes: [relief, foret, patrimoine]
+    couleur: A0522D
+    resume: >-
+      La reserve naturelle des pelouses calcaires, ses orchidees et ses vues
+      sur la boucle de la Moselle, au depart du chateau de Sierck.
+    etapes: [sierck, montenach, sierck]

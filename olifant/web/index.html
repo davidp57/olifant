@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Olifant</title>
+<link rel="stylesheet" href="/vendor/leaflet.css">
+<style>
+  :root{
+    --papier:#E8EBE4; --carte-fond:#F3F5F0; --encre:#15211D;
+    --profond:#1E3B34; --eau:#316E7C; --jaumont:#B8862A;
+    --trait:rgba(21,33,29,.14); --trait-fort:rgba(21,33,29,.3);
+    --doux:rgba(21,33,29,.62);
+    --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --papier:#141A18; --carte-fond:#1B2321; --encre:#E4E8E1;
+      --profond:#8FBFA9; --eau:#6FB0BF; --jaumont:#D6A64A;
+      --trait:rgba(228,232,225,.14); --trait-fort:rgba(228,232,225,.28);
+      --doux:rgba(228,232,225,.62);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papier);color:var(--encre);
+    font-family:var(--sans);font-size:15px;line-height:1.55}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;color:var(--profond)}
+  a{color:var(--eau)}
+
+  .cadre{display:grid;grid-template-columns:minmax(320px,420px) 1fr;
+    height:100vh;height:100dvh}
+  .volet{overflow-y:auto;padding:22px 20px 40px;border-right:1px solid var(--trait)}
+  #carte{background:var(--carte-fond)}
+
+  header{border-bottom:2px solid var(--profond);padding-bottom:14px;margin-bottom:6px}
+  h1{font-size:30px;letter-spacing:-.01em}
+  .accroche{margin:8px 0 0;color:var(--doux);font-size:13.5px;max-width:46ch}
+
+  .fiche{border-bottom:1px solid var(--trait);padding:16px 0;cursor:pointer;
+    display:grid;grid-template-columns:74px 1fr;gap:16px;align-items:start;
+    border-left:3px solid transparent;padding-left:9px;margin-left:-12px;
+    transition:background .15s ease}
+  .fiche:hover{background:var(--carte-fond)}
+  .fiche[aria-current="true"]{background:var(--carte-fond)}
+  .mesure{font-family:var(--serif);color:var(--eau);padding-top:2px}
+  .mesure b{display:block;font-size:24px;font-weight:400;line-height:1;letter-spacing:-.02em}
+  .mesure span{display:block;font-size:12px;color:var(--doux);margin-top:5px;
+    font-family:var(--sans)}
+  .fiche h3{font-size:16.5px;line-height:1.25}
+  .resume{margin:5px 0 0;font-size:13.6px;color:var(--doux)}
+
+  .jauge{display:flex;height:5px;border-radius:3px;overflow:hidden;margin-top:10px;
+    background:var(--trait)}
+  .jauge i{display:block;height:100%}
+  .jauge .chemin{background:var(--profond)}
+  .jauge .bitume{background:var(--jaumont)}
+  .jauge .route{background:var(--trait-fort)}
+  .legende{margin-top:6px;font-size:11.5px;color:var(--doux);
+    display:flex;gap:12px;flex-wrap:wrap}
+
+  .detail{margin-top:12px;border-top:1px dashed var(--trait);padding-top:12px}
+  .etapes{margin:0;padding:0;list-style:none}
+  .etapes li{padding:7px 0 7px 13px;border-left:2px solid var(--trait);font-size:13.4px}
+  .etapes li.depart{border-left-color:var(--jaumont)}
+  .etapes b{font-weight:600;font-size:13.8px;display:block}
+  .etapes span{color:var(--doux)}
+  .liens{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px;
+    font-size:13px}
+  .bouton{font:inherit;font-size:13.5px;cursor:pointer;border-radius:2px;
+    background:var(--profond);color:var(--papier);border:1px solid var(--profond);
+    padding:6px 13px}
+  .lien{background:none;border:none;padding:0;font:inherit;font-size:13px;
+    color:var(--eau);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  :focus-visible{outline:2px solid var(--eau);outline-offset:2px}
+
+  .vide{padding:30px 0;color:var(--doux)}
+  .souci{margin:14px 0;padding:12px 14px;border-left:3px solid var(--jaumont);
+    background:var(--carte-fond);font-size:13.5px}
+  .souci code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+
+  dialog{border:1px solid var(--trait-fort);border-radius:3px;background:var(--papier);
+    color:var(--encre);padding:0;width:min(460px,94vw)}
+  dialog::backdrop{background:rgba(10,16,14,.6)}
+  .form-tete{padding:18px 20px 12px;border-bottom:1px solid var(--trait)}
+  .form-corps{padding:16px 20px 20px;max-height:70vh;overflow:auto}
+  label{display:block;font-size:12.5px;color:var(--doux);margin-bottom:4px}
+  input,select,textarea{width:100%;font:inherit;font-size:14.5px;color:var(--encre);
+    background:var(--carte-fond);border:1px solid var(--trait-fort);
+    border-radius:2px;padding:7px 9px}
+  textarea{resize:vertical;min-height:70px;font-family:var(--serif)}
+  .champ{margin-bottom:12px}
+  .rangee{display:flex;gap:11px}
+  .rangee>*{flex:1;margin-bottom:12px}
+  .actions{display:flex;justify-content:flex-end;gap:14px;align-items:center;margin-top:4px}
+
+  .flash{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:900;
+    background:var(--profond);color:var(--papier);padding:9px 16px;border-radius:2px;
+    font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  .flash.on{opacity:1}
+  @media (prefers-reduced-motion:reduce){.flash,.fiche{transition:none}}
+
+  @media (max-width:820px){
+    /* Sur telephone la carte passe en haut, collee, et la liste defile dessous. */
+    .cadre{grid-template-columns:1fr;grid-template-rows:44vh auto;height:auto}
+    #carte{order:-1;position:sticky;top:0;z-index:500;height:44vh}
+    .volet{border-right:none;height:auto;overflow:visible}
+  }
+  .leaflet-popup-content{font-family:var(--sans);font-size:13px}
+  .leaflet-popup-content b{font-family:var(--serif);font-weight:400;font-size:14.5px}
+</style>
+</head>
+<body>
+<div class="cadre">
+  <div class="volet">
+    <header>
+      <h1 id="titre">Olifant</h1>
+      <p class="accroche" id="accroche"></p>
+    </header>
+    <div id="liste"><p class="vide">Chargement…</p></div>
+  </div>
+  <div id="carte"></div>
+</div>
+
+<dialog id="dlg">
+  <div class="form-tete"><h2 id="dlg-titre">Noter la sortie</h2></div>
+  <form class="form-corps" id="form" method="dialog">
+    <div class="rangee">
+      <div><label for="f-jour">Date</label><input id="f-jour" name="jour" type="date"></div>
+      <div><label for="f-km">Distance (km)</label>
+        <input id="f-km" name="km" type="number" step="0.1" min="0"></div>
+    </div>
+    <div class="rangee">
+      <div><label for="f-minutes">Durée (minutes)</label>
+        <input id="f-minutes" name="minutes" type="number" min="0" placeholder="150"></div>
+      <div><label for="f-temps">Temps</label>
+        <select id="f-temps" name="temps">
+          <option>Grand soleil</option><option>Éclaircies</option>
+          <option selected>Couvert</option><option>Brouillard</option>
+          <option>Pluie</option><option>Gel ou neige</option><option>Vent fort</option>
+        </select></div>
+    </div>
+    <div class="rangee">
+      <div><label for="f-chemins">État des chemins</label>
+        <select id="f-chemins" name="chemins">
+          <option selected>Sec</option><option>Humide</option>
+          <option>Boueux</option><option>Verglacé</option></select></div>
+      <div><label for="f-ressenti">Ressenti</label>
+        <select id="f-ressenti" name="ressenti">
+          <option>Facile</option><option selected>Bien</option>
+          <option>Éprouvant</option></select></div>
+    </div>
+    <div class="champ"><label for="f-mot">Commentaire</label>
+      <textarea id="f-mot" name="mot"
+        placeholder="Chevreuils dans les vergers avant Lorry, pause café à Scy."></textarea></div>
+    <div class="champ"><label for="f-trace">Trace réellement suivie (.gpx, facultatif)</label>
+      <input id="f-trace" type="file" accept=".gpx"></div>
+    <div class="actions">
+      <button class="lien" type="button" id="btn-annuler">Annuler</button>
+      <button class="bouton" type="button" id="btn-enregistrer">Enregistrer</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="flash" id="flash"></div>
+
+<script src="/vendor/leaflet.js"></script>
+<script>
+const METZ = [49.1093, 6.1770];
+let catalogue = null, traces = null, choisi = null;
+const couches = {};        // id du parcours -> polyligne Leaflet
+const marqueurs = L.layerGroup();
+
+const carte = L.map("carte", {scrollWheelZoom: true}).setView(METZ, 12);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+  attribution: '&copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(carte);
+marqueurs.addTo(carte);
+
+const secu = s => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
+const nb = x => String(x).replace(".", ",");
+
+function flash(message){
+  const f = document.getElementById("flash");
+  f.textContent = message; f.classList.add("on");
+  clearTimeout(f._t); f._t = setTimeout(() => f.classList.remove("on"), 2800);
+}
+
+/* ---------------------------------------------------------------- rendu */
+
+function carteDuParcours(p){
+  const autre = Math.max(0, 100 - p.chemin - p.bitume - p.route);
+  return `<article class="fiche" data-id="${p.id}" tabindex="0" role="button"
+      aria-current="${choisi === p.id}">
+    <div class="mesure"><b>${nb(p.km)}</b><span>km · D+${p.montee} m</span></div>
+    <div>
+      <h3>${secu(p.nom)}</h3>
+      <p class="resume">${secu(p.resume)}</p>
+      <div class="jauge" role="img"
+           aria-label="${p.chemin} % de chemins, ${p.bitume} % de revêtement dur, ${p.route} % de route">
+        <i class="chemin" style="width:${p.chemin}%"></i>
+        <i class="bitume" style="width:${p.bitume}%"></i>
+        <i class="route" style="width:${p.route + autre}%"></i>
+      </div>
+      <p class="legende">
+        <span>${p.chemin} % chemins</span>
+        <span>${p.bitume} % dur</span>
+        <span>${p.route} % route</span>
+        ${p.balise ? `<span>${p.balise} % balisé</span>` : ""}
+        ${p.fois ? `<span>fait ${p.fois} fois</span>` : ""}
+      </p>
+      ${choisi === p.id ? detailDuParcours(p) : ""}
+    </div>
+  </article>`;
+}
+
+function detailDuParcours(p){
+  const etapes = p.etapes.map(e => `<li class="${e.depart ? "depart" : ""}">
+      <b>${secu(e.depart ? "Départ : " + e.nom : e.nom)}</b>
+      <span>${secu(e.note)}</span></li>`).join("");
+  return `<div class="detail">
+    <ul class="etapes">${etapes}</ul>
+    <div class="liens">
+      <button class="bouton" data-noter="${p.id}">Noter cette sortie</button>
+      <a href="/telecharge/${p.id}.gpx" download>GPX pour Iphigénie</a>
+      <a href="/telecharge/${p.id}.kml" download>KML</a>
+    </div>
+  </div>`;
+}
+
+function rendre(){
+  document.getElementById("titre").textContent = catalogue.titre;
+  document.getElementById("accroche").textContent = catalogue.accroche;
+  document.getElementById("liste").innerHTML = catalogue.parcours.map(carteDuParcours).join("");
+  document.querySelectorAll(".fiche").forEach(el => {
+    el.addEventListener("click", e => {
+      if (e.target.closest("a, button")) return;
+      selectionne(el.dataset.id);
+    });
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectionne(el.dataset.id); }
+    });
+  });
+  document.querySelectorAll("[data-noter]").forEach(b =>
+    b.addEventListener("click", () => ouvreFormulaire(b.dataset.noter)));
+}
+
+function selectionne(id){
+  choisi = (choisi === id) ? null : id;
+  rendre();
+  majCarte();
+  if (choisi && couches[choisi]) carte.fitBounds(couches[choisi].getBounds(), {padding: [30, 30]});
+}
+
+function majCarte(){
+  marqueurs.clearLayers();
+  for (const [id, couche] of Object.entries(couches)){
+    const actif = !choisi || choisi === id;
+    couche.setStyle({opacity: actif ? 0.95 : 0.2, weight: choisi === id ? 6 : 4});
+    if (choisi === id) couche.bringToFront();
+  }
+  if (!choisi) return;
+  const p = catalogue.parcours.find(x => x.id === choisi);
+  p.etapes.forEach((e, i) => {
+    L.circleMarker([e.lat, e.lon], {
+      radius: e.depart ? 8 : 6, color: p.couleur, weight: 2,
+      fillColor: e.depart ? p.couleur : "#fff", fillOpacity: 1,
+    }).bindPopup(`<b>${secu(e.depart ? "Départ : " + e.nom : (i + 1) + ". " + e.nom)}</b>`
+                 + (e.note ? "<br>" + secu(e.note) : "")).addTo(marqueurs);
+  });
+}
+
+/* ---------------------------------------------------------------- carnet */
+
+const dlg = document.getElementById("dlg");
+let parcoursNote = null;
+
+function ouvreFormulaire(id){
+  parcoursNote = catalogue.parcours.find(p => p.id === id);
+  document.getElementById("dlg-titre").textContent = "Noter : " + parcoursNote.nom;
+  document.getElementById("f-jour").value = new Date().toISOString().slice(0, 10);
+  document.getElementById("f-km").value = parcoursNote.km;
+  document.getElementById("f-minutes").value = "";
+  document.getElementById("f-mot").value = "";
+  document.getElementById("f-trace").value = "";
+  dlg.showModal();
+}
+document.getElementById("btn-annuler").addEventListener("click", () => dlg.close());
+
+document.getElementById("btn-enregistrer").addEventListener("click", async () => {
+  const formulaire = new FormData(document.getElementById("form"));
+  formulaire.append("parcours_id", parcoursNote.id);
+  try{
+    const reponse = await fetch("/api/sorties", {method: "POST", body: formulaire});
+    if (!reponse.ok) throw new Error(await reponse.text());
+    const {id} = await reponse.json();
+    const fichier = document.getElementById("f-trace").files[0];
+    if (fichier){
+      const envoi = new FormData();
+      envoi.append("fichier", fichier);
+      const r2 = await fetch(`/api/sorties/${id}/trace`, {method: "POST", body: envoi});
+      if (!r2.ok) throw new Error(await r2.text());
+    }
+    dlg.close();
+    flash("Sortie enregistrée");
+    await charge();
+  }catch(e){
+    flash("Enregistrement impossible : " + e.message.slice(0, 90));
+  }
+});
+
+/* ---------------------------------------------------------------- demarrage */
+
+function surveilleLaTaille(tout){
+  // Leaflet cadre d'apres la taille de son conteneur. Tant que la grille CSS
+  // n'a pas donne sa hauteur a #carte, cette taille vaut zero et le cadrage
+  // part au zoom maximum sur un point. On attend donc que le conteneur ait
+  // vraiment une hauteur, puis on se contente de remesurer aux changements
+  // suivants (rotation du telephone, barre d'adresse qui se replie).
+  const conteneur = document.getElementById("carte");
+  let cadre = false;
+  new ResizeObserver(() => {
+    carte.invalidateSize();
+    if (!cadre && conteneur.clientHeight > 80){
+      cadre = true;
+      carte.fitBounds(tout.getBounds(), {padding: [25, 25]});
+    }
+  }).observe(conteneur);
+}
+
+async function charge(){
+  const reponse = await fetch("/api/parcours");
+  if (!reponse.ok){
+    document.getElementById("liste").innerHTML =
+      `<div class="souci">Rien à afficher pour l'instant.<br>
+       Lancez <code>python -m olifant calcule</code> pour calculer les traces,
+       puis rechargez cette page.</div>`;
+    return;
+  }
+  catalogue = await reponse.json();
+  if (!traces){
+    traces = await (await fetch("/api/traces.geojson")).json();
+    traces.features.forEach(f => {
+      couches[f.properties.id] = L.geoJSON(f, {
+        style: {color: f.properties.couleur, weight: 4, opacity: .95},
+      }).addTo(carte).on("click", () => selectionne(f.properties.id));
+    });
+    const tout = L.featureGroup(Object.values(couches));
+    if (tout.getLayers().length) surveilleLaTaille(tout);
+  }
+  rendre();
+  majCarte();
+}
+charge();
+</script>
+</body>
+</html>

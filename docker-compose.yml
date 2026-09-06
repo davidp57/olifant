@@ -1,0 +1,25 @@
+# Olifant sur le NAS.
+#
+#   docker compose up -d --build
+#
+# Le service ne sert que des fichiers deja calcules : il n'appelle aucun
+# routeur et ne depend d'aucun service exterieur pour demarrer. Seul le fond
+# de carte vient d'OpenStreetMap, cote navigateur.
+#
+# Pour ajouter ou corriger un parcours, on modifie data/parcours.yaml sur le
+# poste, on lance `python -m olifant calcule`, on reconstruit l'image. Le
+# volume, lui, n'est jamais touche : le carnet et les traces suivies restent.
+
+services:
+  olifant:
+    build: .
+    image: olifant:latest
+    container_name: olifant
+    restart: unless-stopped
+    ports:
+      - "8137:8137"
+    volumes:
+      # Le carnet de sorties et les traces reellement suivies.
+      - ./carnet:/data
+    environment:
+      TZ: Europe/Paris

@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+
+# Ce qui naît de l'usage, pas du code : le carnet et les traces suivies.
+carnet/
+data/carnet.db
+data/traces/

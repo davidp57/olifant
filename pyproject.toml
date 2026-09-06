@@ -1,0 +1,30 @@
+[project]
+name = "olifant"
+version = "0.1.0"
+description = "Preparer, consulter et emporter des randonnees autour de Metz"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pyyaml>=6",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[project.scripts]
+olifant = "olifant.cli:principal"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["olifant*"]
+
+[tool.setuptools.package-data]
+olifant = ["web/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
