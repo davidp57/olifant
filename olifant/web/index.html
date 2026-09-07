@@ -117,6 +117,15 @@
     .bascule .temoin,.bascule .temoin::after{transition:none}
   }
 
+  /* --- ou je suis, et vers ou aller ------------------------------------- */
+  .ma-position{position:relative}
+  .ma-position .point{position:absolute;left:50%;top:50%;width:15px;height:15px;
+    margin:-7.5px 0 0 -7.5px;border-radius:50%;background:#316E7C;
+    border:3px solid #fdfdfb;box-shadow:0 1px 3px rgba(21,33,29,.5)}
+  .ma-position .vise{position:absolute;inset:0;transform-origin:50% 50%}
+  .ma-position .vise svg{width:52px;height:52px;display:block;
+    filter:drop-shadow(0 1px 2px rgba(21,33,29,.4))}
+
   /* --- les pions des reperes sur la carte ------------------------------- */
   /* Le fond est fixe et clair, jamais celui de l'interface : ces pastilles
      sont posees sur une carte qui reste claire meme quand la page passe en
@@ -946,12 +955,6 @@ function situe(position){
   const p = catalogue.parcours.find(x => x.id === choisi);
   if (!p) return;
 
-  maPosition.clearLayers();
-  L.circle([lat, lon], {radius: Math.max(precision, 8), weight: 1,
-    color: "#316E7C", fillColor: "#316E7C", fillOpacity: .12}).addTo(maPosition);
-  L.circleMarker([lat, lon], {radius: 7, weight: 3, color: "#fff",
-    fillColor: "#316E7C", fillOpacity: 1}).addTo(maPosition);
-
   const ou = situeSurLaTrace([lon, lat], p.id);
   if (!ou){ ecritLeSuivi(`<b>Position trouvée</b>`); return; }
   const suivante = etapeApres(p, ou.km);
@@ -960,11 +963,23 @@ function situe(position){
   // `heading` est la direction du deplacement, que le GPS ne connait qu'en
   // mouvement : nulle a l'arret, et absente sur bien des ordinateurs.
   const capActuel = position.coords.heading;
+  const capCible = suivante
+    ? capVers([lon, lat], [suivante.lon, suivante.lat]) : null;
   const versEtape = suivante
     ? `<p class="cap">${suivante.retour ? "Retour au départ" : secu(suivante.nom)} :
        ${nb(Math.max(0, suivante.km - ou.km))} km,
-       ${orientation(capVers([lon, lat], [suivante.lon, suivante.lat]), capActuel)}</p>`
+       ${orientation(capCible, capActuel)}</p>`
     : "";
+
+  // La direction se lit sur la carte, la ou on regarde deja : une fleche
+  // autour du point de position, tournee vers l'etape a rejoindre. Elle vaut
+  // surtout quand cette etape est hors de l'ecran, ce qui est le cas le plus
+  // frequent -- un cap en degres, lui, demande de savoir ou est le nord.
+  maPosition.clearLayers();
+  L.circle([lat, lon], {radius: Math.max(precision, 8), weight: 1,
+    color: "#316E7C", fillColor: "#316E7C", fillOpacity: .12}).addTo(maPosition);
+  L.marker([lat, lon], {icon: pionDePosition(capCible), interactive: false,
+                        zIndexOffset: 1000}).addTo(maPosition);
   ecritLeSuivi(`
     <b>km ${nb(ou.km)} sur ${nb(p.km)}</b>
     <p>${nb(reste)} km restants</p>
@@ -973,6 +988,23 @@ function situe(position){
       ? `Vous êtes à ${Math.round(ou.ecart_m)} m du tracé.`
       : `Sur le tracé, à ${Math.round(ou.ecart_m)} m près.`}
       Position connue au ${Math.round(precision)} m.</p>`);
+}
+
+/* Le point de position, et la fleche s'il y a quelque chose a viser. La
+   carte de Leaflet ne pivote pas : le haut est toujours le nord, donc une
+   rotation de la valeur du cap suffit a pointer au bon endroit. */
+function pionDePosition(capCible){
+  const fleche = capCible === null || capCible === undefined ? "" :
+    `<span class="vise" style="transform:rotate(${capCible.toFixed(1)}deg)">
+       <svg viewBox="0 0 52 52" aria-hidden="true">
+         <path d="M26 1l8.5 13h-5.5v8h-6v-8h-5.5z" fill="#316E7C"
+               stroke="#fdfdfb" stroke-width="1.6" stroke-linejoin="round"/>
+       </svg></span>`;
+  return L.divIcon({
+    className: "ma-position",
+    html: `${fleche}<span class="point"></span>`,
+    iconSize: [52, 52], iconAnchor: [26, 26],
+  });
 }
 
 function ecritLeSuivi(html){
@@ -1109,10 +1141,17 @@ async function basculeLaTraceSuivie(sortieId){
     effaceLaSortie();
     // En pointille et par-dessus : ce qu'on veut voir, c'est ou la marche
     // reelle s'est ecartee de ce qui etait prevu.
-    coucheSortie = L.geoJSON(forme, {
-      style: {color: "#B8862A", weight: 3, opacity: .95, dashArray: "5 4"},
-    }).addTo(carte);
-    coucheSortie.bringToFront();
+    //
+    // Deux traits superposes, et non un seul : un lisere clair dessous, le
+    // pointille dessus. Sans ce lisere, un trait fin se perd dans le detail
+    // d'une carte de ville -- l'ocre precedent se confondait avec les routes
+    // secondaires d'OpenStreetMap, qui sont de la meme famille de teinte.
+    coucheSortie = L.layerGroup([
+      L.geoJSON(forme, {style: {color: "#fdfdfb", weight: 7, opacity: .9}}),
+      L.geoJSON(forme, {style: {color: "#C0392B", weight: 3.5, opacity: 1,
+                                dashArray: "7 5"}}),
+    ]).addTo(carte);
+    coucheSortie.eachLayer(c => c.bringToFront());
     sortieAffichee = sortieId;
     rendre();
     flash(`${nb(forme.properties.km)} km relevés ce jour-là`);
