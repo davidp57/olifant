@@ -142,3 +142,40 @@ class TestServiceWorker:
         """Sinon une correction du service worker n'atteindrait jamais le
         telephone qui tourne avec l'ancien."""
         assert "no-cache" in client.get("/sw.js").headers["cache-control"]
+
+
+class TestVersion:
+    def test_dit_ce_qui_tourne(self, client, monkeypatch):
+        """Sans ce numero, impossible de savoir si le NAS fait tourner la
+        derniere image -- ni de s'apercevoir qu'une mise a jour n'est jamais
+        arrivee jusqu'au telephone."""
+        reponse = client.get("/api/version").json()
+        assert set(reponse) == {"version", "construite"}
+        assert reponse["version"] == "dev"      # hors conteneur
+
+    def test_la_version_est_inscrite_dans_le_service_worker(self, client):
+        """C'est ce qui debloque les mises a jour : un service worker n'est
+        reinstalle que si ses octets changent, et sans cela il continuait de
+        servir eternellement la page qu'il avait en cache."""
+        sw = client.get("/sw.js").text
+        assert "__VERSION__" not in sw
+        assert 'const VERSION = "dev"' in sw
+
+    def test_les_carreaux_ne_sont_pas_versionnes(self, client):
+        """Les jeter a chaque mise a jour ferait perdre un quart d'heure de
+        telechargement pour rien : eux ne dependent pas du code."""
+        sw = client.get("/sw.js").text
+        assert 'const CARREAUX = "olifant-carreaux"' in sw
+        assert '"olifant-coquille-" + VERSION' in sw
+
+    def test_la_version_est_inscrite_dans_la_page(self, client):
+        """La page porte la version avec laquelle elle a ete servie : c'est
+        ainsi qu'elle sait qu'elle sort d'une coquille perimee."""
+        page = client.get("/").text
+        assert "__VERSION__" not in page
+        assert 'data-version="dev"' in page
+
+    def test_la_page_se_revalide(self, client):
+        """Sans cet en-tete, le navigateur resservait sa propre copie et une
+        nouvelle version restait invisible."""
+        assert "no-cache" in client.get("/").headers["cache-control"]

@@ -19,10 +19,19 @@
  * facon avant de partir -- ou lorsqu'on demande explicitement les dix.
  */
 
-const VERSION = "olifant-v1";
-const COQUILLE = VERSION + "-coquille";
-const DONNEES = VERSION + "-donnees";
-const CARREAUX = VERSION + "-carreaux";
+/* Le serveur remplace ce jeton par la version de l'image. Les octets de ce
+   fichier changent donc a chaque deploiement, ce qui declenche la
+   reinstallation du service worker : sans cela une nouvelle version du site
+   n'atteignait jamais le telephone, la page etant servie depuis le cache
+   meme quand on demandait explicitement de le contourner. */
+const VERSION = "__VERSION__";
+
+/* La coquille et les donnees portent la version : un deploiement les remplace.
+   Les carreaux, non -- ils ne dependent pas du code, et les jeter a chaque
+   mise a jour ferait perdre un quart d'heure de telechargement pour rien. */
+const COQUILLE = "olifant-coquille-" + VERSION;
+const DONNEES = "olifant-donnees-" + VERSION;
+const CARREAUX = "olifant-carreaux";
 
 const A_EMPORTER = [
   "/",
@@ -35,7 +44,12 @@ self.addEventListener("install", evenement => {
     const cache = await caches.open(COQUILLE);
     // Une image de Leaflet absente ne doit pas faire echouer l'installation
     // entiere : on prend ce qui vient.
-    await Promise.allSettled(A_EMPORTER.map(url => cache.add(new Request(url))));
+    // On force le contournement du cache HTTP : sans cela l'installation
+    // remettrait en cache la page que le navigateur garde de son cote.
+    await Promise.allSettled(A_EMPORTER.map(async url => {
+      const reponse = await fetch(url, {cache: "reload"});
+      if (reponse.ok) await cache.put(url, reponse);
+    }));
     await self.skipWaiting();
   })());
 });
@@ -44,10 +58,27 @@ self.addEventListener("activate", evenement => {
   evenement.waitUntil((async () => {
     const gardes = [COQUILLE, DONNEES, CARREAUX];
     const noms = await caches.keys();
-    await Promise.all(noms.filter(n => !gardes.includes(n)).map(n => caches.delete(n)));
+    // On ne balaye que nos propres caches, et jamais celui des carreaux.
+    await Promise.all(noms
+      .filter(n => n.startsWith("olifant-") && !gardes.includes(n))
+      .map(n => caches.delete(n)));
     await self.clients.claim();
+    // Les pages ouvertes tournent encore sur l'ancienne coquille : on le leur
+    // dit plutot que de recharger sous les pieds de quelqu'un qui marche.
+    await annonce({type: "version", version: VERSION});
   })());
 });
+
+/* Tout compte rendu part vers toutes les pages ouvertes, et non vers
+   l'expediteur d'un message. Au tout premier chargement, une page n'est pas
+   encore controlee par le service worker : `evenement.source` valait alors
+   null, le travail se faisait mais personne n'en etait informe -- le bouton
+   restait a « Emporter » alors que les carreaux etaient deja pris. */
+async function annonce(nouvelle){
+  const pages = await self.clients.matchAll({includeUncontrolled: true,
+                                             type: "window"});
+  pages.forEach(page => page.postMessage(nouvelle));
+}
 
 /* ------------------------------------------------------------- strategies */
 
@@ -108,16 +139,7 @@ self.addEventListener("message", evenement => {
   evenement.waitUntil(emporte(ordre.parcours, ordre.urls || []));
 });
 
-/* Le compte rendu part vers toutes les pages ouvertes, et non vers l'expediteur
-   du message. Au tout premier chargement, une page n'est pas encore controlee
-   par le service worker : `evenement.source` valait alors null, le travail se
-   faisait mais personne n'en etait informe -- le bouton restait a « Emporter »
-   alors que les carreaux etaient deja pris. */
-async function annonce(nouvelle){
-  const pages = await self.clients.matchAll({includeUncontrolled: true,
-                                             type: "window"});
-  pages.forEach(page => page.postMessage(nouvelle));
-}
+
 
 /* Le compte rendu nomme la boucle dont il parle. Sans cela la page devait se
    fier a une variable disant « celle qu'on emporte en ce moment », qui pouvait

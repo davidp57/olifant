@@ -144,12 +144,19 @@ garde tout.
 
 D'où deux dispositifs, l'un sur le serveur, l'autre dans le navigateur.
 
-**Sur le serveur**, au premier démarrage, le service complète les carreaux qui
-couvrent les traces : 997 pour les dix boucles, du zoom 13 au zoom 16, une
-quinzaine de mégaoctets, un quart d'heure en tâche de fond, une seule fois
-puisqu'ils restent dans le volume. Rien à lancer — le conteneur pose
-`OLIFANT_TUILES_AUTO=1`. Hors conteneur, la variable est absente et un
-`uvicorn` local ne télécharge donc rien ; la commande reste disponible :
+**Le fond voyage dans l'image**, récupéré au moment de la construction : 997
+carreaux pour les dix boucles, du zoom 13 au zoom 16, une quinzaine de
+mégaoctets. Un cache d'Actions évite de les reprendre à chaque push — seul un
+changement de traces en redemande.
+
+C'est une correction, et elle vaut d'être expliquée. Le service les
+téléchargeait lui-même au premier démarrage, un carreau par seconde pendant un
+quart d'heure. Or **les serveurs de tuiles comptent par adresse IP**, et celle
+du NAS est celle de la maison : pendant qu'il préparait le hors-ligne, il
+faisait refuser les tuiles du navigateur de la personne assise à côté — carte
+en damier, sans explication. Le NAS n'appelle donc plus OpenStreetMap du tout.
+
+En développement, la commande reste là :
 
 ```bash
 python -m olifant tuiles --compte-seulement   # dit combien, sans rien prendre
@@ -171,6 +178,25 @@ La carte empile deux fonds : les carreaux locaux **au-dessus** de ceux
 d'OpenStreetMap. Là où le carreau local manque, on voit celui d'OSM à
 travers ; là où le réseau manque, c'est l'inverse ; et quand les deux
 manquent, restent la trace et la position.
+
+### Savoir ce qui tourne
+
+Le pied de la liste affiche la version de l'image et sa date de construction —
+le commit court, inscrit par la construction. Sur un poste de développement,
+il dit « dev ».
+
+Ce n'est pas de la coquetterie. La page est servie par un service worker, donc
+depuis un cache : sans ce numéro, on n'a aucun moyen de savoir si le NAS fait
+tourner la dernière image, **ni de s'apercevoir qu'une mise à jour n'est jamais
+arrivée jusqu'au téléphone**. Un service worker n'est réinstallé que si ses
+octets changent ; le sien porte donc la version, ce qui suffit à le faire
+changer à chaque déploiement. La page, elle, porte la version avec laquelle
+elle a été servie : si le serveur en annonce une autre, elle propose de
+recharger — sans le faire d'autorité, parce que quelqu'un peut être en train de
+marcher en suivant la carte.
+
+Les carreaux, eux, survivent aux mises à jour : leur cache n'est pas versionné.
+Les jeter à chaque déploiement ferait reperdre le téléchargement pour rien.
 
 ### Relever ce qu'il y a autour des étapes
 
@@ -267,7 +293,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-130 tests, sans réseau.
+135 tests, sans réseau.
 
 ## Un mot sur les services publics
 
