@@ -197,10 +197,20 @@ En ligne de commande :
 docker compose up -d
 ```
 
-Le service ne calcule rien et n'appelle aucun routeur : il sert ce que
-`calcule` a produit. Le NAS peut donc être éteint sans que les traces déjà
-emportées cessent d'exister, et le remettre debout ne dépend d'aucun service
-extérieur. Leaflet est servi par le conteneur, pas par un CDN.
+**Pour mettre à jour**, après un push sur `main` : dans Portainer, ouvrir la
+stack et **Pull and redeploy**. En ligne de commande :
+
+```bash
+docker compose pull && docker compose up -d
+```
+
+Le service ne calcule aucune trace et n'interroge aucun routeur : il sert ce
+que `calcule` a produit. Aucune visite ne déclenche d'appel vers l'extérieur.
+La seule exception est une préparation unique au premier démarrage — le fond
+de carte, décrit plus haut — qui se fait en tâche de fond et ne se reproduit
+pas. Le NAS peut donc être éteint sans que les traces déjà emportées cessent
+d'exister, et le remettre debout ne dépend d'aucun service extérieur. Leaflet
+est servi par le conteneur, pas par un CDN.
 
 Le volume nommé `carnet` contient ce qui naît de l'usage — les sorties notées et les
 traces réellement suivies. Une mise à jour de l'image n'y touche pas.
