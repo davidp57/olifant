@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Olifant</title>
 <link rel="stylesheet" href="/vendor/leaflet.css">
 <style>
@@ -13,6 +13,7 @@
     --doux:rgba(21,33,29,.62);
     --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
     --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --pouce:44px;   /* hauteur minimale d'une cible tactile */
   }
   @media (prefers-color-scheme:dark){
     :root{
@@ -37,6 +38,20 @@
   h1{font-size:30px;letter-spacing:-.01em}
   .accroche{margin:8px 0 0;color:var(--doux);font-size:13.5px;max-width:46ch}
 
+  /* --- filtres ---------------------------------------------------------- */
+  .filtres{display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+    padding:12px 0 4px;border-bottom:1px solid var(--trait)}
+  .segments{display:flex;border:1px solid var(--trait-fort);border-radius:2px;
+    overflow:hidden}
+  .segments button{font:inherit;font-size:13px;cursor:pointer;border:none;
+    background:none;color:var(--doux);padding:0 11px;min-height:34px;
+    white-space:nowrap;border-right:1px solid var(--trait)}
+  .segments button:last-child{border-right:none}
+  .segments button[aria-pressed="true"]{background:var(--profond);color:var(--papier)}
+  .filtres select{width:auto;font-size:13px;padding:6px 8px;min-height:34px}
+  .compte{font-size:12.5px;color:var(--doux);margin-left:auto}
+
+  /* --- une fiche de la liste -------------------------------------------- */
   .fiche{border-bottom:1px solid var(--trait);padding:16px 0;cursor:pointer;
     display:grid;grid-template-columns:74px 1fr;gap:16px;align-items:start;
     border-left:3px solid transparent;padding-left:9px;margin-left:-12px;
@@ -46,9 +61,12 @@
   .mesure{font-family:var(--serif);color:var(--eau);padding-top:2px}
   .mesure b{display:block;font-size:24px;font-weight:400;line-height:1;letter-spacing:-.02em}
   .mesure span{display:block;font-size:12px;color:var(--doux);margin-top:5px;
-    font-family:var(--sans)}
+    font-family:var(--sans);white-space:nowrap}
   .fiche h3{font-size:16.5px;line-height:1.25}
   .resume{margin:5px 0 0;font-size:13.6px;color:var(--doux)}
+  .marque{font-size:11.5px;color:var(--doux);border:1px solid var(--trait-fort);
+    border-radius:2px;padding:1px 6px;margin-left:7px;vertical-align:2px;
+    white-space:nowrap}
 
   .jauge{display:flex;height:5px;border-radius:3px;overflow:hidden;margin-top:10px;
     background:var(--trait)}
@@ -61,23 +79,83 @@
 
   .detail{margin-top:12px;border-top:1px dashed var(--trait);padding-top:12px}
   .etapes{margin:0;padding:0;list-style:none}
-  .etapes li{padding:7px 0 7px 13px;border-left:2px solid var(--trait);font-size:13.4px}
+  .etapes li{padding:0;border-left:2px solid var(--trait);font-size:13.4px}
   .etapes li.depart{border-left-color:var(--jaumont)}
+  .etapes li[aria-current="true"]{border-left-color:var(--eau);
+    background:var(--carte-fond)}
+  /* Une etape s'ouvre : c'est un bouton, donc a la hauteur du pouce. */
+  .etape-tete{display:grid;grid-template-columns:52px 1fr;gap:9px;width:100%;
+    align-items:baseline;font:inherit;text-align:left;background:none;
+    border:none;color:inherit;cursor:pointer;padding:9px 8px 9px 11px;
+    min-height:var(--pouce)}
+  .etape-km{font-family:var(--serif);color:var(--eau);font-size:13px;
+    white-space:nowrap}
   .etapes b{font-weight:600;font-size:13.8px;display:block}
   .etapes span{color:var(--doux)}
-  .liens{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px;
-    font-size:13px}
-  .bouton{font:inherit;font-size:13.5px;cursor:pointer;border-radius:2px;
-    background:var(--profond);color:var(--papier);border:1px solid var(--profond);
-    padding:6px 13px}
-  .lien{background:none;border:none;padding:0;font:inherit;font-size:13px;
-    color:var(--eau);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  .etape-corps{padding:0 8px 10px 11px}
+
+  /* --- ce qu'OSM sait autour d'une etape -------------------------------- */
+  .reperes{margin:8px 0 0;padding:0;list-style:none;display:flex;
+    flex-wrap:wrap;gap:6px}
+  .reperes li{border:1px solid var(--trait-fort);border-radius:2px;
+    padding:3px 8px;font-size:12px;color:var(--doux);border-left-width:1px}
+  .reperes li.eau{border-color:var(--eau);color:var(--eau)}
+  .reperes li.vue,.reperes li.patrimoine{border-color:var(--jaumont)}
+  .reperes .loin{opacity:.6}
+
+  /* --- se situer pendant la marche -------------------------------------- */
+  .position{margin:12px 0 0;padding:11px 13px;border-left:3px solid var(--eau);
+    background:var(--carte-fond);font-size:13.5px}
+  .position b{font-family:var(--serif);font-size:16px;color:var(--eau);
+    font-weight:400}
+  .position p{margin:4px 0 0;color:var(--doux);font-size:12.8px}
+  .position .ecarte{color:var(--jaumont)}
+
+  /* --- les fois ou on l'a marchee --------------------------------------- */
+  .sorties{margin:12px 0 0;padding:0;list-style:none;border-top:1px dashed var(--trait)}
+  .sorties li{display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+    padding:6px 0;border-bottom:1px solid var(--trait);font-size:13px}
+  .sorties .quand{font-family:var(--serif);color:var(--eau)}
+  .sorties .rien{color:var(--doux);font-size:12.5px}
+  .sorties button{margin-left:auto}
+
+  /* Les liens d'un parcours sont ce qu'on touche avant de partir marcher :
+     ils ont droit a la pleine hauteur du pouce, pas a 20 px de texte souligne. */
+  .liens{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+  .bouton,.liens a{font:inherit;font-size:13.5px;cursor:pointer;border-radius:2px;
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:var(--pouce);padding:0 15px;text-decoration:none;
+    background:var(--profond);color:var(--papier);border:1px solid var(--profond)}
+  .liens a.discret{background:none;color:var(--eau);border-color:var(--trait-fort)}
+  .lien{background:none;border:none;padding:0 4px;font:inherit;font-size:13px;
+    color:var(--eau);text-decoration:underline;text-underline-offset:3px;cursor:pointer;
+    min-height:var(--pouce)}
+  .liens a.marche,.bouton.marche{background:var(--eau);border-color:var(--eau)}
+  .bouton.eteint{background:none;color:var(--eau);border-color:var(--trait-fort)}
+  .petit{min-height:34px;padding:0 10px;font-size:12.5px}
   :focus-visible{outline:2px solid var(--eau);outline-offset:2px}
 
   .vide{padding:30px 0;color:var(--doux)}
   .souci{margin:14px 0;padding:12px 14px;border-left:3px solid var(--jaumont);
     background:var(--carte-fond);font-size:13.5px}
   .souci code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+
+  /* --- barres de navigation, telephone seulement ------------------------ */
+  .barre-bas,.barre-haut{display:none}
+  .barre-bas{position:fixed;left:0;right:0;bottom:0;z-index:600;
+    background:var(--papier);border-top:1px solid var(--trait-fort);
+    padding-bottom:env(safe-area-inset-bottom)}
+  .barre-bas div{display:flex}
+  .barre-bas button{flex:1;font:inherit;font-size:13.5px;cursor:pointer;
+    border:none;background:none;color:var(--doux);min-height:52px;
+    font-family:var(--serif);font-size:15px}
+  .barre-bas button[aria-pressed="true"]{color:var(--profond);
+    box-shadow:inset 0 -3px 0 var(--profond)}
+  .barre-haut{position:sticky;top:0;z-index:600;background:var(--papier);
+    border-bottom:1px solid var(--trait);margin:0 -20px 10px;padding:0 12px}
+  .barre-haut button{font:inherit;font-size:14px;cursor:pointer;border:none;
+    background:none;color:var(--eau);min-height:var(--pouce);padding:0 8px;
+    display:inline-flex;align-items:center;gap:6px}
 
   dialog{border:1px solid var(--trait-fort);border-radius:3px;background:var(--papier);
     color:var(--encre);padding:0;width:min(460px,94vw)}
@@ -92,7 +170,7 @@
   .champ{margin-bottom:12px}
   .rangee{display:flex;gap:11px}
   .rangee>*{flex:1;margin-bottom:12px}
-  .actions{display:flex;justify-content:flex-end;gap:14px;align-items:center;margin-top:4px}
+  .actions{display:flex;justify-content:flex-end;gap:10px;align-items:center;margin-top:4px}
 
   .flash{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:900;
     background:var(--profond);color:var(--papier);padding:9px 16px;border-radius:2px;
@@ -100,27 +178,118 @@
   .flash.on{opacity:1}
   @media (prefers-reduced-motion:reduce){.flash,.fiche{transition:none}}
 
+  /* --------------------------------------------------------------------- */
+  /* Telephone : une chose a la fois.                                      */
+  /*                                                                       */
+  /* L'ancienne disposition collait la carte sur 44 % de la hauteur et      */
+  /* laissait defiler la liste dans ce qui restait : une fiche et demie     */
+  /* visible sur dix, et les boutons d'un parcours ouvert 400 px sous le    */
+  /* bas de l'ecran. On echange donc trois vues au lieu d'en montrer deux   */
+  /* a moitie -- la liste, la carte, la fiche -- chacune sur tout l'ecran.  */
   @media (max-width:820px){
-    /* Sur telephone la carte passe en haut, collee, et la liste defile dessous. */
-    .cadre{grid-template-columns:1fr;grid-template-rows:44vh auto;height:auto}
-    #carte{order:-1;position:sticky;top:0;z-index:500;height:44vh}
-    .volet{border-right:none;height:auto;overflow:visible}
+    .cadre{grid-template-columns:1fr;grid-template-rows:1fr;height:100dvh}
+    .volet{border-right:none;grid-area:1/1;padding:16px 16px 70px}
+    #carte{grid-area:1/1}
+    .barre-bas{display:block}
+    .barre-haut{display:block}
+
+    /* vue liste : le volet seul, la carte de cote */
+    body[data-vue="liste"] #carte{display:none}
+    body[data-vue="liste"] .barre-haut{display:none}
+
+    /* vue carte : la carte seule, plein ecran */
+    body[data-vue="carte"] .volet{display:none}
+    body[data-vue="carte"] .barre-haut{display:none}
+
+    /* vue fiche : la carte en bandeau, le parcours choisi dessous */
+    body[data-vue="fiche"] .cadre{grid-template-rows:40dvh 1fr}
+    body[data-vue="fiche"] #carte{grid-area:1/1;height:40dvh}
+    body[data-vue="fiche"] .volet{grid-area:2/1;padding-bottom:24px}
+    body[data-vue="fiche"] header,
+    body[data-vue="fiche"] .filtres,
+    body[data-vue="fiche"] .barre-bas{display:none}
+    body[data-vue="fiche"] .fiche{grid-template-columns:1fr;gap:0;cursor:default;
+      border-bottom:none;margin-left:0;padding-left:0;border-left:none}
+    body[data-vue="fiche"] .fiche:not([aria-current="true"]){display:none}
+    body[data-vue="fiche"] .mesure{display:flex;gap:8px;align-items:baseline;
+      margin-bottom:6px}
+    /* Telecharger le GPX est ce qu'on vient faire ici, juste avant de partir.
+       Le detail des etapes fait 800 px : sans cette barre collee en bas du
+       volet, le bouton attend 600 px sous l'ecran. */
+    body[data-vue="fiche"] .liens{position:sticky;bottom:0;z-index:5;
+      background:var(--papier);border-top:1px solid var(--trait);
+      margin:14px -16px 0;padding:10px 16px}
+    body[data-vue="fiche"] .mesure b{display:inline;font-size:27px}
+    body[data-vue="fiche"] .mesure span{display:inline;margin:0}
+
+    /* Dans la liste on ne garde que de quoi choisir : le titre, les chiffres
+       et la jauge. Le resume et le detail des revetements attendent la fiche,
+       ce qui fait tenir sept boucles par ecran au lieu d'une et demie. */
+    body[data-vue="liste"] .resume,
+    body[data-vue="liste"] .legende{display:none}
+    body[data-vue="liste"] .fiche{padding:11px 0;grid-template-columns:76px 1fr}
+    body[data-vue="liste"] .mesure b{font-size:21px}
+    body[data-vue="liste"] .mesure span{font-size:11px;margin-top:3px}
+    /* La barre de filtres doit tenir sur une ligne : deux lignes coutaient
+       120 px, soit une boucle de moins a l'ecran. */
+    .filtres{gap:6px;flex-wrap:nowrap}
+    .segments button{padding:0 9px;font-size:12.5px}
+    .filtres select{font-size:12.5px;padding:6px 4px 6px 6px}
+    .compte{display:none}
+    body[data-vue="liste"] header{padding-bottom:10px;margin-bottom:0}
+    body[data-vue="liste"] h1{font-size:24px}
+    body[data-vue="liste"] .accroche{display:none}
+    .liens{gap:8px}
+    .liens a,.bouton{flex:1 1 auto}
+    .rangee{flex-wrap:wrap}
+    .rangee>*{flex:1 1 130px}
+    .actions button{flex:1;min-height:var(--pouce)}
+    .form-corps{max-height:none}
   }
   .leaflet-popup-content{font-family:var(--sans);font-size:13px}
   .leaflet-popup-content b{font-family:var(--serif);font-weight:400;font-size:14.5px}
+  /* Les commandes de zoom de Leaflet sont sous le pouce en bas d'ecran. */
+  @media (max-width:820px){
+    .leaflet-control-zoom a{width:38px;height:38px;line-height:38px}
+    .leaflet-bottom{bottom:56px}
+  }
 </style>
 </head>
-<body>
+<body data-vue="liste">
 <div class="cadre">
   <div class="volet">
+    <div class="barre-haut">
+      <button type="button" id="btn-retour">‹ Toutes les boucles</button>
+    </div>
     <header>
       <h1 id="titre">Olifant</h1>
       <p class="accroche" id="accroche"></p>
     </header>
+    <nav class="filtres" aria-label="Filtrer et trier">
+      <div class="segments" role="group" aria-label="Type de départ">
+        <button type="button" data-filtre="tout" aria-pressed="true">Tout</button>
+        <button type="button" data-filtre="a pied" aria-pressed="false">À pied</button>
+        <button type="button" data-filtre="voiture" aria-pressed="false">En voiture</button>
+      </div>
+      <select id="tri" aria-label="Trier">
+        <option value="carnet">ordre du carnet</option>
+        <option value="km">la plus courte d'abord</option>
+        <option value="montee">la plus plate d'abord</option>
+        <option value="chemin">le plus de chemins d'abord</option>
+      </select>
+      <span class="compte" id="compte"></span>
+    </nav>
     <div id="liste"><p class="vide">Chargement…</p></div>
   </div>
   <div id="carte"></div>
 </div>
+
+<nav class="barre-bas" aria-label="Vue">
+  <div>
+    <button type="button" data-vue="liste" aria-pressed="true">Les boucles</button>
+    <button type="button" data-vue="carte" aria-pressed="false">La carte</button>
+  </div>
+</nav>
 
 <dialog id="dlg">
   <div class="form-tete"><h2 id="dlg-titre">Noter la sortie</h2></div>
@@ -167,19 +336,83 @@
 <script src="/vendor/leaflet.js"></script>
 <script>
 const METZ = [49.1093, 6.1770];
+const TELEPHONE = "(max-width:820px)";
 let catalogue = null, traces = null, choisi = null;
+let etapeChoisie = null;          // etape depliee dans la fiche
+let veille = null;                // identifiant du suivi de position
+let verrouEcran = null;           // pour que l'ecran ne s'eteigne pas en marchant
+let sortiesConnues = [];          // les fois ou on a marche la boucle choisie
+let sortieAffichee = null;
+let filtre = localStorage.getItem("olifant-filtre") || "tout";
+let tri = localStorage.getItem("olifant-tri") || "carnet";
 const couches = {};        // id du parcours -> polyligne Leaflet
 const marqueurs = L.layerGroup();
+const reperesCarte = L.layerGroup();
+const maPosition = L.layerGroup();
+let coucheSortie = null;   // la trace reellement suivie, quand on l'affiche
 
 const carte = L.map("carte", {scrollWheelZoom: true}).setView(METZ, 12);
+
+/* Deux fonds empiles. Dessous, les serveurs d'OpenStreetMap, qui savent tout
+   mais demandent du reseau. Dessus, les carreaux emportes par
+   `python -m olifant tuiles`, qui ne couvrent que les traces mais existent
+   encore au fond d'un bois. Chacun se tait quand il ne sait pas -- un carreau
+   manquant est remplace par une image transparente plutot que par une icone
+   d'erreur -- et on voit donc toujours le meilleur des deux. */
+const TRANSPARENT = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=";
+
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
+  maxZoom: 18, errorTileUrl: TRANSPARENT,
   attribution: '&copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(carte);
+/* La couche locale n'est posee qu'une fois qu'on sait ce qui a ete emporte, et
+   ne demande que les carreaux qui existent vraiment. Se contenter d'une
+   emprise ne suffirait pas : le couloir des traces n'est pas un rectangle, et
+   entre Metz et Sierck il y a cinquante kilometres de vide dont chaque
+   carreau serait reclame pour rien, puis refuse. */
+async function poseLeFondEmporte(){
+  let fond;
+  try{
+    fond = await (await fetch("/api/fond")).json();
+  }catch(e){ return; }              // pas de fond local : OSM fera l'affaire
+  if (!fond.emporte || !fond.zooms.length) return;
+
+  const inventaire = fond.carreaux_par_zoom || {};
+  const emporte = (z, x, y) => {
+    const colonne = inventaire[String(z)] && inventaire[String(z)][String(x)];
+    return Boolean(colonne) && colonne.includes(y);
+  };
+
+  const Locale = L.TileLayer.extend({
+    getTileUrl(coords){
+      // Le carreau exact, ou rien du tout : aucune requete n'est envoyee pour
+      // ce qu'on sait absent.
+      const z = this._getZoomForUrl();
+      return emporte(z, coords.x, coords.y)
+        ? L.Util.template(this._url, {z, x: coords.x, y: coords.y})
+        : TRANSPARENT;
+    },
+  });
+
+  new Locale("/tuiles/{z}/{x}/{y}.png", {
+    minZoom: Math.min(...fond.zooms),
+    // Au-dela du zoom emporte, Leaflet etire le dernier carreau connu plutot
+    // que de reclamer des carreaux qui n'existent pas.
+    maxNativeZoom: Math.max(...fond.zooms), maxZoom: 18,
+    errorTileUrl: TRANSPARENT, zIndex: 2,
+  }).addTo(carte);
+  fondEmporte = fond;
+}
+let fondEmporte = null;
 marqueurs.addTo(carte);
+reperesCarte.addTo(carte);
+maPosition.addTo(carte);
 
 const secu = s => { const d = document.createElement("div"); d.textContent = s ?? ""; return d.innerHTML; };
-const nb = x => String(x).replace(".", ",");
+// Une decimale toujours : « 15 » a cote de « 15,2 » dans la meme colonne
+// se lit comme une mesure moins precise que les autres.
+const nb = x => x.toFixed(1).replace(".", ",");
+const surTelephone = () => matchMedia(TELEPHONE).matches;
 
 function flash(message){
   const f = document.getElementById("flash");
@@ -187,15 +420,100 @@ function flash(message){
   clearTimeout(f._t); f._t = setTimeout(() => f.classList.remove("on"), 2800);
 }
 
+/* ------------------------------------------------------------------ vues */
+/* Sur telephone, une seule des trois vues est a l'ecran. Sur grand ecran
+   l'attribut ne sert a rien : la grille montre la liste et la carte cote a
+   cote, et le detail se deplie dans la liste comme avant. */
+
+function montre(vue){
+  document.body.dataset.vue = vue;
+  document.querySelectorAll(".barre-bas button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.vue === vue)));
+  // Leaflet mesure son conteneur : il faut le lui redemander apres coup.
+  carte.invalidateSize();
+  appliqueLeCadrage();
+}
+
+document.querySelectorAll(".barre-bas button").forEach(b =>
+  b.addEventListener("click", () => {
+    if (b.dataset.vue === "carte") cadre(limitesDeTout());
+    montre(b.dataset.vue);
+  }));
+
+document.getElementById("btn-retour").addEventListener("click", () => retourListe());
+
+function retourListe(){
+  choisi = null;
+  etapeChoisie = null;
+  if (veille !== null) arreteLeSuivi();
+  sortiesConnues = [];
+  sortieAffichee = null;
+  effaceLaSortie();
+  rendre();
+  majCarte();
+  montre("liste");
+}
+
+// Le bouton « retour » d'Android doit refermer la fiche, pas quitter le site.
+addEventListener("popstate", () => { if (surTelephone()) retourListe(); });
+
+/* Cadrage differe : Leaflet cadre d'apres la taille de son conteneur, et
+   celle-ci vaut zero tant que la vue n'est pas affichee. On garde donc les
+   limites voulues sous le coude et on les applique des que la carte a une
+   hauteur -- le ResizeObserver s'en charge au premier affichage. */
+let aCadrer = null;
+
+function cadre(limites){ aCadrer = limites; appliqueLeCadrage(); }
+
+function appliqueLeCadrage(){
+  const conteneur = document.getElementById("carte");
+  if (!aCadrer || conteneur.clientHeight < 80) return;
+  carte.invalidateSize();
+  // Sans animation : un recadrage anime que l'utilisateur interrompt (il
+  // change d'onglet, le telephone rame) laisse la carte a mi-chemin, sur un
+  // cadre qui n'est ni l'ancien ni le nouveau.
+  carte.fitBounds(aCadrer, {padding: [25, 25], animate: false});
+  aCadrer = null;
+}
+
+function limitesDeTout(){
+  const visibles = parcoursAffiches().map(p => couches[p.id]).filter(Boolean);
+  return visibles.length ? L.featureGroup(visibles).getBounds() : null;
+}
+
+/* --------------------------------------------------------------- filtres */
+
+function parcoursAffiches(){
+  let liste = catalogue.parcours.filter(p => filtre === "tout" || p.acces === filtre);
+  const clefs = {km: p => p.km, montee: p => p.montee, chemin: p => -p.chemin};
+  if (clefs[tri]) liste = [...liste].sort((a, b) => clefs[tri](a) - clefs[tri](b));
+  return liste;
+}
+
+document.querySelectorAll("[data-filtre]").forEach(b =>
+  b.addEventListener("click", () => {
+    filtre = b.dataset.filtre;
+    localStorage.setItem("olifant-filtre", filtre);
+    if (choisi && !parcoursAffiches().some(p => p.id === choisi)) choisi = null;
+    rendre(); majCarte(); cadre(limitesDeTout());
+  }));
+
+document.getElementById("tri").addEventListener("change", e => {
+  tri = e.target.value;
+  localStorage.setItem("olifant-tri", tri);
+  rendre();
+});
+
 /* ---------------------------------------------------------------- rendu */
 
 function carteDuParcours(p){
   const autre = Math.max(0, 100 - p.chemin - p.bitume - p.route);
+  const marque = p.acces === "voiture" ? '<span class="marque">en voiture</span>' : "";
   return `<article class="fiche" data-id="${p.id}" tabindex="0" role="button"
       aria-current="${choisi === p.id}">
     <div class="mesure"><b>${nb(p.km)}</b><span>km · D+${p.montee} m</span></div>
     <div>
-      <h3>${secu(p.nom)}</h3>
+      <h3>${secu(p.nom)}${marque}</h3>
       <p class="resume">${secu(p.resume)}</p>
       <div class="jauge" role="img"
            aria-label="${p.chemin} % de chemins, ${p.bitume} % de revêtement dur, ${p.route} % de route">
@@ -216,23 +534,61 @@ function carteDuParcours(p){
 }
 
 function detailDuParcours(p){
-  const etapes = p.etapes.map(e => `<li class="${e.depart ? "depart" : ""}">
-      <b>${secu(e.depart ? "Départ : " + e.nom : e.nom)}</b>
-      <span>${secu(e.note)}</span></li>`).join("");
   return `<div class="detail">
-    <ul class="etapes">${etapes}</ul>
+    ${p.parking ? `<p class="resume">Stationnement : ${secu(p.parking)}</p>` : ""}
+    <ul class="etapes">${p.etapes.map(carteDeLEtape).join("")}</ul>
+    <div id="position"></div>
+    ${listeDesSorties()}
     <div class="liens">
-      <button class="bouton" data-noter="${p.id}">Noter cette sortie</button>
+      <button class="bouton marche" data-suivre="${p.id}">${
+        veille === null ? "Me situer" : "Arrêter"}</button>
       <a href="/telecharge/${p.id}.gpx" download>GPX pour Iphigénie</a>
-      <a href="/telecharge/${p.id}.kml" download>KML</a>
+      <button class="bouton eteint" data-noter="${p.id}">Noter la sortie</button>
+      <a class="discret" href="/telecharge/${p.id}.kml" download>KML</a>
     </div>
   </div>`;
+}
+
+/* Une etape se deplie : son kilometrage, sa note, et ce qu'OSM connait
+   autour d'elle. Replie, elle tient sur une ligne -- il y en a jusqu'a huit
+   et la place manque sur un telephone. */
+function carteDeLEtape(e){
+  const ouverte = etapeChoisie === e.cle;
+  return `<li class="${e.depart ? "depart" : ""}" aria-current="${ouverte}">
+    <button type="button" class="etape-tete" data-etape="${e.cle}"
+            aria-expanded="${ouverte}">
+      <span class="etape-km">${e.depart ? "départ" : "km " + nb(e.km)}</span>
+      <b>${secu(e.nom)}</b>
+    </button>
+    ${ouverte ? `<div class="etape-corps">
+      ${e.note ? `<span>${secu(e.note)}</span>` : ""}
+      ${reperesDeLEtape(e)}
+    </div>` : ""}
+  </li>`;
+}
+
+function reperesDeLEtape(e){
+  if (!e.reperes || !e.reperes.length){
+    return `<p class="legende">Rien de particulier relevé autour de ce point.</p>`;
+  }
+  const items = e.reperes.map(r => `<li class="${r.genre} ${
+    r.distance_m > 200 ? "loin" : ""}">${secu(r.nom)}${
+    r.combien > 1 ? ` ×${r.combien}` : ""}${
+    r.distance_m > 80 ? ` · ${r.distance_m} m` : ""}</li>`).join("");
+  return `<ul class="reperes">${items}</ul>`;
 }
 
 function rendre(){
   document.getElementById("titre").textContent = catalogue.titre;
   document.getElementById("accroche").textContent = catalogue.accroche;
-  document.getElementById("liste").innerHTML = catalogue.parcours.map(carteDuParcours).join("");
+  const affiches = parcoursAffiches();
+  const compte = document.getElementById("compte");
+  compte.textContent = affiches.length === catalogue.parcours.length
+    ? `${affiches.length} boucles`
+    : `${affiches.length} sur ${catalogue.parcours.length}`;
+  document.getElementById("liste").innerHTML = affiches.length
+    ? affiches.map(carteDuParcours).join("")
+    : `<p class="vide">Aucune boucle de ce type.</p>`;
   document.querySelectorAll(".fiche").forEach(el => {
     el.addEventListener("click", e => {
       if (e.target.closest("a, button")) return;
@@ -244,31 +600,295 @@ function rendre(){
   });
   document.querySelectorAll("[data-noter]").forEach(b =>
     b.addEventListener("click", () => ouvreFormulaire(b.dataset.noter)));
+  document.querySelectorAll("[data-etape]").forEach(b =>
+    b.addEventListener("click", () => ouvreLEtape(b.dataset.etape)));
+  document.querySelectorAll("[data-suivre]").forEach(b =>
+    b.addEventListener("click", basculeLeSuivi));
+  document.querySelectorAll("[data-trace]").forEach(b =>
+    b.addEventListener("click", () => basculeLaTraceSuivie(Number(b.dataset.trace))));
 }
 
 function selectionne(id){
-  choisi = (choisi === id) ? null : id;
+  const ouvrait = choisi;
+  choisi = (choisi === id && !surTelephone()) ? null : id;
+  if (choisi !== ouvrait){
+    // On change de boucle : l'etape ouverte, le suivi et la trace affichee
+    // appartenaient a la precedente.
+    etapeChoisie = null;
+    if (veille !== null) arreteLeSuivi();
+    chargeLesSorties(choisi);
+  }
   rendre();
   majCarte();
-  if (choisi && couches[choisi]) carte.fitBounds(couches[choisi].getBounds(), {padding: [30, 30]});
+  if (choisi && couches[choisi]) cadre(couches[choisi].getBounds());
+  if (!surTelephone()) return;
+  // Sur telephone la fiche prend l'ecran ; on empile une entree d'historique
+  // pour que le retour du telephone revienne a la liste.
+  if (ouvrait !== choisi && choisi) history.pushState({fiche: choisi}, "");
+  montre("fiche");
+  document.querySelector(".volet").scrollTop = 0;
 }
 
 function majCarte(){
   marqueurs.clearLayers();
+  const affiches = new Set(parcoursAffiches().map(p => p.id));
   for (const [id, couche] of Object.entries(couches)){
+    // Une boucle ecartee par le filtre disparait aussi de la carte : sinon on
+    // clique sur un trait qui n'est plus dans la liste.
+    if (!affiches.has(id)){ carte.removeLayer(couche); continue; }
+    if (!carte.hasLayer(couche)) couche.addTo(carte);
     const actif = !choisi || choisi === id;
     couche.setStyle({opacity: actif ? 0.95 : 0.2, weight: choisi === id ? 6 : 4});
     if (choisi === id) couche.bringToFront();
   }
-  if (!choisi) return;
+  if (!choisi){ reperesCarte.clearLayers(); return; }
   const p = catalogue.parcours.find(x => x.id === choisi);
   p.etapes.forEach((e, i) => {
+    const ouverte = etapeChoisie === e.cle;
     L.circleMarker([e.lat, e.lon], {
-      radius: e.depart ? 8 : 6, color: p.couleur, weight: 2,
-      fillColor: e.depart ? p.couleur : "#fff", fillOpacity: 1,
-    }).bindPopup(`<b>${secu(e.depart ? "Départ : " + e.nom : (i + 1) + ". " + e.nom)}</b>`
-                 + (e.note ? "<br>" + secu(e.note) : "")).addTo(marqueurs);
+      radius: ouverte ? 11 : (e.depart ? 8 : 6),
+      color: ouverte ? "#316E7C" : p.couleur, weight: ouverte ? 3 : 2,
+      fillColor: e.depart || ouverte ? (ouverte ? "#316E7C" : p.couleur) : "#fff",
+      fillOpacity: 1,
+    }).bindPopup(`<b>${secu(e.depart ? "Départ : " + e.nom
+                                     : "km " + nb(e.km) + " · " + e.nom)}</b>`
+                 + (e.note ? "<br>" + secu(e.note) : ""))
+      .on("click", () => ouvreLEtape(e.cle))
+      .addTo(marqueurs);
   });
+  dessineLesReperes(etapeDuChoisi(etapeChoisie));
+}
+
+/* ------------------------------------------------------------------ etapes */
+
+function ouvreLEtape(cle){
+  etapeChoisie = (etapeChoisie === cle) ? null : cle;
+  rendre();
+  majCarte();
+  if (!etapeChoisie) return;
+  const etape = etapeDuChoisi(cle);
+  if (etape){
+    carte.setView([etape.lat, etape.lon], Math.max(carte.getZoom(), 15),
+                  {animate: false});
+  }
+}
+
+function etapeDuChoisi(cle){
+  const p = catalogue.parcours.find(x => x.id === choisi);
+  return p ? p.etapes.find(e => e.cle === cle) : null;
+}
+
+/* Les reperes d'une etape sur la carte : de petits points, distincts des
+   etapes elles-memes, qu'on ne montre que pour l'etape ouverte -- sinon la
+   carte devient un semis illisible de fontaines et de bancs. */
+function dessineLesReperes(etape){
+  reperesCarte.clearLayers();
+  if (!etape || !etape.reperes) return;
+  const teintes = {eau: "#316E7C", vue: "#B8862A", patrimoine: "#B8862A",
+                   ravitaillement: "#7A4A6B", halte: "#1E3B34",
+                   nature: "#5A6E2F", commodite: "#8a8a8a"};
+  etape.reperes.forEach(r => {
+    L.circleMarker([r.lat, r.lon], {
+      radius: 4, weight: 1.5, color: teintes[r.genre] || "#8a8a8a",
+      fillColor: "#fff", fillOpacity: .9,
+    }).bindPopup(`<b>${secu(r.nom)}</b><br>à ${r.distance_m} m de l'étape`)
+      .addTo(reperesCarte);
+  });
+}
+
+/* -------------------------------------------------------------- navigation */
+/* Se situer, pas s'enregistrer. Un navigateur ne suit pas la position quand
+   la page passe en arriere-plan : impossible d'en faire un enregistreur de
+   trace fiable. En revanche, sortir le telephone pour savoir ou on en est
+   marche tres bien, et c'est ce dont on a besoin quand le sentier se divise
+   sans panneau. */
+
+async function basculeLeSuivi(){
+  if (veille !== null){ arreteLeSuivi(); return; }
+  if (!window.isSecureContext){
+    // Mesure faite : en http, le navigateur refuse la position sans meme
+    // demander a l'utilisateur. Autant l'expliquer que laisser un bouton mort.
+    ecritLeSuivi(`<b>Impossible ici</b><p>Le navigateur ne donne la position
+      qu'en HTTPS. Ouvrez le site par son adresse sécurisée.</p>`);
+    return;
+  }
+  if (!navigator.geolocation){
+    ecritLeSuivi(`<b>Pas de localisation</b><p>Ce navigateur ne sait pas donner
+      la position.</p>`);
+    return;
+  }
+  veille = navigator.geolocation.watchPosition(situe, echecDeSuivi, {
+    enableHighAccuracy: true, maximumAge: 5000, timeout: 30000,
+  });
+  rendre();
+  ecritLeSuivi(`<b>Recherche…</b><p>Le premier point peut demander une
+    trentaine de secondes.</p>`);
+  await gardeLEcranAllume();
+}
+
+function arreteLeSuivi(){
+  if (veille !== null) navigator.geolocation.clearWatch(veille);
+  veille = null;
+  maPosition.clearLayers();
+  if (verrouEcran){ verrouEcran.release().catch(() => {}); verrouEcran = null; }
+  rendre();
+}
+
+async function gardeLEcranAllume(){
+  // Sans cela l'ecran s'eteint au bout d'une minute et le suivi s'arrete au
+  // moment ou on en a besoin. Le verrou est refuse par certains navigateurs :
+  // ce n'est pas grave, le suivi marche tant que l'ecran est allume.
+  try{
+    if ("wakeLock" in navigator){
+      verrouEcran = await navigator.wakeLock.request("screen");
+    }
+  }catch(e){ verrouEcran = null; }
+}
+
+function echecDeSuivi(erreur){
+  const causes = {1: "Vous avez refusé l'accès à la position.",
+                  2: "Position indisponible ici.",
+                  3: "Le GPS n'a pas répondu à temps."};
+  ecritLeSuivi(`<b>Sans position</b><p>${secu(causes[erreur.code] || erreur.message)}</p>`);
+}
+
+function situe(position){
+  const lat = position.coords.latitude, lon = position.coords.longitude;
+  const precision = position.coords.accuracy;
+  const p = catalogue.parcours.find(x => x.id === choisi);
+  if (!p) return;
+
+  maPosition.clearLayers();
+  L.circle([lat, lon], {radius: Math.max(precision, 8), weight: 1,
+    color: "#316E7C", fillColor: "#316E7C", fillOpacity: .12}).addTo(maPosition);
+  L.circleMarker([lat, lon], {radius: 7, weight: 3, color: "#fff",
+    fillColor: "#316E7C", fillOpacity: 1}).addTo(maPosition);
+
+  const ou = situeSurLaTrace([lon, lat], p.id);
+  if (!ou){ ecritLeSuivi(`<b>Position trouvée</b>`); return; }
+  const suivante = etapeApres(p, ou.km);
+  const reste = Math.max(0, p.km - ou.km);
+  const loin = ou.ecart_m > 60;
+  ecritLeSuivi(`
+    <b>km ${nb(ou.km)} sur ${nb(p.km)}</b>
+    <p>${nb(reste)} km restants${suivante
+      ? ` · ${secu(suivante.nom)} dans ${nb(Math.max(0, suivante.km - ou.km))} km`
+      : " · dernière ligne droite"}</p>
+    <p class="${loin ? "ecarte" : ""}">${loin
+      ? `Vous êtes à ${Math.round(ou.ecart_m)} m du tracé.`
+      : `Sur le tracé, à ${Math.round(ou.ecart_m)} m près.`}
+      Position connue au ${Math.round(precision)} m.</p>`);
+}
+
+function ecritLeSuivi(html){
+  const zone = document.getElementById("position");
+  if (zone) zone.innerHTML = `<div class="position">${html}</div>`;
+}
+
+/* Ou suis-je le long de la trace : on cherche le point de la trace le plus
+   proche, et on lit la distance cumulee jusqu'a lui. Les cumuls sont calcules
+   une fois par parcours, pas a chaque battement du GPS. */
+const cumulsParParcours = {};
+
+function cumulsDe(id){
+  if (cumulsParParcours[id]) return cumulsParParcours[id];
+  const trait = traces.features.find(f => f.properties.id === id);
+  if (!trait) return null;
+  const coords = trait.geometry.coordinates;
+  const cumuls = [0];
+  for (let i = 1; i < coords.length; i++){
+    cumuls.push(cumuls[i - 1] + metresEntre(coords[i - 1], coords[i]));
+  }
+  cumulsParParcours[id] = {coords, cumuls};
+  return cumulsParParcours[id];
+}
+
+function situeSurLaTrace(lonlat, id){
+  const donnees = cumulsDe(id);
+  if (!donnees) return null;
+  let meilleur = 0, ecart = Infinity;
+  for (let i = 0; i < donnees.coords.length; i++){
+    const d = metresEntre(lonlat, donnees.coords[i]);
+    if (d < ecart){ ecart = d; meilleur = i; }
+  }
+  return {km: donnees.cumuls[meilleur] / 1000, ecart_m: ecart};
+}
+
+function etapeApres(p, km){
+  return p.etapes.find(e => !e.depart && e.km > km + 0.05) || null;
+}
+
+function metresEntre(a, b){
+  const rad = Math.PI / 180;
+  const dlat = (b[1] - a[1]) * rad, dlon = (b[0] - a[0]) * rad;
+  const h = Math.sin(dlat / 2) ** 2
+    + Math.cos(a[1] * rad) * Math.cos(b[1] * rad) * Math.sin(dlon / 2) ** 2;
+  return 6371000 * 2 * Math.asin(Math.sqrt(h));
+}
+
+/* ------------------------------------------------- les fois ou on l'a fait */
+
+function listeDesSorties(){
+  if (!sortiesConnues.length){
+    return `<p class="sorties rien">Jamais marchée pour l'instant.</p>`;
+  }
+  const lignes = sortiesConnues.map(s => {
+    const details = [
+      s.km ? nb(s.km) + " km" : "",
+      s.minutes ? Math.round(s.minutes / 6) / 10 + " h" : "",
+      s.temps, s.ressenti,
+    ].filter(Boolean).join(" · ");
+    const bouton = s.trace
+      ? `<button class="bouton petit ${sortieAffichee === s.id ? "" : "eteint"}"
+                 data-trace="${s.id}">${
+          sortieAffichee === s.id ? "Masquer" : "Voir la trace"}</button>`
+      : `<span class="rien">sans trace</span>`;
+    return `<li><span class="quand">${secu(s.jour)}</span>
+      <span class="rien">${secu(details)}</span>${bouton}</li>`;
+  }).join("");
+  return `<ul class="sorties">${lignes}</ul>`;
+}
+
+async function chargeLesSorties(id){
+  sortiesConnues = [];
+  sortieAffichee = null;
+  effaceLaSortie();
+  if (!id) return;
+  try{
+    const reponse = await fetch("/api/sorties?parcours_id=" + encodeURIComponent(id));
+    if (reponse.ok) sortiesConnues = await reponse.json();
+  }catch(e){ /* le carnet est un supplement : son absence n'empeche rien */ }
+  if (choisi === id) rendre();
+}
+
+async function basculeLaTraceSuivie(sortieId){
+  if (sortieAffichee === sortieId){
+    sortieAffichee = null;
+    effaceLaSortie();
+    rendre();
+    return;
+  }
+  try{
+    const reponse = await fetch(`/api/sorties/${sortieId}/trace.geojson`);
+    const forme = await reponse.json();
+    if (!reponse.ok) throw new Error(forme.detail || "trace illisible");
+    effaceLaSortie();
+    // En pointille et par-dessus : ce qu'on veut voir, c'est ou la marche
+    // reelle s'est ecartee de ce qui etait prevu.
+    coucheSortie = L.geoJSON(forme, {
+      style: {color: "#B8862A", weight: 3, opacity: .95, dashArray: "5 4"},
+    }).addTo(carte);
+    coucheSortie.bringToFront();
+    sortieAffichee = sortieId;
+    rendre();
+    flash(`${nb(forme.properties.km)} km relevés ce jour-là`);
+  }catch(e){
+    flash("Trace illisible : " + String(e.message).slice(0, 80));
+  }
+}
+
+function effaceLaSortie(){
+  if (coucheSortie){ carte.removeLayer(coucheSortie); coucheSortie = null; }
 }
 
 /* ---------------------------------------------------------------- carnet */
@@ -312,23 +932,6 @@ document.getElementById("btn-enregistrer").addEventListener("click", async () =>
 
 /* ---------------------------------------------------------------- demarrage */
 
-function surveilleLaTaille(tout){
-  // Leaflet cadre d'apres la taille de son conteneur. Tant que la grille CSS
-  // n'a pas donne sa hauteur a #carte, cette taille vaut zero et le cadrage
-  // part au zoom maximum sur un point. On attend donc que le conteneur ait
-  // vraiment une hauteur, puis on se contente de remesurer aux changements
-  // suivants (rotation du telephone, barre d'adresse qui se replie).
-  const conteneur = document.getElementById("carte");
-  let cadre = false;
-  new ResizeObserver(() => {
-    carte.invalidateSize();
-    if (!cadre && conteneur.clientHeight > 80){
-      cadre = true;
-      carte.fitBounds(tout.getBounds(), {padding: [25, 25]});
-    }
-  }).observe(conteneur);
-}
-
 async function charge(){
   const reponse = await fetch("/api/parcours");
   if (!reponse.ok){
@@ -346,11 +949,18 @@ async function charge(){
         style: {color: f.properties.couleur, weight: 4, opacity: .95},
       }).addTo(carte).on("click", () => selectionne(f.properties.id));
     });
-    const tout = L.featureGroup(Object.values(couches));
-    if (tout.getLayers().length) surveilleLaTaille(tout);
+    // Le conteneur n'a pas encore de hauteur au premier tour : on remesure a
+    // chaque changement (bascule de vue, rotation, barre d'adresse repliee).
+    new ResizeObserver(() => appliqueLeCadrage())
+      .observe(document.getElementById("carte"));
+    poseLeFondEmporte();
   }
+  document.querySelectorAll("[data-filtre]").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.filtre === filtre)));
+  document.getElementById("tri").value = tri;
   rendre();
   majCarte();
+  cadre(limitesDeTout());
 }
 charge();
 </script>

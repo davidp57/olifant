@@ -8,6 +8,10 @@ dependencies = [
     "uvicorn[standard]>=0.30",
     "pyyaml>=6",
     "python-multipart>=0.0.9",
+    # Les GPX rapportes d'une sortie viennent de l'exterieur : on les
+    # relit pour les afficher, donc avec un parseur qui refuse les
+    # entites recursives et les references de fichiers locaux.
+    "defusedxml>=0.7",
 ]
 
 [project.optional-dependencies]

@@ -23,39 +23,236 @@
    "depart": "Gare de Metz, parvis",
    "etapes": [
     {
+     "cle": "gare",
      "nom": "Gare de Metz, parvis",
      "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
      "lon": 6.177013,
      "lat": 49.109277,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.177206,
+       "lat": 49.109563,
+       "distance_m": 35,
+       "combien": 3
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.179587,
+       "lat": 49.110434,
+       "distance_m": 227
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.17708,
+       "lat": 49.109618,
+       "distance_m": 38
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "ABC",
+       "lon": 6.176095,
+       "lat": 49.110211,
+       "distance_m": 123
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "L'Express Bar",
+       "lon": 6.175709,
+       "lat": 49.110311,
+       "distance_m": 149
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Mémorial à Jean Moulin",
+       "lon": 6.177287,
+       "lat": 49.109757,
+       "distance_m": 57
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Statue du Général de Gaulle",
+       "lon": 6.176598,
+       "lat": 49.109931,
+       "distance_m": 79
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.176348,
+       "lat": 49.109234,
+       "distance_m": 49,
+       "combien": 3
+      }
+     ]
     },
     {
+     "cle": "parc-seille",
      "nom": "Parc de la Seille",
      "note": "Prairies humides et roselieres au bord de la Seille. Herons.",
      "lon": 6.184968,
      "lat": 49.10661,
-     "depart": false
+     "depart": false,
+     "km": 0.8,
+     "part": 8,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.184908,
+       "lat": 49.106644,
+       "distance_m": 6,
+       "combien": 3
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Poulaillon",
+       "lon": 6.182393,
+       "lat": 49.106628,
+       "distance_m": 187
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.182102,
+       "lat": 49.106637,
+       "distance_m": 209
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Columbus Café & Co",
+       "lon": 6.182066,
+       "lat": 49.106636,
+       "distance_m": 211
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Paul",
+       "lon": 6.182228,
+       "lat": 49.105732,
+       "distance_m": 222,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Kefan Traiteur",
+       "lon": 6.182108,
+       "lat": 49.105725,
+       "distance_m": 230
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Liberazione",
+       "lon": 6.18464,
+       "lat": 49.107907,
+       "distance_m": 146
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.181425,
+       "lat": 49.108319,
+       "distance_m": 320
+      }
+     ]
     },
     {
+     "cle": "queuleu",
      "nom": "Fort de Queuleu",
      "note": "Fort du XIXe siecle, memorial de la Resistance. Le bois autour est ouvert et sillonne de chemins.",
      "lon": 6.195434,
      "lat": 49.098452,
-     "depart": false
+     "depart": false,
+     "km": 2.3,
+     "part": 23,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Lucas Simon",
+       "lon": 6.197868,
+       "lat": 49.10102,
+       "distance_m": 336
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Cantine",
+       "lon": 6.200035,
+       "lat": 49.096738,
+       "distance_m": 385
+      }
+     ]
     },
     {
+     "cle": "pas-du-loup",
      "nom": "Parc du Pas du Loup",
      "note": "Coteau boise au sud du fort de Queuleu, sentiers en terre.",
      "lon": 6.190089,
      "lat": 49.089365,
-     "depart": false
+     "depart": false,
+     "km": 3.9,
+     "part": 38,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Point de vue",
+       "lon": 6.191861,
+       "lat": 49.090814,
+       "distance_m": 206
+      }
+     ]
     },
     {
+     "cle": "montigny",
      "nom": "Montigny-les-Metz",
      "note": "Retour par le sud, jardins ouvriers et bord de Moselle.",
      "lon": 6.163123,
      "lat": 49.087475,
-     "depart": false
+     "depart": false,
+     "km": 6.6,
+     "part": 64,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Point de vue",
+       "lon": 6.160857,
+       "lat": 49.086363,
+       "distance_m": 206
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Beige",
+       "lon": 6.162151,
+       "lat": 49.08739,
+       "distance_m": 71
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Pierrot Poulet bicyclette",
+       "lon": 6.16082,
+       "lat": 49.08975,
+       "distance_m": 303
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.163429,
+       "lat": 49.088947,
+       "distance_m": 165
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.162057,
+       "lat": 49.0864,
+       "distance_m": 143
+      }
+     ]
     }
    ]
   },
@@ -79,46 +276,282 @@
    "depart": "Gare de Metz, parvis",
    "etapes": [
     {
+     "cle": "gare",
      "nom": "Gare de Metz, parvis",
      "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
      "lon": 6.177013,
      "lat": 49.109277,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.177206,
+       "lat": 49.109563,
+       "distance_m": 35,
+       "combien": 3
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.179587,
+       "lat": 49.110434,
+       "distance_m": 227
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.17708,
+       "lat": 49.109618,
+       "distance_m": 38
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "ABC",
+       "lon": 6.176095,
+       "lat": 49.110211,
+       "distance_m": 123
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "L'Express Bar",
+       "lon": 6.175709,
+       "lat": 49.110311,
+       "distance_m": 149
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Mémorial à Jean Moulin",
+       "lon": 6.177287,
+       "lat": 49.109757,
+       "distance_m": 57
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Statue du Général de Gaulle",
+       "lon": 6.176598,
+       "lat": 49.109931,
+       "distance_m": 79
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.176348,
+       "lat": 49.109234,
+       "distance_m": 49,
+       "combien": 3
+      }
+     ]
     },
     {
+     "cle": "parc-seille",
      "nom": "Parc de la Seille",
      "note": "Prairies humides et roselieres au bord de la Seille. Herons.",
      "lon": 6.184968,
      "lat": 49.10661,
-     "depart": false
+     "depart": false,
+     "km": 0.8,
+     "part": 7,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.184908,
+       "lat": 49.106644,
+       "distance_m": 6,
+       "combien": 3
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Poulaillon",
+       "lon": 6.182393,
+       "lat": 49.106628,
+       "distance_m": 187
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.182102,
+       "lat": 49.106637,
+       "distance_m": 209
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Columbus Café & Co",
+       "lon": 6.182066,
+       "lat": 49.106636,
+       "distance_m": 211
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Paul",
+       "lon": 6.182228,
+       "lat": 49.105732,
+       "distance_m": 222,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Kefan Traiteur",
+       "lon": 6.182108,
+       "lat": 49.105725,
+       "distance_m": 230
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Liberazione",
+       "lon": 6.18464,
+       "lat": 49.107907,
+       "distance_m": 146
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.181425,
+       "lat": 49.108319,
+       "distance_m": 320
+      }
+     ]
     },
     {
+     "cle": "queuleu",
      "nom": "Fort de Queuleu",
      "note": "Fort du XIXe siecle, memorial de la Resistance. Le bois autour est ouvert et sillonne de chemins.",
      "lon": 6.195434,
      "lat": 49.098452,
-     "depart": false
+     "depart": false,
+     "km": 2.3,
+     "part": 19,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Lucas Simon",
+       "lon": 6.197868,
+       "lat": 49.10102,
+       "distance_m": 336
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Cantine",
+       "lon": 6.200035,
+       "lat": 49.096738,
+       "distance_m": 385
+      }
+     ]
     },
     {
+     "cle": "bois-macabee",
      "nom": "Bois de la Macabee",
      "note": "Le plus grand massif accessible a pied depuis Metz, hetres et charmes.",
      "lon": 6.232106,
      "lat": 49.101397,
-     "depart": false
+     "depart": false,
+     "km": 6.2,
+     "part": 50
     },
     {
+     "cle": "gloucester",
      "nom": "Parc de Gloucester",
      "note": "Allees en terre et pieces d'eau, a la lisiere est de Borny.",
      "lon": 6.226121,
      "lat": 49.113226,
-     "depart": false
+     "depart": false,
+     "km": 7.9,
+     "part": 64,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Proxi",
+       "lon": 6.22204,
+       "lat": 49.114839,
+       "distance_m": 347
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Eses'Li",
+       "lon": 6.228883,
+       "lat": 49.115797,
+       "distance_m": 349
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Bar-PMU Le Sébastopol",
+       "lon": 6.228815,
+       "lat": 49.116,
+       "distance_m": 366
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Bar-PMU Le 7",
+       "lon": 6.228724,
+       "lat": 49.116142,
+       "distance_m": 375
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Château de Borny",
+       "lon": 6.22574,
+       "lat": 49.109858,
+       "distance_m": 376
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix de chemin",
+       "lon": 6.226505,
+       "lat": 49.109857,
+       "distance_m": 376
+      }
+     ]
     },
     {
+     "cle": "cheneau",
      "nom": "Parc de la Cheneau",
      "note": "Grand parc boise a l'est de Metz, etang et allees en terre.",
      "lon": 6.207915,
      "lat": 49.113291,
-     "depart": false
+     "depart": false,
+     "km": 9.5,
+     "part": 78,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.20763,
+       "lat": 49.113293,
+       "distance_m": 21,
+       "combien": 2
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.203335,
+       "lat": 49.11279,
+       "distance_m": 338
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Foyer des Élèves",
+       "lon": 6.206448,
+       "lat": 49.111302,
+       "distance_m": 246
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Savoureux",
+       "lon": 6.209403,
+       "lat": 49.11557,
+       "distance_m": 276
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Cafet’ Bridoux",
+       "lon": 6.211355,
+       "lat": 49.11593,
+       "distance_m": 386
+      }
+     ]
     }
    ]
   },
@@ -142,46 +575,319 @@
    "depart": "Gare de Metz, parvis",
    "etapes": [
     {
+     "cle": "gare",
      "nom": "Gare de Metz, parvis",
      "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
      "lon": 6.177013,
      "lat": 49.109277,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.177206,
+       "lat": 49.109563,
+       "distance_m": 35,
+       "combien": 3
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.179587,
+       "lat": 49.110434,
+       "distance_m": 227
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.17708,
+       "lat": 49.109618,
+       "distance_m": 38
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "ABC",
+       "lon": 6.176095,
+       "lat": 49.110211,
+       "distance_m": 123
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "L'Express Bar",
+       "lon": 6.175709,
+       "lat": 49.110311,
+       "distance_m": 149
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Mémorial à Jean Moulin",
+       "lon": 6.177287,
+       "lat": 49.109757,
+       "distance_m": 57
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Statue du Général de Gaulle",
+       "lon": 6.176598,
+       "lat": 49.109931,
+       "distance_m": 79
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.176348,
+       "lat": 49.109234,
+       "distance_m": 49,
+       "combien": 4
+      }
+     ]
     },
     {
+     "cle": "esplanade",
      "nom": "Jardin de l'Esplanade",
      "note": "Terrasse au-dessus de la Moselle, vue sur le Mont Saint-Quentin.",
      "lon": 6.170519,
      "lat": 49.115968,
-     "depart": false
+     "depart": false,
+     "km": 1.1,
+     "part": 8,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.17128,
+       "lat": 49.114941,
+       "distance_m": 127,
+       "combien": 6
+      },
+      {
+       "genre": "vue",
+       "nom": "Point de vue",
+       "lon": 6.169141,
+       "lat": 49.116659,
+       "distance_m": 126
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Papy Disco",
+       "lon": 6.169056,
+       "lat": 49.115923,
+       "distance_m": 107
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Le Cheval de Bronze",
+       "lon": 6.17125,
+       "lat": 49.11653,
+       "distance_m": 82
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Ney",
+       "lon": 6.171516,
+       "lat": 49.11547,
+       "distance_m": 91
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "La Naïade",
+       "lon": 6.171655,
+       "lat": 49.11633,
+       "distance_m": 92
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Le Poilu libérateur",
+       "lon": 6.169396,
+       "lat": 49.116517,
+       "distance_m": 102
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.171635,
+       "lat": 49.115205,
+       "distance_m": 117,
+       "combien": 5
+      }
+     ]
     },
     {
+     "cle": "saulcy",
      "nom": "Ile du Saulcy",
      "note": "Ile universitaire, tres calme hors semestre. Cygnes sur les deux bras.",
      "lon": 6.161249,
      "lat": 49.120109,
-     "depart": false
+     "depart": false,
+     "km": 2.4,
+     "part": 18,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "AGORAé Metz Saulcy",
+       "lon": 6.16226,
+       "lat": 49.120024,
+       "distance_m": 74
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Market' Rimbaud",
+       "lon": 6.159659,
+       "lat": 49.119155,
+       "distance_m": 157
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Brasserie Baudelaire",
+       "lon": 6.158791,
+       "lat": 49.120717,
+       "distance_m": 191
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Restaurant universitaire Paul Verlaine",
+       "lon": 6.16441,
+       "lat": 49.118817,
+       "distance_m": 271
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.161103,
+       "lat": 49.12001,
+       "distance_m": 15,
+       "combien": 3
+      }
+     ]
     },
     {
+     "cle": "grand-patural",
      "nom": "Le Grand Patural, Ban-Saint-Martin",
      "note": "Prairie et promenade au bord de la Moselle, juste avant de quitter la ville.",
      "lon": 6.151052,
      "lat": 49.117929,
-     "depart": false
+     "depart": false,
+     "km": 3.4,
+     "part": 26,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.149677,
+       "lat": 49.118121,
+       "distance_m": 102
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.150156,
+       "lat": 49.116694,
+       "distance_m": 152
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Relais Saint-Symphorien",
+       "lon": 6.150408,
+       "lat": 49.116345,
+       "distance_m": 182
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Les Rives",
+       "lon": 6.148543,
+       "lat": 49.118178,
+       "distance_m": 185
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Streiff",
+       "lon": 6.152956,
+       "lat": 49.115323,
+       "distance_m": 321
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Taormina",
+       "lon": 6.148932,
+       "lat": 49.12088,
+       "distance_m": 363
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "BDC - Bar Resto",
+       "lon": 6.152868,
+       "lat": 49.114892,
+       "distance_m": 363
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Pont du Sauvage",
+       "lon": 6.146993,
+       "lat": 49.119241,
+       "distance_m": 329
+      }
+     ]
     },
     {
+     "cle": "longeville",
      "nom": "Longeville-les-Metz",
      "note": "Rive droite, entre les jardins et le bras de la Moselle.",
      "lon": 6.136124,
      "lat": 49.115245,
-     "depart": false
+     "depart": false,
+     "km": 5.1,
+     "part": 39,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Donjon des Gournay",
+       "lon": 6.136995,
+       "lat": 49.113551,
+       "distance_m": 199
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Paul",
+       "lon": 6.139984,
+       "lat": 49.11437,
+       "distance_m": 297
+      }
+     ]
     },
     {
+     "cle": "schuman",
      "nom": "Parc Robert Schuman, Montigny",
      "note": "Bras mort de la Moselle et grands arbres, entre Longeville et Montigny.",
      "lon": 6.140945,
      "lat": 49.099878,
-     "depart": false
+     "depart": false,
+     "km": 9.6,
+     "part": 73,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Priscilla & Rémi Pruvost",
+       "lon": 6.141489,
+       "lat": 49.100426,
+       "distance_m": 73
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Restaurant Aime",
+       "lon": 6.144456,
+       "lat": 49.09752,
+       "distance_m": 366
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Saint-Christophe",
+       "lon": 6.142493,
+       "lat": 49.096873,
+       "distance_m": 353
+      }
+     ]
     }
    ]
   },
@@ -204,32 +910,201 @@
    "depart": "Gare de Metz, parvis",
    "etapes": [
     {
+     "cle": "gare",
      "nom": "Gare de Metz, parvis",
      "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
      "lon": 6.177013,
      "lat": 49.109277,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.177206,
+       "lat": 49.109563,
+       "distance_m": 35,
+       "combien": 3
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.179587,
+       "lat": 49.110434,
+       "distance_m": 227
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.17708,
+       "lat": 49.109618,
+       "distance_m": 38
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "ABC",
+       "lon": 6.176095,
+       "lat": 49.110211,
+       "distance_m": 123
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "L'Express Bar",
+       "lon": 6.175709,
+       "lat": 49.110311,
+       "distance_m": 149
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Mémorial à Jean Moulin",
+       "lon": 6.177287,
+       "lat": 49.109757,
+       "distance_m": 57
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Statue du Général de Gaulle",
+       "lon": 6.176598,
+       "lat": 49.109931,
+       "distance_m": 79
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.176348,
+       "lat": 49.109234,
+       "distance_m": 49,
+       "combien": 3
+      }
+     ]
     },
     {
+     "cle": "parc-seille",
      "nom": "Parc de la Seille",
      "note": "Prairies humides et roselieres au bord de la Seille. Herons.",
      "lon": 6.184968,
      "lat": 49.10661,
-     "depart": false
+     "depart": false,
+     "km": 0.8,
+     "part": 5,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.184908,
+       "lat": 49.106644,
+       "distance_m": 6,
+       "combien": 3
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Poulaillon",
+       "lon": 6.182393,
+       "lat": 49.106628,
+       "distance_m": 187
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.182102,
+       "lat": 49.106637,
+       "distance_m": 209
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Columbus Café & Co",
+       "lon": 6.182066,
+       "lat": 49.106636,
+       "distance_m": 211
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Paul",
+       "lon": 6.182228,
+       "lat": 49.105732,
+       "distance_m": 222,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Kefan Traiteur",
+       "lon": 6.182108,
+       "lat": 49.105725,
+       "distance_m": 230
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Liberazione",
+       "lon": 6.18464,
+       "lat": 49.107907,
+       "distance_m": 146
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.181425,
+       "lat": 49.108319,
+       "distance_m": 320
+      }
+     ]
     },
     {
+     "cle": "seille-marly",
      "nom": "Bord de Seille, Marly",
      "note": "La Seille en amont de Metz, prairies inondables et ripisylve.",
      "lon": 6.155748,
      "lat": 49.065114,
-     "depart": false
+     "depart": false,
+     "km": 7.8,
+     "part": 52
     },
     {
+     "cle": "montigny",
      "nom": "Montigny-les-Metz",
      "note": "Retour par le sud, jardins ouvriers et bord de Moselle.",
      "lon": 6.163123,
      "lat": 49.087475,
-     "depart": false
+     "depart": false,
+     "km": 11.5,
+     "part": 76,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Point de vue",
+       "lon": 6.160857,
+       "lat": 49.086363,
+       "distance_m": 206
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Beige",
+       "lon": 6.162151,
+       "lat": 49.08739,
+       "distance_m": 71
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Pierrot Poulet bicyclette",
+       "lon": 6.16082,
+       "lat": 49.08975,
+       "distance_m": 303
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.163429,
+       "lat": 49.088947,
+       "distance_m": 165
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.162057,
+       "lat": 49.0864,
+       "distance_m": 143
+      }
+     ]
     }
    ]
   },
@@ -253,39 +1128,284 @@
    "depart": "Gare de Metz, parvis",
    "etapes": [
     {
+     "cle": "gare",
      "nom": "Gare de Metz, parvis",
      "note": "Point de ralliement des boucles a pied : a moins d'un quart d'heure de marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.",
      "lon": 6.177013,
      "lat": 49.109277,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.177206,
+       "lat": 49.109563,
+       "distance_m": 35,
+       "combien": 3
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.179587,
+       "lat": 49.110434,
+       "distance_m": 227
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.17708,
+       "lat": 49.109618,
+       "distance_m": 38
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "ABC",
+       "lon": 6.176095,
+       "lat": 49.110211,
+       "distance_m": 123
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "L'Express Bar",
+       "lon": 6.175709,
+       "lat": 49.110311,
+       "distance_m": 149
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Mémorial à Jean Moulin",
+       "lon": 6.177287,
+       "lat": 49.109757,
+       "distance_m": 57
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Statue du Général de Gaulle",
+       "lon": 6.176598,
+       "lat": 49.109931,
+       "distance_m": 79
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.176348,
+       "lat": 49.109234,
+       "distance_m": 49,
+       "combien": 4
+      }
+     ]
     },
     {
+     "cle": "saulcy",
      "nom": "Ile du Saulcy",
      "note": "Ile universitaire, tres calme hors semestre. Cygnes sur les deux bras.",
      "lon": 6.161249,
      "lat": 49.120109,
-     "depart": false
+     "depart": false,
+     "km": 2.1,
+     "part": 13,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "AGORAé Metz Saulcy",
+       "lon": 6.16226,
+       "lat": 49.120024,
+       "distance_m": 74
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Market' Rimbaud",
+       "lon": 6.159659,
+       "lat": 49.119155,
+       "distance_m": 157
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Brasserie Baudelaire",
+       "lon": 6.158791,
+       "lat": 49.120717,
+       "distance_m": 191
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Restaurant universitaire Paul Verlaine",
+       "lon": 6.16441,
+       "lat": 49.118817,
+       "distance_m": 271
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.161103,
+       "lat": 49.12001,
+       "distance_m": 15,
+       "combien": 3
+      }
+     ]
     },
     {
+     "cle": "grand-patural",
      "nom": "Le Grand Patural, Ban-Saint-Martin",
      "note": "Prairie et promenade au bord de la Moselle, juste avant de quitter la ville.",
      "lon": 6.151052,
      "lat": 49.117929,
-     "depart": false
+     "depart": false,
+     "km": 3.1,
+     "part": 19,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.149677,
+       "lat": 49.118121,
+       "distance_m": 102
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.150156,
+       "lat": 49.116694,
+       "distance_m": 152
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Relais Saint-Symphorien",
+       "lon": 6.150408,
+       "lat": 49.116345,
+       "distance_m": 182
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Les Rives",
+       "lon": 6.148543,
+       "lat": 49.118178,
+       "distance_m": 185
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Streiff",
+       "lon": 6.152956,
+       "lat": 49.115323,
+       "distance_m": 321
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Taormina",
+       "lon": 6.148932,
+       "lat": 49.12088,
+       "distance_m": 363
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "BDC - Bar Resto",
+       "lon": 6.152868,
+       "lat": 49.114892,
+       "distance_m": 363
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Pont du Sauvage",
+       "lon": 6.146993,
+       "lat": 49.119241,
+       "distance_m": 329
+      }
+     ]
     },
     {
+     "cle": "plappeville",
      "nom": "Plappeville",
      "note": "Village vigneron du versant nord, ruelles et maisons de maitre.",
      "lon": 6.125013,
      "lat": 49.131014,
-     "depart": false
+     "depart": false,
+     "km": 6.5,
+     "part": 41,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Émotions",
+       "lon": 6.1254,
+       "lat": 49.130024,
+       "distance_m": 114
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Calvaire",
+       "lon": 6.123898,
+       "lat": 49.133563,
+       "distance_m": 295
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.124632,
+       "lat": 49.127827,
+       "distance_m": 355
+      }
+     ]
     },
     {
+     "cle": "lorry",
      "nom": "Lorry-les-Metz",
      "note": "Vergers et vignes en terrasse sur le versant nord de la cote.",
      "lon": 6.12044,
      "lat": 49.143109,
-     "depart": false
+     "depart": false,
+     "km": 8.4,
+     "part": 53,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Bistrot Sous la Vigne",
+       "lon": 6.121859,
+       "lat": 49.14268,
+       "distance_m": 114
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie",
+       "lon": 6.118221,
+       "lat": 49.141626,
+       "distance_m": 231
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Calvaire de la Grand'Rue",
+       "lon": 6.121004,
+       "lat": 49.142311,
+       "distance_m": 98
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Fort",
+       "lon": 6.124127,
+       "lat": 49.143419,
+       "distance_m": 270
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Calvaire",
+       "lon": 6.122505,
+       "lat": 49.140986,
+       "distance_m": 280
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Chapelle Carré de Malberg",
+       "lon": 6.116055,
+       "lat": 49.141637,
+       "distance_m": 359
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Calvaire du Château",
+       "lon": 6.115659,
+       "lat": 49.141662,
+       "distance_m": 383
+      }
+     ]
     }
    ]
   },
@@ -310,32 +1430,165 @@
    "depart": "Eglise fortifiee Saint-Quentin, Scy-Chazelles",
    "etapes": [
     {
+     "cle": "scy",
      "nom": "Eglise fortifiee Saint-Quentin, Scy-Chazelles",
      "note": "Eglise fortifiee du XIIe siecle, tombe de Robert Schuman a l'interieur, sa maison a 200 m. C'est ici que commence la montee.",
      "lon": 6.111337,
      "lat": 49.111092,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Chez Pierre",
+       "lon": 6.112376,
+       "lat": 49.11337,
+       "distance_m": 264
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Au Petit Tonneau",
+       "lon": 6.113235,
+       "lat": 49.114436,
+       "distance_m": 397
+      }
+     ]
     },
     {
+     "cle": "quentin",
      "nom": "Mont Saint-Quentin, sommet",
      "note": "358 m, ancien complexe fortifie en partie ruine, bois et prairies, panorama sur toute la vallee. Les batiments sont interdits d'acces.",
      "lon": 6.127302,
      "lat": 49.121225,
-     "depart": false
+     "depart": false,
+     "km": 2.0,
+     "part": 19,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Mont Saint-Quentin",
+       "lon": 6.127302,
+       "lat": 49.121225,
+       "distance_m": 0
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour Hertzienne",
+       "lon": 6.129258,
+       "lat": 49.1214,
+       "distance_m": 144
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Fort Diou",
+       "lon": 6.127709,
+       "lat": 49.121476,
+       "distance_m": 41
+      },
+      {
+       "genre": "nature",
+       "nom": "Falaise",
+       "lon": 6.125113,
+       "lat": 49.121632,
+       "distance_m": 166,
+       "combien": 2
+      }
+     ]
     },
     {
+     "cle": "plappeville",
      "nom": "Plappeville",
      "note": "Village vigneron du versant nord, ruelles et maisons de maitre.",
      "lon": 6.125013,
      "lat": 49.131014,
-     "depart": false
+     "depart": false,
+     "km": 3.8,
+     "part": 35,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Émotions",
+       "lon": 6.1254,
+       "lat": 49.130024,
+       "distance_m": 114
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Calvaire",
+       "lon": 6.123898,
+       "lat": 49.133563,
+       "distance_m": 295
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.124632,
+       "lat": 49.127827,
+       "distance_m": 355
+      }
+     ]
     },
     {
+     "cle": "lorry",
      "nom": "Lorry-les-Metz",
      "note": "Vergers et vignes en terrasse sur le versant nord de la cote.",
      "lon": 6.12044,
      "lat": 49.143109,
-     "depart": false
+     "depart": false,
+     "km": 5.8,
+     "part": 54,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Bistrot Sous la Vigne",
+       "lon": 6.121859,
+       "lat": 49.14268,
+       "distance_m": 114
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie",
+       "lon": 6.118221,
+       "lat": 49.141626,
+       "distance_m": 231
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Calvaire de la Grand'Rue",
+       "lon": 6.121004,
+       "lat": 49.142311,
+       "distance_m": 98
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Fort",
+       "lon": 6.124127,
+       "lat": 49.143419,
+       "distance_m": 270
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Calvaire",
+       "lon": 6.122505,
+       "lat": 49.140986,
+       "distance_m": 280
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Chapelle Carré de Malberg",
+       "lon": 6.116055,
+       "lat": 49.141637,
+       "distance_m": 359
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Calvaire du Château",
+       "lon": 6.115659,
+       "lat": 49.141662,
+       "distance_m": 383
+      }
+     ]
     }
    ]
   },
@@ -359,53 +1612,188 @@
    "depart": "Sainte-Ruffine",
    "etapes": [
     {
+     "cle": "sainte-ruffine",
      "nom": "Sainte-Ruffine",
      "note": "Petit village accroche a la cote, depart des sentiers du versant ouest.",
      "lon": 6.096321,
      "lat": 49.105775,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.095795,
+       "lat": 49.105097,
+       "distance_m": 85
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix de chemin",
+       "lon": 6.091613,
+       "lat": 49.105186,
+       "distance_m": 349
+      }
+     ]
     },
     {
+     "cle": "jussy",
      "nom": "Jussy",
      "note": "Village vigneron, vue sur la vallee depuis les hauts.",
      "lon": 6.08606,
      "lat": 49.101975,
-     "depart": false
+     "depart": false,
+     "km": 1.2,
+     "part": 8,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Croix de chemin",
+       "lon": 6.086056,
+       "lat": 49.101223,
+       "distance_m": 84
+      }
+     ]
     },
     {
+     "cle": "vaux",
      "nom": "Vaux",
      "note": "Fond de vallon boise, source et lavoir.",
      "lon": 6.080754,
      "lat": 49.094109,
-     "depart": false
+     "depart": false,
+     "km": 2.3,
+     "part": 15,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Au Bon Bouillon",
+       "lon": 6.08057,
+       "lat": 49.093185,
+       "distance_m": 104
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Château de Vaux",
+       "lon": 6.081169,
+       "lat": 49.094465,
+       "distance_m": 50
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Monument aux morts",
+       "lon": 6.07963,
+       "lat": 49.094211,
+       "distance_m": 83
+      }
+     ]
     },
     {
+     "cle": "scy",
      "nom": "Eglise fortifiee Saint-Quentin, Scy-Chazelles",
      "note": "Eglise fortifiee du XIIe siecle, tombe de Robert Schuman a l'interieur, sa maison a 200 m. C'est ici que commence la montee.",
      "lon": 6.111337,
      "lat": 49.111092,
-     "depart": false
+     "depart": false,
+     "km": 6.1,
+     "part": 40,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Chez Pierre",
+       "lon": 6.112376,
+       "lat": 49.11337,
+       "distance_m": 264
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Au Petit Tonneau",
+       "lon": 6.113235,
+       "lat": 49.114436,
+       "distance_m": 397
+      }
+     ]
     },
     {
+     "cle": "quentin",
      "nom": "Mont Saint-Quentin, sommet",
      "note": "358 m, ancien complexe fortifie en partie ruine, bois et prairies, panorama sur toute la vallee. Les batiments sont interdits d'acces.",
      "lon": 6.127302,
      "lat": 49.121225,
-     "depart": false
+     "depart": false,
+     "km": 8.1,
+     "part": 54,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Mont Saint-Quentin",
+       "lon": 6.127302,
+       "lat": 49.121225,
+       "distance_m": 0
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour Hertzienne",
+       "lon": 6.129258,
+       "lat": 49.1214,
+       "distance_m": 144
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Fort Diou",
+       "lon": 6.127709,
+       "lat": 49.121476,
+       "distance_m": 41
+      },
+      {
+       "genre": "nature",
+       "nom": "Falaise",
+       "lon": 6.125113,
+       "lat": 49.121632,
+       "distance_m": 166,
+       "combien": 2
+      }
+     ]
     },
     {
+     "cle": "lessy",
      "nom": "Lessy",
      "note": "Village blotti dans le cirque, au pied du versant sud du Saint-Quentin.",
      "lon": 6.095582,
      "lat": 49.120168,
-     "depart": false
+     "depart": false,
+     "km": 11.1,
+     "part": 73,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Croix de chemin",
+       "lon": 6.096538,
+       "lat": 49.118331,
+       "distance_m": 216,
+       "combien": 2
+      }
+     ]
     },
     {
+     "cle": "rozerieulles",
      "nom": "Rozerieulles",
      "note": "Village vigneron sur le versant, en balcon au-dessus de la Moselle.",
      "lon": 6.082715,
      "lat": 49.107214,
-     "depart": false
+     "depart": false,
+     "km": 13.8,
+     "part": 91,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Café du Fort Jeanne d'Arc",
+       "lon": 6.082005,
+       "lat": 49.106744,
+       "distance_m": 74
+      }
+     ]
     }
    ]
   },
@@ -430,46 +1818,229 @@
    "depart": "Ars-sur-Moselle",
    "etapes": [
     {
+     "cle": "ars",
      "nom": "Ars-sur-Moselle",
      "note": "Depart en voiture. Se garer pres de la gare ou du centre.",
      "lon": 6.076311,
      "lat": 49.076968,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.072926,
+       "lat": 49.07635,
+       "distance_m": 256
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Carré d'Ars",
+       "lon": 6.07614,
+       "lat": 49.076625,
+       "distance_m": 40
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Au Briochin",
+       "lon": 6.075621,
+       "lat": 49.076141,
+       "distance_m": 105
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Banette",
+       "lon": 6.075287,
+       "lat": 49.076214,
+       "distance_m": 112
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie Erman",
+       "lon": 6.076749,
+       "lat": 49.075723,
+       "distance_m": 142
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Lion D'Or",
+       "lon": 6.076273,
+       "lat": 49.075483,
+       "distance_m": 165
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Pt'it Bistrot",
+       "lon": 6.077265,
+       "lat": 49.074874,
+       "distance_m": 243
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.078193,
+       "lat": 49.07738,
+       "distance_m": 145
+      }
+     ]
     },
     {
+     "cle": "jouy-aqueduc",
      "nom": "Aqueduc romain de Jouy-aux-Arches",
      "note": "Sept arches encore debout d'un aqueduc du IIe siecle qui amenait l'eau de Gorze a Metz. La suite de l'ouvrage se devine tout le long du vallon.",
      "lon": 6.08025,
      "lat": 49.065293,
-     "depart": false
+     "depart": false,
+     "km": 1.8,
+     "part": 12,
+     "reperes": [
+      {
+       "genre": "halte",
+       "nom": "Abri",
+       "lon": 6.080549,
+       "lat": 49.063019,
+       "distance_m": 254
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Fournil des Arches",
+       "lon": 6.079722,
+       "lat": 49.065241,
+       "distance_m": 39
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Collecteur de l'aqueduc",
+       "lon": 6.082615,
+       "lat": 49.064709,
+       "distance_m": 184
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Monument",
+       "lon": 6.081402,
+       "lat": 49.067523,
+       "distance_m": 262
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Aqueduc Romain",
+       "lon": 6.075312,
+       "lat": 49.066559,
+       "distance_m": 386
+      }
+     ]
     },
     {
+     "cle": "dornot",
      "nom": "Dornot",
      "note": "Hameau viticole au pied de la corniche.",
      "lon": 6.056,
      "lat": 49.0481,
-     "depart": false
+     "depart": false,
+     "km": 6.8,
+     "part": 43
     },
     {
+     "cle": "roches-fraze",
      "nom": "Les Roches de la Fraze",
      "note": "Corniche calcaire, vue plongeante sur la vallee de la Moselle.",
      "lon": 6.046575,
      "lat": 49.040158,
-     "depart": false
+     "depart": false,
+     "km": 8.7,
+     "part": 56,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Point de vue",
+       "lon": 6.046827,
+       "lat": 49.040794,
+       "distance_m": 73
+      },
+      {
+       "genre": "nature",
+       "nom": "Falaise",
+       "lon": 6.046661,
+       "lat": 49.04018,
+       "distance_m": 7,
+       "combien": 3
+      },
+      {
+       "genre": "nature",
+       "nom": "Grotte du Marteau",
+       "lon": 6.045957,
+       "lat": 49.039203,
+       "distance_m": 115
+      }
+     ]
     },
     {
+     "cle": "croix-st-clement",
      "nom": "Croix Saint-Clement",
      "note": "Carrefour de chemins sur le plateau, entre Gorze et la Moselle.",
      "lon": 6.039177,
      "lat": 49.05378,
-     "depart": false
+     "depart": false,
+     "km": 10.6,
+     "part": 67,
+     "reperes": [
+      {
+       "genre": "halte",
+       "nom": "Abri",
+       "lon": 6.039215,
+       "lat": 49.0535,
+       "distance_m": 31
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix Saint-Clément",
+       "lon": 6.039177,
+       "lat": 49.05378,
+       "distance_m": 0
+      }
+     ]
     },
     {
+     "cle": "ancy",
      "nom": "Ancy-sur-Moselle",
      "note": "Village au bord de l'eau, au debouche du vallon de Gorze.",
      "lon": 6.058474,
      "lat": 49.056561,
-     "depart": false
+     "depart": false,
+     "km": 12.6,
+     "part": 81,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "L'Auberge Du Lion D'Or",
+       "lon": 6.058724,
+       "lat": 49.057876,
+       "distance_m": 147
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.058421,
+       "lat": 49.056569,
+       "distance_m": 4
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Ossuaire (ancien) dans le cimetière",
+       "lon": 6.05937,
+       "lat": 49.055644,
+       "distance_m": 121
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix Rouge",
+       "lon": 6.058177,
+       "lat": 49.054178,
+       "distance_m": 266
+      }
+     ]
     }
    ]
   },
@@ -493,25 +2064,66 @@
    "depart": "Kedange-sur-Canner",
    "etapes": [
     {
+     "cle": "kedange",
      "nom": "Kedange-sur-Canner",
      "note": "Depart en voiture, 35 min de Metz. Se garer pres de la mairie.",
      "lon": 6.3412,
      "lat": 49.3095,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.339356,
+       "lat": 49.309134,
+       "distance_m": 140
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Bar Jaminet",
+       "lon": 6.338963,
+       "lat": 49.308123,
+       "distance_m": 223
+      }
+     ]
     },
     {
+     "cle": "hombourg",
      "nom": "Hombourg-Budange",
      "note": "Chateau et parc, au bord de la Canner.",
      "lon": 6.344634,
      "lat": 49.295953,
-     "depart": false
+     "depart": false,
+     "km": 2.4,
+     "part": 16,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Proxi",
+       "lon": 6.345064,
+       "lat": 49.296127,
+       "distance_m": 37
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Château de Hombourg",
+       "lon": 6.341517,
+       "lat": 49.295372,
+       "distance_m": 235
+      }
+     ]
     },
     {
+     "cle": "foret-hombourg",
      "nom": "Foret de Hombourg-Budange",
      "note": "Grande hetraie, chemins forestiers larges et bien traces.",
      "lon": 6.371644,
      "lat": 49.285601,
-     "depart": false
+     "depart": false,
+     "km": 9.0,
+     "part": 60
     }
    ]
   },
@@ -536,39 +2148,170 @@
    "depart": "Chateau des ducs de Lorraine, Sierck-les-Bains",
    "etapes": [
     {
+     "cle": "sierck",
      "nom": "Chateau des ducs de Lorraine, Sierck-les-Bains",
      "note": "Depart en voiture, 45 min de Metz. Parking sous le chateau.",
      "lon": 6.359738,
      "lat": 49.440098,
-     "depart": true
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.356803,
+       "lat": 49.441712,
+       "distance_m": 278
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour de l'Horloge",
+       "lon": 6.35741,
+       "lat": 49.4413,
+       "distance_m": 215
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "La Vieille Porte",
+       "lon": 6.357601,
+       "lat": 49.441209,
+       "distance_m": 198
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Ruines du château des ducs de Lorraine et des fortifications",
+       "lon": 6.358681,
+       "lat": 49.440517,
+       "distance_m": 90
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Maison Berweiller",
+       "lon": 6.357327,
+       "lat": 49.44106,
+       "distance_m": 205
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Monument aux morts 1870-1871 de Sierck-les-Bains",
+       "lon": 6.358148,
+       "lat": 49.441893,
+       "distance_m": 230
+      },
+      {
+       "genre": "nature",
+       "nom": "Falaise",
+       "lon": 6.363762,
+       "lat": 49.438821,
+       "distance_m": 324
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.356871,
+       "lat": 49.441713,
+       "distance_m": 274
+      }
+     ]
     },
     {
+     "cle": "rustroff",
      "nom": "Rustroff",
      "note": "Village au-dessus de Sierck, entre vignes et pelouses seches.",
      "lon": 6.372046,
      "lat": 49.442158,
-     "depart": false
+     "depart": false,
+     "km": 1.6,
+     "part": 10,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.372138,
+       "lat": 49.442633,
+       "distance_m": 53
+      }
+     ]
     },
     {
+     "cle": "montenach",
      "nom": "Montenach",
      "note": "Village au pied de la reserve naturelle des pelouses calcaires, orchidees au printemps, vues sur la boucle de la Moselle.",
      "lon": 6.381197,
      "lat": 49.420355,
-     "depart": false
+     "depart": false,
+     "km": 5.0,
+     "part": 32,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Au Val Sierckois",
+       "lon": 6.380471,
+       "lat": 49.419578,
+       "distance_m": 101
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Auberge de la Klauss",
+       "lon": 6.377639,
+       "lat": 49.418693,
+       "distance_m": 317
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix de chemin",
+       "lon": 6.378512,
+       "lat": 49.418434,
+       "distance_m": 289
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Monument aux morts de Montenach",
+       "lon": 6.378158,
+       "lat": 49.4175,
+       "distance_m": 386
+      }
+     ]
     },
     {
+     "cle": "kerling",
      "nom": "Kerling-les-Sierck",
      "note": "Village le plus au sud du secteur, sur le plateau agricole.",
      "lon": 6.353243,
      "lat": 49.397766,
-     "depart": false
+     "depart": false,
+     "km": 9.2,
+     "part": 59,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Monument aux morts de Kerling-lès-Sierck",
+       "lon": 6.35004,
+       "lat": 49.397328,
+       "distance_m": 237
+      }
+     ]
     },
     {
+     "cle": "ferme-koenigsberg",
      "nom": "Ferme du Koenigsberg",
      "note": "Ferme isolee sur le plateau, au-dessus de la reserve de Montenach.",
      "lon": 6.359513,
      "lat": 49.420557,
-     "depart": false
+     "depart": false,
+     "km": 12.8,
+     "part": 82,
+     "reperes": [
+      {
+       "genre": "nature",
+       "nom": "Falaise",
+       "lon": 6.362978,
+       "lat": 49.422363,
+       "distance_m": 321,
+       "combien": 2
+      }
+     ]
     }
    ]
   }

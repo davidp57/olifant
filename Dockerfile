@@ -15,7 +15,7 @@ WORKDIR /app
 
 COPY pyproject.toml ./
 RUN pip install --no-cache-dir "fastapi>=0.115" "uvicorn[standard]>=0.30" \
-        "pyyaml>=6" "python-multipart>=0.0.9"
+        "pyyaml>=6" "python-multipart>=0.0.9" "defusedxml>=0.7"
 
 COPY olifant/ ./olifant/
 COPY data/parcours.yaml ./data/parcours.yaml
@@ -23,7 +23,7 @@ COPY data/sortie/ ./data/sortie/
 
 # Le service tourne sans privileges : il n'ecrit que dans /data.
 RUN useradd --system --uid 1001 marcheur \
-    && mkdir -p /data/traces \
+    && mkdir -p /data/traces /data/tuiles \
     && chown -R marcheur:marcheur /data
 USER marcheur
 
