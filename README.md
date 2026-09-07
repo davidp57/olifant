@@ -108,6 +108,11 @@ Chaque étape porte **le kilomètre auquel on y arrive** et se déplie sur ce
 qu'il y a autour : de l'eau, un point de vue, un abri, un café, du patrimoine.
 Ces repères sont relevés dans OpenStreetMap, jamais saisis à la main.
 
+Un interrupteur les affiche **tous d'un coup sur la carte**, avec une icône par
+genre — goutte, montagne, tasse, tour, arbre. C'est ainsi qu'on répond à « où
+est l'eau sur ce trajet ? » sans déplier les sept étapes une par une. L'état
+est retenu d'une visite à l'autre.
+
 ### Marcher avec
 
 Le bouton **Me situer** affiche la position sur la trace et répond aux trois

@@ -87,8 +87,17 @@ async function cacheDAbord(requete, nomDuCache){
   const garde = await cache.match(requete);
   if (garde) return garde;
   const reponse = await fetch(requete);
-  if (reponse.ok) cache.put(requete, reponse.clone());
+  if (gardable(reponse)) cache.put(requete, reponse.clone());
   return reponse;
+}
+
+/* Une image demandee a un autre domaine revient « opaque » : on ne peut pas
+   lire son statut, et `ok` vaut faux meme quand tout s'est bien passe. Une
+   premiere version ne gardait donc jamais les carreaux d'OpenStreetMap -- ceux
+   des zones hors des parcours ne survivaient pas a la perte du reseau, alors
+   qu'on venait de les regarder. */
+function gardable(reponse){
+  return reponse.ok || (reponse.type === "opaque" && reponse.status === 0);
 }
 
 async function reseauDAbord(requete, nomDuCache){
@@ -113,7 +122,13 @@ self.addEventListener("fetch", evenement => {
   // Les carreaux, d'ou qu'ils viennent : ils ne changent jamais.
   if ((local && url.pathname.startsWith("/tuiles/"))
       || url.hostname.endsWith("tile.openstreetmap.org")){
-    evenement.respondWith(cacheDAbord(requete, CARREAUX).catch(() => Response.error()));
+    // On laisse l'echec remonter tel quel plutot que de le remplacer par une
+    // erreur fabriquee. La nuance compte : une reponse d'erreur forgee fait
+    // marquer le carreau comme definitivement manquant, et le trou reste dans
+    // la carte jusqu'au rechargement de la page, meme si le reseau revient
+    // dans la seconde. Une erreur ordinaire, elle, laisse Leaflet redemander
+    // le carreau au prochain deplacement.
+    evenement.respondWith(cacheDAbord(requete, CARREAUX));
     return;
   }
   if (!local) return;

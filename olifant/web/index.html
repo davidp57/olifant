@@ -94,6 +94,35 @@
   .etapes span{color:var(--doux)}
   .etape-corps{padding:0 8px 10px 11px}
 
+  /* --- l'interrupteur des reperes --------------------------------------- */
+  .bascule{margin:10px 0 4px}
+  .bascule button{font:inherit;font-size:12.5px;cursor:pointer;
+    background:none;border:1px solid var(--trait-fort);border-radius:2px;
+    color:var(--doux);min-height:var(--pouce);padding:0 11px;
+    display:inline-flex;align-items:center;gap:9px}
+  .bascule button[aria-pressed="true"]{color:var(--profond);
+    border-color:var(--profond)}
+  .bascule .temoin{width:26px;height:15px;border-radius:8px;flex:none;
+    border:1px solid var(--trait-fort);position:relative;transition:background .15s}
+  .bascule .temoin::after{content:"";position:absolute;top:1px;left:1px;
+    width:11px;height:11px;border-radius:50%;background:var(--doux);
+    transition:transform .15s ease, background .15s}
+  .bascule button[aria-pressed="true"] .temoin{background:var(--profond);
+    border-color:var(--profond)}
+  .bascule button[aria-pressed="true"] .temoin::after{transform:translateX(11px);
+    background:var(--papier)}
+  .bascule .combien{font-size:11px;color:var(--doux);
+    border-left:1px solid var(--trait);padding-left:9px}
+  @media (prefers-reduced-motion:reduce){
+    .bascule .temoin,.bascule .temoin::after{transition:none}
+  }
+
+  /* --- les pions des reperes sur la carte ------------------------------- */
+  .pion-fond{display:flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:50%;background:var(--papier);
+    border:1.5px solid;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+  .pion-fond svg{width:15px;height:15px}
+
   /* --- ce qu'OSM sait autour d'une etape -------------------------------- */
   .reperes{margin:8px 0 0;padding:0;list-style:none;display:flex;
     flex-wrap:wrap;gap:6px}
@@ -359,6 +388,7 @@ let verrouEcran = null;           // pour que l'ecran ne s'eteigne pas en marcha
 let sortiesConnues = [];          // les fois ou on a marche la boucle choisie
 let fondEmporteConnu = null;      // ce que le serveur a sous la main
 let versionServie = null;         // ce que le serveur dit faire tourner
+let tousLesReperes = localStorage.getItem("olifant-reperes") === "1";
 let sortieAffichee = null;
 let filtre = localStorage.getItem("olifant-filtre") || "tout";
 let tri = localStorage.getItem("olifant-tri") || "carnet";
@@ -368,7 +398,13 @@ const reperesCarte = L.layerGroup();
 const maPosition = L.layerGroup();
 let coucheSortie = null;   // la trace reellement suivie, quand on l'affiche
 
-const carte = L.map("carte", {scrollWheelZoom: true}).setView(METZ, 12);
+/* Les bornes de zoom sont posees sur la carte, et non deduites de ses couches.
+   Leaflet, quand la carte n'en declare pas, prend le plus grand `minZoom` de
+   ses couches de tuiles : ajouter le fond emporte, qui commence au zoom 13,
+   empechait alors de dezoomer davantage -- un effet de bord invisible et
+   difficile a relier a sa cause. */
+const carte = L.map("carte", {scrollWheelZoom: true, minZoom: 3, maxZoom: 18})
+  .setView(METZ, 12);
 
 /* Deux fonds empiles. Dessous, les serveurs d'OpenStreetMap, qui savent tout
    mais demandent du reseau. Dessus, les carreaux emportes par
@@ -412,12 +448,16 @@ async function poseLeFondEmporte(){
   });
 
   new Locale("/tuiles/{z}/{x}/{y}.png", {
-    minZoom: Math.min(...fond.zooms),
+    // Pas de `minZoom` ici : `getTileUrl` ecarte deja tout carreau absent, et
+    // le poser sur la couche contraindrait le zoom de la carte entiere.
     // Au-dela du zoom emporte, Leaflet etire le dernier carreau connu plutot
     // que de reclamer des carreaux qui n'existent pas.
     maxNativeZoom: Math.max(...fond.zooms), maxZoom: 18,
     errorTileUrl: TRANSPARENT, zIndex: 2,
   }).addTo(carte);
+  // Une couche qui arrive apres coup : on redonne a Leaflet la taille de son
+  // conteneur, sinon elle se remplit d'apres une mesure perimee.
+  remesureLaCarte();
   fondEmporte = fond;
 }
 let fondEmporte = null;
@@ -447,8 +487,7 @@ function montre(vue){
   document.querySelectorAll(".barre-bas button").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.vue === vue)));
   // Leaflet mesure son conteneur : il faut le lui redemander apres coup.
-  carte.invalidateSize();
-  appliqueLeCadrage();
+  remesureLaCarte();
 }
 
 document.querySelectorAll(".barre-bas button").forEach(b =>
@@ -481,6 +520,17 @@ addEventListener("popstate", () => { if (surTelephone()) retourListe(); });
 let aCadrer = null;
 
 function cadre(limites){ aCadrer = limites; appliqueLeCadrage(); }
+
+/* Remesurer, toujours. Leaflet garde la taille de son conteneur en memoire et
+   ne decide qu'a partir d'elle quelles tuiles charger : si elle est perimee,
+   il en charge pour une fenetre qui n'existe plus et laisse des pans de carte
+   vides. Une version precedente n'appelait `invalidateSize` que lorsqu'un
+   cadrage etait en attente -- c'est-a-dire presque jamais -- et la carte
+   restait trouee des que la fenetre changeait de taille. */
+function remesureLaCarte(){
+  carte.invalidateSize();
+  appliqueLeCadrage();
+}
 
 function appliqueLeCadrage(){
   const conteneur = document.getElementById("carte");
@@ -553,6 +603,12 @@ function carteDuParcours(p){
 function detailDuParcours(p){
   return `<div class="detail">
     ${p.parking ? `<p class="resume">Stationnement : ${secu(p.parking)}</p>` : ""}
+    ${compteLesReperes(p) ? `<p class="bascule">
+      <button type="button" id="btn-reperes" aria-pressed="${tousLesReperes}">
+        <span class="temoin"></span>
+        Tous les repères sur la carte
+        <span class="combien">${compteLesReperes(p)}</span>
+      </button></p>` : ""}
     <ul class="etapes">${p.etapes.map(carteDeLEtape).join("")}</ul>
     <div id="position"></div>
     ${listeDesSorties()}
@@ -629,6 +685,8 @@ function rendre(){
     b.addEventListener("click", () => basculeLaTraceSuivie(Number(b.dataset.trace))));
   document.querySelectorAll("[data-emporte]").forEach(b =>
     b.addEventListener("click", () => emporteLaBoucle(b.dataset.emporte)));
+  const bascule = document.getElementById("btn-reperes");
+  if (bascule) bascule.addEventListener("click", basculeLesReperes);
 }
 
 function selectionne(id){
@@ -702,22 +760,83 @@ function etapeDuChoisi(cle){
   return p ? p.etapes.find(e => e.cle === cle) : null;
 }
 
-/* Les reperes d'une etape sur la carte : de petits points, distincts des
-   etapes elles-memes, qu'on ne montre que pour l'etape ouverte -- sinon la
-   carte devient un semis illisible de fontaines et de bancs. */
+/* -------------------------------------------------------- reperes en carte */
+/* Les reperes d'une boucle, tous visibles d'un coup si on le demande. Le
+   dessin est en SVG trace ici plutot qu'en emoji : un emoji change de forme,
+   de couleur et de taille selon le telephone, et sept genres cote a cote
+   deviennent illisibles. */
+
+const SIGNES = {
+  // une goutte
+  eau: '<path d="M12 3c-4 6-6 9-6 12a6 6 0 0 0 12 0c0-3-2-6-6-12z"/>',
+  // une montagne
+  vue: '<path d="M3 19h18L12 5z"/>',
+  // un toit sur deux poteaux
+  halte: '<path d="M3 12l9-7 9 7M6 12v8M18 12v8"/>',
+  // une tasse
+  ravitaillement: '<path d="M5 7h11v6a5 5 0 0 1-11 0zM16 8h3a2 2 0 0 1 0 5h-3M4 21h14"/>',
+  // une tour crenelee
+  patrimoine: '<path d="M7 21V7h10v14M7 7V4h3v3M14 7V4h3v3M12 21v-6"/>',
+  // un arbre
+  nature: '<path d="M12 21v-5M6 16h12L12 4z"/>',
+  // un point d'information
+  commodite: '<path d="M12 8h.01M11 12h2v5h-2z"/><circle cx="12" cy="12" r="9"/>',
+};
+
+const TEINTES = {
+  eau: "#316E7C", vue: "#B8862A", patrimoine: "#7A4A6B",
+  ravitaillement: "#8C4A2F", halte: "#1E3B34", nature: "#5A6E2F",
+  commodite: "#6b6b6b",
+};
+
+const NOMS_DE_GENRE = {
+  eau: "de l'eau", vue: "un point de vue", halte: "de quoi s'asseoir",
+  ravitaillement: "de quoi manger ou boire", patrimoine: "à voir",
+  nature: "curiosité naturelle", commodite: "commodité",
+};
+
+function pionDeRepere(genre){
+  const teinte = TEINTES[genre] || TEINTES.commodite;
+  const signe = SIGNES[genre] || SIGNES.commodite;
+  return L.divIcon({
+    className: "pion",
+    html: `<span class="pion-fond" style="border-color:${teinte}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="${teinte}" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">${signe}</svg></span>`,
+    iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -12],
+  });
+}
+
+/* Tous les reperes de la boucle choisie, ou seulement ceux de l'etape ouverte.
+   Deux usages differents : on parcourt la liste des etapes chez soi, et on
+   cherche « ou est l'eau sur ce trajet » avant de partir. */
 function dessineLesReperes(etape){
   reperesCarte.clearLayers();
-  if (!etape || !etape.reperes) return;
-  const teintes = {eau: "#316E7C", vue: "#B8862A", patrimoine: "#B8862A",
-                   ravitaillement: "#7A4A6B", halte: "#1E3B34",
-                   nature: "#5A6E2F", commodite: "#8a8a8a"};
-  etape.reperes.forEach(r => {
-    L.circleMarker([r.lat, r.lon], {
-      radius: 4, weight: 1.5, color: teintes[r.genre] || "#8a8a8a",
-      fillColor: "#fff", fillOpacity: .9,
-    }).bindPopup(`<b>${secu(r.nom)}</b><br>à ${r.distance_m} m de l'étape`)
+  const p = catalogue && catalogue.parcours.find(x => x.id === choisi);
+  if (!p) return;
+
+  const aMontrer = tousLesReperes
+    ? p.etapes.flatMap(e => (e.reperes || []).map(r => ({...r, etape: e})))
+    : (etape && etape.reperes || []).map(r => ({...r, etape}));
+
+  aMontrer.forEach(r => {
+    L.marker([r.lat, r.lon], {icon: pionDeRepere(r.genre), riseOnHover: true})
+      .bindPopup(`<b>${secu(r.nom)}</b>${r.combien > 1 ? ` ×${r.combien}` : ""}
+        <br>${secu(NOMS_DE_GENRE[r.genre] || r.genre)}
+        <br>à ${r.distance_m} m de « ${secu(r.etape.nom)} »`)
       .addTo(reperesCarte);
   });
+}
+
+function basculeLesReperes(){
+  tousLesReperes = !tousLesReperes;
+  localStorage.setItem("olifant-reperes", tousLesReperes ? "1" : "0");
+  rendre();
+  majCarte();
+}
+
+function compteLesReperes(p){
+  return p.etapes.reduce((n, e) => n + (e.reperes ? e.reperes.length : 0), 0);
 }
 
 /* -------------------------------------------------------------- navigation */
@@ -1131,10 +1250,15 @@ async function charge(){
         style: {color: f.properties.couleur, weight: 4, opacity: .95},
       }).addTo(carte).on("click", () => selectionne(f.properties.id));
     });
-    // Le conteneur n'a pas encore de hauteur au premier tour : on remesure a
-    // chaque changement (bascule de vue, rotation, barre d'adresse repliee).
-    new ResizeObserver(() => appliqueLeCadrage())
+    // Le conteneur n'a pas encore de hauteur au premier tour, et sa taille
+    // changera ensuite (bascule de vue, rotation du telephone, barre
+    // d'adresse repliee, fenetre redimensionnee) : on remesure a chaque fois.
+    new ResizeObserver(() => remesureLaCarte())
       .observe(document.getElementById("carte"));
+    // Le ResizeObserver ne voit pas tout : une fenetre agrandie sans que le
+    // conteneur change de taille CSS, par exemple. La ceinture avec les
+    // bretelles.
+    addEventListener("resize", remesureLaCarte);
     poseLeFondEmporte();
   }
   document.querySelectorAll("[data-filtre]").forEach(b =>
