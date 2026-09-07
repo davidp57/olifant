@@ -414,7 +414,18 @@ const carte = L.map("carte", {scrollWheelZoom: true, minZoom: 3, maxZoom: 18})
    encore au fond d'un bois. Chacun se tait quand il ne sait pas -- un carreau
    manquant est remplace par une image transparente plutot que par une icone
    d'erreur -- et on voit donc toujours le meilleur des deux. */
-const TRANSPARENT = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=";
+/* Un carreau vide, et reellement transparent. Le precedent ne l'etait pas : il
+   lui manquait le bloc de controle graphique (0x21 0xF9) qui declare la
+   couleur transparente, et il valait donc un pixel blanc opaque. Pose par
+   dessus la couche d'OpenStreetMap partout ou le fond emporte n'a pas de
+   carreau -- c'est-a-dire hors du couloir des parcours -- il masquait la carte
+   d'un blanc uni. Le symptome etait deroutant : les carreaux arrivaient bien,
+   aucun ne tombait en erreur, et pourtant la carte etait trouee.
+
+   Les octets ci-dessous sont verifies par un test : 0x21 0xF9, drapeau de
+   transparence a 1, indice transparent 0. */
+const TRANSPARENT = "data:image/gif;base64,"
+  + "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18, errorTileUrl: TRANSPARENT,
