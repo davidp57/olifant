@@ -135,22 +135,42 @@ mesuré**. Sans cela, le tremblement du GPS s'ajoute au chemin : sur un essai,
 
 ### Emporter le fond de carte
 
-En forêt, il n'y a pas de réseau, et la carte serait blanche. Cette commande
-récupère une fois pour toutes les carreaux qui couvrent les traces :
+En forêt, il n'y a pas de réseau. **Et un point qu'il faut avoir en tête :
+sans réseau, le téléphone ne joint pas non plus le NAS** — ni la page, ni le
+catalogue, ni les traces, ni les carreaux. Emporter le fond de carte sur le
+serveur ne suffit donc pas à marcher hors réseau ; ça évite seulement de
+dépendre d'OpenStreetMap. Ce qui permet de marcher, c'est que **le téléphone**
+garde tout.
+
+D'où deux dispositifs, l'un sur le serveur, l'autre dans le navigateur.
+
+**Sur le serveur**, au premier démarrage, le service complète les carreaux qui
+couvrent les traces : 997 pour les dix boucles, du zoom 13 au zoom 16, une
+quinzaine de mégaoctets, un quart d'heure en tâche de fond, une seule fois
+puisqu'ils restent dans le volume. Rien à lancer — le conteneur pose
+`OLIFANT_TUILES_AUTO=1`. Hors conteneur, la variable est absente et un
+`uvicorn` local ne télécharge donc rien ; la commande reste disponible :
 
 ```bash
 python -m olifant tuiles --compte-seulement   # dit combien, sans rien prendre
 python -m olifant tuiles                      # les prend, un par seconde
 ```
 
-997 carreaux pour les dix boucles, du zoom 13 au zoom 16, une quinzaine de
-mégaoctets, environ un quart d'heure. Ils vont dans `data/tuiles/` — hors
-dépôt, et du côté du volume qu'on sauvegarde, pas de l'image. Sur le NAS, la
-commande se lance depuis la console du conteneur.
+**Dans le navigateur**, un service worker garde la page, Leaflet, le catalogue
+et les traces dès la première visite. Puis, quand on ouvre une boucle, le
+bouton **Emporter pour hors réseau** prend ses carreaux — une centaine, un ou
+deux mégaoctets, quelques secondes en Wi-Fi. On regarde la boucle chez soi
+avant de partir, et elle est prête. Rien n'est téléchargé sans être demandé.
 
-La page empile ce fond local **au-dessus** de celui d'OpenStreetMap : là où le
-carreau local manque, on voit celui d'OSM à travers ; là où le réseau manque,
-c'est l'inverse ; et quand les deux manquent, restent la trace et la position.
+Le serveur ne dit pas seulement *s'il* a un fond, mais *lequel* : la page ne
+réclame ainsi aucun carreau absent. Un couloir de traces n'est pas un
+rectangle — cinquante kilomètres séparent Metz de Sierck — et une simple
+emprise aurait fait demander des milliers de carreaux inexistants.
+
+La carte empile deux fonds : les carreaux locaux **au-dessus** de ceux
+d'OpenStreetMap. Là où le carreau local manque, on voit celui d'OSM à
+travers ; là où le réseau manque, c'est l'inverse ; et quand les deux
+manquent, restent la trace et la position.
 
 ### Relever ce qu'il y a autour des étapes
 
@@ -227,6 +247,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 | `olifant/export.py` | GPX, KML, GeoJSON |
 | `olifant/api.py` | le serveur et le carnet |
 | `olifant/web/` | la page, Leaflet compris |
+| `olifant/web/sw.js` | ce qui fait que le téléphone marche sans réseau |
 | `data/cache/` | les réponses du routeur, versionnées : tout se rejoue hors ligne |
 | `data/tuiles/` | le fond de carte emporté, hors dépôt (19 Mo de PNG) |
 
@@ -236,7 +257,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-103 tests, sans réseau.
+130 tests, sans réseau.
 
 ## Un mot sur les services publics
 
