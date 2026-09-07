@@ -27,7 +27,8 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import FastAPI, Form, HTTPException, UploadFile
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.responses import (FileResponse, HTMLResponse, JSONResponse,
+                               Response)
 from fastapi.staticfiles import StaticFiles
 
 from . import suivi, tuiles
@@ -50,6 +51,11 @@ TUILES = Path(os.environ.get("OLIFANT_TUILES", ECRITURE / "tuiles"))
 # poste de developpement non. Sans quoi chaque lancement de test ou chaque
 # `uvicorn` local se mettrait a telecharger un millier de carreaux.
 TUILES_AUTO = os.environ.get("OLIFANT_TUILES_AUTO", "") == "1"
+
+# De quoi savoir ce qui tourne. Inscrits dans l'image a la construction ;
+# absents sur un poste de developpement, ou l'on repond « dev ».
+VERSION = os.environ.get("OLIFANT_VERSION", "dev")
+CONSTRUITE = os.environ.get("OLIFANT_CONSTRUITE", "")
 
 journal = logging.getLogger("olifant")
 
@@ -148,19 +154,46 @@ def _catalogue() -> dict:
 
 @app.get("/", response_class=HTMLResponse)
 def page() -> HTMLResponse:
-    return HTMLResponse((WEB / "index.html").read_text(encoding="utf-8"))
+    """La page, que le navigateur doit revalider a chaque fois.
+
+    Sans cet en-tete, le navigateur gardait sa propre copie et la resservait
+    au rechargement : une nouvelle version restait invisible meme apres que le
+    service worker avait mis la bonne page dans son cache. Le hors-ligne n'en
+    souffre pas -- c'est le service worker qui repond quand le reseau manque,
+    et lui garde la page exprès.
+    """
+    source = (WEB / "index.html").read_text(encoding="utf-8")
+    return HTMLResponse(source.replace("__VERSION__", VERSION),
+                        headers={"Cache-Control": "no-cache"})
+
+
+@app.get("/api/version")
+def version() -> JSONResponse:
+    """Ce qui tourne, pour qu'on puisse le lire sans deviner."""
+    return JSONResponse({"version": VERSION, "construite": CONSTRUITE})
 
 
 @app.get("/sw.js")
-def service_worker() -> FileResponse:
-    """Servi depuis la racine, sinon sa portee ne couvre pas tout le site.
+def service_worker() -> Response:
+    """Servi depuis la racine, avec le numero de version inscrit dedans.
 
-    Un service worker ne peut intercepter que ce qui se trouve sous son propre
-    chemin : place sous /vendor/, il ne verrait ni la page ni les carreaux.
+    Deux raisons, et la seconde est un correctif. La portee d'abord : un
+    service worker n'intercepte que ce qui se trouve sous son propre chemin,
+    donc place sous /vendor/ il ne verrait ni la page ni les carreaux.
+
+    Ensuite la mise a jour. Un service worker n'est reinstalle que si ses
+    octets changent ; tant qu'il ne bouge pas, il continue de servir la page
+    qu'il a en cache -- y compris quand on la recharge, y compris quand on
+    demande explicitement de contourner le cache. Une nouvelle version du site
+    n'atteignait donc jamais le telephone. En inscrivant la version dans le
+    fichier, chaque deploiement le fait changer, le navigateur le reinstalle,
+    et la coquille est rafraichie.
     """
-    return FileResponse(WEB / "sw.js", media_type="text/javascript",
-                        headers={"Cache-Control": "no-cache",
-                                 "Service-Worker-Allowed": "/"})
+    source = (WEB / "sw.js").read_text(encoding="utf-8")
+    return Response(source.replace("__VERSION__", VERSION),
+                    media_type="text/javascript",
+                    headers={"Cache-Control": "no-cache",
+                             "Service-Worker-Allowed": "/"})
 
 
 @app.get("/api/fond/{parcours_id}")

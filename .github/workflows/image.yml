@@ -3,6 +3,14 @@
 # Sans ca, deployer sur Portainer obligerait a lui faire construire l'image
 # lui-meme, ce que l'editeur web ne sait pas faire : il ne dispose que du
 # fichier compose, pas du depot.
+#
+# La construction recupere aussi le fond de carte des traces. C'est ici et
+# nulle part ailleurs que cela doit se faire : le service le prenait autrefois
+# lui-meme au premier demarrage, mais les serveurs de tuiles comptent par
+# adresse IP, et celle du NAS est celle de la maison -- il faisait donc
+# refuser les tuiles du navigateur de la personne assise a cote. Depuis les
+# machines de GitHub, et une seule fois par changement de traces grace au
+# cache ci-dessous, la depense est honnete.
 
 name: image
 
@@ -20,6 +28,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Retrouver le fond de carte deja pris
+        uses: actions/cache@v4
+        with:
+          path: data/tuiles
+          # La cle suit les traces : si elles changent, il faut de nouveaux
+          # carreaux. Le prefixe de repli permet de repartir du lot precedent
+          # et de ne prendre que la difference, plutot que les mille d'un coup.
+          key: tuiles-${{ hashFiles('data/sortie/traces.geojson') }}
+          restore-keys: tuiles-
+
+      - name: Completer le fond de carte
+        # Un carreau par seconde, et rien de ce qui est deja la n'est
+        # redemande : le premier passage dure un quart d'heure, les suivants
+        # ne demandent rien du tout.
+        run: |
+          pip install --quiet "pyyaml>=6"
+          python -m olifant tuiles
+
       - uses: docker/setup-buildx-action@v3
 
       - uses: docker/login-action@v3
@@ -28,6 +58,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: De quoi savoir ce qui tourne
+        id: reperes
+        run: |
+          echo "version=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          echo "construite=$(date -u +%Y-%m-%dT%H:%MZ)" >> "$GITHUB_OUTPUT"
+
       - uses: docker/build-push-action@v6
         with:
           context: .
@@ -35,8 +71,9 @@ jobs:
           # Le NAS peut etre en ARM (Synology recents, QNAP) comme en x86 :
           # on publie les deux, Docker choisira.
           platforms: linux/amd64,linux/arm64
+          build-args: |
+            OLIFANT_VERSION=${{ steps.reperes.outputs.version }}
+            OLIFANT_CONSTRUITE=${{ steps.reperes.outputs.construite }}
           tags: |
             ghcr.io/${{ github.repository_owner }}/olifant:latest
             ghcr.io/${{ github.repository_owner }}/olifant:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max

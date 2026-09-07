@@ -172,6 +172,19 @@
   .rangee>*{flex:1;margin-bottom:12px}
   .actions{display:flex;justify-content:flex-end;gap:10px;align-items:center;margin-top:4px}
 
+  /* Ce qui tourne, en pied de liste : discret, mais lisible sans rien ouvrir. */
+  .signature{margin:22px 0 0;padding-top:12px;border-top:1px solid var(--trait);
+    font-size:11.5px;color:var(--doux);display:flex;gap:10px;flex-wrap:wrap;
+    align-items:center}
+  .signature code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11px}
+  /* Une nouvelle version est prete : on le dit, on ne recharge pas de force --
+     quelqu'un peut etre en train de marcher en suivant la carte. */
+  .nouveaute{margin:12px 0 0;padding:10px 13px;border-left:3px solid var(--eau);
+    background:var(--carte-fond);font-size:13px;display:flex;gap:10px;
+    align-items:center;flex-wrap:wrap}
+  .nouveaute button{margin-left:auto}
+
   .flash{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:900;
     background:var(--profond);color:var(--papier);padding:9px 16px;border-radius:2px;
     font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -255,7 +268,7 @@
   }
 </style>
 </head>
-<body data-vue="liste">
+<body data-vue="liste" data-version="__VERSION__">
 <div class="cadre">
   <div class="volet">
     <div class="barre-haut">
@@ -279,7 +292,9 @@
       </select>
       <span class="compte" id="compte"></span>
     </nav>
+    <div id="nouveaute"></div>
     <div id="liste"><p class="vide">Chargement…</p></div>
+    <p class="signature" id="signature"></p>
   </div>
   <div id="carte"></div>
 </div>
@@ -343,6 +358,7 @@ let veille = null;                // identifiant du suivi de position
 let verrouEcran = null;           // pour que l'ecran ne s'eteigne pas en marchant
 let sortiesConnues = [];          // les fois ou on a marche la boucle choisie
 let fondEmporteConnu = null;      // ce que le serveur a sous la main
+let versionServie = null;         // ce que le serveur dit faire tourner
 let sortieAffichee = null;
 let filtre = localStorage.getItem("olifant-filtre") || "tout";
 let tri = localStorage.getItem("olifant-tri") || "carnet";
@@ -624,6 +640,7 @@ function selectionne(id){
     etapeChoisie = null;
     if (veille !== null) arreteLeSuivi();
     chargeLesSorties(choisi);
+    relitCeQuiEstEmporte(choisi);
   }
   rendre();
   majCarte();
@@ -898,6 +915,63 @@ function effaceLaSortie(){
   if (coucheSortie){ carte.removeLayer(coucheSortie); coucheSortie = null; }
 }
 
+/* ---------------------------------------------------------------- version */
+/* Sans ce numero, impossible de savoir si le NAS fait tourner la derniere
+   image -- et impossible de s'apercevoir qu'une mise a jour n'est jamais
+   arrivee jusqu'au telephone. */
+
+async function litLaVersion(){
+  try{
+    versionServie = await (await fetch("/api/version")).json();
+  }catch(e){ return; }
+  const zone = document.getElementById("signature");
+  if (!zone || !versionServie) return;
+  const quand = versionServie.construite
+    ? ` · image du ${secu(versionServie.construite.replace("T", " à ")
+                            .replace("Z", " UTC"))}`
+    : "";
+  const page = document.body.dataset.version;
+  const perimee = page && page !== "__VERSION__" && page !== versionServie.version
+    ? ` · page <code>${secu(page)}</code>`
+    : "";
+  zone.innerHTML = `<span>Olifant <code>${secu(versionServie.version)}</code>${quand}${perimee}</span>`;
+  verifieLaFraicheur();
+}
+
+/* La page porte la version avec laquelle elle a ete servie. Si le serveur en
+   annonce une autre, c'est que cette page-ci sort d'une coquille perimee : un
+   deploiement demande un chargement pour se mettre en cache et un second pour
+   s'afficher, et sans cet avis on resterait sur l'ancienne sans le savoir.
+
+   La comparaison se fait sur le html plutot que sur un message du service
+   worker : un ancien worker, qui ne connait pas ce message, ne dirait rien du
+   tout -- et c'est precisement lui qu'il faut detecter. */
+function verifieLaFraicheur(){
+  if (!versionServie) return;
+  const versionDeLaPage = document.body.dataset.version;
+  if (!versionDeLaPage || versionDeLaPage === "__VERSION__") return;
+  if (versionDeLaPage === versionServie.version) return;
+  annonceLaNouveaute(versionServie.version);
+}
+
+function noteLaNouveaute(versionDuWorker){
+  if (!versionServie || !versionDuWorker) return;
+  if (versionDuWorker === versionServie.version) return;
+  annonceLaNouveaute(versionDuWorker);
+}
+
+function annonceLaNouveaute(versionDuWorker){
+  const zone = document.getElementById("nouveaute");
+  if (!zone || zone.dataset.pour === versionDuWorker) return;
+  zone.dataset.pour = versionDuWorker;
+  zone.innerHTML = `<div class="nouveaute">
+    <span>Une nouvelle version est prête.</span>
+    <button class="bouton petit" id="btn-recharger">Recharger</button>
+  </div>`;
+  document.getElementById("btn-recharger")
+    .addEventListener("click", () => location.reload());
+}
+
 /* --------------------------------------------------------------- emporter */
 /* Marcher sans reseau demande que le telephone garde tout : la page, les
    traces, et les carreaux de carte. Le service worker s'en charge ; ce qui
@@ -918,6 +992,7 @@ async function reveilleLOuvrier(){
     ouvrier = (await navigator.serviceWorker.ready).active;
     navigator.serviceWorker.addEventListener("message", e => {
       const nouvelle = e.data || {};
+      if (nouvelle.type === "version"){ noteLaNouveaute(nouvelle.version); return; }
       if (!nouvelle.parcours) return;
       if (nouvelle.type === "avancement" && nouvelle.parcours === choisi){
         montreLEmportage(`${nouvelle.pris} / ${nouvelle.total} carreaux`);
@@ -970,29 +1045,31 @@ function montreLEmportage(texte){
 
 /* Sait-on si une boucle est deja emportee ? On le demande au cache du
    navigateur plutot que de le supposer : l'utilisateur a pu vider ses donnees
-   de site entre deux visites. */
-async function relitCeQuiEstEmporte(){
-  if (!("caches" in window)) return;
+   de site entre deux visites.
+
+   La verification ne porte que sur la boucle qu'on ouvre. Une premiere
+   version interrogeait le serveur pour les dix a chaque chargement de page,
+   soit dix requetes pour un badge -- alors que le seul endroit ou l'etat
+   compte est la fiche qu'on a sous les yeux. */
+async function relitCeQuiEstEmporte(id){
+  if (!id || !("caches" in window)) return;
   try{
     const noms = await caches.keys();
     const nom = noms.find(n => n.endsWith("-carreaux"));
     if (!nom) return;
     const cache = await caches.open(nom);
     const pris = new Set((await cache.keys()).map(r => new URL(r.url).pathname));
-    if (!pris.size || !catalogue) return;
+    if (!pris.size) return;
 
-    for (const p of catalogue.parcours){
-      try{
-        const fond = await (await fetch("/api/fond/" + encodeURIComponent(p.id))).json();
-        // Emportee si l'essentiel est la : un carreau manquant sur cent ne
-        // doit pas faire croire que rien n'a ete pris.
-        const dedans = fond.carreaux.filter(u => pris.has(u)).length;
-        if (fond.carreaux.length && dedans >= fond.carreaux.length * 0.95){
-          emportees.add(p.id);
-        }
-      }catch(e){ /* tant pis, on ne dira rien pour cette boucle */ }
+    const fond = await (await fetch("/api/fond/" + encodeURIComponent(id))).json();
+    // Emportee si l'essentiel est la : un carreau manquant sur cent ne doit
+    // pas faire croire que rien n'a ete pris.
+    const dedans = fond.carreaux.filter(u => pris.has(u)).length;
+    const complete = fond.carreaux.length && dedans >= fond.carreaux.length * 0.95;
+    if (complete !== emportees.has(id)){
+      if (complete) emportees.add(id); else emportees.delete(id);
+      if (choisi === id) rendre();
     }
-    rendre();
   }catch(e){ /* pas de cache accessible : on n'affiche simplement rien */ }
 }
 
@@ -1066,11 +1143,9 @@ async function charge(){
   rendre();
   majCarte();
   cadre(limitesDeTout());
+  await litLaVersion();
   await reveilleLOuvrier();
-  if (ouvrier){
-    rendre();
-    relitCeQuiEstEmporte();
-  }
+  if (ouvrier) rendre();
 }
 charge();
 </script>

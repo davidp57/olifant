@@ -11,9 +11,10 @@
 # deja calculees, qui voyagent dans l'image.
 #
 # Pour que la carte existe encore sans reseau -- en foret, il n'y en a pas --
-# le service complete son fond de carte au premier demarrage : un millier de
-# carreaux, un quart d'heure, en tache de fond. Rien a lancer. Ils sont ranges
-# dans le volume et survivent donc aux mises a jour de l'image.
+# le fond de carte voyage dans l'image : rien a lancer, et le NAS n'appelle
+# jamais les serveurs de tuiles. Il les appelait dans une version precedente,
+# et comme ils comptent par adresse IP, il faisait refuser les tuiles du
+# navigateur de la maison pendant qu'il travaillait.
 #
 # C'est ensuite le navigateur qui garde ce dont il a besoin : en ouvrant une
 # boucle chez soi, on l'emporte -- carte comprise -- pour la marcher sans
