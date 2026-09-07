@@ -407,6 +407,8 @@ let catalogue = null, traces = null, choisi = null;
 let etapeChoisie = null;          // etape depliee dans la fiche
 let veille = null;                // identifiant du suivi de position
 let verrouEcran = null;           // pour que l'ecran ne s'eteigne pas en marchant
+let capBoussole = null;           // le nord magnetique, quand l'appareil le donne
+let ecouteLaBoussole = null;      // de quoi arreter d'ecouter
 let sortiesConnues = [];          // les fois ou on a marche la boucle choisie
 let fondEmporteConnu = null;      // ce que le serveur a sous la main
 let versionServie = null;         // ce que le serveur dit faire tourner
@@ -920,6 +922,9 @@ async function basculeLeSuivi(){
   rendre();
   ecritLeSuivi(`<b>Recherche…</b><p>Le premier point peut demander une
     trentaine de secondes.</p>`);
+  // Depuis le clic, donc depuis un geste : c'est la seule occasion ou iOS
+  // acceptera de donner acces au magnetometre.
+  await reveilleLaBoussole();
   await gardeLEcranAllume();
 }
 
@@ -927,8 +932,50 @@ function arreteLeSuivi(){
   if (veille !== null) navigator.geolocation.clearWatch(veille);
   veille = null;
   maPosition.clearLayers();
+  endortLaBoussole();
   if (verrouEcran){ verrouEcran.release().catch(() => {}); verrouEcran = null; }
   rendre();
+}
+
+/* La boussole, pour savoir de quel cote tourner meme a l'arret.
+ *
+ * Le GPS ne donne la direction qu'en mouvement -- c'est celle du deplacement,
+ * qu'il deduit de deux positions successives. Immobile a un carrefour, il n'a
+ * rien a en dire, et c'est justement la qu'on hesite. Le magnetometre, lui,
+ * repond a l'arret.
+ *
+ * Deux dialectes coexistent : Safari expose un cap tout fait, oriente comme
+ * une boussole ; les autres donnent un angle qui tourne dans l'autre sens, et
+ * dont il faut verifier qu'il est bien rapporte au nord et non a l'orientation
+ * de depart de l'appareil. Et sur iOS, rien ne se declenche sans une
+ * autorisation demandee depuis un geste de l'utilisateur -- d'ou l'appel
+ * depuis le bouton, et non au chargement de la page.
+ */
+async function reveilleLaBoussole(){
+  if (typeof DeviceOrientationEvent === "undefined" || ecouteLaBoussole) return;
+  try{
+    if (typeof DeviceOrientationEvent.requestPermission === "function"){
+      if (await DeviceOrientationEvent.requestPermission() !== "granted") return;
+    }
+  }catch(e){ return; }          // refus, ou appel hors d'un geste : tant pis
+
+  ecouteLaBoussole = e => {
+    if (typeof e.webkitCompassHeading === "number" && !isNaN(e.webkitCompassHeading)){
+      capBoussole = e.webkitCompassHeading;      // deja un cap, sens horaire
+    }else if (e.absolute && typeof e.alpha === "number" && !isNaN(e.alpha)){
+      capBoussole = (360 - e.alpha) % 360;       // angle antihoraire depuis le nord
+    }
+  };
+  const nom = "ondeviceorientationabsolute" in window
+    ? "deviceorientationabsolute" : "deviceorientation";
+  addEventListener(nom, ecouteLaBoussole);
+  ecouteLaBoussole.nom = nom;
+}
+
+function endortLaBoussole(){
+  if (ecouteLaBoussole) removeEventListener(ecouteLaBoussole.nom, ecouteLaBoussole);
+  ecouteLaBoussole = null;
+  capBoussole = null;
 }
 
 async function gardeLEcranAllume(){
@@ -961,8 +1008,10 @@ function situe(position){
   const reste = Math.max(0, p.km - ou.km);
   const loin = ou.ecart_m > 60;
   // `heading` est la direction du deplacement, que le GPS ne connait qu'en
-  // mouvement : nulle a l'arret, et absente sur bien des ordinateurs.
-  const capActuel = position.coords.heading;
+  // mouvement : nulle a l'arret, et absente sur bien des ordinateurs. La
+  // boussole prend alors le relais, quand l'appareil en a une.
+  const duGps = position.coords.heading;
+  const capActuel = (typeof duGps === "number" && !isNaN(duGps)) ? duGps : capBoussole;
   const capCible = suivante
     ? capVers([lon, lat], [suivante.lon, suivante.lat]) : null;
   const versEtape = suivante

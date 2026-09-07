@@ -40,8 +40,8 @@ calcul et signalent, avant qu'on parte marcher :
 
 ## Les parcours
 
-Dix boucles. Les cinq premières partent du parvis de la gare de Metz : abrité,
-un café ouvert tôt, et tout le monde sait où c'est.
+Onze boucles. Les cinq premières partent du parvis de la gare de Metz :
+abrité, un café ouvert tôt, et tout le monde sait où c'est.
 
 | parcours | distance | D+ | chemins | balisé |
 |---|---|---|---|---|
@@ -51,7 +51,7 @@ un café ouvert tôt, et tout le monde sait où c'est.
 | La Seille en amont | 15,2 km | 31 m | 54 % | — |
 | Le versant de Plappeville | 15,8 km | 160 m | 33 % | 21 % |
 
-Les cinq autres demandent un quart d'heure à trois quarts d'heure de voiture
+Les six autres demandent un quart d'heure à trois quarts d'heure de voiture
 pour rejoindre le départ. Elles quittent la ville, et ça se voit : presque pas
 de bitume, beaucoup plus de dénivelé, et des tronçons déjà balisés.
 
@@ -62,6 +62,7 @@ de bitume, beaucoup plus de dénivelé, et des tronçons déjà balisés.
 | Les côtes de Jussy | Sainte-Ruffine | 15,2 km | 341 m | 50 % | 29 % |
 | Les pelouses de Montenach | Sierck-les-Bains | 15,5 km | 330 m | 54 % | 57 % |
 | L'aqueduc et la corniche de la Fraze | Ars-sur-Moselle | 15,7 km | 208 m | 68 % | 51 % |
+| Le tour du vallon de Gorze | Gorze | 14,8 km | 222 m | 68 % | — |
 
 ## Utiliser
 
@@ -125,13 +126,18 @@ en est, ce qu'il reste, et quelle est la prochaine étape. Il prévient aussi
 quand on s'est écarté de plus de soixante mètres. L'écran est maintenu allumé
 pendant le suivi.
 
-Il donne surtout **la direction à suivre**. À l'arrêt : « Parc de la Seille :
-0,8 km, cap 117° (sud-est) ». En marchant, le GPS connaît la direction du
-déplacement, et l'application dit alors de quel côté tourner — « 27° à
-droite », ou « tout droit » — ce qui se lit mieux qu'un azimut brut quand on
-est à un embranchement. La direction du déplacement n'existe qu'en mouvement :
-à l'arrêt, ou sur un appareil qui ne la fournit pas, le cap absolu reste
-affiché.
+Il donne surtout **la direction à suivre**, sur la carte comme en toutes
+lettres : une flèche tourne autour du point de position vers l'étape à
+rejoindre — utile surtout quand cette étape est hors de l'écran, ce qui est le
+cas le plus fréquent — et la ligne de texte donne la distance.
+
+Reste à savoir de quel côté tourner. Le GPS ne connaît la direction que par
+le déplacement, donc en mouvement : « 27° à droite », ou « tout droit ».
+Immobile à un carrefour — exactement là où l'on hésite — il n'a rien à en
+dire, et c'est **la boussole** qui prend le relais quand l'appareil en a une.
+Sur iPhone elle demande une autorisation, réclamée au moment où l'on touche
+« Me situer ». Faute des deux, le cap absolu et son aire restent affichés :
+« cap 117° (sud-est) ».
 
 Deux limites à connaître. La position exige **HTTPS** : en HTTP, même sur le
 réseau local, le navigateur la refuse sans rien demander. Et un navigateur ne

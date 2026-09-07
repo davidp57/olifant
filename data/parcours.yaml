@@ -335,6 +335,37 @@ points:
     lat: 49.414041
     note: Village a l'ouest de la reserve, au bord du plateau.
 
+  # --- le tour du vallon de Gorze ----------------------------------------
+  # Releves autour du village : de quoi boucler par l'ouest et le sud plutot
+  # que d'entrer et de ressortir par le meme chemin.
+  saint-thiebaut:
+    nom: Saint-Thiebaut
+    lon: 5.990321
+    lat: 49.058264
+    note: Hameau accroche au versant nord du vallon, au-dessus de l'abbaye.
+  croix-sergent:
+    nom: Croix Sergent
+    lon: 5.971396
+    lat: 49.054633
+    note: Croix de chemin sur le plateau, a l'ouest du vallon.
+  labauville:
+    nom: Labauville
+    lon: 5.963820
+    lat: 49.049105
+    note: Ferme isolee au bout du plateau, point le plus a l'ouest de la boucle.
+  mazagran:
+    nom: Ferme de Mazagran
+    lon: 5.998554
+    lat: 49.033221
+    note: Ferme isolee au sud, dans les champs qui dominent le vallon.
+  vue-gorze:
+    nom: Belvedere du vallon
+    lon: 6.005246
+    lat: 49.046635
+    note: >-
+      Point de vue sur Gorze et le fond du vallon, juste avant de redescendre
+      au village.
+
 parcours:
 
   # Les cinq boucles ci-dessous sont calees sur des mesures, pas sur des
@@ -455,3 +486,16 @@ parcours:
       sur la boucle de la Moselle, puis le plateau agricole ; depart du chateau
       de Sierck.
     etapes: [sierck, rustroff, montenach, kerling, ferme-koenigsberg, sierck]
+
+  - id: vallon-gorze
+    nom: Le tour du vallon de Gorze
+    acces: voiture
+    parking: Gorze, pres du palais abbatial (25 min de Metz)
+    themes: [patrimoine, eau, relief, foret]
+    couleur: 6B4A7A
+    resume: >-
+      L'abbaye, la source qui alimentait l'aqueduc romain, puis le tour complet
+      du vallon par les plateaux : montee au nord, plateau ouest, retour par le
+      sud et un dernier belvedere avant de redescendre au village.
+    etapes: [gorze, abbaye-gorze, source-bouillons, saint-thiebaut, croix-sergent,
+             labauville, mazagran, vue-gorze, gorze]
