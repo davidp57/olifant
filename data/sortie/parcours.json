@@ -288,6 +288,289 @@
      "depart": false
     }
    ]
+  },
+  {
+   "id": "mont-saint-quentin",
+   "nom": "Le tour du Mont Saint-Quentin",
+   "resume": "Le sommet et son fort en ruine, puis les deux villages vignerons du versant nord.",
+   "acces": "voiture",
+   "parking": "Parking de l'eglise fortifiee, Scy-Chazelles (15 min de Metz)",
+   "themes": [
+    "relief",
+    "foret",
+    "patrimoine"
+   ],
+   "couleur": "#8C4A2F",
+   "km": 10.8,
+   "montee": 284,
+   "chemin": 42,
+   "bitume": 1,
+   "route": 57,
+   "balise": 38,
+   "depart": "Eglise fortifiee Saint-Quentin, Scy-Chazelles",
+   "etapes": [
+    {
+     "nom": "Eglise fortifiee Saint-Quentin, Scy-Chazelles",
+     "note": "Eglise fortifiee du XIIe siecle, tombe de Robert Schuman a l'interieur, sa maison a 200 m. C'est ici que commence la montee.",
+     "lon": 6.111337,
+     "lat": 49.111092,
+     "depart": true
+    },
+    {
+     "nom": "Mont Saint-Quentin, sommet",
+     "note": "358 m, ancien complexe fortifie en partie ruine, bois et prairies, panorama sur toute la vallee. Les batiments sont interdits d'acces.",
+     "lon": 6.127302,
+     "lat": 49.121225,
+     "depart": false
+    },
+    {
+     "nom": "Plappeville",
+     "note": "Village vigneron du versant nord, ruelles et maisons de maitre.",
+     "lon": 6.125013,
+     "lat": 49.131014,
+     "depart": false
+    },
+    {
+     "nom": "Lorry-les-Metz",
+     "note": "Vergers et vignes en terrasse sur le versant nord de la cote.",
+     "lon": 6.12044,
+     "lat": 49.143109,
+     "depart": false
+    }
+   ]
+  },
+  {
+   "id": "cotes-jussy",
+   "nom": "Les cotes de Jussy",
+   "resume": "Le versant ouest de la cote, vignes en bas et hetraie en haut, jusqu'au sommet du Saint-Quentin ; retour en balcon par Lessy et Rozerieulles.",
+   "acces": "voiture",
+   "parking": "Sainte-Ruffine, centre du village (15 min de Metz)",
+   "themes": [
+    "relief",
+    "foret"
+   ],
+   "couleur": "#5A6E2F",
+   "km": 15.2,
+   "montee": 341,
+   "chemin": 50,
+   "bitume": 2,
+   "route": 47,
+   "balise": 29,
+   "depart": "Sainte-Ruffine",
+   "etapes": [
+    {
+     "nom": "Sainte-Ruffine",
+     "note": "Petit village accroche a la cote, depart des sentiers du versant ouest.",
+     "lon": 6.096321,
+     "lat": 49.105775,
+     "depart": true
+    },
+    {
+     "nom": "Jussy",
+     "note": "Village vigneron, vue sur la vallee depuis les hauts.",
+     "lon": 6.08606,
+     "lat": 49.101975,
+     "depart": false
+    },
+    {
+     "nom": "Vaux",
+     "note": "Fond de vallon boise, source et lavoir.",
+     "lon": 6.080754,
+     "lat": 49.094109,
+     "depart": false
+    },
+    {
+     "nom": "Eglise fortifiee Saint-Quentin, Scy-Chazelles",
+     "note": "Eglise fortifiee du XIIe siecle, tombe de Robert Schuman a l'interieur, sa maison a 200 m. C'est ici que commence la montee.",
+     "lon": 6.111337,
+     "lat": 49.111092,
+     "depart": false
+    },
+    {
+     "nom": "Mont Saint-Quentin, sommet",
+     "note": "358 m, ancien complexe fortifie en partie ruine, bois et prairies, panorama sur toute la vallee. Les batiments sont interdits d'acces.",
+     "lon": 6.127302,
+     "lat": 49.121225,
+     "depart": false
+    },
+    {
+     "nom": "Lessy",
+     "note": "Village blotti dans le cirque, au pied du versant sud du Saint-Quentin.",
+     "lon": 6.095582,
+     "lat": 49.120168,
+     "depart": false
+    },
+    {
+     "nom": "Rozerieulles",
+     "note": "Village vigneron sur le versant, en balcon au-dessus de la Moselle.",
+     "lon": 6.082715,
+     "lat": 49.107214,
+     "depart": false
+    }
+   ]
+  },
+  {
+   "id": "aqueduc-corniche",
+   "nom": "L'aqueduc et la corniche de la Fraze",
+   "resume": "Les arches romaines de Jouy, puis la corniche calcaire qui surplombe la Moselle et le plateau boise ou passait l'aqueduc, retour par les villages viticoles.",
+   "acces": "voiture",
+   "parking": "Ars-sur-Moselle, pres de la gare (20 min de Metz)",
+   "themes": [
+    "patrimoine",
+    "foret",
+    "relief"
+   ],
+   "couleur": "#7A4A6B",
+   "km": 15.7,
+   "montee": 208,
+   "chemin": 68,
+   "bitume": 1,
+   "route": 31,
+   "balise": 51,
+   "depart": "Ars-sur-Moselle",
+   "etapes": [
+    {
+     "nom": "Ars-sur-Moselle",
+     "note": "Depart en voiture. Se garer pres de la gare ou du centre.",
+     "lon": 6.076311,
+     "lat": 49.076968,
+     "depart": true
+    },
+    {
+     "nom": "Aqueduc romain de Jouy-aux-Arches",
+     "note": "Sept arches encore debout d'un aqueduc du IIe siecle qui amenait l'eau de Gorze a Metz. La suite de l'ouvrage se devine tout le long du vallon.",
+     "lon": 6.08025,
+     "lat": 49.065293,
+     "depart": false
+    },
+    {
+     "nom": "Dornot",
+     "note": "Hameau viticole au pied de la corniche.",
+     "lon": 6.056,
+     "lat": 49.0481,
+     "depart": false
+    },
+    {
+     "nom": "Les Roches de la Fraze",
+     "note": "Corniche calcaire, vue plongeante sur la vallee de la Moselle.",
+     "lon": 6.046575,
+     "lat": 49.040158,
+     "depart": false
+    },
+    {
+     "nom": "Croix Saint-Clement",
+     "note": "Carrefour de chemins sur le plateau, entre Gorze et la Moselle.",
+     "lon": 6.039177,
+     "lat": 49.05378,
+     "depart": false
+    },
+    {
+     "nom": "Ancy-sur-Moselle",
+     "note": "Village au bord de l'eau, au debouche du vallon de Gorze.",
+     "lon": 6.058474,
+     "lat": 49.056561,
+     "depart": false
+    }
+   ]
+  },
+  {
+   "id": "canner",
+   "nom": "La vallee de la Canner",
+   "resume": "Une hetraie et une riviere tranquille, le plus forestier du lot et le plus plat.",
+   "acces": "voiture",
+   "parking": "Kedange-sur-Canner, pres de la mairie (35 min de Metz)",
+   "themes": [
+    "foret",
+    "eau"
+   ],
+   "couleur": "#2F5F6B",
+   "km": 15.0,
+   "montee": 249,
+   "chemin": 87,
+   "bitume": 0,
+   "route": 13,
+   "balise": 8,
+   "depart": "Kedange-sur-Canner",
+   "etapes": [
+    {
+     "nom": "Kedange-sur-Canner",
+     "note": "Depart en voiture, 35 min de Metz. Se garer pres de la mairie.",
+     "lon": 6.3412,
+     "lat": 49.3095,
+     "depart": true
+    },
+    {
+     "nom": "Hombourg-Budange",
+     "note": "Chateau et parc, au bord de la Canner.",
+     "lon": 6.344634,
+     "lat": 49.295953,
+     "depart": false
+    },
+    {
+     "nom": "Foret de Hombourg-Budange",
+     "note": "Grande hetraie, chemins forestiers larges et bien traces.",
+     "lon": 6.371644,
+     "lat": 49.285601,
+     "depart": false
+    }
+   ]
+  },
+  {
+   "id": "montenach",
+   "nom": "Les pelouses de Montenach",
+   "resume": "La reserve naturelle des pelouses calcaires, ses orchidees et ses vues sur la boucle de la Moselle, puis le plateau agricole ; depart du chateau de Sierck.",
+   "acces": "voiture",
+   "parking": "Sous le chateau de Sierck-les-Bains (45 min de Metz)",
+   "themes": [
+    "relief",
+    "foret",
+    "patrimoine"
+   ],
+   "couleur": "#A0522D",
+   "km": 15.5,
+   "montee": 330,
+   "chemin": 54,
+   "bitume": 3,
+   "route": 44,
+   "balise": 57,
+   "depart": "Chateau des ducs de Lorraine, Sierck-les-Bains",
+   "etapes": [
+    {
+     "nom": "Chateau des ducs de Lorraine, Sierck-les-Bains",
+     "note": "Depart en voiture, 45 min de Metz. Parking sous le chateau.",
+     "lon": 6.359738,
+     "lat": 49.440098,
+     "depart": true
+    },
+    {
+     "nom": "Rustroff",
+     "note": "Village au-dessus de Sierck, entre vignes et pelouses seches.",
+     "lon": 6.372046,
+     "lat": 49.442158,
+     "depart": false
+    },
+    {
+     "nom": "Montenach",
+     "note": "Village au pied de la reserve naturelle des pelouses calcaires, orchidees au printemps, vues sur la boucle de la Moselle.",
+     "lon": 6.381197,
+     "lat": 49.420355,
+     "depart": false
+    },
+    {
+     "nom": "Kerling-les-Sierck",
+     "note": "Village le plus au sud du secteur, sur le plateau agricole.",
+     "lon": 6.353243,
+     "lat": 49.397766,
+     "depart": false
+    },
+    {
+     "nom": "Ferme du Koenigsberg",
+     "note": "Ferme isolee sur le plateau, au-dessus de la reserve de Montenach.",
+     "lon": 6.359513,
+     "lat": 49.420557,
+     "depart": false
+    }
+   ]
   }
  ]
 }

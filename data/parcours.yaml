@@ -151,8 +151,8 @@ points:
     note: Chateau et parc, au bord de la Canner.
   foret-hombourg:
     nom: Foret de Hombourg-Budange
-    lon: 6.373180
-    lat: 49.284147
+    lon: 6.371644
+    lat: 49.285601
     note: Grande hetraie, chemins forestiers larges et bien traces.
 
   # --- pays des trois frontieres -----------------------------------------
@@ -221,6 +221,120 @@ points:
     lat: 49.061343
     note: Point le plus au sud de la boucle, avant de remonter la Seille.
 
+  # --- points de passage pour caler les boucles en voiture ----------------
+  # Releves sur OpenStreetMap (Overpass) : sommets, points de vue, villages
+  # et cols qui servent a casser les aller-retours.
+
+  # cotes de Jussy
+  rozerieulles:
+    nom: Rozerieulles
+    lon: 6.082715
+    lat: 49.107214
+    note: Village vigneron sur le versant, en balcon au-dessus de la Moselle.
+  lessy:
+    nom: Lessy
+    lon: 6.095582
+    lat: 49.120168
+    note: Village blotti dans le cirque, au pied du versant sud du Saint-Quentin.
+  chatel-st-germain:
+    nom: Chatel-Saint-Germain
+    lon: 6.079120
+    lat: 49.123716
+    note: Vallon du ruisseau de Montvaux, ruines du chateau sur l'eperon.
+
+  # vallee de Gorze
+  source-bouillons:
+    nom: Source des Bouillons, Gorze
+    lon: 5.995189
+    lat: 49.056690
+    note: Resurgence qui alimentait l'aqueduc romain jusqu'a Metz.
+  mont-st-blaise:
+    nom: Mont Saint-Blaise
+    lon: 6.004067
+    lat: 49.055265
+    note: Croupe boisee au-dessus de Gorze.
+  croix-st-clement:
+    nom: Croix Saint-Clement
+    lon: 6.039177
+    lat: 49.053780
+    note: Carrefour de chemins sur le plateau, entre Gorze et la Moselle.
+  roches-fraze:
+    nom: Les Roches de la Fraze
+    lon: 6.046575
+    lat: 49.040158
+    note: Corniche calcaire, vue plongeante sur la vallee de la Moselle.
+  ancy:
+    nom: Ancy-sur-Moselle
+    lon: 6.058474
+    lat: 49.056561
+    note: Village au bord de l'eau, au debouche du vallon de Gorze.
+  dornot:
+    nom: Dornot
+    lon: 6.056000
+    lat: 49.048100
+    note: Hameau viticole au pied de la corniche.
+
+  # vallee de la Canner
+  elzing:
+    nom: Elzing
+    lon: 6.328398
+    lat: 49.319932
+    note: Hameau au nord de la Canner.
+  escherberg:
+    nom: Escherberg
+    lon: 6.317975
+    lat: 49.315909
+    note: Croupe boisee sur le versant nord de la vallee.
+  metzeresche:
+    nom: Metzeresche
+    lon: 6.306848
+    lat: 49.298641
+    note: Village a l'ouest de la boucle, sur le plateau.
+  sabelsberg:
+    nom: Sabelsberg
+    lon: 6.326878
+    lat: 49.298212
+    note: Bois du versant sud, entre Metzeresche et Hombourg.
+  langenberg:
+    nom: Langenberg
+    lon: 6.352529
+    lat: 49.318950
+    note: Hauteur boisee a l'est de Kedange.
+
+  # pays des trois frontieres
+  stromberg:
+    nom: Stromberg
+    lon: 6.355809
+    lat: 49.449933
+    note: Sommet boise au nord de Sierck, le point haut du secteur.
+  dreilaenderblick:
+    nom: Vue des Trois Frontieres
+    lon: 6.379732
+    lat: 49.466350
+    note: >-
+      Belvedere sur la boucle de la Moselle et les trois pays, tout au nord de
+      la boucle.
+  rustroff:
+    nom: Rustroff
+    lon: 6.372046
+    lat: 49.442158
+    note: Village au-dessus de Sierck, entre vignes et pelouses seches.
+  ferme-koenigsberg:
+    nom: Ferme du Koenigsberg
+    lon: 6.359513
+    lat: 49.420557
+    note: Ferme isolee sur le plateau, au-dessus de la reserve de Montenach.
+  kerling:
+    nom: Kerling-les-Sierck
+    lon: 6.353243
+    lat: 49.397766
+    note: Village le plus au sud du secteur, sur le plateau agricole.
+  hunting:
+    nom: Hunting
+    lon: 6.326126
+    lat: 49.414041
+    note: Village a l'ouest de la reserve, au bord du plateau.
+
 parcours:
 
   # Les cinq boucles ci-dessous sont calees sur des mesures, pas sur des
@@ -279,3 +393,65 @@ parcours:
       Ban-Saint-Martin, on traverse le village vigneron de Plappeville et les
       vergers de Lorry, on redescend plein est.
     etapes: [gare, saulcy, grand-patural, plappeville, lorry, gare]
+
+  # Les cinq boucles suivantes demandent une voiture pour rejoindre le depart.
+  # Memes mesures, meme exigence : 10 a 15 km, moins d'un quart du trace
+  # parcouru deux fois.
+
+  - id: mont-saint-quentin
+    nom: Le tour du Mont Saint-Quentin
+    acces: voiture
+    parking: Parking de l'eglise fortifiee, Scy-Chazelles (15 min de Metz)
+    themes: [relief, foret, patrimoine]
+    couleur: 8C4A2F
+    resume: >-
+      Le sommet et son fort en ruine, puis les deux villages vignerons du
+      versant nord.
+    etapes: [scy, quentin, plappeville, lorry, scy]
+
+  - id: cotes-jussy
+    nom: Les cotes de Jussy
+    acces: voiture
+    parking: Sainte-Ruffine, centre du village (15 min de Metz)
+    themes: [relief, foret]
+    couleur: 5A6E2F
+    resume: >-
+      Le versant ouest de la cote, vignes en bas et hetraie en haut, jusqu'au
+      sommet du Saint-Quentin ; retour en balcon par Lessy et Rozerieulles.
+    etapes: [sainte-ruffine, jussy, vaux, scy, quentin, lessy, rozerieulles,
+             sainte-ruffine]
+
+  - id: aqueduc-corniche
+    nom: L'aqueduc et la corniche de la Fraze
+    acces: voiture
+    parking: Ars-sur-Moselle, pres de la gare (20 min de Metz)
+    themes: [patrimoine, foret, relief]
+    couleur: 7A4A6B
+    resume: >-
+      Les arches romaines de Jouy, puis la corniche calcaire qui surplombe la
+      Moselle et le plateau boise ou passait l'aqueduc, retour par les villages
+      viticoles.
+    etapes: [ars, jouy-aqueduc, dornot, roches-fraze, croix-st-clement, ancy, ars]
+
+  - id: canner
+    nom: La vallee de la Canner
+    acces: voiture
+    parking: Kedange-sur-Canner, pres de la mairie (35 min de Metz)
+    themes: [foret, eau]
+    couleur: 2F5F6B
+    resume: >-
+      Une hetraie et une riviere tranquille, le plus forestier du lot et le
+      plus plat.
+    etapes: [kedange, hombourg, foret-hombourg, kedange]
+
+  - id: montenach
+    nom: Les pelouses de Montenach
+    acces: voiture
+    parking: Sous le chateau de Sierck-les-Bains (45 min de Metz)
+    themes: [relief, foret, patrimoine]
+    couleur: A0522D
+    resume: >-
+      La reserve naturelle des pelouses calcaires, ses orchidees et ses vues
+      sur la boucle de la Moselle, puis le plateau agricole ; depart du chateau
+      de Sierck.
+    etapes: [sierck, rustroff, montenach, kerling, ferme-koenigsberg, sierck]

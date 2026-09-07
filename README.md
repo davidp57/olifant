@@ -40,8 +40,8 @@ calcul et signalent, avant qu'on parte marcher :
 
 ## Les parcours
 
-Cinq boucles, toutes au départ du parvis de la gare de Metz : abrité, un café
-ouvert tôt, et tout le monde sait où c'est.
+Dix boucles. Les cinq premières partent du parvis de la gare de Metz : abrité,
+un café ouvert tôt, et tout le monde sait où c'est.
 
 | parcours | distance | D+ | chemins | balisé |
 |---|---|---|---|---|
@@ -51,10 +51,17 @@ ouvert tôt, et tout le monde sait où c'est.
 | La Seille en amont | 15,2 km | 31 m | 54 % | — |
 | Le versant de Plappeville | 15,8 km | 160 m | 33 % | 21 % |
 
-Des boucles au départ en voiture (Mont Saint-Quentin, côtes de Jussy, vallée de
-Gorze, vallée de la Canner, pelouses de Montenach) attendent dans
-`data/parcours-voiture-en-attente.yaml` — elles mesurent jusqu'à **87 % de
-chemin et 0 % de bitume**, mais demandaient encore du calage.
+Les cinq autres demandent un quart d'heure à trois quarts d'heure de voiture
+pour rejoindre le départ. Elles quittent la ville, et ça se voit : presque pas
+de bitume, beaucoup plus de dénivelé, et des tronçons déjà balisés.
+
+| parcours | départ | distance | D+ | chemins | balisé |
+|---|---|---|---|---|---|
+| Le tour du Mont Saint-Quentin | Scy-Chazelles | 10,8 km | 284 m | 42 % | 38 % |
+| La vallée de la Canner | Kédange-sur-Canner | 15,0 km | 249 m | 87 % | 8 % |
+| Les côtes de Jussy | Sainte-Ruffine | 15,2 km | 341 m | 50 % | 29 % |
+| Les pelouses de Montenach | Sierck-les-Bains | 15,5 km | 330 m | 54 % | 57 % |
+| L'aqueduc et la corniche de la Fraze | Ars-sur-Moselle | 15,7 km | 208 m | 68 % | 51 % |
 
 ## Utiliser
 
