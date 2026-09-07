@@ -8,7 +8,11 @@
 name: tests
 
 on:
+  # Sur `main` seulement, plus sur les pull requests : sans la restriction, une
+  # branche poussee et proposee en pull request declenchait deux fois la meme
+  # serie, soit quatre executions pour rien a chaque commit.
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
