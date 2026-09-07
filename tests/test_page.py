@@ -79,3 +79,49 @@ class TestConstantesDeLaPage:
         rendu = source[source.index("function rendre()"):]
         rendu = rendu[:rendu.index("\nfunction ")]
         assert "data-filtre" in rendu and "aria-pressed" in rendu
+
+
+class TestCapVersLEtape:
+    """Le relevement affiche pendant la marche.
+
+    La formule vit dans la page ; on la reimplemente ici pour verifier qu'elle
+    donne les valeurs attendues sur des cas dont la reponse est connue
+    d'avance -- plein nord, plein est, et deux vraies etapes du carnet.
+    """
+
+    @staticmethod
+    def cap(depuis, vers):
+        import math
+        dlon = math.radians(vers[0] - depuis[0])
+        lat1, lat2 = math.radians(depuis[1]), math.radians(vers[1])
+        y = math.sin(dlon) * math.cos(lat2)
+        x = (math.cos(lat1) * math.sin(lat2)
+             - math.sin(lat1) * math.cos(lat2) * math.cos(dlon))
+        return (math.degrees(math.atan2(y, x)) + 360) % 360
+
+    @pytest.mark.parametrize("vers,attendu", [
+        ((6.0, 50.0), 0),      # plein nord
+        ((7.0, 49.0), 90),     # plein est, a l'equateur de notre latitude pres
+        ((6.0, 48.0), 180),    # plein sud
+        ((5.0, 49.0), 270),    # plein ouest
+    ])
+    def test_les_quatre_aires_cardinales(self, vers, attendu):
+        assert self.cap((6.0, 49.0), vers) == pytest.approx(attendu, abs=1.0)
+
+    def test_le_cap_est_dans_la_page(self, source):
+        """Si la fonction disparait ou change de nom, ce test le dit."""
+        assert "function capVers(" in source
+        assert "Math.atan2" in source
+
+    def test_deux_etapes_reelles(self):
+        """De la gare de Metz au fort de Queuleu : au sud-est."""
+        gare, fort = (6.177013, 49.109277), (6.195434, 49.098452)
+        c = self.cap(gare, fort)
+        assert 120 < c < 150, "attendu vers le sud-est, obtenu %.0f" % c
+
+    def test_le_cap_inverse_est_a_180_degres(self):
+        """A un degre pres : sur un grand cercle les meridiens convergent, et
+        l'aller et le retour ne sont pas exactement opposes."""
+        gare, fort = (6.177013, 49.109277), (6.195434, 49.098452)
+        aller, retour = self.cap(gare, fort), self.cap(fort, gare)
+        assert abs(abs(aller - retour) - 180) < 1
