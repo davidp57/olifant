@@ -1608,5 +1608,80 @@
     "combien": 2
    }
   ]
+ },
+ "vallon-gorze": {
+  "gorze": [
+   {
+    "genre": "patrimoine",
+    "nom": "Croix de chemin",
+    "lon": 5.996726,
+    "lat": 49.053213,
+    "distance_m": 234
+   }
+  ],
+  "abbaye-gorze": [
+   {
+    "genre": "patrimoine",
+    "nom": "Ancien palais abbatial",
+    "lon": 5.996767,
+    "lat": 49.053813,
+    "distance_m": 182
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 5.998613,
+    "lat": 49.054134,
+    "distance_m": 184
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Statue de la Vierge",
+    "lon": 6.00233,
+    "lat": 49.054741,
+    "distance_m": 392
+   }
+  ],
+  "source-bouillons": [
+   {
+    "genre": "halte",
+    "nom": "Aire de pique-nique",
+    "lon": 5.992951,
+    "lat": 49.056224,
+    "distance_m": 171
+   },
+   {
+    "genre": "nature",
+    "nom": "Source des Bouillons",
+    "lon": 5.995189,
+    "lat": 49.05669,
+    "distance_m": 0
+   }
+  ],
+  "croix-sergent": [
+   {
+    "genre": "patrimoine",
+    "nom": "Croix Sergent",
+    "lon": 5.971396,
+    "lat": 49.054633,
+    "distance_m": 0
+   }
+  ],
+  "vue-gorze": [
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.005246,
+    "lat": 49.046635,
+    "distance_m": 0
+   },
+   {
+    "genre": "halte",
+    "nom": "Aire de pique-nique",
+    "lon": 6.003727,
+    "lat": 49.049669,
+    "distance_m": 355
+   }
+  ]
  }
 }

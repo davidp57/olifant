@@ -2314,6 +2314,182 @@
      ]
     }
    ]
+  },
+  {
+   "id": "vallon-gorze",
+   "nom": "Le tour du vallon de Gorze",
+   "resume": "L'abbaye, la source qui alimentait l'aqueduc romain, puis le tour complet du vallon par les plateaux : montee au nord, plateau ouest, retour par le sud et un dernier belvedere avant de redescendre au village.",
+   "acces": "voiture",
+   "parking": "Gorze, pres du palais abbatial (25 min de Metz)",
+   "themes": [
+    "patrimoine",
+    "eau",
+    "relief",
+    "foret"
+   ],
+   "couleur": "#6B4A7A",
+   "km": 14.8,
+   "montee": 222,
+   "chemin": 69,
+   "bitume": 0,
+   "route": 31,
+   "balise": 2,
+   "depart": "Gorze",
+   "etapes": [
+    {
+     "cle": "gorze",
+     "nom": "Gorze",
+     "note": "Village au fond de la vallee, ancienne abbaye benedictine et palais abbatial. Boulangerie et cafe sur la place.",
+     "lon": 5.998824,
+     "lat": 49.051625,
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Croix de chemin",
+       "lon": 5.996726,
+       "lat": 49.053213,
+       "distance_m": 234
+      }
+     ]
+    },
+    {
+     "cle": "abbaye-gorze",
+     "nom": "Abbaye de Gorze",
+     "note": "Le palais abbatial et son jardin en terrasses.",
+     "lon": 5.997058,
+     "lat": 49.055439,
+     "depart": false,
+     "km": 0.6,
+     "part": 4,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Ancien palais abbatial",
+       "lon": 5.996767,
+       "lat": 49.053813,
+       "distance_m": 182
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 5.998613,
+       "lat": 49.054134,
+       "distance_m": 184
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Statue de la Vierge",
+       "lon": 6.00233,
+       "lat": 49.054741,
+       "distance_m": 392
+      }
+     ]
+    },
+    {
+     "cle": "source-bouillons",
+     "nom": "Source des Bouillons, Gorze",
+     "note": "Resurgence qui alimentait l'aqueduc romain jusqu'a Metz.",
+     "lon": 5.995189,
+     "lat": 49.05669,
+     "depart": false,
+     "km": 1.1,
+     "part": 8,
+     "reperes": [
+      {
+       "genre": "halte",
+       "nom": "Aire de pique-nique",
+       "lon": 5.992951,
+       "lat": 49.056224,
+       "distance_m": 171
+      },
+      {
+       "genre": "nature",
+       "nom": "Source des Bouillons",
+       "lon": 5.995189,
+       "lat": 49.05669,
+       "distance_m": 0
+      }
+     ]
+    },
+    {
+     "cle": "saint-thiebaut",
+     "nom": "Saint-Thiebaut",
+     "note": "Hameau accroche au versant nord du vallon, au-dessus de l'abbaye.",
+     "lon": 5.990321,
+     "lat": 49.058264,
+     "depart": false,
+     "km": 2.0,
+     "part": 13
+    },
+    {
+     "cle": "croix-sergent",
+     "nom": "Croix Sergent",
+     "note": "Croix de chemin sur le plateau, a l'ouest du vallon.",
+     "lon": 5.971396,
+     "lat": 49.054633,
+     "depart": false,
+     "km": 3.5,
+     "part": 24,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Croix Sergent",
+       "lon": 5.971396,
+       "lat": 49.054633,
+       "distance_m": 0
+      }
+     ]
+    },
+    {
+     "cle": "labauville",
+     "nom": "Labauville",
+     "note": "Ferme isolee au bout du plateau, point le plus a l'ouest de la boucle.",
+     "lon": 5.96382,
+     "lat": 49.049105,
+     "depart": false,
+     "km": 5.0,
+     "part": 34
+    },
+    {
+     "cle": "mazagran",
+     "nom": "Ferme de Mazagran",
+     "note": "Ferme isolee au sud, dans les champs qui dominent le vallon.",
+     "lon": 5.998554,
+     "lat": 49.033221,
+     "depart": false,
+     "km": 10.3,
+     "part": 69
+    },
+    {
+     "cle": "vue-gorze",
+     "nom": "Belvedere du vallon",
+     "note": "Point de vue sur Gorze et le fond du vallon, juste avant de redescendre au village.",
+     "lon": 6.005246,
+     "lat": 49.046635,
+     "depart": false,
+     "km": 13.8,
+     "part": 93,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Point de vue",
+       "lon": 6.005246,
+       "lat": 49.046635,
+       "distance_m": 0
+      },
+      {
+       "genre": "halte",
+       "nom": "Aire de pique-nique",
+       "lon": 6.003727,
+       "lat": 49.049669,
+       "distance_m": 355
+      }
+     ]
+    }
+   ]
   }
  ]
 }
