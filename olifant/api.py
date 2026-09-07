@@ -16,7 +16,9 @@ qu'on ne controle pas.
 
 from __future__ import annotations
 
+import asyncio
 import json
+import logging
 import os
 import sqlite3
 from contextlib import asynccontextmanager, closing
@@ -28,7 +30,7 @@ from fastapi import FastAPI, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import suivi
+from . import suivi, tuiles
 
 RACINE = Path(__file__).resolve().parent.parent
 WEB = Path(__file__).resolve().parent / "web"
@@ -44,6 +46,12 @@ BASE = ECRITURE / "carnet.db"
 # Le fond de carte emporte par `python -m olifant tuiles`. Absent, la page se
 # rabat sur les serveurs d'OpenStreetMap ; present, elle marche sans reseau.
 TUILES = Path(os.environ.get("OLIFANT_TUILES", ECRITURE / "tuiles"))
+# Remplir le fond de carte au premier demarrage : le conteneur le fait, le
+# poste de developpement non. Sans quoi chaque lancement de test ou chaque
+# `uvicorn` local se mettrait a telecharger un millier de carreaux.
+TUILES_AUTO = os.environ.get("OLIFANT_TUILES_AUTO", "") == "1"
+
+journal = logging.getLogger("olifant")
 
 TAILLE_MAX = 20 * 1024 * 1024      # un GPX de journee pese quelques centaines de ko
 
@@ -76,11 +84,50 @@ def prepare_base() -> None:
 
 
 
+async def _emporte_le_fond() -> None:
+    """Complete le fond de carte, une fois, sans faire attendre le service.
+
+    Le principe du projet -- le serveur ne calcule rien et n'appelle aucun
+    service exterieur -- vaut pour les requetes qu'on lui adresse, et il tient
+    toujours : aucune visite ne declenche d'appel. Ce qui se passe ici est une
+    preparation unique au premier demarrage, en tache de fond, et qui ne se
+    reproduit jamais puisque les carreaux restent dans le volume.
+    """
+    fichier = SORTIE / "traces.geojson"
+    if not fichier.exists():
+        return
+    try:
+        formes = json.loads(fichier.read_text(encoding="utf-8"))["features"]
+    except (json.JSONDecodeError, KeyError, OSError):
+        journal.warning("fond de carte : traces.geojson illisible, on s'en passe")
+        return
+
+    besoin = set()
+    for forme in formes:
+        besoin |= tuiles.couloir([(c[0], c[1]) for c in forme["geometry"]["coordinates"]])
+    manquants = [c for c in besoin if not (TUILES / c.chemin()).exists()]
+    if not manquants:
+        return
+
+    journal.info("fond de carte : %d carreaux a prendre, en tache de fond "
+                 "(environ %d min)", len(manquants),
+                 max(1, round(len(manquants) * tuiles.PAUSE / 60)))
+    # Dans un fil separe : la recuperation attend une seconde entre deux
+    # carreaux, ce qui immobiliserait la boucle d'evenements.
+    pris, _, echecs = await asyncio.to_thread(
+        tuiles.recupere, besoin, TUILES, tuiles.PAUSE, journal.info)
+    journal.info("fond de carte : %d carreaux pris, %d echec(s)", pris, len(echecs))
+
+
 @asynccontextmanager
 async def demarrage(_: FastAPI):
     prepare_base()
     TRACES.mkdir(parents=True, exist_ok=True)
+    TUILES.mkdir(parents=True, exist_ok=True)
+    fond = asyncio.create_task(_emporte_le_fond()) if TUILES_AUTO else None
     yield
+    if fond and not fond.done():
+        fond.cancel()
 
 
 app = FastAPI(title="Olifant", docs_url="/api/docs", lifespan=demarrage)
@@ -102,6 +149,47 @@ def _catalogue() -> dict:
 @app.get("/", response_class=HTMLResponse)
 def page() -> HTMLResponse:
     return HTMLResponse((WEB / "index.html").read_text(encoding="utf-8"))
+
+
+@app.get("/sw.js")
+def service_worker() -> FileResponse:
+    """Servi depuis la racine, sinon sa portee ne couvre pas tout le site.
+
+    Un service worker ne peut intercepter que ce qui se trouve sous son propre
+    chemin : place sous /vendor/, il ne verrait ni la page ni les carreaux.
+    """
+    return FileResponse(WEB / "sw.js", media_type="text/javascript",
+                        headers={"Cache-Control": "no-cache",
+                                 "Service-Worker-Allowed": "/"})
+
+
+@app.get("/api/fond/{parcours_id}")
+def fond_du_parcours(parcours_id: str) -> JSONResponse:
+    """Les carreaux a emporter pour marcher cette boucle sans reseau.
+
+    Calcule ici et non dans le navigateur : la geometrie du couloir est deja
+    ecrite et eprouvee en Python, et la dupliquer en JavaScript ferait deux
+    verites a maintenir. On ne renvoie que les carreaux presents sur le
+    serveur, pour ne pas envoyer le telephone en chercher d'introuvables.
+    """
+    fichier = SORTIE / "traces.geojson"
+    if not fichier.exists():
+        raise HTTPException(503, "Rien n'a encore ete calcule.")
+    formes = json.loads(fichier.read_text(encoding="utf-8"))["features"]
+    forme = next((f for f in formes if f["properties"]["id"] == parcours_id), None)
+    if forme is None:
+        raise HTTPException(404, "Parcours inconnu : %s" % parcours_id)
+
+    besoin = tuiles.couloir([(c[0], c[1]) for c in forme["geometry"]["coordinates"]])
+    presents = sorted((c for c in besoin if (TUILES / c.chemin()).exists()),
+                      key=lambda c: (c.z, c.x, c.y))
+    poids = sum((TUILES / c.chemin()).stat().st_size for c in presents)
+    return JSONResponse({
+        "parcours": parcours_id,
+        "carreaux": ["/tuiles/" + c.chemin() for c in presents],
+        "attendus": len(besoin),
+        "octets": poids,
+    })
 
 
 @app.get("/api/parcours")
@@ -133,12 +221,6 @@ def tuile(z: int, x: int, y: int) -> FileResponse:
                         headers={"Cache-Control": "public, max-age=604800"})
 
 
-# L'inventaire du fond emporte change rarement -- seule la commande `tuiles`
-# le modifie -- et le parcourir demande de lire un millier d'entrees de
-# dossier : on le garde en memoire, indexe sur l'etat du dossier racine.
-_inventaire: dict[int, dict] = {}
-
-
 @app.get("/api/fond")
 def fond() -> JSONResponse:
     """L'inventaire exact des carreaux emportes.
@@ -152,28 +234,31 @@ def fond() -> JSONResponse:
     if not TUILES.exists():
         return JSONResponse({"emporte": False, "zooms": [], "carreaux": 0,
                              "carreaux_par_zoom": {}})
-    empreinte = TUILES.stat().st_mtime_ns
-    if empreinte not in _inventaire:
-        par_zoom: dict[str, dict[str, list[int]]] = {}
-        total = 0
-        for carreau in TUILES.rglob("*.png"):
-            try:
-                z, x, y = carreau.parts[-3], carreau.parts[-2], carreau.stem
-                par_zoom.setdefault(z, {}).setdefault(x, []).append(int(y))
-                total += 1
-            except (ValueError, IndexError):
-                continue
-        for colonnes in par_zoom.values():
-            for ys in colonnes.values():
-                ys.sort()
-        _inventaire.clear()
-        _inventaire[empreinte] = {
-            "emporte": bool(total),
-            "zooms": sorted(int(z) for z in par_zoom),
-            "carreaux": total,
-            "carreaux_par_zoom": par_zoom,
-        }
-    return JSONResponse(_inventaire[empreinte])
+    # Recompte a chaque appel. Une premiere version gardait le resultat en
+    # memoire, indexe sur la date du dossier racine -- qui ne bouge pas quand
+    # on ecrit dans 13/4240/2802.png. L'inventaire restait donc fige sur un
+    # etat ancien, et la page ne reclamait qu'une fraction des carreaux
+    # reellement disponibles. Parcourir un millier d'entrees coute quelques
+    # millisecondes, une fois par ouverture de page : le compte juste vaut
+    # mieux que l'economie.
+    par_zoom: dict[str, dict[str, list[int]]] = {}
+    total = 0
+    for carreau in TUILES.rglob("*.png"):
+        try:
+            z, x, y = carreau.parts[-3], carreau.parts[-2], carreau.stem
+            par_zoom.setdefault(z, {}).setdefault(x, []).append(int(y))
+            total += 1
+        except (ValueError, IndexError):
+            continue
+    for colonnes in par_zoom.values():
+        for ys in colonnes.values():
+            ys.sort()
+    return JSONResponse({
+        "emporte": bool(total),
+        "zooms": sorted(int(z) for z in par_zoom),
+        "carreaux": total,
+        "carreaux_par_zoom": par_zoom,
+    })
 
 
 @app.get("/api/traces.geojson")

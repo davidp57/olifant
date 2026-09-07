@@ -342,6 +342,7 @@ let etapeChoisie = null;          // etape depliee dans la fiche
 let veille = null;                // identifiant du suivi de position
 let verrouEcran = null;           // pour que l'ecran ne s'eteigne pas en marchant
 let sortiesConnues = [];          // les fois ou on a marche la boucle choisie
+let fondEmporteConnu = null;      // ce que le serveur a sous la main
 let sortieAffichee = null;
 let filtre = localStorage.getItem("olifant-filtre") || "tout";
 let tri = localStorage.getItem("olifant-tri") || "carnet";
@@ -539,9 +540,13 @@ function detailDuParcours(p){
     <ul class="etapes">${p.etapes.map(carteDeLEtape).join("")}</ul>
     <div id="position"></div>
     ${listeDesSorties()}
+    <p class="legende" id="emportage"></p>
     <div class="liens">
       <button class="bouton marche" data-suivre="${p.id}">${
         veille === null ? "Me situer" : "Arrêter"}</button>
+      ${ouvrier ? `<button class="bouton ${emportees.has(p.id) ? "" : "eteint"}"
+          data-emporte="${p.id}">${emportees.has(p.id)
+            ? "Emportée ✓" : "Emporter pour hors réseau"}</button>` : ""}
       <a href="/telecharge/${p.id}.gpx" download>GPX pour Iphigénie</a>
       <button class="bouton eteint" data-noter="${p.id}">Noter la sortie</button>
       <a class="discret" href="/telecharge/${p.id}.kml" download>KML</a>
@@ -606,6 +611,8 @@ function rendre(){
     b.addEventListener("click", basculeLeSuivi));
   document.querySelectorAll("[data-trace]").forEach(b =>
     b.addEventListener("click", () => basculeLaTraceSuivie(Number(b.dataset.trace))));
+  document.querySelectorAll("[data-emporte]").forEach(b =>
+    b.addEventListener("click", () => emporteLaBoucle(b.dataset.emporte)));
 }
 
 function selectionne(id){
@@ -891,6 +898,104 @@ function effaceLaSortie(){
   if (coucheSortie){ carte.removeLayer(coucheSortie); coucheSortie = null; }
 }
 
+/* --------------------------------------------------------------- emporter */
+/* Marcher sans reseau demande que le telephone garde tout : la page, les
+   traces, et les carreaux de carte. Le service worker s'en charge ; ce qui
+   suit lui dit quoi prendre et rend compte a l'utilisateur.
+
+   La regle est de n'emporter que ce qu'on a demande. Ouvrir une boucle vaut
+   demande -- c'est le geste qu'on fait avant de partir -- et il y a un bouton
+   pour prendre les dix d'un coup. Rien ne se telecharge par surprise. */
+
+let ouvrier = null;              // le service worker, quand il est pret
+let emportees = new Set();       // boucles dont les carreaux sont deja pris
+let emportageEnCours = null;
+
+async function reveilleLOuvrier(){
+  if (!("serviceWorker" in navigator) || !window.isSecureContext) return;
+  try{
+    await navigator.serviceWorker.register("/sw.js", {scope: "/"});
+    ouvrier = (await navigator.serviceWorker.ready).active;
+    navigator.serviceWorker.addEventListener("message", e => {
+      const nouvelle = e.data || {};
+      if (!nouvelle.parcours) return;
+      if (nouvelle.type === "avancement" && nouvelle.parcours === choisi){
+        montreLEmportage(`${nouvelle.pris} / ${nouvelle.total} carreaux`);
+      }
+      if (nouvelle.type === "emporte"){
+        // On se fie a ce que le compte rendu nomme, pas a ce qu'on croyait
+        // etre en train d'emporter : entre l'ordre et la reponse, l'utilisateur
+        // a pu ouvrir une autre boucle.
+        if (nouvelle.pris + nouvelle.rates && nouvelle.rates <= nouvelle.total * 0.05){
+          emportees.add(nouvelle.parcours);
+        }
+        if (emportageEnCours === nouvelle.parcours) emportageEnCours = null;
+        montreLEmportage(null);
+        rendre();
+        flash(nouvelle.rates
+          ? `Emportée, ${nouvelle.rates} carreaux manquants sur ${nouvelle.total}`
+          : "Emportée : elle marchera sans réseau");
+      }
+    });
+    // Un service worker fraichement installe ne controle pas encore la page.
+    if (!navigator.serviceWorker.controller) return;
+    ouvrier = navigator.serviceWorker.controller;
+  }catch(e){ ouvrier = null; }
+}
+
+async function emporteLaBoucle(id, discret){
+  // Un emport deja en cours sur une autre boucle n'interdit pas celui-ci : le
+  // service worker les traite l'un apres l'autre.
+  if (!ouvrier || emportageEnCours === id) return;
+  let fond;
+  try{
+    const reponse = await fetch("/api/fond/" + encodeURIComponent(id));
+    if (!reponse.ok) return;
+    fond = await reponse.json();
+  }catch(e){ return; }
+  if (!fond.carreaux.length) return;
+
+  emportageEnCours = id;
+  if (!discret){
+    flash(`${fond.carreaux.length} carreaux, ${Math.round(fond.octets / 1024)} Ko`);
+  }
+  montreLEmportage("préparation…");
+  ouvrier.postMessage({type: "emporte", parcours: id, urls: fond.carreaux});
+}
+
+function montreLEmportage(texte){
+  const zone = document.getElementById("emportage");
+  if (zone) zone.textContent = texte || "";
+}
+
+/* Sait-on si une boucle est deja emportee ? On le demande au cache du
+   navigateur plutot que de le supposer : l'utilisateur a pu vider ses donnees
+   de site entre deux visites. */
+async function relitCeQuiEstEmporte(){
+  if (!("caches" in window)) return;
+  try{
+    const noms = await caches.keys();
+    const nom = noms.find(n => n.endsWith("-carreaux"));
+    if (!nom) return;
+    const cache = await caches.open(nom);
+    const pris = new Set((await cache.keys()).map(r => new URL(r.url).pathname));
+    if (!pris.size || !catalogue) return;
+
+    for (const p of catalogue.parcours){
+      try{
+        const fond = await (await fetch("/api/fond/" + encodeURIComponent(p.id))).json();
+        // Emportee si l'essentiel est la : un carreau manquant sur cent ne
+        // doit pas faire croire que rien n'a ete pris.
+        const dedans = fond.carreaux.filter(u => pris.has(u)).length;
+        if (fond.carreaux.length && dedans >= fond.carreaux.length * 0.95){
+          emportees.add(p.id);
+        }
+      }catch(e){ /* tant pis, on ne dira rien pour cette boucle */ }
+    }
+    rendre();
+  }catch(e){ /* pas de cache accessible : on n'affiche simplement rien */ }
+}
+
 /* ---------------------------------------------------------------- carnet */
 
 const dlg = document.getElementById("dlg");
@@ -961,6 +1066,11 @@ async function charge(){
   rendre();
   majCarte();
   cadre(limitesDeTout());
+  await reveilleLOuvrier();
+  if (ouvrier){
+    rendre();
+    relitCeQuiEstEmporte();
+  }
 }
 charge();
 </script>

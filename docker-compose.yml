@@ -10,14 +10,14 @@
 # Le service ne calcule rien et n'appelle aucun routeur : il sert les traces
 # deja calculees, qui voyagent dans l'image.
 #
-# Le fond de carte vient d'OpenStreetMap, cote navigateur. Pour que la carte
-# existe encore sans reseau -- en foret, il n'y en a pas -- emporter les
-# carreaux une fois, depuis la console du conteneur dans Portainer :
+# Pour que la carte existe encore sans reseau -- en foret, il n'y en a pas --
+# le service complete son fond de carte au premier demarrage : un millier de
+# carreaux, un quart d'heure, en tache de fond. Rien a lancer. Ils sont ranges
+# dans le volume et survivent donc aux mises a jour de l'image.
 #
-#     python -m olifant tuiles
-#
-# Un quart d'heure, une quinzaine de Mo, ranges dans le volume : ils survivent
-# donc aux mises a jour de l'image.
+# C'est ensuite le navigateur qui garde ce dont il a besoin : en ouvrant une
+# boucle chez soi, on l'emporte -- carte comprise -- pour la marcher sans
+# reseau.
 
 services:
   olifant:

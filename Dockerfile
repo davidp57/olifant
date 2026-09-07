@@ -7,9 +7,15 @@
 
 FROM python:3.13-slim
 
+# OLIFANT_TUILES_AUTO : au premier demarrage, le service complete le fond de
+# carte des traces -- un millier de carreaux, un quart d'heure, en tache de
+# fond, une seule fois, puisqu'ils restent ensuite dans le volume. Mettre a 0
+# pour s'en passer. Hors conteneur la variable n'est pas posee : un `uvicorn`
+# lance sur un poste de developpement ne telecharge donc rien.
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    OLIFANT_DATA=/data
+    OLIFANT_DATA=/data \
+    OLIFANT_TUILES_AUTO=1
 
 WORKDIR /app
 

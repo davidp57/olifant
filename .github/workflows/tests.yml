@@ -1,0 +1,41 @@
+# Lance les tests sur chaque poussee et chaque pull request.
+#
+# Ils ne touchent pas au reseau : ni BRouter, ni Overpass, ni les serveurs de
+# tuiles ne sont appeles. Les traces des tests sont fabriquees a la main et les
+# reponses des services sont ecrites dans les tests eux-memes. Ils tournent
+# donc partout, vite, et sans rien demander a des services benevoles.
+
+name: tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      # La version la plus basse que le projet accepte et la plus recente :
+      # entre les deux, rien ne devrait surprendre.
+      matrix:
+        python: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+
+      - name: Installer le projet et de quoi le tester
+        run: pip install -e ".[dev]"
+
+      - name: Les tests
+        run: python -m pytest -q
+
+      - name: Le catalogue se rejoue hors ligne
+        # Le cache des reponses du routeur est versionne : les dix parcours
+        # doivent se recalculer sans aucun appel reseau. Si ce pas echoue,
+        # c'est que le cache et le fichier de reference ont divergé.
+        run: python -m olifant calcule --hors-ligne
