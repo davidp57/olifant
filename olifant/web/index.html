@@ -207,6 +207,7 @@
     align-items:center}
   .signature code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
     font-size:11px}
+  .signature .rates{color:var(--jaumont);font-weight:400}
   /* Une nouvelle version est prete : on le dit, on ne recharge pas de force --
      quelqu'un peut etre en train de marcher en suivant la carte. */
   .nouveaute{margin:12px 0 0;padding:10px 13px;border-left:3px solid var(--eau);
@@ -389,6 +390,7 @@ let sortiesConnues = [];          // les fois ou on a marche la boucle choisie
 let fondEmporteConnu = null;      // ce que le serveur a sous la main
 let versionServie = null;         // ce que le serveur dit faire tourner
 let tousLesReperes = localStorage.getItem("olifant-reperes") === "1";
+let carreauxRates = 0;           // carreaux que la carte n'a pas pu charger
 let sortieAffichee = null;
 let filtre = localStorage.getItem("olifant-filtre") || "tout";
 let tri = localStorage.getItem("olifant-tri") || "carnet";
@@ -417,7 +419,17 @@ const TRANSPARENT = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABA
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18, errorTileUrl: TRANSPARENT,
   attribution: '&copy; contributeurs <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(carte);
+}).addTo(carte).on("tileerror", compteUnRate);
+
+/* Un carreau qui ne vient pas laisse un trou muet : la carte parait
+   simplement vide a cet endroit, et rien ne dit si c'est le reseau, le
+   serveur de tuiles qui refuse, ou un defaut d'ici. On les compte donc, et le
+   pied de la liste le dit -- sans qu'il faille ouvrir une console. */
+function compteUnRate(){
+  carreauxRates++;
+  clearTimeout(compteUnRate._t);
+  compteUnRate._t = setTimeout(() => { if (versionServie) litLaVersion(); }, 1200);
+}
 /* La couche locale n'est posee qu'une fois qu'on sait ce qui a ete emporte, et
    ne demande que les carreaux qui existent vraiment. Se contenter d'une
    emprise ne suffirait pas : le couloir des traces n'est pas un rectangle, et
@@ -454,7 +466,7 @@ async function poseLeFondEmporte(){
     // que de reclamer des carreaux qui n'existent pas.
     maxNativeZoom: Math.max(...fond.zooms), maxZoom: 18,
     errorTileUrl: TRANSPARENT, zIndex: 2,
-  }).addTo(carte);
+  }).addTo(carte).on("tileerror", compteUnRate);
   // Une couche qui arrive apres coup : on redonne a Leaflet la taille de son
   // conteneur, sinon elle se remplit d'apres une mesure perimee.
   remesureLaCarte();
@@ -658,6 +670,12 @@ function reperesDeLEtape(e){
 function rendre(){
   document.getElementById("titre").textContent = catalogue.titre;
   document.getElementById("accroche").textContent = catalogue.accroche;
+  // L'etat des segments se pose ici et non au seul chargement : sans cela le
+  // filtre s'appliquait bien -- la liste changeait -- mais le bouton restait
+  // eteint jusqu'au rechargement de la page.
+  document.querySelectorAll("[data-filtre]").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.filtre === filtre)));
+  document.getElementById("tri").value = tri;
   const affiches = parcoursAffiches();
   const compte = document.getElementById("compte");
   compte.textContent = affiches.length === catalogue.parcours.length
@@ -1053,7 +1071,10 @@ async function litLaVersion(){
   const perimee = page && page !== "__VERSION__" && page !== versionServie.version
     ? ` · page <code>${secu(page)}</code>`
     : "";
-  zone.innerHTML = `<span>Olifant <code>${secu(versionServie.version)}</code>${quand}${perimee}</span>`;
+  const rates = carreauxRates
+    ? ` · <b class="rates">${carreauxRates} carreaux de carte non chargés</b>`
+    : "";
+  zone.innerHTML = `<span>Olifant <code>${secu(versionServie.version)}</code>${quand}${perimee}${rates}</span>`;
   verifieLaFraicheur();
 }
 
@@ -1261,9 +1282,6 @@ async function charge(){
     addEventListener("resize", remesureLaCarte);
     poseLeFondEmporte();
   }
-  document.querySelectorAll("[data-filtre]").forEach(b =>
-    b.setAttribute("aria-pressed", String(b.dataset.filtre === filtre)));
-  document.getElementById("tri").value = tri;
   rendre();
   majCarte();
   cadre(limitesDeTout());
