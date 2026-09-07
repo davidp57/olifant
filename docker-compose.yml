@@ -8,8 +8,16 @@
 # du depot : il ne saurait donc pas construire l'image lui-meme.
 #
 # Le service ne calcule rien et n'appelle aucun routeur : il sert les traces
-# deja calculees, qui voyagent dans l'image. Seul le fond de carte vient
-# d'OpenStreetMap, cote navigateur.
+# deja calculees, qui voyagent dans l'image.
+#
+# Le fond de carte vient d'OpenStreetMap, cote navigateur. Pour que la carte
+# existe encore sans reseau -- en foret, il n'y en a pas -- emporter les
+# carreaux une fois, depuis la console du conteneur dans Portainer :
+#
+#     python -m olifant tuiles
+#
+# Un quart d'heure, une quinzaine de Mo, ranges dans le volume : ils survivent
+# donc aux mises a jour de l'image.
 
 services:
   olifant:

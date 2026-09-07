@@ -93,6 +93,77 @@ python -m uvicorn olifant.api:app --port 8137
 Puis <http://localhost:8137> : la carte, la liste, le détail des étapes avec
 leurs notes, et le téléchargement GPX ou KML.
 
+Sur grand écran, la liste et la carte tiennent côte à côte. Sur téléphone,
+elles ne le peuvent pas — la place manque — et l'interface montre **une chose
+à la fois** : la liste des boucles, la carte, ou une boucle. La barre du bas
+passe de l'une à l'autre, le bouton retour du téléphone referme une boucle.
+
+Les filtres « à pied / en voiture » et le tri sont retenus d'une visite à
+l'autre. Dans la liste, une boucle se résume à sa distance, son dénivelé et sa
+jauge de revêtement : de quoi choisir sans lire. Le reste — résumé, étapes,
+téléchargements — apparaît quand on l'ouvre, et les boutons restent collés en
+bas de l'écran plutôt qu'au bout du défilement.
+
+Chaque étape porte **le kilomètre auquel on y arrive** et se déplie sur ce
+qu'il y a autour : de l'eau, un point de vue, un abri, un café, du patrimoine.
+Ces repères sont relevés dans OpenStreetMap, jamais saisis à la main.
+
+### Marcher avec
+
+Le bouton **Me situer** affiche la position sur la trace et répond aux trois
+questions qu'on se pose à un embranchement sans panneau : à quel kilomètre on
+en est, ce qu'il reste, et quelle est la prochaine étape. Il prévient aussi
+quand on s'est écarté de plus de soixante mètres. L'écran est maintenu allumé
+pendant le suivi.
+
+Deux limites à connaître. La position exige **HTTPS** : en HTTP, même sur le
+réseau local, le navigateur la refuse sans rien demander. Et un navigateur ne
+suit pas la position en arrière-plan : téléphone rangé ou verrouillé, le suivi
+s'interrompt. Se situer quand on sort le téléphone marche très bien ;
+enregistrer une trace de quatre heures, non — c'est le travail d'une
+application installée comme Iphigénie.
+
+### Revoir une sortie
+
+Sous chaque boucle, les fois où on l'a marchée. Quand une sortie a un GPX,
+**Voir la trace** le dessine en pointillé par-dessus le tracé prévu : on voit
+où on a coupé, où on s'est perdu, où on a fait un détour.
+
+Le fichier est relu avec un parseur XML durci, et **débruité avant d'être
+mesuré**. Sans cela, le tremblement du GPS s'ajoute au chemin : sur un essai,
+10,3 km de marche donnaient 13,5 km et 660 m de dénivelé au lieu de 61.
+
+### Emporter le fond de carte
+
+En forêt, il n'y a pas de réseau, et la carte serait blanche. Cette commande
+récupère une fois pour toutes les carreaux qui couvrent les traces :
+
+```bash
+python -m olifant tuiles --compte-seulement   # dit combien, sans rien prendre
+python -m olifant tuiles                      # les prend, un par seconde
+```
+
+997 carreaux pour les dix boucles, du zoom 13 au zoom 16, une quinzaine de
+mégaoctets, environ un quart d'heure. Ils vont dans `data/tuiles/` — hors
+dépôt, et du côté du volume qu'on sauvegarde, pas de l'image. Sur le NAS, la
+commande se lance depuis la console du conteneur.
+
+La page empile ce fond local **au-dessus** de celui d'OpenStreetMap : là où le
+carreau local manque, on voit celui d'OSM à travers ; là où le réseau manque,
+c'est l'inverse ; et quand les deux manquent, restent la trace et la position.
+
+### Relever ce qu'il y a autour des étapes
+
+```bash
+python -m olifant reperes                     # les dix boucles
+python -m olifant reperes canner --hors-ligne # une seule, depuis le cache
+```
+
+Une requête Overpass par boucle, gardée sur disque. C'est lent (une minute et
+demie par boucle) et volontairement séparé de `calcule` : un parcours doit
+pouvoir se calculer sans dépendre d'Overpass, et `calcule` se passe du relevé
+s'il n'existe pas.
+
 ### Sur le NAS
 
 Depuis Portainer : **Stacks → Add stack → Web editor**, coller
@@ -149,10 +220,15 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 | `data/parcours.yaml` | le seul fichier écrit à la main |
 | `olifant/routage.py` | BRouter, cache disque, réessais patients |
 | `olifant/qualite.py` | les quatre contrôles, et leurs seuils |
+| `olifant/jalons.py` | à quel kilomètre tombe chaque étape |
+| `olifant/reperes.py` | ce qu'OSM sait autour des étapes |
+| `olifant/tuiles.py` | le fond de carte à emporter |
+| `olifant/suivi.py` | relire un GPX rapporté d'une sortie |
 | `olifant/export.py` | GPX, KML, GeoJSON |
 | `olifant/api.py` | le serveur et le carnet |
 | `olifant/web/` | la page, Leaflet compris |
 | `data/cache/` | les réponses du routeur, versionnées : tout se rejoue hors ligne |
+| `data/tuiles/` | le fond de carte emporté, hors dépôt (19 Mo de PNG) |
 
 ## Tests
 
@@ -160,10 +236,22 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-44 tests, sans réseau.
+103 tests, sans réseau.
 
 ## Un mot sur les services publics
 
-BRouter, Nominatim et Overpass sont gratuits et tenus par des bénévoles. Le
-routeur attend deux secondes entre deux appels et patiente quand on lui demande
-de ralentir. Gardez le cache, évitez les recalculs inutiles.
+BRouter, Overpass et les serveurs de tuiles d'OpenStreetMap sont gratuits et
+tenus par des bénévoles. Chaque commande qui les sollicite attend entre deux
+appels, patiente quand on lui demande de ralentir, et **garde tout sur disque
+pour ne jamais redemander deux fois la même chose**.
+
+Deux décisions viennent de là. Le relevé des repères ne demande plus les arbres
+ni les bancs : à eux seuls, ils représentaient jusqu'à 589 et 401 réponses pour
+un seul parcours, l'essentiel du volume, sans rien apprendre à qui marche. Et le
+fond de carte emporté se limite au couloir des traces et s'arrête au zoom 16 —
+997 carreaux pour les dix boucles, une quinzaine de mégaoctets, pris une seule
+fois à raison d'un par seconde. C'est un usage personnel et borné, pas une
+aspiration ; si vous élargissez les zooms ou la marge, le compte grimpe vite
+(`--compte-seulement` le dit avant de rien télécharger).
+
+Gardez le cache, évitez les recalculs inutiles.

@@ -6,3 +6,7 @@ __pycache__/
 carnet/
 data/carnet.db
 data/traces/
+
+# Le fond de carte emporte : 19 Mo de PNG, reconstructibles par
+# `python -m olifant tuiles`, et sans interet dans un depot de code.
+data/tuiles/

@@ -9,7 +9,9 @@ debout ne demande aucun appel a un service exterieur.
 
 Ce qu'il ajoute, en revanche, ne peut pas etre un fichier fige : les notes de
 sortie et les traces reellement suivies, qui arrivent apres coup et vivent
-dans un volume qu'on sauvegarde.
+dans un volume qu'on sauvegarde. Ces traces, il les relit pour les remettre
+sur la carte -- avec un parseur XML durci, le fichier venant d'un telephone
+qu'on ne controle pas.
 """
 
 from __future__ import annotations
@@ -26,6 +28,8 @@ from fastapi import FastAPI, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from . import suivi
+
 RACINE = Path(__file__).resolve().parent.parent
 WEB = Path(__file__).resolve().parent / "web"
 
@@ -37,6 +41,9 @@ SORTIE = Path(os.environ.get("OLIFANT_SORTIE", RACINE / "data" / "sortie"))
 ECRITURE = Path(os.environ.get("OLIFANT_DATA", RACINE / "data"))
 TRACES = ECRITURE / "traces"
 BASE = ECRITURE / "carnet.db"
+# Le fond de carte emporte par `python -m olifant tuiles`. Absent, la page se
+# rabat sur les serveurs d'OpenStreetMap ; present, elle marche sans reseau.
+TUILES = Path(os.environ.get("OLIFANT_TUILES", ECRITURE / "tuiles"))
 
 TAILLE_MAX = 20 * 1024 * 1024      # un GPX de journee pese quelques centaines de ko
 
@@ -109,6 +116,66 @@ def parcours() -> JSONResponse:
     return JSONResponse(catalogue)
 
 
+@app.get("/tuiles/{z}/{x}/{y}.png")
+def tuile(z: int, x: int, y: int) -> FileResponse:
+    """Un carreau du fond de carte, s'il a ete emporte.
+
+    Un 404 n'est pas une anomalie : la page empile cette couche au-dessus de
+    celle d'OpenStreetMap et laisse voir a travers ce qui manque. En foret,
+    ou l'une et l'autre sont muettes, restent la trace et la position.
+    """
+    if not 0 <= z <= 19 or not 0 <= x < 2 ** z or not 0 <= y < 2 ** z:
+        raise HTTPException(404, "Ce carreau n'existe pas")
+    chemin = TUILES / str(z) / str(x) / ("%d.png" % y)
+    if not chemin.exists():
+        raise HTTPException(404, "Carreau absent du fond emporte")
+    return FileResponse(chemin, media_type="image/png",
+                        headers={"Cache-Control": "public, max-age=604800"})
+
+
+# L'inventaire du fond emporte change rarement -- seule la commande `tuiles`
+# le modifie -- et le parcourir demande de lire un millier d'entrees de
+# dossier : on le garde en memoire, indexe sur l'etat du dossier racine.
+_inventaire: dict[int, dict] = {}
+
+
+@app.get("/api/fond")
+def fond() -> JSONResponse:
+    """L'inventaire exact des carreaux emportes.
+
+    Pas seulement « oui » ou « non » : la liste precise, pour que la page ne
+    demande jamais un carreau absent. Un couloir de traces n'est pas un
+    rectangle -- entre Metz et Sierck il y a cinquante kilometres de vide --
+    et une simple emprise ferait reclamer des milliers de carreaux qui
+    n'existent pas, chacun repondu par un 404.
+    """
+    if not TUILES.exists():
+        return JSONResponse({"emporte": False, "zooms": [], "carreaux": 0,
+                             "carreaux_par_zoom": {}})
+    empreinte = TUILES.stat().st_mtime_ns
+    if empreinte not in _inventaire:
+        par_zoom: dict[str, dict[str, list[int]]] = {}
+        total = 0
+        for carreau in TUILES.rglob("*.png"):
+            try:
+                z, x, y = carreau.parts[-3], carreau.parts[-2], carreau.stem
+                par_zoom.setdefault(z, {}).setdefault(x, []).append(int(y))
+                total += 1
+            except (ValueError, IndexError):
+                continue
+        for colonnes in par_zoom.values():
+            for ys in colonnes.values():
+                ys.sort()
+        _inventaire.clear()
+        _inventaire[empreinte] = {
+            "emporte": bool(total),
+            "zooms": sorted(int(z) for z in par_zoom),
+            "carreaux": total,
+            "carreaux_par_zoom": par_zoom,
+        }
+    return JSONResponse(_inventaire[empreinte])
+
+
 @app.get("/api/traces.geojson")
 def traces() -> FileResponse:
     return _fichier(SORTIE / "traces.geojson", "application/geo+json")
@@ -134,10 +201,20 @@ def _fichier(chemin: Path, type_mime: str, telechargement: bool = False) -> File
 # ---------------------------------------------------------------- ecriture
 
 @app.get("/api/sorties")
-def sorties() -> JSONResponse:
+def sorties(parcours_id: str = "") -> JSONResponse:
+    """Le carnet, du plus recent au plus ancien.
+
+    `parcours_id` restreint a une boucle : c'est ce dont l'interface a besoin
+    pour proposer, sous une boucle, les fois ou on l'a marchee.
+    """
+    requete = "SELECT * FROM sortie"
+    parametres: tuple = ()
+    if parcours_id:
+        requete += " WHERE parcours_id = ?"
+        parametres = (parcours_id,)
+    requete += " ORDER BY jour DESC, id DESC"
     with closing(connexion()) as conn:
-        lignes = conn.execute(
-            "SELECT * FROM sortie ORDER BY jour DESC, id DESC").fetchall()
+        lignes = conn.execute(requete, parametres).fetchall()
     return JSONResponse([dict(l) for l in lignes])
 
 
@@ -192,6 +269,35 @@ def relis_la_trace(sortie_id: int) -> FileResponse:
     if ligne is None or not ligne["trace"]:
         raise HTTPException(404, "Aucune trace deposee pour cette sortie")
     return FileResponse(TRACES / ligne["trace"], media_type="application/gpx+xml")
+
+
+# Relire un GPX de plusieurs milliers de points coute quelques dizaines de
+# millisecondes ; on garde le resultat tant que le fichier ne change pas,
+# plutot que de refaire le travail a chaque affichage.
+_traces_relues: dict[tuple[str, int], dict] = {}
+
+
+@app.get("/api/sorties/{sortie_id}/trace.geojson")
+def trace_dessinable(sortie_id: int) -> JSONResponse:
+    """La trace reellement suivie, allegee et prete pour la carte."""
+    with closing(connexion()) as conn:
+        ligne = conn.execute("SELECT jour, trace FROM sortie WHERE id = ?",
+                             (sortie_id,)).fetchone()
+    if ligne is None or not ligne["trace"]:
+        raise HTTPException(404, "Aucune trace deposee pour cette sortie")
+
+    chemin = TRACES / ligne["trace"]
+    if not chemin.exists():
+        raise HTTPException(404, "Le fichier de cette trace a disparu")
+    clef = (ligne["trace"], chemin.stat().st_mtime_ns)
+    if clef not in _traces_relues:
+        try:
+            trace = suivi.lis(chemin.read_bytes())
+        except suivi.ErreurGpx as e:
+            raise HTTPException(422, "GPX inexploitable : %s" % e) from e
+        _traces_relues.clear()          # une seule trace affichee a la fois
+        _traces_relues[clef] = trace.geojson(nom="Sortie du %s" % ligne["jour"])
+    return JSONResponse(_traces_relues[clef])
 
 
 @app.delete("/api/sorties/{sortie_id}")
