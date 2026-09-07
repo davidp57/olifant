@@ -98,6 +98,10 @@ elles ne le peuvent pas — la place manque — et l'interface montre **une chos
 à la fois** : la liste des boucles, la carte, ou une boucle. La barre du bas
 passe de l'une à l'autre, le bouton retour du téléphone referme une boucle.
 
+Choisir une boucle fait entrer en **consultation**, aux deux tailles d'écran :
+la liste et les filtres s'effacent, la boucle prend toute la place, et un lien
+ramène en arrière. Tant qu'on regarde celle-ci, le reste n'a rien à dire.
+
 Les filtres « à pied / en voiture » et le tri sont retenus d'une visite à
 l'autre. Dans la liste, une boucle se résume à sa distance, son dénivelé et sa
 jauge de revêtement : de quoi choisir sans lire. Le reste — résumé, étapes,
@@ -120,6 +124,14 @@ questions qu'on se pose à un embranchement sans panneau : à quel kilomètre on
 en est, ce qu'il reste, et quelle est la prochaine étape. Il prévient aussi
 quand on s'est écarté de plus de soixante mètres. L'écran est maintenu allumé
 pendant le suivi.
+
+Il donne surtout **la direction à suivre**. À l'arrêt : « Parc de la Seille :
+0,8 km, cap 117° (sud-est) ». En marchant, le GPS connaît la direction du
+déplacement, et l'application dit alors de quel côté tourner — « 27° à
+droite », ou « tout droit » — ce qui se lit mieux qu'un azimut brut quand on
+est à un embranchement. La direction du déplacement n'existe qu'en mouvement :
+à l'arrêt, ou sur un appareil qui ne la fournit pas, le cap absolu reste
+affiché.
 
 Deux limites à connaître. La position exige **HTTPS** : en HTTP, même sur le
 réseau local, le navigateur la refuse sans rien demander. Et un navigateur ne
@@ -298,7 +310,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-142 tests, sans réseau.
+149 tests, sans réseau.
 
 ## Un mot sur les services publics
 

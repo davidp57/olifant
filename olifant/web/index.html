@@ -139,6 +139,7 @@
     font-weight:400}
   .position p{margin:4px 0 0;color:var(--doux);font-size:12.8px}
   .position .ecarte{color:var(--jaumont)}
+  .position .cap{color:var(--encre);font-size:13.2px}
 
   /* --- les fois ou on l'a marchee --------------------------------------- */
   .sorties{margin:12px 0 0;padding:0;list-style:none;border-top:1px dashed var(--trait)}
@@ -169,7 +170,18 @@
     background:var(--carte-fond);font-size:13.5px}
   .souci code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
 
-  /* --- barres de navigation, telephone seulement ------------------------ */
+  /* --- le mode consultation -------------------------------------------- */
+  /* Une boucle choisie prend toute la place : la liste et les filtres n'ont
+     plus rien a dire tant qu'on regarde celle-ci, et sur un telephone ils
+     coutaient l'ecran entier. Les regles valent donc aux deux tailles ; ce
+     qui suit dans la section telephone ne concerne que la disposition. */
+  body[data-vue="fiche"] header,
+  body[data-vue="fiche"] .filtres{display:none}
+  body[data-vue="fiche"] .fiche:not([aria-current="true"]){display:none}
+  body[data-vue="fiche"] .fiche{cursor:default}
+  body[data-vue="fiche"] .barre-haut{display:block}
+
+  /* --- barres de navigation --------------------------------------------- */
   .barre-bas,.barre-haut{display:none}
   .barre-bas{position:fixed;left:0;right:0;bottom:0;z-index:600;
     background:var(--papier);border-top:1px solid var(--trait-fort);
@@ -234,26 +246,20 @@
     .volet{border-right:none;grid-area:1/1;padding:16px 16px 70px}
     #carte{grid-area:1/1}
     .barre-bas{display:block}
-    .barre-haut{display:block}
 
     /* vue liste : le volet seul, la carte de cote */
     body[data-vue="liste"] #carte{display:none}
-    body[data-vue="liste"] .barre-haut{display:none}
 
     /* vue carte : la carte seule, plein ecran */
     body[data-vue="carte"] .volet{display:none}
-    body[data-vue="carte"] .barre-haut{display:none}
 
     /* vue fiche : la carte en bandeau, le parcours choisi dessous */
     body[data-vue="fiche"] .cadre{grid-template-rows:40dvh 1fr}
     body[data-vue="fiche"] #carte{grid-area:1/1;height:40dvh}
     body[data-vue="fiche"] .volet{grid-area:2/1;padding-bottom:24px}
-    body[data-vue="fiche"] header,
-    body[data-vue="fiche"] .filtres,
     body[data-vue="fiche"] .barre-bas{display:none}
-    body[data-vue="fiche"] .fiche{grid-template-columns:1fr;gap:0;cursor:default;
+    body[data-vue="fiche"] .fiche{grid-template-columns:1fr;gap:0;
       border-bottom:none;margin-left:0;padding-left:0;border-left:none}
-    body[data-vue="fiche"] .fiche:not([aria-current="true"]){display:none}
     body[data-vue="fiche"] .mesure{display:flex;gap:8px;align-items:baseline;
       margin-bottom:6px}
     /* Telecharger le GPX est ce qu'on vient faire ici, juste avant de partir.
@@ -720,7 +726,7 @@ function rendre(){
 
 function selectionne(id){
   const ouvrait = choisi;
-  choisi = (choisi === id && !surTelephone()) ? null : id;
+  choisi = id;
   if (choisi !== ouvrait){
     // On change de boucle : l'etape ouverte, le suivi et la trace affichee
     // appartenaient a la precedente.
@@ -732,10 +738,11 @@ function selectionne(id){
   rendre();
   majCarte();
   if (choisi && couches[choisi]) cadre(couches[choisi].getBounds());
-  if (!surTelephone()) return;
-  // Sur telephone la fiche prend l'ecran ; on empile une entree d'historique
-  // pour que le retour du telephone revienne a la liste.
-  if (ouvrait !== choisi && choisi) history.pushState({fiche: choisi}, "");
+  if (!choisi){ montre("liste"); return; }
+  // La boucle choisie prend la place de la liste, sur telephone comme sur
+  // grand ecran : tant qu'on la regarde, le reste n'a rien a dire. L'entree
+  // d'historique permet au bouton retour du telephone de refermer.
+  if (ouvrait !== choisi) history.pushState({fiche: choisi}, "");
   montre("fiche");
   document.querySelector(".volet").scrollTop = 0;
 }
@@ -941,11 +948,17 @@ function situe(position){
   const suivante = etapeApres(p, ou.km);
   const reste = Math.max(0, p.km - ou.km);
   const loin = ou.ecart_m > 60;
+  // `heading` est la direction du deplacement, que le GPS ne connait qu'en
+  // mouvement : nulle a l'arret, et absente sur bien des ordinateurs.
+  const capActuel = position.coords.heading;
+  const versEtape = suivante
+    ? `<p class="cap">${secu(suivante.nom)} : ${nb(Math.max(0, suivante.km - ou.km))} km,
+       ${orientation(capVers([lon, lat], [suivante.lon, suivante.lat]), capActuel)}</p>`
+    : "";
   ecritLeSuivi(`
     <b>km ${nb(ou.km)} sur ${nb(p.km)}</b>
-    <p>${nb(reste)} km restants${suivante
-      ? ` · ${secu(suivante.nom)} dans ${nb(Math.max(0, suivante.km - ou.km))} km`
-      : " · dernière ligne droite"}</p>
+    <p>${nb(reste)} km restants${suivante ? "" : " · dernière ligne droite"}</p>
+    ${versEtape}
     <p class="${loin ? "ecarte" : ""}">${loin
       ? `Vous êtes à ${Math.round(ou.ecart_m)} m du tracé.`
       : `Sur le tracé, à ${Math.round(ou.ecart_m)} m près.`}
@@ -988,6 +1001,39 @@ function situeSurLaTrace(lonlat, id){
 
 function etapeApres(p, km){
   return p.etapes.find(e => !e.depart && e.km > km + 0.05) || null;
+}
+
+/* Le cap a suivre pour rejoindre un point : l'azimut initial du grand cercle,
+   en degres depuis le nord. Sur quelques kilometres une formule plane
+   suffirait, mais celle-ci ne coute rien de plus et ne se degrade pas. */
+function capVers(depuis, vers){
+  const rad = Math.PI / 180;
+  const dlon = (vers[0] - depuis[0]) * rad;
+  const lat1 = depuis[1] * rad, lat2 = vers[1] * rad;
+  const y = Math.sin(dlon) * Math.cos(lat2);
+  const x = Math.cos(lat1) * Math.sin(lat2)
+          - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dlon);
+  return (Math.atan2(y, x) / rad + 360) % 360;
+}
+
+const AIRES = ["nord", "nord-est", "est", "sud-est",
+               "sud", "sud-ouest", "ouest", "nord-ouest"];
+
+function aire(cap){
+  return AIRES[Math.round(cap / 45) % 8];
+}
+
+/* Un cap absolu ne dit rien a qui marche : il faut savoir de quel cote
+   tourner. Quand le GPS connait la direction du deplacement, on donne donc
+   l'ecart plutot que l'azimut brut. */
+function orientation(capCible, capActuel){
+  if (capActuel === null || capActuel === undefined || isNaN(capActuel)){
+    return `cap ${Math.round(capCible)}° (${aire(capCible)})`;
+  }
+  const ecart = ((capCible - capActuel + 540) % 360) - 180;
+  if (Math.abs(ecart) < 20) return `tout droit (cap ${Math.round(capCible)}°)`;
+  const cote = ecart > 0 ? "à droite" : "à gauche";
+  return `${Math.round(Math.abs(ecart))}° ${cote} (cap ${Math.round(capCible)}°)`;
 }
 
 function metresEntre(a, b){
