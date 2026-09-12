@@ -40,7 +40,7 @@ calcul et signalent, avant qu'on parte marcher :
 
 ## Les parcours
 
-Onze boucles. Les cinq premières partent du parvis de la gare de Metz :
+Treize parcours. Les cinq premiers partent du parvis de la gare de Metz :
 abrité, un café ouvert tôt, et tout le monde sait où c'est.
 
 | parcours | distance | D+ | chemins | balisé |
@@ -51,7 +51,7 @@ abrité, un café ouvert tôt, et tout le monde sait où c'est.
 | La Seille en amont | 15,2 km | 31 m | 54 % | — |
 | Le versant de Plappeville | 15,8 km | 160 m | 33 % | 21 % |
 
-Les six autres demandent un quart d'heure à trois quarts d'heure de voiture
+Les six suivants demandent un quart d'heure à trois quarts d'heure de voiture
 pour rejoindre le départ. Elles quittent la ville, et ça se voit : presque pas
 de bitume, beaucoup plus de dénivelé, et des tronçons déjà balisés.
 
@@ -63,6 +63,25 @@ de bitume, beaucoup plus de dénivelé, et des tronçons déjà balisés.
 | Les pelouses de Montenach | Sierck-les-Bains | 15,5 km | 330 m | 54 % | 57 % |
 | L'aqueduc et la corniche de la Fraze | Ars-sur-Moselle | 15,7 km | 208 m | 68 % | 51 % |
 | Le tour du vallon de Gorze | Gorze | 14,8 km | 222 m | 68 % | — |
+
+### Aller au centre commercial à pied
+
+Les deux derniers ne cherchent pas la campagne : ils relient la rue des
+Parmentiers au centre commercial de Borny — l'ancien Cora, passé sous
+l'enseigne Carrefour — et en reviennent. Le but fixe les deux extrémités, et
+la marge de manœuvre est mince : cinq corridors de retour ont été mesurés
+(parc de la Seille, parc de la Chêneau, parc de Gloucester, Technopôle,
+Queuleu) et **tous donnent 10,3 km**. Descendre sous 10 km oblige à refaire le
+chemin à l'envers. Les deux options sont là, au choix.
+
+| parcours | distance | D+ | chemins | balisé | forme |
+|---|---|---|---|---|---|
+| La Seille et les commerces de Borny | 10,3 km | 55 m | 36 % | 20 % | boucle, 8 % de recouvrement |
+| Borny par le plus court | 9,6 km | 38 m | 39 % | 40 % | aller-retour assumé, moitié du tracé refait |
+
+Le second sort exprès du cadre : il déclenche l'alerte « aller-retour déguisé »
+du contrôle qualité, et c'est voulu. Quand le but est le but, la boucle n'est
+pas toujours ce qu'on cherche.
 
 ## Utiliser
 

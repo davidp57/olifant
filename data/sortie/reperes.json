@@ -1683,5 +1683,263 @@
     "distance_m": 355
    }
   ]
+ },
+ "seille-borny": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le P'tit Frontalier",
+    "lon": 6.177244,
+    "lat": 49.115861,
+    "distance_m": 59
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180,
+    "combien": 4
+   }
+  ],
+  "parc-seille": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.184908,
+    "lat": 49.106644,
+    "distance_m": 6,
+    "combien": 3
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Poulaillon",
+    "lon": 6.182347,
+    "lat": 49.106648,
+    "distance_m": 191
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Starbucks",
+    "lon": 6.182102,
+    "lat": 49.106637,
+    "distance_m": 209
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Columbus Café & Co",
+    "lon": 6.182066,
+    "lat": 49.106636,
+    "distance_m": 211
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Paul",
+    "lon": 6.182267,
+    "lat": 49.10573,
+    "distance_m": 220,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Kefan Traiteur",
+    "lon": 6.182108,
+    "lat": 49.105725,
+    "distance_m": 230
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Liberazione",
+    "lon": 6.18464,
+    "lat": 49.107907,
+    "distance_m": 146
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.181425,
+    "lat": 49.108319,
+    "distance_m": 320
+   }
+  ],
+  "borny-commerces": [
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.231387,
+    "lat": 49.107554,
+    "distance_m": 365
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Ti Bistrot",
+    "lon": 6.228488,
+    "lat": 49.106,
+    "distance_m": 97
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Buffalo Grill",
+    "lon": 6.225707,
+    "lat": 49.108197,
+    "distance_m": 298
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Spok",
+    "lon": 6.222638,
+    "lat": 49.104173,
+    "distance_m": 376
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.226658,
+    "lat": 49.105954,
+    "distance_m": 50
+   }
+  ]
+ },
+ "borny-direct": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180,
+    "combien": 4
+   }
+  ],
+  "borny-commerces": [
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.231387,
+    "lat": 49.107554,
+    "distance_m": 365
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Ti Bistrot",
+    "lon": 6.228488,
+    "lat": 49.106,
+    "distance_m": 97
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Buffalo Grill",
+    "lon": 6.225707,
+    "lat": 49.108197,
+    "distance_m": 298
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Spok",
+    "lon": 6.222638,
+    "lat": 49.104173,
+    "distance_m": 376
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.226658,
+    "lat": 49.105954,
+    "distance_m": 50
+   }
+  ]
  }
 }

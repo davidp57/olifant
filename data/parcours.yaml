@@ -8,8 +8,8 @@ meta:
   titre: Olifant
   accroche: >-
     Boucles de 10 a 15 km autour de Metz. Celles qui partent a pied se
-    retrouvent sur le parvis de la gare. Les autres demandent une demi-heure
-    de voiture.
+    retrouvent sur le parvis de la gare ; les autres demandent une demi-heure
+    de voiture. Deux trajets en plus, qui vont aux commerces de Borny a pied.
 
 points:
 
@@ -21,6 +21,14 @@ points:
     note: >-
       Point de ralliement des boucles a pied : a moins d'un quart d'heure de
       marche pour tout le monde. Abrite, cafe ouvert tot, toilettes.
+
+  parmentiers:
+    nom: Rue des Parmentiers, Metz
+    lon: 6.176870
+    lat: 49.115387
+    note: >-
+      Depart des deux boucles vers Borny, dans la Nouvelle Ville. A dix minutes
+      a pied de la gare, dont il partage les commodites.
 
   # --- Metz et sa banlieue ----------------------------------------------
   parc-seille:
@@ -40,6 +48,13 @@ points:
     lon: 6.207915
     lat: 49.113291
     note: Grand parc boise a l'est de Metz, etang et allees en terre.
+  borny-commerces:
+    nom: Centre commercial de Borny
+    lon: 6.227234
+    lat: 49.105715
+    note: >-
+      L'ancien Cora, passe sous l'enseigne Carrefour ; galerie, cafe et
+      toilettes. Le seul ravitaillement a mi-parcours des deux boucles de l'est.
   esplanade:
     nom: Jardin de l'Esplanade
     lon: 6.170519
@@ -370,6 +385,29 @@ parcours:
 
   # Les cinq boucles ci-dessous sont calees sur des mesures, pas sur des
   # estimations : distance reelle, denivele, part de chemin. Voir le README.
+
+  - id: seille-borny
+    nom: La Seille et les commerces de Borny
+    acces: a pied
+    themes: [eau, ville]
+    couleur: 4A6B8C
+    resume: >-
+      Une course a pied plutot qu'une escapade : on descend la Seille et son
+      parc, on traverse le Technopole jusqu'au centre commercial de Borny, et
+      on rentre par le plus court. La seule boucle qui ne se referme pas sur
+      la campagne.
+    etapes: [parmentiers, parc-seille, borny-commerces, parmentiers]
+
+  - id: borny-direct
+    nom: Borny par le plus court
+    acces: a pied
+    themes: [ville]
+    couleur: A0455B
+    resume: >-
+      Le meme but en trois quarts d'heure de moins : l'aller et le retour par
+      le meme trace, celui que le routeur juge le plus court. Assume comme un
+      aller-retour, pas comme une boucle.
+    etapes: [parmentiers, borny-commerces, parmentiers]
 
   - id: seille-queuleu
     nom: La Seille et le fort de Queuleu
