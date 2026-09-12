@@ -213,6 +213,36 @@
     background:none;color:var(--eau);min-height:var(--pouce);padding:0 8px;
     display:inline-flex;align-items:center;gap:6px}
 
+  /* --- le mode marche ---------------------------------------------------- */
+  /* Sur le sentier, la carte est tout ce qui compte : elle prend l'ecran, et
+     les chiffres du suivi passent en surimpression au-dessus d'elle. Le mode
+     n'existe que sur telephone -- c'est l'appareil qu'on a dans la main en
+     marchant, et lui seul manque de place. */
+  #marche{display:none;position:fixed;left:0;right:0;bottom:0;z-index:850;
+    flex-direction:column;gap:8px;background:var(--papier);
+    border-top:1px solid var(--trait-fort);max-height:46dvh;overflow:auto;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+  /* Le bloc de suivi est deja mis en forme pour le volet : dans le bandeau il
+     n'a plus besoin de sa marge ni de son filet, la bordure du bandeau joue
+     ce role. */
+  #marche .position{margin:0;padding:0;border-left:none;background:none}
+  /* Escamote, il ne reste que la poignee : la carte est alors entiere, et un
+     appui n'importe ou la fait revenir. C'est ce qu'on veut quand on cherche
+     un embranchement plutot que son kilometrage. */
+  #marche.replie{max-height:none;padding-bottom:env(safe-area-inset-bottom)}
+  #marche.replie #position-marche,#marche.replie .quitter{display:none}
+  #marche .poignee{font:inherit;font-size:12.5px;color:var(--doux);
+    font-family:var(--serif);cursor:pointer;border:none;background:none;
+    min-height:34px;padding:0;display:flex;align-items:center;
+    justify-content:center;gap:7px}
+  #marche .poignee::before{content:"";width:34px;height:3px;border-radius:2px;
+    background:var(--trait-fort)}
+  #marche .quitter{font:inherit;font-size:15px;font-family:var(--serif);
+    cursor:pointer;min-height:var(--pouce);border:1px solid var(--trait-fort);
+    border-radius:2px;background:none;color:var(--doux)}
+  /* Marcher est un geste de telephone : le bouton n'apparait pas ailleurs. */
+  .seul-telephone{display:none}
+
   dialog{border:1px solid var(--trait-fort);border-radius:3px;background:var(--papier);
     color:var(--encre);padding:0;width:min(460px,94vw)}
   dialog::backdrop{background:rgba(10,16,14,.6)}
@@ -267,6 +297,24 @@
 
     /* vue carte : la carte seule, plein ecran */
     body[data-vue="carte"] .volet{display:none}
+
+    /* vue marche : comme la vue carte, mais cadree sur la boucle qu'on suit
+       et coiffee du bandeau de suivi. La barre du bas disparait : on ne
+       change pas de vue par megarde quand on marche avec le pouce sur
+       l'ecran. */
+    body[data-vue="marche"] .volet{display:none}
+    body[data-vue="marche"] .barre-bas{display:none}
+    body[data-vue="marche"] #marche{display:flex}
+    /* Leaflet loge la mention des contributeurs dans le coin bas de la carte,
+       qu'il monte a z-index 1000 : elle se pose donc sur le bandeau quoi
+       qu'on empile. Plutot que de l'enterrer -- la licence veut qu'elle reste
+       lisible -- on la remonte juste au-dessus. */
+    body[data-vue="marche"] .leaflet-bottom{margin-bottom:var(--bandeau,0px)}
+    .seul-telephone{display:inline-flex}
+    /* « Marcher » devient le geste principal, « Me situer » passe au second
+       plan : il rend le meme service sans prendre l'ecran. */
+    .liens .bouton[data-suivre]{background:none;color:var(--doux);
+      border-color:var(--trait-fort)}
 
     /* vue fiche : la carte en bandeau, le parcours choisi dessous */
     body[data-vue="fiche"] .cadre{grid-template-rows:40dvh 1fr}
@@ -350,6 +398,13 @@
   <div id="carte"></div>
 </div>
 
+<div id="marche">
+  <button type="button" class="poignee" id="btn-plier-marche"
+          aria-expanded="true" aria-controls="position-marche">Masquer</button>
+  <div id="position-marche" aria-live="polite"></div>
+  <button type="button" class="quitter" id="btn-quitter-marche">Quitter la marche</button>
+</div>
+
 <nav class="barre-bas" aria-label="Vue">
   <div>
     <button type="button" data-vue="liste" aria-pressed="true">Les boucles</button>
@@ -407,6 +462,7 @@ let catalogue = null, traces = null, choisi = null;
 let etapeChoisie = null;          // etape depliee dans la fiche
 let veille = null;                // identifiant du suivi de position
 let verrouEcran = null;           // pour que l'ecran ne s'eteigne pas en marchant
+let dernierSuivi = "";            // ce que le suivi a affiche en dernier
 let capBoussole = null;           // le nord magnetique, quand l'appareil le donne
 let ecouteLaBoussole = null;      // de quoi arreter d'ecouter
 let sortiesConnues = [];          // les fois ou on a marche la boucle choisie
@@ -544,6 +600,72 @@ document.querySelectorAll(".barre-bas button").forEach(b =>
 
 document.getElementById("btn-retour").addEventListener("click", () => retourListe());
 
+/* ------------------------------------------------------------- mode marche */
+/* Entrer en marche, c'est trois choses d'un coup : la carte prend l'ecran,
+   elle se cadre sur la boucle qu'on suit -- et non sur les treize, comme le
+   fait le bouton « La carte » --, et le suivi demarre s'il ne tournait pas.
+   Le clic est un geste de l'utilisateur, seule occasion ou iOS accepte de
+   donner la boussole : le demarrage doit donc partir d'ici. */
+async function entreEnMarche(){
+  if (!choisi) return;
+  // Cadrer apres avoir change de vue, jamais avant : la carte passe de 40 %
+  // de la hauteur a l'ecran entier, et un cadrage pose sur l'ancienne taille
+  // s'elargit d'autant quand elle grandit -- on se retrouvait a voir Marly.
+  montre("marche");
+  const bandeau = document.getElementById("marche");
+  if (bandeau.classList.contains("replie")) plieLeBandeau();
+  if (couches[choisi]) cadre(couches[choisi].getBounds());
+  if (dernierSuivi) ecritLeSuivi(dernierSuivi);
+  if (veille === null) await basculeLeSuivi();
+}
+
+/* En sortir ne l'arrete pas : on regarde le detail d'une etape, puis on
+   repart. Seuls le retour a la liste et le changement de boucle arretent le
+   suivi, parce que la position n'y veut plus rien dire. */
+function quitteLaMarche(){
+  montre("fiche");
+  if (dernierSuivi) ecritLeSuivi(dernierSuivi);
+}
+
+document.getElementById("btn-quitter-marche")
+  .addEventListener("click", quitteLaMarche);
+
+/* Le bandeau s'escamote d'un appui -- sur sa poignee, ou n'importe ou sur la
+   carte. En marchant on alterne entre deux besoins : savoir ou l'on en est,
+   et voir le chemin ; le second veut tout l'ecran. */
+function plieLeBandeau(){
+  const bandeau = document.getElementById("marche");
+  const replie = bandeau.classList.toggle("replie");
+  const poignee = document.getElementById("btn-plier-marche");
+  poignee.setAttribute("aria-expanded", String(!replie));
+  poignee.textContent = replie ? "Le suivi" : "Masquer";
+}
+
+document.getElementById("btn-plier-marche")
+  .addEventListener("click", plieLeBandeau);
+
+/* La hauteur du bandeau sert au CSS, qui remonte d'autant la mention des
+   contributeurs. Elle change a chaque battement du GPS -- le texte n'a pas
+   toujours le meme nombre de lignes -- donc on la mesure plutot que de la
+   calculer. Nulle hors du mode marche, ou le bandeau n'est pas affiche. */
+new ResizeObserver(() => {
+  document.body.style.setProperty("--bandeau",
+    document.getElementById("marche").offsetHeight + "px");
+}).observe(document.getElementById("marche"));
+carte.on("click", () => {
+  if (document.body.dataset.vue === "marche") plieLeBandeau();
+});
+
+/* Le verrou d'ecran lache des que la page passe en arriere-plan -- une
+   notification, l'ecran qu'on eteint a la main en marchant -- et le
+   navigateur ne le rend pas de lui-meme. Sans ce rappel, l'ecran se rendort
+   definitivement au premier detour, et le suivi avec lui. */
+addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && veille !== null && !verrouEcran){
+    gardeLEcranAllume();
+  }
+});
+
 function retourListe(){
   choisi = null;
   etapeChoisie = null;
@@ -585,7 +707,13 @@ function appliqueLeCadrage(){
   // Sans animation : un recadrage anime que l'utilisateur interrompt (il
   // change d'onglet, le telephone rame) laisse la carte a mi-chemin, sur un
   // cadre qui n'est ni l'ancien ni le nouveau.
-  carte.fitBounds(aCadrer, {padding: [25, 25], animate: false});
+  // Le bandeau du mode marche couvre le bas de la carte. Cadrer sans le
+  // savoir cacherait derriere lui le tiers de la trace.
+  const bandeau = document.body.dataset.vue === "marche"
+    ? document.getElementById("marche").offsetHeight : 0;
+  carte.fitBounds(aCadrer, {paddingTopLeft: [25, 25],
+                            paddingBottomRight: [25, 25 + bandeau],
+                            animate: false});
   aCadrer = null;
 }
 
@@ -660,6 +788,8 @@ function detailDuParcours(p){
     ${listeDesSorties()}
     <p class="legende" id="emportage"></p>
     <div class="liens">
+      <button class="bouton marche seul-telephone" data-marche="${p.id}">${
+        veille === null ? "Marcher" : "Reprendre la marche"}</button>
       <button class="bouton marche" data-suivre="${p.id}">${
         veille === null ? "Me situer" : "Arrêter"}</button>
       ${ouvrier ? `<button class="bouton ${emportees.has(p.id) ? "" : "eteint"}"
@@ -733,12 +863,17 @@ function rendre(){
     b.addEventListener("click", () => ouvreLEtape(b.dataset.etape)));
   document.querySelectorAll("[data-suivre]").forEach(b =>
     b.addEventListener("click", basculeLeSuivi));
+  document.querySelectorAll("[data-marche]").forEach(b =>
+    b.addEventListener("click", entreEnMarche));
   document.querySelectorAll("[data-trace]").forEach(b =>
     b.addEventListener("click", () => basculeLaTraceSuivie(Number(b.dataset.trace))));
   document.querySelectorAll("[data-emporte]").forEach(b =>
     b.addEventListener("click", () => emporteLaBoucle(b.dataset.emporte)));
   const bascule = document.getElementById("btn-reperes");
   if (bascule) bascule.addEventListener("click", basculeLesReperes);
+  // La liste vient d'etre refaite, donc la zone de suivi de la fiche est
+  // vide : sans cela, elle reste blanche jusqu'au prochain battement du GPS.
+  if (dernierSuivi && veille !== null) ecritLeSuivi(dernierSuivi);
 }
 
 function selectionne(id){
@@ -931,6 +1066,12 @@ async function basculeLeSuivi(){
 function arreteLeSuivi(){
   if (veille !== null) navigator.geolocation.clearWatch(veille);
   veille = null;
+  dernierSuivi = "";
+  // Le bandeau n'a plus rien a dire, et le mode marche non plus : sans
+  // position, la carte plein ecran n'est qu'une carte.
+  if (document.body.dataset.vue === "marche") montre("fiche");
+  const bandeau = document.getElementById("position-marche");
+  if (bandeau) bandeau.innerHTML = "";
   maPosition.clearLayers();
   endortLaBoussole();
   if (verrouEcran){ verrouEcran.release().catch(() => {}); verrouEcran = null; }
@@ -1056,9 +1197,16 @@ function pionDePosition(capCible){
   });
 }
 
+/* Le meme suivi s'affiche a deux endroits : dans la fiche, et dans le bandeau
+   du mode marche. On garde le dernier etat sous le coude, parce que `rendre()`
+   reconstruit la liste -- donc la zone de la fiche -- et parce qu'en entrant
+   en marche on ne veut pas d'un bandeau vide le temps que le GPS batte. */
 function ecritLeSuivi(html){
-  const zone = document.getElementById("position");
-  if (zone) zone.innerHTML = `<div class="position">${html}</div>`;
+  dernierSuivi = html;
+  for (const id of ["position", "position-marche"]){
+    const zone = document.getElementById(id);
+    if (zone) zone.innerHTML = `<div class="position">${html}</div>`;
+  }
 }
 
 /* Ou suis-je le long de la trace : on cherche le point de la trace le plus
@@ -1430,7 +1578,12 @@ async function charge(){
     traces.features.forEach(f => {
       couches[f.properties.id] = L.geoJSON(f, {
         style: {color: f.properties.couleur, weight: 4, opacity: .95},
-      }).addTo(carte).on("click", () => selectionne(f.properties.id));
+      }).addTo(carte).on("click", () => {
+        // En marchant, un appui sert a escamoter le bandeau, jamais a changer
+        // de boucle : on a le pouce sur l'ecran et la trace passe dessous.
+        if (document.body.dataset.vue === "marche"){ plieLeBandeau(); return; }
+        selectionne(f.properties.id);
+      });
     });
     // Le conteneur n'a pas encore de hauteur au premier tour, et sa taille
     // changera ensuite (bascule de vue, rotation du telephone, barre
