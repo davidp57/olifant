@@ -143,7 +143,9 @@ Le bouton **Me situer** affiche la position sur la trace et répond aux trois
 questions qu'on se pose à un embranchement sans panneau : à quel kilomètre on
 en est, ce qu'il reste, et quelle est la prochaine étape. Il prévient aussi
 quand on s'est écarté de plus de soixante mètres. L'écran est maintenu allumé
-pendant le suivi.
+pendant le suivi, et le verrou est repris à chaque retour au premier plan —
+le navigateur le relâche dès que la page passe derrière, et ne le rend jamais
+de lui-même.
 
 Il donne surtout **la direction à suivre**, sur la carte comme en toutes
 lettres : une flèche tourne autour du point de position vers l'étape à
@@ -164,6 +166,23 @@ suit pas la position en arrière-plan : téléphone rangé ou verrouillé, le su
 s'interrompt. Se situer quand on sort le téléphone marche très bien ;
 enregistrer une trace de quatre heures, non — c'est le travail d'une
 application installée comme Iphigénie.
+
+#### Le mode marche
+
+Sur téléphone, le bouton **Marcher** d'une boucle donne l'écran entier à la
+carte, cadrée sur cette boucle — et non sur les treize, comme le fait l'onglet
+« La carte ». Les chiffres du suivi passent dans un bandeau en surimpression,
+que l'on **escamote d'un appui n'importe où sur la carte** : on alterne entre
+savoir où l'on en est et voir le chemin, et le second veut toute la place. Le
+suivi démarre en même temps s'il ne tournait pas.
+
+En marchant, un appui sur une trace n'ouvre plus la boucle correspondante : on
+a le pouce sur l'écran et les traces passent dessous. **Quitter la marche**
+rend la fiche sans arrêter le suivi ; seuls le retour à la liste et le
+changement de boucle l'arrêtent, puisque la position n'y veut plus rien dire.
+
+Le mode n'existe pas sur grand écran : c'est le téléphone qu'on a dans la main
+sur le sentier, et lui seul manque de place.
 
 ### Revoir une sortie
 
