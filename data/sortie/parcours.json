@@ -1,7 +1,352 @@
 {
  "titre": "Olifant",
- "accroche": "Boucles de 10 a 15 km autour de Metz. Celles qui partent a pied se retrouvent sur le parvis de la gare. Les autres demandent une demi-heure de voiture.",
+ "accroche": "Boucles de 10 a 15 km autour de Metz. Celles qui partent a pied se retrouvent sur le parvis de la gare ; les autres demandent une demi-heure de voiture. Deux trajets en plus, qui vont aux commerces de Borny a pied.",
  "parcours": [
+  {
+   "id": "seille-borny",
+   "nom": "La Seille et les commerces de Borny",
+   "resume": "Une course a pied plutot qu'une escapade : on descend la Seille et son parc, on traverse le Technopole jusqu'au centre commercial de Borny, et on rentre par le plus court. La seule boucle qui ne se referme pas sur la campagne.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "eau",
+    "ville"
+   ],
+   "couleur": "#4A6B8C",
+   "km": 10.3,
+   "montee": 55,
+   "chemin": 36,
+   "bitume": 34,
+   "route": 30,
+   "balise": 20,
+   "depart": "Rue des Parmentiers, Metz",
+   "etapes": [
+    {
+     "cle": "parmentiers",
+     "nom": "Rue des Parmentiers, Metz",
+     "note": "Depart des deux boucles vers Borny, dans la Nouvelle Ville. A dix minutes a pied de la gare, dont il partage les commodites.",
+     "lon": 6.17687,
+     "lat": 49.115387,
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.174459,
+       "lat": 49.116194,
+       "distance_m": 197,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Baratin",
+       "lon": 6.176598,
+       "lat": 49.115105,
+       "distance_m": 37
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le P'tit Frontalier",
+       "lon": 6.177244,
+       "lat": 49.115861,
+       "distance_m": 59
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Piaf",
+       "lon": 6.177539,
+       "lat": 49.115883,
+       "distance_m": 74
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie Mougel",
+       "lon": 6.177615,
+       "lat": 49.115852,
+       "distance_m": 75
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "verdura",
+       "lon": 6.177312,
+       "lat": 49.116004,
+       "distance_m": 76
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Megama",
+       "lon": 6.17618,
+       "lat": 49.11483,
+       "distance_m": 80
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.179258,
+       "lat": 49.114953,
+       "distance_m": 180,
+       "combien": 4
+      }
+     ]
+    },
+    {
+     "cle": "parc-seille",
+     "nom": "Parc de la Seille",
+     "note": "Prairies humides et roselieres au bord de la Seille. Herons.",
+     "lon": 6.184968,
+     "lat": 49.10661,
+     "depart": false,
+     "km": 1.4,
+     "part": 14,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.184908,
+       "lat": 49.106644,
+       "distance_m": 6,
+       "combien": 3
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Poulaillon",
+       "lon": 6.182347,
+       "lat": 49.106648,
+       "distance_m": 191
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Starbucks",
+       "lon": 6.182102,
+       "lat": 49.106637,
+       "distance_m": 209
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Columbus Café & Co",
+       "lon": 6.182066,
+       "lat": 49.106636,
+       "distance_m": 211
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Paul",
+       "lon": 6.182267,
+       "lat": 49.10573,
+       "distance_m": 220,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Kefan Traiteur",
+       "lon": 6.182108,
+       "lat": 49.105725,
+       "distance_m": 230
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Liberazione",
+       "lon": 6.18464,
+       "lat": 49.107907,
+       "distance_m": 146
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.181425,
+       "lat": 49.108319,
+       "distance_m": 320
+      }
+     ]
+    },
+    {
+     "cle": "borny-commerces",
+     "nom": "Centre commercial de Borny",
+     "note": "L'ancien Cora, passe sous l'enseigne Carrefour ; galerie, cafe et toilettes. Le seul ravitaillement a mi-parcours des deux boucles de l'est.",
+     "lon": 6.227234,
+     "lat": 49.105715,
+     "depart": false,
+     "km": 5.5,
+     "part": 53,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.231387,
+       "lat": 49.107554,
+       "distance_m": 365
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Ti Bistrot",
+       "lon": 6.228488,
+       "lat": 49.106,
+       "distance_m": 97
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Buffalo Grill",
+       "lon": 6.225707,
+       "lat": 49.108197,
+       "distance_m": 298
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Spok",
+       "lon": 6.222638,
+       "lat": 49.104173,
+       "distance_m": 376
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.226658,
+       "lat": 49.105954,
+       "distance_m": 50
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "borny-direct",
+   "nom": "Borny par le plus court",
+   "resume": "Le meme but en trois quarts d'heure de moins : l'aller et le retour par le meme trace, celui que le routeur juge le plus court. Assume comme un aller-retour, pas comme une boucle.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "ville"
+   ],
+   "couleur": "#A0455B",
+   "km": 9.6,
+   "montee": 38,
+   "chemin": 39,
+   "bitume": 33,
+   "route": 29,
+   "balise": 40,
+   "depart": "Rue des Parmentiers, Metz",
+   "etapes": [
+    {
+     "cle": "parmentiers",
+     "nom": "Rue des Parmentiers, Metz",
+     "note": "Depart des deux boucles vers Borny, dans la Nouvelle Ville. A dix minutes a pied de la gare, dont il partage les commodites.",
+     "lon": 6.17687,
+     "lat": 49.115387,
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.174459,
+       "lat": 49.116194,
+       "distance_m": 197,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Baratin",
+       "lon": 6.176598,
+       "lat": 49.115105,
+       "distance_m": 37
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Piaf",
+       "lon": 6.177539,
+       "lat": 49.115883,
+       "distance_m": 74
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie Mougel",
+       "lon": 6.177615,
+       "lat": 49.115852,
+       "distance_m": 75
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "verdura",
+       "lon": 6.177312,
+       "lat": 49.116004,
+       "distance_m": 76
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Les Copains d'Abord",
+       "lon": 6.175917,
+       "lat": 49.114896,
+       "distance_m": 88
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Megama",
+       "lon": 6.17618,
+       "lat": 49.11483,
+       "distance_m": 80
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.179258,
+       "lat": 49.114953,
+       "distance_m": 180,
+       "combien": 4
+      }
+     ]
+    },
+    {
+     "cle": "borny-commerces",
+     "nom": "Centre commercial de Borny",
+     "note": "L'ancien Cora, passe sous l'enseigne Carrefour ; galerie, cafe et toilettes. Le seul ravitaillement a mi-parcours des deux boucles de l'est.",
+     "lon": 6.227234,
+     "lat": 49.105715,
+     "depart": false,
+     "km": 4.8,
+     "part": 50,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.231387,
+       "lat": 49.107554,
+       "distance_m": 365
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Ti Bistrot",
+       "lon": 6.228488,
+       "lat": 49.106,
+       "distance_m": 97
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Buffalo Grill",
+       "lon": 6.225707,
+       "lat": 49.108197,
+       "distance_m": 298
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Spok",
+       "lon": 6.222638,
+       "lat": 49.104173,
+       "distance_m": 376
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.226658,
+       "lat": 49.105954,
+       "distance_m": 50
+      }
+     ]
+    }
+   ]
+  },
   {
    "id": "seille-queuleu",
    "nom": "La Seille et le fort de Queuleu",
