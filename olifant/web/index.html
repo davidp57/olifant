@@ -464,7 +464,11 @@ let veille = null;                // identifiant du suivi de position
 let verrouEcran = null;           // pour que l'ecran ne s'eteigne pas en marchant
 let dernierSuivi = "";            // ce que le suivi a affiche en dernier
 let capBoussole = null;           // le nord magnetique, quand l'appareil le donne
+let capBoussoleVuA = 0;           // quand, pour ne pas croire une boussole muette
 let ecouteLaBoussole = null;      // de quoi arreter d'ecouter
+let pionPosition = null;          // le marqueur du point ou je suis
+let capAffiche = null;            // le cap que la fleche montre en ce moment
+let sourceAffichee = null;        // « boussole » ou « marche » : le dessin en depend
 let sortiesConnues = [];          // les fois ou on a marche la boucle choisie
 let fondEmporteConnu = null;      // ce que le serveur a sous la main
 let versionServie = null;         // ce que le serveur dit faire tourner
@@ -1073,6 +1077,7 @@ function arreteLeSuivi(){
   const bandeau = document.getElementById("position-marche");
   if (bandeau) bandeau.innerHTML = "";
   maPosition.clearLayers();
+  pionPosition = null; capAffiche = null; sourceAffichee = null;
   endortLaBoussole();
   if (verrouEcran){ verrouEcran.release().catch(() => {}); verrouEcran = null; }
   rendre();
@@ -1101,11 +1106,16 @@ async function reveilleLaBoussole(){
   }catch(e){ return; }          // refus, ou appel hors d'un geste : tant pis
 
   ecouteLaBoussole = e => {
-    if (typeof e.webkitCompassHeading === "number" && !isNaN(e.webkitCompassHeading)){
-      capBoussole = e.webkitCompassHeading;      // deja un cap, sens horaire
-    }else if (e.absolute && typeof e.alpha === "number" && !isNaN(e.alpha)){
-      capBoussole = (360 - e.alpha) % 360;       // angle antihoraire depuis le nord
-    }
+    const cap =
+      typeof e.webkitCompassHeading === "number" && !isNaN(e.webkitCompassHeading)
+        ? e.webkitCompassHeading                   // deja un cap, sens horaire
+      : e.absolute && typeof e.alpha === "number" && !isNaN(e.alpha)
+        ? (360 - e.alpha) % 360                    // angle antihoraire depuis le nord
+        : null;
+    if (cap === null) return;                      // evenement sans cap utilisable
+    capBoussole = cap;
+    capBoussoleVuA = Date.now();
+    tourneLaFleche();
   };
   const nom = "ondeviceorientationabsolute" in window
     ? "deviceorientationabsolute" : "deviceorientation";
@@ -1117,6 +1127,41 @@ function endortLaBoussole(){
   if (ecouteLaBoussole) removeEventListener(ecouteLaBoussole.nom, ecouteLaBoussole);
   ecouteLaBoussole = null;
   capBoussole = null;
+  capBoussoleVuA = 0;
+}
+
+/* Le cap magnetique, s'il est encore frais. Une boussole peut se taire sans
+   prevenir -- capteur mal calibre, page revenue de l'arriere-plan, masse
+   metallique -- et sa derniere valeur prendrait alors le pas sur le GPS, qui
+   lui continue de parler. Au-dela de trois secondes sans nouvelle, on ne la
+   croit plus. */
+function capDeLaBoussole(){
+  if (capBoussole === null || Date.now() - capBoussoleVuA > 3000) return null;
+  return capBoussole;
+}
+
+/* La fleche montre vers ou je regarde : elle doit donc tourner quand je pivote
+   sur place, sans attendre le point GPS suivant. On ne reconstruit pas le
+   marqueur a chaque degre -- le magnetometre parle des dizaines de fois par
+   seconde -- on ne touche qu'a la rotation du dessin deja pose. Le marqueur
+   n'est refait que si la source change, parce que le dessin change avec elle. */
+function tourneLaFleche(){
+  const cap = capDeLaBoussole();
+  if (!pionPosition || cap === null) return;
+  if (sourceAffichee !== "boussole"){
+    pionPosition.setIcon(pionDePosition(cap, "boussole"));
+    sourceAffichee = "boussole";
+    capAffiche = cap;
+    return;
+  }
+  const bouge = capAffiche === null
+    || Math.abs(((cap - capAffiche + 540) % 360) - 180) >= 2;
+  if (!bouge) return;                     // sous 2°, c'est du tremblement
+  const pion = pionPosition.getElement();
+  const vise = pion && pion.querySelector(".vise");
+  if (!vise) return;
+  vise.style.transform = `rotate(${cap.toFixed(1)}deg)`;
+  capAffiche = cap;
 }
 
 async function gardeLEcranAllume(){
@@ -1148,11 +1193,22 @@ function situe(position){
   const suivante = etapeApres(p, ou.km);
   const reste = Math.max(0, p.km - ou.km);
   const loin = ou.ecart_m > 60;
-  // `heading` est la direction du deplacement, que le GPS ne connait qu'en
-  // mouvement : nulle a l'arret, et absente sur bien des ordinateurs. La
-  // boussole prend alors le relais, quand l'appareil en a une.
+  // Vers ou je regarde. La boussole repond a la question directement, et meme
+  // a l'arret : c'est elle qu'on prend d'abord. Faute de magnetometre, le GPS
+  // donne `heading`, la direction du deplacement -- en marchant on regarde ou
+  // l'on va, l'approximation tient. Mais ce cap-la n'a de sens qu'en mouvement,
+  // et a l'arret certains appareils renvoient 0 plutot que rien : on l'ecarte
+  // des que la vitesse dit qu'on ne bouge pas, sinon la carte affirmerait qu'on
+  // regarde le nord.
   const duGps = position.coords.heading;
-  const capActuel = (typeof duGps === "number" && !isNaN(duGps)) ? duGps : capBoussole;
+  const vitesse = position.coords.speed;
+  const arrete = typeof vitesse === "number" && !isNaN(vitesse) && vitesse < .5;
+  const marche = (!arrete && typeof duGps === "number" && !isNaN(duGps))
+    ? duGps : null;
+  const deLaBoussole = capDeLaBoussole();
+  const capActuel = deLaBoussole !== null ? deLaBoussole : marche;
+  const sourceDuCap = deLaBoussole !== null ? "boussole"
+                    : (marche !== null ? "marche" : null);
   const capCible = suivante
     ? capVers([lon, lat], [suivante.lon, suivante.lat]) : null;
   const versEtape = suivante
@@ -1161,15 +1217,18 @@ function situe(position){
        ${orientation(capCible, capActuel)}</p>`
     : "";
 
-  // La direction se lit sur la carte, la ou on regarde deja : une fleche
-  // autour du point de position, tournee vers l'etape a rejoindre. Elle vaut
-  // surtout quand cette etape est hors de l'ecran, ce qui est le cas le plus
-  // frequent -- un cap en degres, lui, demande de savoir ou est le nord.
+  // Sur la carte, la fleche dit vers ou je fais face -- comme le curseur d'un
+  // GPS. C'est ce qui manque pour lire le reste : le texte annonce « 30° a
+  // droite », encore faut-il savoir ou est la droite. La direction de l'etape,
+  // elle, reste dans le texte.
   maPosition.clearLayers();
   L.circle([lat, lon], {radius: Math.max(precision, 8), weight: 1,
     color: "#316E7C", fillColor: "#316E7C", fillOpacity: .12}).addTo(maPosition);
-  L.marker([lat, lon], {icon: pionDePosition(capCible), interactive: false,
-                        zIndexOffset: 1000}).addTo(maPosition);
+  pionPosition = L.marker([lat, lon], {
+    icon: pionDePosition(capActuel, sourceDuCap),
+    interactive: false, zIndexOffset: 1000}).addTo(maPosition);
+  capAffiche = capActuel;
+  sourceAffichee = sourceDuCap;
   ecritLeSuivi(`
     <b>km ${nb(ou.km)} sur ${nb(p.km)}</b>
     <p>${nb(reste)} km restants</p>
@@ -1180,16 +1239,32 @@ function situe(position){
       Position connue au ${Math.round(precision)} m.</p>`);
 }
 
-/* Le point de position, et la fleche s'il y a quelque chose a viser. La
-   carte de Leaflet ne pivote pas : le haut est toujours le nord, donc une
-   rotation de la valeur du cap suffit a pointer au bon endroit. */
-function pionDePosition(capCible){
-  const fleche = capCible === null || capCible === undefined ? "" :
-    `<span class="vise" style="transform:rotate(${capCible.toFixed(1)}deg)">
-       <svg viewBox="0 0 52 52" aria-hidden="true">
-         <path d="M26 1l8.5 13h-5.5v8h-6v-8h-5.5z" fill="#316E7C"
-               stroke="#fdfdfb" stroke-width="1.6" stroke-linejoin="round"/>
-       </svg></span>`;
+/* Le point de position, et la fleche du cap quand on sait vers ou je regarde.
+   La carte de Leaflet ne pivote pas : le haut est toujours le nord, donc une
+   rotation de la valeur du cap suffit a pointer au bon endroit.
+
+   Les deux sources ne se valent pas, et le dessin le dit. La boussole donne
+   une aiguille dans un cercle, parce que c'est une boussole : elle repond a
+   l'arret et vise ou l'appareil est tourne. La marche donne la fleche seule :
+   c'est la direction du deplacement, deduite par le GPS de deux positions
+   successives -- juste tant qu'on avance, et perdue des qu'on s'arrete. */
+const DESSINS_DE_CAP = {
+  boussole: `<circle cx="26" cy="26" r="22" fill="none"
+                     stroke="#fdfdfb" stroke-width="3.5"/>
+             <circle cx="26" cy="26" r="22" fill="none"
+                     stroke="#316E7C" stroke-width="1.8"/>
+             <path d="M26 2l8.5 13h-5.5v6h-6v-6h-5.5z" fill="#316E7C"
+                   stroke="#fdfdfb" stroke-width="1.6" stroke-linejoin="round"/>`,
+  marche: `<path d="M26 1l8.5 13h-5.5v8h-6v-8h-5.5z" fill="#316E7C"
+                 stroke="#fdfdfb" stroke-width="1.6" stroke-linejoin="round"/>`,
+};
+
+function pionDePosition(cap, source){
+  const dessin = DESSINS_DE_CAP[source];
+  // Sans cap connu, le point seul : une fleche immobile mentirait.
+  const fleche = (cap === null || cap === undefined || !dessin) ? "" :
+    `<span class="vise" style="transform:rotate(${cap.toFixed(1)}deg)">
+       <svg viewBox="0 0 52 52" aria-hidden="true">${dessin}</svg></span>`;
   return L.divIcon({
     className: "ma-position",
     html: `${fleche}<span class="point"></span>`,

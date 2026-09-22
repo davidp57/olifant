@@ -147,18 +147,22 @@ pendant le suivi, et le verrou est repris à chaque retour au premier plan —
 le navigateur le relâche dès que la page passe derrière, et ne le rend jamais
 de lui-même.
 
-Il donne surtout **la direction à suivre**, sur la carte comme en toutes
-lettres : une flèche tourne autour du point de position vers l'étape à
-rejoindre — utile surtout quand cette étape est hors de l'écran, ce qui est le
-cas le plus fréquent — et la ligne de texte donne la distance.
+Il donne surtout **la direction à suivre**, en toutes lettres : « Parc de la
+Seille : 1,0 km, 27° à droite », ou « tout droit ».
 
-Reste à savoir de quel côté tourner. Le GPS ne connaît la direction que par
-le déplacement, donc en mouvement : « 27° à droite », ou « tout droit ».
-Immobile à un carrefour — exactement là où l'on hésite — il n'a rien à en
-dire, et c'est **la boussole** qui prend le relais quand l'appareil en a une.
-Sur iPhone elle demande une autorisation, réclamée au moment où l'on touche
-« Me situer ». Faute des deux, le cap absolu et son aire restent affichés :
-« cap 117° (sud-est) ».
+Encore faut-il savoir où est la droite, et c'est ce que dit la carte : une
+flèche autour du point de position montre **vers où l'on fait face**. Les deux
+sources ne se valent pas, et le dessin le dit. La **boussole** répond même à
+l'arrêt, et vise là où l'appareil est tourné : son cap s'affiche en aiguille
+dans un cercle, comme une boussole, et l'aiguille suit le mouvement dès qu'on
+pivote. Faute de magnétomètre, le GPS déduit la direction du **déplacement**
+de deux positions successives — juste tant qu'on avance, perdue dès qu'on
+s'arrête : ce cap-là s'affiche en flèche seule, sans cercle. Quand aucun des
+deux ne répond, il n'y a pas de flèche : le cap absolu de l'étape et son aire
+restent affichés en texte, « cap 117° (sud-est) ».
+
+Sur iPhone, la boussole demande une autorisation, réclamée au moment où l'on
+touche « Me situer ».
 
 Deux limites à connaître. La position exige **HTTPS** : en HTTP, même sur le
 réseau local, le navigateur la refuse sans rien demander. Et un navigateur ne
