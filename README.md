@@ -1,6 +1,7 @@
 # Olifant
 
-Préparer, consulter et emporter des randonnées à pied autour de Metz.
+Préparer, consulter et emporter des randonnées à pied autour de Metz — et
+les balades d'une heure qu'on fait au départ de chez soi.
 
 On décrit des lieux et l'ordre dans lequel on les enchaîne ; une commande
 calcule le tracé réel sur les chemins, **mesure ce qu'il vaut** et fabrique les
@@ -36,11 +37,21 @@ calcul et signalent, avant qu'on parte marcher :
 - **la boucle qui ne boucle pas** — départ et arrivée ne coïncident pas ;
 - **l'aller-retour déguisé** — la moitié du parcours refait le même chemin, ce
   qui se voit mal sur une carte et très bien en marchant ;
-- **le bitume** — au-delà de 45 %, le parcours est signalé.
+- **le bitume** — au-delà de 45 %, le parcours est signalé. Une boucle
+  marquée `ville` s'autorise 65 % : il n'existe pas de 5 km sans trottoir au
+  départ du centre de Metz, et juger ces boucles-là au seuil de la campagne
+  reviendrait à signaler tout le lot, donc à ne plus rien signaler.
+
+Un cinquième défaut ne se mesure pas au calcul mais se refuse à la
+composition : **la branche**, ce bout de tracé qu'on parcourt à l'aller et au
+retour pour aller toucher un lieu planté à l'écart. Le contrôle du
+recouvrement ne l'attrape pas — 300 m aller-retour sur 13 km font 5 % — et ça
+se voit très bien sur la carte, en deux traits superposés. Les dix balades
+courtes ont été composées en refusant toute branche de plus de 250 m.
 
 ## Les parcours
 
-Treize parcours. Les cinq premiers partent du parvis de la gare de Metz :
+Vingt-trois parcours. Les cinq premiers partent du parvis de la gare de Metz :
 abrité, un café ouvert tôt, et tout le monde sait où c'est.
 
 | parcours | distance | D+ | chemins | balisé |
@@ -63,6 +74,37 @@ de bitume, beaucoup plus de dénivelé, et des tronçons déjà balisés.
 | Les pelouses de Montenach | Sierck-les-Bains | 15,5 km | 330 m | 54 % | 57 % |
 | L'aqueduc et la corniche de la Fraze | Ars-sur-Moselle | 15,7 km | 208 m | 68 % | 51 % |
 | Le tour du vallon de Gorze | Gorze | 14,8 km | 222 m | 68 % | — |
+
+### Dix balades d'une heure, au départ de la rue des Parmentiers
+
+Celles-là ne sont pas des randonnées : ce sont les sorties de fin de journée,
+quatre à six kilomètres, sans voiture ni préparation. Elles partent toutes du
+même endroit et vont chacune dans une direction différente — l'eau à l'ouest,
+les remparts au nord-est, le Sablon et la Seille au sud, le Technopôle à
+l'est.
+
+| parcours | distance | D+ | chemins | bitume | balisé |
+|---|---|---|---|---|---|
+| La boucle de la Seille | 4,2 km | 5 m | 34 % | 45 % | 9 % |
+| Les remparts et la colline Sainte-Croix | 4,2 km | 29 m | 16 % | 50 % | 1 % |
+| Le tour des jardins du centre | 4,4 km | 25 m | 16 % | 62 % | — |
+| Chambière et le plan d'eau | 4,5 km | 19 m | 34 % | 45 % | 18 % |
+| La Seille et le Sablon | 4,9 km | 10 m | 29 % | 36 % | 1 % |
+| Le tour du Sablon | 5,1 km | 8 m | 27 % | **29 %** | 1 % |
+| Le Sansonnet et les portes | 5,1 km | 42 m | 27 % | 43 % | 30 % |
+| La Moselle et les deux îles | 5,5 km | 19 m | 35 % | 45 % | 16 % |
+| La Nouvelle Ville et l'eau | 5,9 km | 21 m | 25 % | 61 % | 14 % |
+| Le Technopôle et la Chêneau | 6,1 km | 37 m | 24 % | **24 %** | 9 % |
+
+Le bitume est la contrainte de ce lot, et elle a été mesurée avant d'être
+acceptée : sur une cinquantaine d'essais au départ de la Nouvelle Ville, le
+revêtement dur ne descend jamais sous 24 %. Les deux boucles qui s'en
+approchent — le Sablon et le Technopôle — sont celles qui sortent le plus vite
+du tissu urbain.
+
+Quatre ne repassent nulle part ; les six autres refont entre 85 et 207 m, et
+c'est presque toujours le bout de rue du départ, qu'on prend forcément dans
+les deux sens.
 
 ### Aller au centre commercial à pied
 
@@ -209,10 +251,11 @@ garde tout.
 
 D'où deux dispositifs, l'un sur le serveur, l'autre dans le navigateur.
 
-**Le fond voyage dans l'image**, récupéré au moment de la construction : 997
-carreaux pour les dix boucles, du zoom 13 au zoom 16, une quinzaine de
-mégaoctets. Un cache d'Actions évite de les reprendre à chaque push — seul un
-changement de traces en redemande.
+**Le fond voyage dans l'image**, récupéré au moment de la construction : 1154
+carreaux pour les vingt-trois boucles, du zoom 13 au zoom 16. Les dix balades
+courtes n'en ont presque rien coûté — elles tournent dans un couloir que les
+boucles au départ de la gare traversaient déjà. Un cache d'Actions évite de
+les reprendre à chaque push — seul un changement de traces en redemande.
 
 C'est une correction, et elle vaut d'être expliquée. Le service les
 téléchargeait lui-même au premier démarrage, un carreau par seconde pendant un
@@ -266,7 +309,7 @@ Les jeter à chaque déploiement ferait reperdre le téléchargement pour rien.
 ### Relever ce qu'il y a autour des étapes
 
 ```bash
-python -m olifant reperes                     # les dix boucles
+python -m olifant reperes                     # les vingt-trois boucles
 python -m olifant reperes canner --hors-ligne # une seule, depuis le cache
 ```
 
@@ -358,7 +401,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-149 tests, sans réseau.
+151 tests, sans réseau.
 
 ## Un mot sur les services publics
 
@@ -371,9 +414,9 @@ Deux décisions viennent de là. Le relevé des repères ne demande plus les arb
 ni les bancs : à eux seuls, ils représentaient jusqu'à 589 et 401 réponses pour
 un seul parcours, l'essentiel du volume, sans rien apprendre à qui marche. Et le
 fond de carte emporté se limite au couloir des traces et s'arrête au zoom 16 —
-997 carreaux pour les dix boucles, une quinzaine de mégaoctets, pris une seule
-fois à raison d'un par seconde. C'est un usage personnel et borné, pas une
-aspiration ; si vous élargissez les zooms ou la marge, le compte grimpe vite
+1154 carreaux pour les vingt-trois boucles, pris une seule fois à raison d'un
+par seconde. C'est un usage personnel et borné, pas une aspiration ; si vous
+élargissez les zooms ou la marge, le compte grimpe vite
 (`--compte-seulement` le dit avant de rien télécharger).
 
 Gardez le cache, évitez les recalculs inutiles.

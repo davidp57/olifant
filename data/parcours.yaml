@@ -7,9 +7,10 @@
 meta:
   titre: Olifant
   accroche: >-
-    Boucles de 10 a 15 km autour de Metz. Celles qui partent a pied se
-    retrouvent sur le parvis de la gare ; les autres demandent une demi-heure
-    de voiture. Deux trajets en plus, qui vont aux commerces de Borny a pied.
+    Boucles de 10 a 15 km autour de Metz, et dix balades d'une heure au
+    depart de la rue des Parmentiers. Celles qui partent a pied se retrouvent
+    sur le parvis de la gare ; les autres demandent une demi-heure de voiture.
+    Deux trajets en plus, qui vont aux commerces de Borny a pied.
 
 points:
 
@@ -381,6 +382,131 @@ points:
       Point de vue sur Gorze et le fond du vallon, juste avant de redescendre
       au village.
 
+  # --- autour de la rue des Parmentiers, pour les balades courtes --------
+  # Ces points ne servent qu'aux dix boucles de 5 km : ils sont tous a moins
+  # de deux kilometres du depart. Les coordonnees viennent d'OpenStreetMap,
+  # pas d'une lecture de carte, et aucune etape n'est rattachee a plus de
+  # 80 m d'un chemin.
+  temple-neuf:
+    nom: Temple Neuf et le Moyen Pont
+    lon: 6.170382
+    lat: 49.119743
+    note: >-
+      Pointe de l'ile du Petit-Saulcy, entre les deux bras de la Moselle ;
+      la vue sur la cathedrale et le plan d'eau.
+  esplanade-lac:
+    nom: Parc du Lac aux Cygnes
+    lon: 6.167327
+    lat: 49.116160
+    note: Rive du plan d'eau sous l'Esplanade, cygnes et saules.
+  base-loisirs:
+    nom: Base de loisirs de l'Esplanade
+    lon: 6.163107
+    lat: 49.115853
+    note: Rive ouest du plan d'eau, face au Saulcy. Buvette l'ete.
+  plan-eau-nord:
+    nom: Plan d'eau, rive nord
+    lon: 6.164400
+    lat: 49.119200
+    note: La rive d'en face, celle que personne ne prend. Plus calme, plus ombragee.
+  port-marcel:
+    nom: Port Saint-Marcel
+    lon: 6.171312
+    lat: 49.121635
+    note: Petit port de plaisance au nord de l'ile, peniches a quai.
+  saint-vincent:
+    nom: Abbaye Saint-Vincent
+    lon: 6.172450
+    lat: 49.123134
+    note: Ancienne abbaye du quartier Chambiere, facade classique.
+  moulin-thermes:
+    nom: Moulin des Thermes
+    lon: 6.176562
+    lat: 49.123052
+    note: Bras de la Moselle a Chambiere, ancien moulin et lavoirs.
+  sansonnet-sud:
+    nom: Parc du Sansonnet, entree sud
+    lon: 6.188000
+    lat: 49.126000
+    note: Le plus grand espace vert du nord de Metz, etang et sous-bois.
+  sarrelouis:
+    nom: Porte de Sarrelouis
+    lon: 6.191447
+    lat: 49.120629
+    note: Vestige des fortifications du XVIIIe siecle, a l'est de la ville.
+  porte-allemands:
+    nom: Porte des Allemands
+    lon: 6.185568
+    lat: 49.117880
+    note: >-
+      Chatelet fortifie du XIIIe siecle a cheval sur la Seille, et le depart
+      du chemin des remparts.
+  tanneurs:
+    nom: Jardin des Tanneurs
+    lon: 6.181121
+    lat: 49.119708
+    note: Jardin en terrasses sur le flanc de la colline Sainte-Croix.
+  cinq-sens:
+    nom: Jardin des Cinq Sens
+    lon: 6.180858
+    lat: 49.112569
+    note: Jardin au bord de la Seille, au pied d'Outre-Seille.
+  saint-thiebault:
+    nom: Place Saint-Thiebault
+    lon: 6.177797
+    lat: 49.112479
+    note: Place plantee entre la Nouvelle Ville et la vieille ville.
+  camoufle:
+    nom: Tour Camoufle
+    lon: 6.173578
+    lat: 49.112047
+    note: Tour d'artillerie du XVe siecle, restee seule dans son square.
+  serpenoise:
+    nom: Porte Serpenoise
+    lon: 6.171024
+    lat: 49.112570
+    note: Porte de l'enceinte et entree du quartier imperial.
+  jean-moulin:
+    nom: Place Jean Moulin
+    lon: 6.169686
+    lat: 49.107869
+    note: Entre la gare et le Sablon, sous les platanes.
+  maud-huy:
+    nom: Place de Maud'Huy
+    lon: 6.167192
+    lat: 49.108925
+    note: Sud-ouest de la Nouvelle Ville, maisons allemandes.
+  persuis:
+    nom: Square Loiseau de Persuis, Sablon
+    lon: 6.178319
+    lat: 49.100723
+    note: Coeur du Sablon, a mi-chemin entre la gare et les roselieres.
+  keune:
+    nom: Jardin Jean-Baptiste Keune
+    lon: 6.180962
+    lat: 49.108755
+    note: Jardin du Sablon nord, a deux pas de la Seille.
+  amphitheatre:
+    nom: Parvis de l'Amphitheatre
+    lon: 6.179658
+    lat: 49.108685
+    note: Le quartier neuf derriere la gare, Centre Pompidou et esplanade.
+  pelt:
+    nom: Jardins Jean-Marie Pelt
+    lon: 6.185757
+    lat: 49.106593
+    note: Prolongement sud du parc de la Seille, prairies et passerelles.
+  technopole:
+    nom: Technopole, square Simon-Louis Freres
+    lon: 6.202193
+    lat: 49.111498
+    note: Allees plantees du Technopole, autour du plan d'eau Symphonie.
+  cheneau-est:
+    nom: Parc de la Cheneau, entree ouest
+    lon: 6.204000
+    lat: 49.113000
+    note: L'entree du parc du cote de Grigy, par les allees en terre.
+
 parcours:
 
   # Les cinq boucles ci-dessous sont calees sur des mesures, pas sur des
@@ -537,3 +663,133 @@ parcours:
       sud et un dernier belvedere avant de redescendre au village.
     etapes: [gorze, abbaye-gorze, source-bouillons, saint-thiebaut, croix-sergent,
              labauville, mazagran, vue-gorze, gorze]
+
+  # --- dix balades courtes au depart de la rue des Parmentiers -----------
+  #
+  # Meme exigence que le reste, un seuil different. Le bitume d'abord : sur
+  # une cinquantaine d'essais de 5 km au depart de la Nouvelle Ville, le
+  # revetement dur ne descend jamais sous 24 % et tourne autour de 45 %.
+  # Elles portent donc le theme « ville », qui leur applique un plafond de
+  # 65 % au lieu de 45. La forme ensuite : on a refuse toute boucle qui part
+  # toucher un lieu et revient par le meme chemin. Aucune des dix ne refait
+  # plus de 250 m de son propre trace, et quatre n'en refont aucun.
+
+  - id: moselle-deux-iles
+    nom: La Moselle et les deux iles
+    acces: a pied
+    themes: [ville, eau]
+    couleur: 4F7CAC
+    resume: >-
+      Le grand tour de l'eau : l'Esplanade, le lac aux Cygnes, la rive ouest
+      du plan d'eau, la promenade du Grand Patural, et le retour par le
+      Saulcy et le port Saint-Marcel. Pas un metre refait.
+    etapes: [parmentiers, esplanade, esplanade-lac, base-loisirs, grand-patural,
+             saulcy, port-marcel, temple-neuf, parmentiers]
+
+  - id: chambiere-plan-eau
+    nom: Chambiere et le plan d'eau
+    acces: a pied
+    themes: [ville, eau]
+    couleur: 2E7A8C
+    resume: >-
+      La meme eau par l'autre bout : on longe la rive ouest du plan d'eau,
+      on passe sur la rive nord -- celle que personne ne prend -- et on
+      rentre par l'abbaye Saint-Vincent et l'ile.
+    etapes: [parmentiers, esplanade, esplanade-lac, base-loisirs, plan-eau-nord,
+             saint-vincent, temple-neuf, parmentiers]
+
+  - id: sansonnet-portes
+    nom: Le Sansonnet et les portes
+    acces: a pied
+    themes: [ville, foret, patrimoine]
+    couleur: 6E8B3D
+    resume: >-
+      La plus verte des courtes cote nord : le bras de la Moselle a
+      Chambiere, les sous-bois du parc du Sansonnet, puis les deux portes
+      fortifiees, Sarrelouis et les Allemands. Un tiers de chemin balise.
+    etapes: [parmentiers, moulin-thermes, sansonnet-sud, sarrelouis,
+             porte-allemands, parmentiers]
+
+  - id: remparts-sainte-croix
+    nom: Les remparts et la colline Sainte-Croix
+    acces: a pied
+    themes: [ville, patrimoine]
+    couleur: 8E5572
+    resume: >-
+      La plus courte : le chemin des remparts depuis la Porte des Allemands,
+      les terrasses du jardin des Tanneurs, Chambiere et l'ile. Une heure,
+      et tout le vieux Metz.
+    etapes: [parmentiers, porte-allemands, tanneurs, moulin-thermes,
+             saint-vincent, temple-neuf, esplanade, parmentiers]
+
+  - id: jardins-du-centre
+    nom: Le tour des jardins du centre
+    acces: a pied
+    themes: [ville, patrimoine]
+    couleur: B5651D
+    resume: >-
+      Un chapelet de jardins et de places : les Cinq Sens au bord de la
+      Seille, Saint-Thiebault, la tour Camoufle, la Porte Serpenoise,
+      l'Esplanade, l'ile et les Tanneurs. Beaucoup de pave, peu de voitures.
+    etapes: [parmentiers, cinq-sens, saint-thiebault, camoufle, serpenoise,
+             esplanade, temple-neuf, tanneurs, parmentiers]
+
+  - id: tour-du-sablon
+    nom: Le tour du Sablon
+    acces: a pied
+    themes: [ville]
+    couleur: 5D5FA6
+    resume: >-
+      Plein sud derriere la gare, la traversee du Sablon jusqu'a son square
+      central, le retour par le jardin Keune et le quartier de
+      l'Amphitheatre. Plate de bout en bout, et la moins bitumee du lot avec
+      la Cheneau.
+    etapes: [parmentiers, gare, jean-moulin, persuis, keune, amphitheatre,
+             parmentiers]
+
+  - id: seille-sablon
+    nom: La Seille et le Sablon
+    acces: a pied
+    themes: [ville, eau]
+    couleur: 7C6A3F
+    resume: >-
+      La descente vers le Sablon, puis la remontee par les jardins Pelt et
+      le parc de la Seille : on rentre le long de l'eau, a plat et sur
+      l'herbe.
+    etapes: [parmentiers, gare, persuis, pelt, parc-seille, parmentiers]
+
+  - id: boucle-de-la-seille
+    nom: La boucle de la Seille
+    acces: a pied
+    themes: [ville, eau]
+    couleur: 3F7D6E
+    resume: >-
+      Le tour complet de la riviere en ville : le jardin des Cinq Sens,
+      l'Amphitheatre, les jardins Pelt, le parc de la Seille, et la remontee
+      jusqu'a la Porte des Allemands. Quatre-vingts metres refaits, pas un de
+      plus.
+    etapes: [parmentiers, cinq-sens, amphitheatre, keune, pelt, parc-seille,
+             porte-allemands, parmentiers]
+
+  - id: technopole-cheneau
+    nom: Le Technopole et la Cheneau
+    acces: a pied
+    themes: [ville, foret, eau]
+    couleur: A34F6B
+    resume: >-
+      La plus longue des dix, et de loin la moins bitumee : le parc de la
+      Seille, les allees du Technopole autour du plan d'eau Symphonie, et le
+      parc de la Cheneau. On ne repasse nulle part.
+    etapes: [parmentiers, cheneau-est, technopole, parc-seille, parmentiers]
+
+  - id: nouvelle-ville-eau
+    nom: La Nouvelle Ville et l'eau
+    acces: a pied
+    themes: [ville, patrimoine, eau]
+    couleur: C2703D
+    resume: >-
+      La traversee des rues allemandes, de la gare a Maud'Huy, puis le
+      basculement vers l'Esplanade, le lac aux Cygnes et le Saulcy. Beaucoup
+      de trottoir a l'aller, l'eau tout le retour, et rien en double.
+    etapes: [parmentiers, gare, jean-moulin, maud-huy, esplanade,
+             esplanade-lac, saulcy, parmentiers]

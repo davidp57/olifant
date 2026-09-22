@@ -15,6 +15,9 @@ Chaque controle repond a une facon precise de se faire avoir :
 - le recouvrement : la moitie du parcours est un aller-retour sur le meme
   chemin, ce qui se voit mal sur une carte et tres bien en marchant ;
 - le bitume : le routeur a trouve une route, elle est plus directe, il la prend.
+  Le seuil depend du terrain : une boucle marquee « ville » s'autorise plus de
+  revetement dur qu'une boucle de campagne, parce qu'il n'existe pas de 5 km
+  sans trottoir au depart du centre de Metz.
 """
 
 from __future__ import annotations
@@ -28,6 +31,13 @@ from .modele import Parcours, Point, Trace, distance_m
 ETAPE_LOIN_M = 150         # une etape rattachee plus loin que ca est suspecte
 BOUCLE_OUVERTE_M = 250     # ecart tolere entre le depart et l'arrivee
 BITUME_MAX = 45.0          # part de revetement dur, en %
+# Une boucle urbaine assumee -- theme « ville » -- n'a pas le meme terrain de
+# jeu : mesure sur cinquante essais de 5 km au depart de la Nouvelle Ville, le
+# revetement dur ne descend jamais sous 24 %, et tourne autour de 45 %. Juger
+# ces boucles-la au seuil de la rando reviendrait a signaler tout le lot, donc
+# a ne plus rien signaler du tout. Au-dela de 65 %, en revanche, on marche sur
+# du trottoir et ca vaut d'etre dit.
+BITUME_MAX_VILLE = 65.0
 RECOUVREMENT_MAX = 25.0    # part de la trace parcourue deux fois, en %
 MAILLE_M = 30              # taille de la maille qui detecte le recouvrement
 
@@ -80,15 +90,26 @@ def juge(parcours: Parcours, trace: Trace, points: dict[str, Point]) -> Bilan:
     if ouverture > BOUCLE_OUVERTE_M:
         bilan.alertes.append(
             "la boucle ne se referme pas : %d m entre l'arrivee et le depart" % ouverture)
-    if bilan.bitume > BITUME_MAX:
+    plafond = bitume_max(parcours)
+    if bilan.bitume > plafond:
         bilan.alertes.append(
             "%d %% de revetement dur, au-dessus des %d %% qu'on s'autorise"
-            % (round(bilan.bitume), BITUME_MAX))
+            % (round(bilan.bitume), plafond))
     if bilan.recouvrement > RECOUVREMENT_MAX:
         bilan.alertes.append(
             "%d %% du parcours est fait deux fois : c'est un aller-retour deguise"
             % round(bilan.recouvrement))
     return bilan
+
+
+def bitume_max(parcours: Parcours) -> float:
+    """Le plafond de revetement dur applicable a ce parcours.
+
+    Une boucle de campagne et une boucle de ville ne se jugent pas pareil :
+    le bitume qu'on reproche a la premiere est le pave que la seconde vient
+    chercher. Le theme « ville » du fichier de reference sert de declarateur.
+    """
+    return BITUME_MAX_VILLE if "ville" in parcours.themes else BITUME_MAX
 
 
 def _ecarts_etapes(parcours: Parcours, trace: Trace,

@@ -70,8 +70,8 @@ class TestRecouvrement:
 
 
 class TestJugement:
-    def parcours(self, etapes):
-        return Parcours(id="essai", nom="Essai", etapes=etapes)
+    def parcours(self, etapes, themes=()):
+        return Parcours(id="essai", nom="Essai", etapes=etapes, themes=list(themes))
 
     def test_signale_une_etape_que_le_routeur_a_rattachee_ailleurs(self):
         # Le point « bois » est a 500 m au nord de tout ce que la trace touche.
@@ -105,6 +105,26 @@ class TestJugement:
                       [Segment(900, {"highway": "footway", "surface": "asphalt"}),
                        Segment(100, {"highway": "path"})])
         bilan = juge(self.parcours(["a", "a"]), trace, points)
+        assert any("revetement dur" in a for a in bilan.alertes)
+
+    def test_une_boucle_de_ville_s_autorise_plus_de_bitume(self):
+        # 60 % de trottoir : reproche a une boucle de campagne, pas a une
+        # boucle urbaine, ou il n'existe pas de 5 km sans revetement dur.
+        points = {"a": point("a", 6.10, 49.10)}
+        trace = Trace("essai", "p", ligne((6.10, 49.10), (6.10, 49.10)),
+                      [Segment(600, {"highway": "footway", "surface": "asphalt"}),
+                       Segment(400, {"highway": "path"})])
+        campagne = juge(self.parcours(["a", "a"]), trace, points)
+        ville = juge(self.parcours(["a", "a"], themes=["ville"]), trace, points)
+        assert any("revetement dur" in a for a in campagne.alertes)
+        assert not any("revetement dur" in a for a in ville.alertes)
+
+    def test_le_tout_trottoir_est_signale_meme_en_ville(self):
+        points = {"a": point("a", 6.10, 49.10)}
+        trace = Trace("essai", "p", ligne((6.10, 49.10), (6.10, 49.10)),
+                      [Segment(800, {"highway": "footway", "surface": "asphalt"}),
+                       Segment(200, {"highway": "path"})])
+        bilan = juge(self.parcours(["a", "a"], themes=["ville"]), trace, points)
         assert any("revetement dur" in a for a in bilan.alertes)
 
 

@@ -1941,5 +1941,3452 @@
     "distance_m": 50
    }
   ]
+ },
+ "moselle-deux-iles": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180
+   }
+  ],
+  "esplanade": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.17128,
+    "lat": 49.114941,
+    "distance_m": 127,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.169141,
+    "lat": 49.116659,
+    "distance_m": 126
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Papy Disco",
+    "lon": 6.169056,
+    "lat": 49.115923,
+    "distance_m": 107
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Cheval de Bronze",
+    "lon": 6.17125,
+    "lat": 49.11653,
+    "distance_m": 82
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Ney",
+    "lon": 6.171516,
+    "lat": 49.11547,
+    "distance_m": 91
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "La Naïade",
+    "lon": 6.171655,
+    "lat": 49.11633,
+    "distance_m": 92
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Poilu libérateur",
+    "lon": 6.169396,
+    "lat": 49.116517,
+    "distance_m": 102
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.171635,
+    "lat": 49.115205,
+    "distance_m": 117,
+    "combien": 4
+   }
+  ],
+  "esplanade-lac": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.166867,
+    "lat": 49.115732,
+    "distance_m": 58
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour de la Cité",
+    "lon": 6.168741,
+    "lat": 49.117343,
+    "distance_m": 167
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.168727,
+    "lat": 49.117354,
+    "distance_m": 167
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Terraza",
+    "lon": 6.167072,
+    "lat": 49.117859,
+    "distance_m": 190
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Buste de Verlaine",
+    "lon": 6.169041,
+    "lat": 49.116958,
+    "distance_m": 153
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Tour d'Enfer",
+    "lon": 6.167172,
+    "lat": 49.113182,
+    "distance_m": 331
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.167437,
+    "lat": 49.11672,
+    "distance_m": 63
+   }
+  ],
+  "base-loisirs": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.162649,
+    "lat": 49.11523,
+    "distance_m": 77,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.162817,
+    "lat": 49.115294,
+    "distance_m": 66
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Buvette du Plan d'O",
+    "lon": 6.164938,
+    "lat": 49.113734,
+    "distance_m": 271
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.164689,
+    "lat": 49.113592,
+    "distance_m": 277
+   }
+  ],
+  "grand-patural": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.149677,
+    "lat": 49.118121,
+    "distance_m": 102
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.150156,
+    "lat": 49.116694,
+    "distance_m": 152
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Relais Saint-Symphorien",
+    "lon": 6.150408,
+    "lat": 49.116345,
+    "distance_m": 182
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Rives",
+    "lon": 6.148543,
+    "lat": 49.118178,
+    "distance_m": 185
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Streiff",
+    "lon": 6.152956,
+    "lat": 49.115323,
+    "distance_m": 321
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Taormina",
+    "lon": 6.148932,
+    "lat": 49.12088,
+    "distance_m": 363
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "BDC - Bar Resto",
+    "lon": 6.152868,
+    "lat": 49.114892,
+    "distance_m": 363
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Pont du Sauvage",
+    "lon": 6.146993,
+    "lat": 49.119241,
+    "distance_m": 329
+   }
+  ],
+  "saulcy": [
+   {
+    "genre": "ravitaillement",
+    "nom": "AGORAé Metz Saulcy",
+    "lon": 6.16226,
+    "lat": 49.120024,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Market' Rimbaud",
+    "lon": 6.159659,
+    "lat": 49.119155,
+    "distance_m": 157
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Brasserie Baudelaire",
+    "lon": 6.158791,
+    "lat": 49.120717,
+    "distance_m": 191
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Restaurant universitaire Paul Verlaine",
+    "lon": 6.16441,
+    "lat": 49.118817,
+    "distance_m": 271
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.161103,
+    "lat": 49.12001,
+    "distance_m": 15,
+    "combien": 2
+   }
+  ],
+  "port-marcel": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.169365,
+    "lat": 49.122716,
+    "distance_m": 186
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.172124,
+    "lat": 49.120814,
+    "distance_m": 109,
+    "combien": 5
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Marcelino",
+    "lon": 6.17085,
+    "lat": 49.121776,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Saint-Marcel",
+    "lon": 6.171265,
+    "lat": 49.121243,
+    "distance_m": 44
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Aux petits choux",
+    "lon": 6.170505,
+    "lat": 49.121632,
+    "distance_m": 59
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Taverne du Graoully",
+    "lon": 6.170303,
+    "lat": 49.121325,
+    "distance_m": 81
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.170984,
+    "lat": 49.122746,
+    "distance_m": 126
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.169734,
+    "lat": 49.122818,
+    "distance_m": 175,
+    "combien": 3
+   }
+  ],
+  "temple-neuf": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.16874,
+    "lat": 49.120852,
+    "distance_m": 172
+   },
+   {
+    "genre": "vue",
+    "nom": "Belvédère Temple Neuf - Cathédrale",
+    "lon": 6.170382,
+    "lat": 49.119743,
+    "distance_m": 0
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Assiette au Bœuf",
+    "lon": 6.170314,
+    "lat": 49.119833,
+    "distance_m": 11
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "La Moselle",
+    "lon": 6.16995,
+    "lat": 49.119906,
+    "distance_m": 36
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Épicerie de l'Île du Saulcy",
+    "lon": 6.169731,
+    "lat": 49.120107,
+    "distance_m": 62
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.170617,
+    "lat": 49.119382,
+    "distance_m": 44,
+    "combien": 2
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Voie de la Liberté 1944",
+    "lon": 6.16977,
+    "lat": 49.11976,
+    "distance_m": 45
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.174641,
+    "lat": 49.119818,
+    "distance_m": 310
+   }
+  ]
+ },
+ "chambiere-plan-eau": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180
+   }
+  ],
+  "esplanade": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.17128,
+    "lat": 49.114941,
+    "distance_m": 127,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.169141,
+    "lat": 49.116659,
+    "distance_m": 126
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Papy Disco",
+    "lon": 6.169056,
+    "lat": 49.115923,
+    "distance_m": 107
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Cheval de Bronze",
+    "lon": 6.17125,
+    "lat": 49.11653,
+    "distance_m": 82
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Ney",
+    "lon": 6.171516,
+    "lat": 49.11547,
+    "distance_m": 91
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "La Naïade",
+    "lon": 6.171655,
+    "lat": 49.11633,
+    "distance_m": 92
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Poilu libérateur",
+    "lon": 6.169396,
+    "lat": 49.116517,
+    "distance_m": 102
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.171635,
+    "lat": 49.115205,
+    "distance_m": 117,
+    "combien": 4
+   }
+  ],
+  "esplanade-lac": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.166867,
+    "lat": 49.115732,
+    "distance_m": 58
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour de la Cité",
+    "lon": 6.168741,
+    "lat": 49.117343,
+    "distance_m": 167
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.168727,
+    "lat": 49.117354,
+    "distance_m": 167
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Terraza",
+    "lon": 6.167072,
+    "lat": 49.117859,
+    "distance_m": 190
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Buste de Verlaine",
+    "lon": 6.169041,
+    "lat": 49.116958,
+    "distance_m": 153
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Tour d'Enfer",
+    "lon": 6.167172,
+    "lat": 49.113182,
+    "distance_m": 331
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.167437,
+    "lat": 49.11672,
+    "distance_m": 63
+   }
+  ],
+  "base-loisirs": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.162649,
+    "lat": 49.11523,
+    "distance_m": 77,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.162817,
+    "lat": 49.115294,
+    "distance_m": 66
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Buvette du Plan d'O",
+    "lon": 6.164938,
+    "lat": 49.113734,
+    "distance_m": 271
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.164689,
+    "lat": 49.113592,
+    "distance_m": 277
+   }
+  ],
+  "plan-eau-nord": [
+   {
+    "genre": "ravitaillement",
+    "nom": "Restaurant universitaire Paul Verlaine",
+    "lon": 6.16441,
+    "lat": 49.118817,
+    "distance_m": 43
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "AGORAé Metz Saulcy",
+    "lon": 6.16226,
+    "lat": 49.120024,
+    "distance_m": 181
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Market' Rimbaud",
+    "lon": 6.159659,
+    "lat": 49.119155,
+    "distance_m": 345
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.16616,
+    "lat": 49.120739,
+    "distance_m": 214,
+    "combien": 3
+   }
+  ],
+  "saint-vincent": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.169365,
+    "lat": 49.122716,
+    "distance_m": 229
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.173251,
+    "lat": 49.123304,
+    "distance_m": 61,
+    "combien": 3
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Angkor Wat",
+    "lon": 6.172957,
+    "lat": 49.123857,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.172147,
+    "lat": 49.123995,
+    "distance_m": 98,
+    "combien": 3
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.170984,
+    "lat": 49.122746,
+    "distance_m": 115,
+    "combien": 4
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Eugène Rolland Memorial",
+    "lon": 6.171807,
+    "lat": 49.124223,
+    "distance_m": 130
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Tour du Temple de Garnison",
+    "lon": 6.170013,
+    "lat": 49.122612,
+    "distance_m": 187
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.169734,
+    "lat": 49.122818,
+    "distance_m": 201,
+    "combien": 3
+   }
+  ],
+  "temple-neuf": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.16874,
+    "lat": 49.120852,
+    "distance_m": 172
+   },
+   {
+    "genre": "vue",
+    "nom": "Belvédère Temple Neuf - Cathédrale",
+    "lon": 6.170382,
+    "lat": 49.119743,
+    "distance_m": 0
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Assiette au Bœuf",
+    "lon": 6.170314,
+    "lat": 49.119833,
+    "distance_m": 11
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "La Moselle",
+    "lon": 6.16995,
+    "lat": 49.119906,
+    "distance_m": 36
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Épicerie de l'Île du Saulcy",
+    "lon": 6.169731,
+    "lat": 49.120107,
+    "distance_m": 62
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.170617,
+    "lat": 49.119382,
+    "distance_m": 44,
+    "combien": 2
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Voie de la Liberté 1944",
+    "lon": 6.16977,
+    "lat": 49.11976,
+    "distance_m": 45
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.173897,
+    "lat": 49.120191,
+    "distance_m": 261
+   }
+  ]
+ },
+ "sansonnet-portes": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180,
+    "combien": 4
+   }
+  ],
+  "moulin-thermes": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.17922,
+    "lat": 49.123305,
+    "distance_m": 195
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.176219,
+    "lat": 49.124872,
+    "distance_m": 204,
+    "combien": 9
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Shalimar",
+    "lon": 6.17802,
+    "lat": 49.122316,
+    "distance_m": 134
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Coup de Ju",
+    "lon": 6.177775,
+    "lat": 49.122051,
+    "distance_m": 142
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Vierge du Moulin",
+    "lon": 6.176452,
+    "lat": 49.123018,
+    "distance_m": 9
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.178474,
+    "lat": 49.12294,
+    "distance_m": 140,
+    "combien": 4
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Église Saint-Livier",
+    "lon": 6.177702,
+    "lat": 49.124105,
+    "distance_m": 144
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.177081,
+    "lat": 49.120182,
+    "distance_m": 321,
+    "combien": 3
+   }
+  ],
+  "sansonnet-sud": [
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.185576,
+    "lat": 49.125628,
+    "distance_m": 181,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour au Diable",
+    "lon": 6.185058,
+    "lat": 49.12565,
+    "distance_m": 218
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour des Maréchaux",
+    "lon": 6.18515,
+    "lat": 49.125301,
+    "distance_m": 221
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour des Chauldronniers",
+    "lon": 6.185182,
+    "lat": 49.124952,
+    "distance_m": 236
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "TotalEnergies",
+    "lon": 6.189251,
+    "lat": 49.127166,
+    "distance_m": 158
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Mémorial Américain",
+    "lon": 6.18797,
+    "lat": 49.124791,
+    "distance_m": 134
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Ruines",
+    "lon": 6.18519,
+    "lat": 49.125087,
+    "distance_m": 228,
+    "combien": 2
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.182768,
+    "lat": 49.126197,
+    "distance_m": 381
+   }
+  ],
+  "sarrelouis": [
+   {
+    "genre": "ravitaillement",
+    "nom": "Grizzly Bar",
+    "lon": 6.194826,
+    "lat": 49.122277,
+    "distance_m": 307
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Epicerie des Frères",
+    "lon": 6.194649,
+    "lat": 49.122747,
+    "distance_m": 331
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "La Cantoche",
+    "lon": 6.187529,
+    "lat": 49.122524,
+    "distance_m": 355
+   }
+  ],
+  "porte-allemands": [
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.185679,
+    "lat": 49.117391,
+    "distance_m": 55,
+    "combien": 5
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.184246,
+    "lat": 49.118028,
+    "distance_m": 98,
+    "combien": 3
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Ohpara",
+    "lon": 6.184679,
+    "lat": 49.117821,
+    "distance_m": 65
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Shalimar market",
+    "lon": 6.184687,
+    "lat": 49.118285,
+    "distance_m": 78
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Petit Bistrot",
+    "lon": 6.184808,
+    "lat": 49.117001,
+    "distance_m": 112
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "OK Pizza",
+    "lon": 6.184669,
+    "lat": 49.116715,
+    "distance_m": 145
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Porte des Allemands",
+    "lon": 6.185568,
+    "lat": 49.11788,
+    "distance_m": 0
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.185453,
+    "lat": 49.117845,
+    "distance_m": 9,
+    "combien": 2
+   }
+  ]
+ },
+ "remparts-sainte-croix": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180
+   }
+  ],
+  "porte-allemands": [
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.185679,
+    "lat": 49.117391,
+    "distance_m": 55,
+    "combien": 3
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.184246,
+    "lat": 49.118028,
+    "distance_m": 98,
+    "combien": 3
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Ohpara",
+    "lon": 6.184679,
+    "lat": 49.117821,
+    "distance_m": 65
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Shalimar market",
+    "lon": 6.184687,
+    "lat": 49.118285,
+    "distance_m": 78
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Petit Bistrot",
+    "lon": 6.184808,
+    "lat": 49.117001,
+    "distance_m": 112
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "OK Pizza",
+    "lon": 6.184669,
+    "lat": 49.116715,
+    "distance_m": 145
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Porte des Allemands",
+    "lon": 6.185568,
+    "lat": 49.11788,
+    "distance_m": 0
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.185453,
+    "lat": 49.117845,
+    "distance_m": 9,
+    "combien": 2
+   }
+  ],
+  "tanneurs": [
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.180924,
+    "lat": 49.119872,
+    "distance_m": 23
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le P’tit Local",
+    "lon": 6.181104,
+    "lat": 49.12066,
+    "distance_m": 106
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Guinea Select",
+    "lon": 6.18004,
+    "lat": 49.118625,
+    "distance_m": 144
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Saveurs du Tibet",
+    "lon": 6.180488,
+    "lat": 49.118245,
+    "distance_m": 169
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Café Jehanne d'Arc",
+    "lon": 6.180013,
+    "lat": 49.12125,
+    "distance_m": 189
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Délices Veggies",
+    "lon": 6.179771,
+    "lat": 49.121226,
+    "distance_m": 195
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.179995,
+    "lat": 49.119338,
+    "distance_m": 92,
+    "combien": 3
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.177081,
+    "lat": 49.120182,
+    "distance_m": 299
+   }
+  ],
+  "moulin-thermes": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.17922,
+    "lat": 49.123305,
+    "distance_m": 195
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.176219,
+    "lat": 49.124872,
+    "distance_m": 204,
+    "combien": 3
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Shalimar",
+    "lon": 6.17802,
+    "lat": 49.122316,
+    "distance_m": 134
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Coup de Ju",
+    "lon": 6.177775,
+    "lat": 49.122051,
+    "distance_m": 142
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Cagibi",
+    "lon": 6.178126,
+    "lat": 49.122241,
+    "distance_m": 145
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Vierge du Moulin",
+    "lon": 6.176452,
+    "lat": 49.123018,
+    "distance_m": 9
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.178474,
+    "lat": 49.12294,
+    "distance_m": 140,
+    "combien": 2
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Église Saint-Livier",
+    "lon": 6.177702,
+    "lat": 49.124105,
+    "distance_m": 144
+   }
+  ],
+  "saint-vincent": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.169365,
+    "lat": 49.122716,
+    "distance_m": 229
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.173251,
+    "lat": 49.123304,
+    "distance_m": 61
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Angkor Wat",
+    "lon": 6.172957,
+    "lat": 49.123857,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.172147,
+    "lat": 49.123995,
+    "distance_m": 98,
+    "combien": 2
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.170984,
+    "lat": 49.122746,
+    "distance_m": 115,
+    "combien": 2
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Eugène Rolland Memorial",
+    "lon": 6.171807,
+    "lat": 49.124223,
+    "distance_m": 130
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Tour du Temple de Garnison",
+    "lon": 6.170013,
+    "lat": 49.122612,
+    "distance_m": 187
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.169734,
+    "lat": 49.122818,
+    "distance_m": 201,
+    "combien": 3
+   }
+  ],
+  "temple-neuf": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.16874,
+    "lat": 49.120852,
+    "distance_m": 172
+   },
+   {
+    "genre": "vue",
+    "nom": "Belvédère Temple Neuf - Cathédrale",
+    "lon": 6.170382,
+    "lat": 49.119743,
+    "distance_m": 0
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Assiette au Bœuf",
+    "lon": 6.170314,
+    "lat": 49.119833,
+    "distance_m": 11
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "La Moselle",
+    "lon": 6.16995,
+    "lat": 49.119906,
+    "distance_m": 36
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Épicerie de l'Île du Saulcy",
+    "lon": 6.169731,
+    "lat": 49.120107,
+    "distance_m": 62
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.170617,
+    "lat": 49.119382,
+    "distance_m": 44,
+    "combien": 2
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Voie de la Liberté 1944",
+    "lon": 6.16977,
+    "lat": 49.11976,
+    "distance_m": 45
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.173897,
+    "lat": 49.120191,
+    "distance_m": 261
+   }
+  ],
+  "esplanade": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.17128,
+    "lat": 49.114941,
+    "distance_m": 127,
+    "combien": 5
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.169141,
+    "lat": 49.116659,
+    "distance_m": 126
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Papy Disco",
+    "lon": 6.169056,
+    "lat": 49.115923,
+    "distance_m": 107
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Cheval de Bronze",
+    "lon": 6.17125,
+    "lat": 49.11653,
+    "distance_m": 82
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Ney",
+    "lon": 6.171516,
+    "lat": 49.11547,
+    "distance_m": 91
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "La Naïade",
+    "lon": 6.171655,
+    "lat": 49.11633,
+    "distance_m": 92
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Poilu libérateur",
+    "lon": 6.169396,
+    "lat": 49.116517,
+    "distance_m": 102
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.171635,
+    "lat": 49.115205,
+    "distance_m": 117,
+    "combien": 5
+   }
+  ]
+ },
+ "jardins-du-centre": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180
+   }
+  ],
+  "cinq-sens": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.180026,
+    "lat": 49.112731,
+    "distance_m": 63
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.179587,
+    "lat": 49.110434,
+    "distance_m": 255
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Amis de Saint-Louis",
+    "lon": 6.181825,
+    "lat": 49.113217,
+    "distance_m": 101
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Paris",
+    "lon": 6.179416,
+    "lat": 49.114156,
+    "distance_m": 205
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Pizzeria Luisa",
+    "lon": 6.182266,
+    "lat": 49.114817,
+    "distance_m": 270
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Mandarin",
+    "lon": 6.182214,
+    "lat": 49.114886,
+    "distance_m": 276
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Je voudrais aller voir la neige en Afrique",
+    "lon": 6.184521,
+    "lat": 49.112865,
+    "distance_m": 269
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.183684,
+    "lat": 49.110613,
+    "distance_m": 299
+   }
+  ],
+  "saint-thiebault": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.175924,
+    "lat": 49.111557,
+    "distance_m": 171
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Café du Port",
+    "lon": 6.178049,
+    "lat": 49.112726,
+    "distance_m": 33
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Maison Blond",
+    "lon": 6.177752,
+    "lat": 49.113105,
+    "distance_m": 70
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Khan Super Store",
+    "lon": 6.177854,
+    "lat": 49.113172,
+    "distance_m": 77
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Émile & Lola",
+    "lon": 6.176977,
+    "lat": 49.113017,
+    "distance_m": 84
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "La Vallée du Kashmir",
+    "lon": 6.17781,
+    "lat": 49.113282,
+    "distance_m": 89
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Buste du Roi Albert",
+    "lon": 6.17654,
+    "lat": 49.111553,
+    "distance_m": 138
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.177322,
+    "lat": 49.111557,
+    "distance_m": 108
+   }
+  ],
+  "camoufle": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.174142,
+    "lat": 49.110209,
+    "distance_m": 208
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Mona",
+    "lon": 6.172419,
+    "lat": 49.111917,
+    "distance_m": 86
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "La Belle Épicerie",
+    "lon": 6.173305,
+    "lat": 49.11119,
+    "distance_m": 97
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Brasserie des Arts et Métiers",
+    "lon": 6.173484,
+    "lat": 49.111075,
+    "distance_m": 108
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Line Sushi",
+    "lon": 6.172715,
+    "lat": 49.111175,
+    "distance_m": 116
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Tour Camoufle",
+    "lon": 6.173509,
+    "lat": 49.111936,
+    "distance_m": 13
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.173272,
+    "lat": 49.111632,
+    "distance_m": 51
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.174158,
+    "lat": 49.110205,
+    "distance_m": 209,
+    "combien": 2
+   }
+  ],
+  "serpenoise": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.170352,
+    "lat": 49.11252,
+    "distance_m": 49
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.165949,
+    "lat": 49.111441,
+    "distance_m": 390
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Au P'tit Comité",
+    "lon": 6.171655,
+    "lat": 49.112152,
+    "distance_m": 65
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "O Petit Japon",
+    "lon": 6.171935,
+    "lat": 49.112289,
+    "distance_m": 73
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Top Shop",
+    "lon": 6.172019,
+    "lat": 49.112148,
+    "distance_m": 86
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.170332,
+    "lat": 49.112159,
+    "distance_m": 68
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.169937,
+    "lat": 49.11267,
+    "distance_m": 80,
+    "combien": 3
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.171714,
+    "lat": 49.11316,
+    "distance_m": 83
+   }
+  ],
+  "esplanade": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.17128,
+    "lat": 49.114941,
+    "distance_m": 127,
+    "combien": 4
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.169141,
+    "lat": 49.116659,
+    "distance_m": 126
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Papy Disco",
+    "lon": 6.169056,
+    "lat": 49.115923,
+    "distance_m": 107
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Cheval de Bronze",
+    "lon": 6.17125,
+    "lat": 49.11653,
+    "distance_m": 82
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Ney",
+    "lon": 6.171516,
+    "lat": 49.11547,
+    "distance_m": 91
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "La Naïade",
+    "lon": 6.171655,
+    "lat": 49.11633,
+    "distance_m": 92
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Poilu libérateur",
+    "lon": 6.169396,
+    "lat": 49.116517,
+    "distance_m": 102
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.171635,
+    "lat": 49.115205,
+    "distance_m": 117,
+    "combien": 4
+   }
+  ],
+  "temple-neuf": [
+   {
+    "genre": "eau",
+    "nom": "De l'eau",
+    "lon": 6.16874,
+    "lat": 49.120852,
+    "distance_m": 172,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Belvédère Temple Neuf - Cathédrale",
+    "lon": 6.170382,
+    "lat": 49.119743,
+    "distance_m": 0
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Assiette au Bœuf",
+    "lon": 6.170314,
+    "lat": 49.119833,
+    "distance_m": 11
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "La Moselle",
+    "lon": 6.16995,
+    "lat": 49.119906,
+    "distance_m": 36
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Épicerie de l'Île du Saulcy",
+    "lon": 6.169731,
+    "lat": 49.120107,
+    "distance_m": 62
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.170617,
+    "lat": 49.119382,
+    "distance_m": 44,
+    "combien": 3
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Voie de la Liberté 1944",
+    "lon": 6.16977,
+    "lat": 49.11976,
+    "distance_m": 45
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.173897,
+    "lat": 49.120191,
+    "distance_m": 261,
+    "combien": 2
+   }
+  ],
+  "tanneurs": [
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.180924,
+    "lat": 49.119872,
+    "distance_m": 23,
+    "combien": 3
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le P’tit Local",
+    "lon": 6.181104,
+    "lat": 49.12066,
+    "distance_m": 106
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Guinea Select",
+    "lon": 6.18004,
+    "lat": 49.118625,
+    "distance_m": 144
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Saveurs du Tibet",
+    "lon": 6.180488,
+    "lat": 49.118245,
+    "distance_m": 169
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Café Jehanne d'Arc",
+    "lon": 6.180013,
+    "lat": 49.12125,
+    "distance_m": 189
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Délices Veggies",
+    "lon": 6.179771,
+    "lat": 49.121226,
+    "distance_m": 195
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.179995,
+    "lat": 49.119338,
+    "distance_m": 92,
+    "combien": 3
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.177081,
+    "lat": 49.120182,
+    "distance_m": 299,
+    "combien": 3
+   }
+  ]
+ },
+ "tour-du-sablon": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180,
+    "combien": 4
+   }
+  ],
+  "gare": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.177206,
+    "lat": 49.109563,
+    "distance_m": 35
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Starbucks",
+    "lon": 6.17708,
+    "lat": 49.109618,
+    "distance_m": 38
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "ABC",
+    "lon": 6.176095,
+    "lat": 49.110211,
+    "distance_m": 123
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Express Bar",
+    "lon": 6.175709,
+    "lat": 49.110311,
+    "distance_m": 149
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Martina Ristorante",
+    "lon": 6.176816,
+    "lat": 49.110766,
+    "distance_m": 166
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Mémorial à Jean Moulin",
+    "lon": 6.177287,
+    "lat": 49.109757,
+    "distance_m": 57
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Statue du Général de Gaulle",
+    "lon": 6.176598,
+    "lat": 49.109931,
+    "distance_m": 79
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.176348,
+    "lat": 49.109234,
+    "distance_m": 49,
+    "combien": 3
+   }
+  ],
+  "jean-moulin": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.1679,
+    "lat": 49.107351,
+    "distance_m": 142,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.167484,
+    "lat": 49.106237,
+    "distance_m": 242
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Atelier du Pain",
+    "lon": 6.170203,
+    "lat": 49.108064,
+    "distance_m": 43
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Aux Vieilles Casseroles",
+    "lon": 6.170458,
+    "lat": 49.10797,
+    "distance_m": 57
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Henri le Boulanger",
+    "lon": 6.169879,
+    "lat": 49.108557,
+    "distance_m": 78
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Honey Coffee & Food",
+    "lon": 6.170921,
+    "lat": 49.108279,
+    "distance_m": 101
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Henri Gerstenhaben",
+    "lon": 6.169821,
+    "lat": 49.108541,
+    "distance_m": 75
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Léon Bleitrach",
+    "lon": 6.170925,
+    "lat": 49.10832,
+    "distance_m": 103
+   }
+  ],
+  "persuis": [
+   {
+    "genre": "ravitaillement",
+    "nom": "Zimmer",
+    "lon": 6.177455,
+    "lat": 49.099921,
+    "distance_m": 109
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Gran Gusto",
+    "lon": 6.179843,
+    "lat": 49.100204,
+    "distance_m": 125
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Tolo Market",
+    "lon": 6.180346,
+    "lat": 49.100215,
+    "distance_m": 158
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le comptoir gourmand du Sablon",
+    "lon": 6.176164,
+    "lat": 49.099433,
+    "distance_m": 213
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Casa Presto",
+    "lon": 6.175142,
+    "lat": 49.100717,
+    "distance_m": 231
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Aurore",
+    "lon": 6.175485,
+    "lat": 49.099488,
+    "distance_m": 248
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.17575,
+    "lat": 49.099953,
+    "distance_m": 206
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.17747,
+    "lat": 49.099857,
+    "distance_m": 114
+   }
+  ],
+  "keune": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.185005,
+    "lat": 49.107589,
+    "distance_m": 322
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Yozora",
+    "lon": 6.181822,
+    "lat": 49.107917,
+    "distance_m": 112
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Umé",
+    "lon": 6.18193,
+    "lat": 49.10794,
+    "distance_m": 115
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Piopa Lasagna-Caffé",
+    "lon": 6.18063,
+    "lat": 49.107574,
+    "distance_m": 134
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Milano",
+    "lon": 6.181289,
+    "lat": 49.107149,
+    "distance_m": 180
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Paul",
+    "lon": 6.181955,
+    "lat": 49.107136,
+    "distance_m": 194,
+    "combien": 2
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.181155,
+    "lat": 49.108448,
+    "distance_m": 37,
+    "combien": 2
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.181425,
+    "lat": 49.108319,
+    "distance_m": 59,
+    "combien": 2
+   }
+  ],
+  "amphitheatre": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.177696,
+    "lat": 49.107739,
+    "distance_m": 177
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.179587,
+    "lat": 49.110434,
+    "distance_m": 195
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Lunch Box",
+    "lon": 6.179708,
+    "lat": 49.107268,
+    "distance_m": 158
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Brasserie Pompidou",
+    "lon": 6.179059,
+    "lat": 49.106786,
+    "distance_m": 216
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.179651,
+    "lat": 49.109375,
+    "distance_m": 77
+   }
+  ]
+ },
+ "seille-sablon": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180,
+    "combien": 4
+   }
+  ],
+  "gare": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.177206,
+    "lat": 49.109563,
+    "distance_m": 35,
+    "combien": 3
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.179587,
+    "lat": 49.110434,
+    "distance_m": 227
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Starbucks",
+    "lon": 6.17708,
+    "lat": 49.109618,
+    "distance_m": 38
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "ABC",
+    "lon": 6.176095,
+    "lat": 49.110211,
+    "distance_m": 123
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Express Bar",
+    "lon": 6.175709,
+    "lat": 49.110311,
+    "distance_m": 149
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Mémorial à Jean Moulin",
+    "lon": 6.177287,
+    "lat": 49.109757,
+    "distance_m": 57
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Statue du Général de Gaulle",
+    "lon": 6.176598,
+    "lat": 49.109931,
+    "distance_m": 79
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.176348,
+    "lat": 49.109234,
+    "distance_m": 49,
+    "combien": 3
+   }
+  ],
+  "persuis": [
+   {
+    "genre": "ravitaillement",
+    "nom": "Zimmer",
+    "lon": 6.177455,
+    "lat": 49.099921,
+    "distance_m": 109
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Gran Gusto",
+    "lon": 6.179843,
+    "lat": 49.100204,
+    "distance_m": 125
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Tolo Market",
+    "lon": 6.180346,
+    "lat": 49.100215,
+    "distance_m": 158
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le comptoir gourmand du Sablon",
+    "lon": 6.176164,
+    "lat": 49.099433,
+    "distance_m": 213
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Casa Presto",
+    "lon": 6.175142,
+    "lat": 49.100717,
+    "distance_m": 231
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Aurore",
+    "lon": 6.175485,
+    "lat": 49.099488,
+    "distance_m": 248
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.17575,
+    "lat": 49.099953,
+    "distance_m": 206
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.17747,
+    "lat": 49.099857,
+    "distance_m": 114
+   }
+  ],
+  "pelt": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.185299,
+    "lat": 49.104087,
+    "distance_m": 281
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.186782,
+    "lat": 49.109778,
+    "distance_m": 362
+   }
+  ],
+  "parc-seille": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.184908,
+    "lat": 49.106644,
+    "distance_m": 6,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Poulaillon",
+    "lon": 6.182393,
+    "lat": 49.106628,
+    "distance_m": 187
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Starbucks",
+    "lon": 6.182102,
+    "lat": 49.106637,
+    "distance_m": 209
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Columbus Café & Co",
+    "lon": 6.182066,
+    "lat": 49.106636,
+    "distance_m": 211
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Paul",
+    "lon": 6.182228,
+    "lat": 49.105732,
+    "distance_m": 222,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Kefan Traiteur",
+    "lon": 6.182108,
+    "lat": 49.105725,
+    "distance_m": 230
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Liberazione",
+    "lon": 6.18464,
+    "lat": 49.107907,
+    "distance_m": 146
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.181425,
+    "lat": 49.108319,
+    "distance_m": 320
+   }
+  ]
+ },
+ "boucle-de-la-seille": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Copains d'Abord",
+    "lon": 6.175917,
+    "lat": 49.114896,
+    "distance_m": 88
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180,
+    "combien": 4
+   }
+  ],
+  "cinq-sens": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.180026,
+    "lat": 49.112731,
+    "distance_m": 63
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Les Amis de Saint-Louis",
+    "lon": 6.181825,
+    "lat": 49.113217,
+    "distance_m": 101
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Zervmary Afro Plus Store",
+    "lon": 6.179393,
+    "lat": 49.111329,
+    "distance_m": 174
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Alimentation Générale",
+    "lon": 6.178492,
+    "lat": 49.113358,
+    "distance_m": 193
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Restaurant Moze",
+    "lon": 6.1788,
+    "lat": 49.11368,
+    "distance_m": 194
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Romarin",
+    "lon": 6.179021,
+    "lat": 49.111173,
+    "distance_m": 205
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Je voudrais aller voir la neige en Afrique",
+    "lon": 6.184521,
+    "lat": 49.112865,
+    "distance_m": 269
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.177322,
+    "lat": 49.111557,
+    "distance_m": 281
+   }
+  ],
+  "amphitheatre": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.177696,
+    "lat": 49.107739,
+    "distance_m": 177,
+    "combien": 3
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.179587,
+    "lat": 49.110434,
+    "distance_m": 195
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Lunch Box",
+    "lon": 6.179708,
+    "lat": 49.107268,
+    "distance_m": 158
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Starbucks",
+    "lon": 6.17708,
+    "lat": 49.109618,
+    "distance_m": 214
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Brasserie Pompidou",
+    "lon": 6.179059,
+    "lat": 49.106786,
+    "distance_m": 216
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.179651,
+    "lat": 49.109375,
+    "distance_m": 77
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Mémorial à Jean Moulin",
+    "lon": 6.177287,
+    "lat": 49.109757,
+    "distance_m": 210
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.176348,
+    "lat": 49.109234,
+    "distance_m": 249
+   }
+  ],
+  "keune": [
+   {
+    "genre": "ravitaillement",
+    "nom": "Yozora",
+    "lon": 6.181822,
+    "lat": 49.107917,
+    "distance_m": 112
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Umé",
+    "lon": 6.18193,
+    "lat": 49.10794,
+    "distance_m": 115
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Piopa Lasagna-Caffé",
+    "lon": 6.18063,
+    "lat": 49.107574,
+    "distance_m": 134
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Milano",
+    "lon": 6.181289,
+    "lat": 49.107149,
+    "distance_m": 180
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Paul",
+    "lon": 6.181955,
+    "lat": 49.107136,
+    "distance_m": 194
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.181155,
+    "lat": 49.108448,
+    "distance_m": 37
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.181425,
+    "lat": 49.108319,
+    "distance_m": 59,
+    "combien": 2
+   }
+  ],
+  "pelt": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.185299,
+    "lat": 49.104087,
+    "distance_m": 281
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.186782,
+    "lat": 49.109778,
+    "distance_m": 362
+   }
+  ],
+  "parc-seille": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.184908,
+    "lat": 49.106644,
+    "distance_m": 6,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Poulaillon",
+    "lon": 6.182393,
+    "lat": 49.106628,
+    "distance_m": 187
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Starbucks",
+    "lon": 6.182102,
+    "lat": 49.106637,
+    "distance_m": 209
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Columbus Café & Co",
+    "lon": 6.182066,
+    "lat": 49.106636,
+    "distance_m": 211
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Paul",
+    "lon": 6.182228,
+    "lat": 49.105732,
+    "distance_m": 222
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Kefan Traiteur",
+    "lon": 6.182108,
+    "lat": 49.105725,
+    "distance_m": 230
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Ammé Thé",
+    "lon": 6.182425,
+    "lat": 49.105226,
+    "distance_m": 241
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Liberazione",
+    "lon": 6.18464,
+    "lat": 49.107907,
+    "distance_m": 146
+   }
+  ],
+  "porte-allemands": [
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.185679,
+    "lat": 49.117391,
+    "distance_m": 55,
+    "combien": 5
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.184246,
+    "lat": 49.118028,
+    "distance_m": 98,
+    "combien": 3
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Ohpara",
+    "lon": 6.184679,
+    "lat": 49.117821,
+    "distance_m": 65
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Shalimar market",
+    "lon": 6.184687,
+    "lat": 49.118285,
+    "distance_m": 78
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Petit Bistrot",
+    "lon": 6.184808,
+    "lat": 49.117001,
+    "distance_m": 112
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "OK Pizza",
+    "lon": 6.184669,
+    "lat": 49.116715,
+    "distance_m": 145
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Porte des Allemands",
+    "lon": 6.185568,
+    "lat": 49.11788,
+    "distance_m": 0
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.185453,
+    "lat": 49.117845,
+    "distance_m": 9,
+    "combien": 2
+   }
+  ]
+ },
+ "technopole-cheneau": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le P'tit Frontalier",
+    "lon": 6.177244,
+    "lat": 49.115861,
+    "distance_m": 59
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180,
+    "combien": 4
+   }
+  ],
+  "cheneau-est": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.202898,
+    "lat": 49.113366,
+    "distance_m": 90,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.203335,
+    "lat": 49.11279,
+    "distance_m": 54
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Foyer des Élèves",
+    "lon": 6.206448,
+    "lat": 49.111302,
+    "distance_m": 260
+   }
+  ],
+  "technopole": [
+   {
+    "genre": "patrimoine",
+    "nom": "Monument",
+    "lon": 6.198921,
+    "lat": 49.108862,
+    "distance_m": 378
+   }
+  ],
+  "parc-seille": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.184908,
+    "lat": 49.106644,
+    "distance_m": 6,
+    "combien": 3
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Au Moulin Poulaillon",
+    "lon": 6.182347,
+    "lat": 49.106648,
+    "distance_m": 191
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Starbucks",
+    "lon": 6.182102,
+    "lat": 49.106637,
+    "distance_m": 209
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Columbus Café & Co",
+    "lon": 6.182066,
+    "lat": 49.106636,
+    "distance_m": 211
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Paul",
+    "lon": 6.182267,
+    "lat": 49.10573,
+    "distance_m": 220,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Kefan Traiteur",
+    "lon": 6.182108,
+    "lat": 49.105725,
+    "distance_m": 230
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Liberazione",
+    "lon": 6.18464,
+    "lat": 49.107907,
+    "distance_m": 146
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.181425,
+    "lat": 49.108319,
+    "distance_m": 320
+   }
+  ]
+ },
+ "nouvelle-ville-eau": {
+  "parmentiers": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.174459,
+    "lat": 49.116194,
+    "distance_m": 197,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Baratin",
+    "lon": 6.176598,
+    "lat": 49.115105,
+    "distance_m": 37
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le P'tit Frontalier",
+    "lon": 6.177244,
+    "lat": 49.115861,
+    "distance_m": 59
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Piaf",
+    "lon": 6.177539,
+    "lat": 49.115883,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Mougel",
+    "lon": 6.177615,
+    "lat": 49.115852,
+    "distance_m": 75
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "verdura",
+    "lon": 6.177312,
+    "lat": 49.116004,
+    "distance_m": 76
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Megama",
+    "lon": 6.17618,
+    "lat": 49.11483,
+    "distance_m": 80
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.179258,
+    "lat": 49.114953,
+    "distance_m": 180
+   }
+  ],
+  "gare": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.177206,
+    "lat": 49.109563,
+    "distance_m": 35,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.179587,
+    "lat": 49.110434,
+    "distance_m": 227
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Starbucks",
+    "lon": 6.17708,
+    "lat": 49.109618,
+    "distance_m": 38
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "ABC",
+    "lon": 6.176095,
+    "lat": 49.110211,
+    "distance_m": 123
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Express Bar",
+    "lon": 6.175709,
+    "lat": 49.110311,
+    "distance_m": 149
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Mémorial à Jean Moulin",
+    "lon": 6.177287,
+    "lat": 49.109757,
+    "distance_m": 57
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Statue du Général de Gaulle",
+    "lon": 6.176598,
+    "lat": 49.109931,
+    "distance_m": 79
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.176348,
+    "lat": 49.109234,
+    "distance_m": 49,
+    "combien": 4
+   }
+  ],
+  "jean-moulin": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.1679,
+    "lat": 49.107351,
+    "distance_m": 142,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.167484,
+    "lat": 49.106237,
+    "distance_m": 242
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Atelier du Pain",
+    "lon": 6.170203,
+    "lat": 49.108064,
+    "distance_m": 43
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Aux Vieilles Casseroles",
+    "lon": 6.170455,
+    "lat": 49.107961,
+    "distance_m": 57
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Henri le Boulanger",
+    "lon": 6.169879,
+    "lat": 49.108557,
+    "distance_m": 78
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Honey Coffee & Food",
+    "lon": 6.170921,
+    "lat": 49.108279,
+    "distance_m": 101
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Henri Gerstenhaben",
+    "lon": 6.169821,
+    "lat": 49.108541,
+    "distance_m": 75
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Léon Bleitrach",
+    "lon": 6.170925,
+    "lat": 49.10832,
+    "distance_m": 103
+   }
+  ],
+  "maud-huy": [
+   {
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.165949,
+    "lat": 49.111441,
+    "distance_m": 294
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Rond Point",
+    "lon": 6.16633,
+    "lat": 49.108944,
+    "distance_m": 63
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Le Cafard",
+    "lon": 6.166494,
+    "lat": 49.108555,
+    "distance_m": 65
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Au Petit Louis",
+    "lon": 6.16691,
+    "lat": 49.109972,
+    "distance_m": 118
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "L'Écrin Gourmand",
+    "lon": 6.166269,
+    "lat": 49.107914,
+    "distance_m": 131
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Golden Bar",
+    "lon": 6.167119,
+    "lat": 49.110354,
+    "distance_m": 159
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Carrefour City",
+    "lon": 6.165603,
+    "lat": 49.107548,
+    "distance_m": 192
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Tchantchès",
+    "lon": 6.167563,
+    "lat": 49.109035,
+    "distance_m": 30
+   }
+  ],
+  "esplanade": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.17128,
+    "lat": 49.114941,
+    "distance_m": 127,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.169141,
+    "lat": 49.116659,
+    "distance_m": 126
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Papy Disco",
+    "lon": 6.169056,
+    "lat": 49.115923,
+    "distance_m": 107
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Cheval de Bronze",
+    "lon": 6.17125,
+    "lat": 49.11653,
+    "distance_m": 82
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Ney",
+    "lon": 6.171516,
+    "lat": 49.11547,
+    "distance_m": 91
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "La Naïade",
+    "lon": 6.171655,
+    "lat": 49.11633,
+    "distance_m": 92
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Le Poilu libérateur",
+    "lon": 6.169396,
+    "lat": 49.116517,
+    "distance_m": 102
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.171635,
+    "lat": 49.115205,
+    "distance_m": 117,
+    "combien": 4
+   }
+  ],
+  "esplanade-lac": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.166867,
+    "lat": 49.115732,
+    "distance_m": 58,
+    "combien": 2
+   },
+   {
+    "genre": "vue",
+    "nom": "Tour de la Cité",
+    "lon": 6.168741,
+    "lat": 49.117343,
+    "distance_m": 167
+   },
+   {
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.168727,
+    "lat": 49.117354,
+    "distance_m": 167,
+    "combien": 2
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Terraza",
+    "lon": 6.167072,
+    "lat": 49.117859,
+    "distance_m": 190
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Buvette du Plan d'O",
+    "lon": 6.164938,
+    "lat": 49.113734,
+    "distance_m": 321
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Buste de Verlaine",
+    "lon": 6.169041,
+    "lat": 49.116958,
+    "distance_m": 153
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Tour d'Enfer",
+    "lon": 6.167172,
+    "lat": 49.113182,
+    "distance_m": 331
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.167437,
+    "lat": 49.11672,
+    "distance_m": 63,
+    "combien": 2
+   }
+  ],
+  "saulcy": [
+   {
+    "genre": "ravitaillement",
+    "nom": "AGORAé Metz Saulcy",
+    "lon": 6.16226,
+    "lat": 49.120024,
+    "distance_m": 74
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Market' Rimbaud",
+    "lon": 6.159659,
+    "lat": 49.119155,
+    "distance_m": 157
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Brasserie Baudelaire",
+    "lon": 6.158791,
+    "lat": 49.120717,
+    "distance_m": 191
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Restaurant universitaire Paul Verlaine",
+    "lon": 6.16441,
+    "lat": 49.118817,
+    "distance_m": 271
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Oeuvre",
+    "lon": 6.161103,
+    "lat": 49.12001,
+    "distance_m": 15,
+    "combien": 3
+   }
+  ]
  }
 }
