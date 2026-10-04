@@ -671,6 +671,9 @@ addEventListener("visibilitychange", () => {
 });
 
 function retourListe(){
+  // La liste n'a pas d'adresse propre : on retire celle de la boucle, sans
+  // creer d'entree d'historique -- le retour du telephone en cree deja une.
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   choisi = null;
   etapeChoisie = null;
   if (veille !== null) arreteLeSuivi();
@@ -682,8 +685,22 @@ function retourListe(){
   montre("liste");
 }
 
-// Le bouton « retour » d'Android doit refermer la fiche, pas quitter le site.
-addEventListener("popstate", () => { if (surTelephone()) retourListe(); });
+/* Chaque boucle a une adresse, `/#son-id`, qu'on peut partager depuis le
+   navigateur. Le `#` ne part pas au serveur : la page est celle que le
+   service worker garde, et un lien s'ouvre donc aussi hors reseau -- une
+   adresse en `/balade/...` n'aurait pas ete dans son cache. */
+function boucleDeLAdresse(){
+  const id = decodeURIComponent(location.hash.slice(1));
+  return catalogue && catalogue.parcours.some(p => p.id === id) ? id : null;
+}
+
+// Le bouton « retour » doit refermer la fiche, pas quitter le site ; et
+// « suivant » la rouvrir. L'adresse dit ou l'on doit etre.
+addEventListener("popstate", () => {
+  const id = boucleDeLAdresse();
+  if (id){ if (id !== choisi) selectionne(id, {depuisLHistorique: true}); }
+  else if (choisi) retourListe();
+});
 
 /* Cadrage differe : Leaflet cadre d'apres la taille de son conteneur, et
    celle-ci vaut zero tant que la vue n'est pas affichee. On garde donc les
@@ -880,7 +897,7 @@ function rendre(){
   if (dernierSuivi && veille !== null) ecritLeSuivi(dernierSuivi);
 }
 
-function selectionne(id){
+function selectionne(id, {depuisLHistorique = false} = {}){
   const ouvrait = choisi;
   choisi = id;
   if (choisi !== ouvrait){
@@ -897,10 +914,24 @@ function selectionne(id){
   if (!choisi){ montre("liste"); return; }
   // La boucle choisie prend la place de la liste, sur telephone comme sur
   // grand ecran : tant qu'on la regarde, le reste n'a rien a dire. L'entree
-  // d'historique permet au bouton retour du telephone de refermer.
-  if (ouvrait !== choisi) history.pushState({fiche: choisi}, "");
+  // d'historique permet au bouton retour de refermer, et porte l'adresse de
+  // la boucle.
+  if (ouvrait !== choisi && !depuisLHistorique){
+    history.pushState({fiche: choisi}, "", "#" + encodeURIComponent(choisi));
+  }
   montre("fiche");
   document.querySelector(".volet").scrollTop = 0;
+}
+
+/* Arriver par un lien partage : la boucle s'ouvre directement. On glisse la
+   liste sous elle dans l'historique, pour que le retour y mene plutot que de
+   quitter le site. Une adresse inconnue -- boucle renommee ou retiree --
+   ramene simplement a la liste. */
+function ouvreLaBoucleDeLAdresse(){
+  if (!location.hash || choisi) return;
+  const id = boucleDeLAdresse();
+  history.replaceState(null, "", location.pathname + location.search);
+  if (id) selectionne(id);
 }
 
 function majCarte(){
@@ -908,8 +939,10 @@ function majCarte(){
   const affiches = new Set(parcoursAffiches().map(p => p.id));
   for (const [id, couche] of Object.entries(couches)){
     // Une boucle ecartee par le filtre disparait aussi de la carte : sinon on
-    // clique sur un trait qui n'est plus dans la liste.
-    if (!affiches.has(id)){ carte.removeLayer(couche); continue; }
+    // clique sur un trait qui n'est plus dans la liste. Sauf celle qu'on
+    // regarde : un lien partage peut ouvrir une boucle en voiture chez
+    // quelqu'un qui ne garde que celles a pied.
+    if (!affiches.has(id) && id !== choisi){ carte.removeLayer(couche); continue; }
     if (!carte.hasLayer(couche)) couche.addTo(carte);
     const actif = !choisi || choisi === id;
     couche.setStyle({opacity: actif ? 0.95 : 0.2, weight: choisi === id ? 6 : 4});
@@ -1676,6 +1709,7 @@ async function charge(){
   rendre();
   majCarte();
   cadre(limitesDeTout());
+  ouvreLaBoucleDeLAdresse();
   await litLaVersion();
   await reveilleLOuvrier();
   if (ouvrier) rendre();
