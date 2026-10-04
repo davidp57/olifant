@@ -66,7 +66,8 @@ def candidats(reponse: dict, centre: tuple[float, float], connus: list[Point],
     """Les lieux de la reponse qu'aucun point connu ne touche, du plus proche.
 
     Un meme bois revient souvent en plusieurs morceaux homonymes : on n'en
-    garde qu'un par nom et par genre, le plus proche du centre.
+    garde qu'un par nom et par genre, le plus proche du centre. Les points de
+    vue sans nom, eux, sont autant de lieux distincts.
     """
     vus: dict[tuple[str, str], Candidat] = {}
     for element in reponse.get("elements", []):
@@ -85,7 +86,8 @@ def candidats(reponse: dict, centre: tuple[float, float], connus: list[Point],
         trouve = Candidat(genre=genre, nom=nom, lon=lon, lat=lat,
                           eloignement_m=distance_m(centre, (lon, lat)),
                           plus_proche_m=proche)
-        clef = (genre, nom.casefold())
+        clef = ((genre, nom.casefold()) if tags.get("name")
+                else (genre, round(lon, 5), round(lat, 5)))
         if clef not in vus or trouve.eloignement_m < vus[clef].eloignement_m:
             vus[clef] = trouve
     return sorted(vus.values(), key=lambda c: c.eloignement_m)

@@ -83,6 +83,12 @@ class TestCandidats:
         trouves = candidats(r, (6.10, 49.10), [])
         assert len(trouves) == 1 and trouves[0].lon == 6.14
 
+    def test_deux_points_de_vue_sans_nom_restent_deux(self):
+        r = self.reponse(
+            {"lon": 6.12, "lat": 49.10, "tags": {"tourism": "viewpoint"}},
+            {"lon": 6.15, "lat": 49.12, "tags": {"tourism": "viewpoint"}})
+        assert len(candidats(r, (6.10, 49.10), [])) == 2
+
     def test_classe_du_plus_proche_au_plus_lointain(self):
         r = self.reponse(
             {"lon": 6.16, "lat": 49.10, "tags": {"historic": "fort", "name": "Loin"}},

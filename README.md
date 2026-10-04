@@ -470,7 +470,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-168 tests, sans réseau.
+169 tests, sans réseau.
 
 ## Un mot sur les services publics
 
