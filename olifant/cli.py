@@ -5,6 +5,8 @@
     python -m olifant calcule --profil trekking --hors-ligne
     python -m olifant reperes                 # ce qu'OSM sait autour des etapes
     python -m olifant tuiles                  # emporte le fond de carte
+    python -m olifant candidats pompidou      # ou aller qu'on ne connait pas
+    python -m olifant essaie gare 6.2157,49.1316 queuleu gare
 """
 
 from __future__ import annotations
@@ -15,8 +17,8 @@ import os
 import sys
 from pathlib import Path
 
-from . import donnees, export, jalons, qualite, reperes, tuiles
-from .modele import Parcours, distance_m
+from . import composition, donnees, export, jalons, qualite, reperes, tuiles
+from .modele import Parcours, Point, distance_m
 from .routage import PROFIL_DEFAUT, ErreurRoutage, Routeur
 
 RACINE = Path(__file__).resolve().parent.parent
@@ -171,23 +173,104 @@ def essaie(args: argparse.Namespace) -> int:
     """Mesure une suite d'etapes sans rien ecrire : sert a composer un parcours.
 
     On tatonne beaucoup pour caler une boucle sur la bonne distance ; autant
-    que le tatonnement ne salisse pas le fichier de reference.
+    que le tatonnement ne salisse pas le fichier de reference. Une etape est
+    une cle du fichier ou un lieu de passage ecrit `lon,lat` -- de quoi essayer
+    un lieu trouve par `candidats` avant de lui donner un nom.
     """
     recueil = donnees.charge(args.fichier)
     routeur = Routeur(args.cache, profil=args.profil, hors_ligne=args.hors_ligne)
-    brouillon = Parcours(id="essai", nom="Essai", etapes=args.etapes)
+    points = dict(recueil.points)
     try:
-        trace = routeur.trace(brouillon, recueil.points)
+        etapes = [_etape(texte, points) for texte in args.etapes]
+    except ValueError as e:
+        print("ECHEC %s" % e)
+        return 2
+    brouillon = Parcours(id="essai", nom="Essai", etapes=etapes)
+    try:
+        trace = routeur.trace(brouillon, points)
     except ErreurRoutage as e:
         print("ECHEC %s" % e)
         return 1
-    bilan = qualite.juge(brouillon, trace, recueil.points)
+    bilan = qualite.juge(brouillon, trace, points)
     print("%5.1f km  D+%4d m  chemin %3d%%  bitume %3d%%  route %3d%%  balise %3d%%"
           "  repasse %3d%%"
           % (bilan.km, round(bilan.montee), round(bilan.chemin), round(bilan.bitume),
              round(bilan.route), round(bilan.balise), round(bilan.recouvrement)))
+
+    # Ce qu'on a deja : les traces des parcours du fichier, depuis le cache.
+    # Un parcours jamais calcule manque a la comparaison, et on le dit.
+    deja = Routeur(args.cache, profil=args.profil, hors_ligne=True)
+    autres, absents = [], 0
+    for parcours in recueil.parcours:
+        # L'essai d'un parcours du fichier ne se compare pas a lui-meme, ni a
+        # la version qu'il vient remplacer.
+        if parcours.etapes == etapes or parcours.id in args.sauf:
+            continue
+        try:
+            autres.append(deja.trace(parcours, recueil.points))
+        except ErreurRoutage:
+            absents += 1
+    print("neuf %3d%%  (hors des %d parcours connus%s)"
+          % (round(composition.part_neuve(trace, autres)), len(autres),
+             ", %d jamais calcules" % absents if absents else ""))
+    if bilan.liaison_m:
+        print("liaison %d m, faite a l'aller et au retour" % bilan.liaison_m)
+
+    print()
+    for t in composition.troncons(brouillon, trace, points):
+        print("  %-24s -> %-24s %5.1f km  (x%.1f le vol d'oiseau)"
+              % (points[t.de].nom[:24], points[t.a].nom[:24], t.metres / 1000,
+                 t.detour))
+    for branche in bilan.branches:
+        if branche.metres >= 100:
+            print("  branche de %d m au km %.1f  (%.5f, %.5f)"
+                  % (branche.metres, branche.km, *branche.lonlat))
     for alerte in bilan.alertes:
         print("  ! " + alerte)
+    return 0
+
+
+def _etape(texte: str, points: dict[str, Point]) -> str:
+    """La cle d'une etape, en inscrivant au passage un lieu ecrit `lon,lat`."""
+    if texte in points:
+        return texte
+    morceaux = texte.split(",")
+    try:
+        lon, lat = (float(m) for m in morceaux)
+    except ValueError:
+        raise ValueError("« %s » n'est ni un point du fichier ni un lieu lon,lat"
+                         % texte) from None
+    points[texte] = Point(cle=texte, nom="%.5f, %.5f" % (lon, lat), lon=lon, lat=lat)
+    return texte
+
+
+def cherche_des_candidats(args: argparse.Namespace) -> int:
+    """Les lieux des environs qui valent une etape et qu'aucun point ne touche.
+
+    C'est la premiere question quand on compose : ou aller qu'on ne connait
+    pas deja. On la pose a OpenStreetMap, une fois, et la reponse est gardee.
+    """
+    recueil = donnees.charge(args.fichier)
+    points = dict(recueil.points)
+    try:
+        centre = points[_etape(args.centre, points)].lonlat
+    except ValueError as e:
+        print("ECHEC %s" % e)
+        return 2
+    sonde = reperes.Sonde(args.cache, hors_ligne=args.hors_ligne)
+    try:
+        reponse = sonde.interroge(composition.requete_lieux(centre, args.rayon))
+    except reperes.ErreurOverpass as e:
+        print("ECHEC %s" % e)
+        return 1
+    trouves = composition.candidats(reponse, centre, list(recueil.points.values()),
+                                    ecart_m=args.ecart)
+    for c in trouves:
+        print("%4.1f km  %-12s %-44s %.5f,%.5f   (%d m du point connu le plus proche)"
+              % (c.eloignement_m / 1000, c.genre, c.nom[:44], c.lon, c.lat,
+                 c.plus_proche_m))
+    print("\n%d lieux a plus de %d m de tout point connu, dans un rayon de %.1f km."
+          % (len(trouves), args.ecart, args.rayon / 1000))
     return 0
 
 
@@ -310,10 +393,25 @@ def principal(argv: list[str] | None = None) -> int:
     tu.set_defaults(fonction=emporte_les_tuiles)
 
     e = sous.add_parser("essaie", help="mesure une suite d'etapes sans rien ecrire")
-    e.add_argument("etapes", nargs="+", help="cles de points, dans l'ordre")
+    e.add_argument("etapes", nargs="+",
+                   help="cles de points ou lieux lon,lat, dans l'ordre")
+    e.add_argument("--sauf", action="append", default=[], metavar="ID",
+                   help="parcours a ne pas compter dans la part neuve")
     e.add_argument("--profil", default=PROFIL_DEFAUT)
     e.add_argument("--hors-ligne", action="store_true")
     e.set_defaults(fonction=essaie)
+
+    ca = sous.add_parser("candidats",
+                         help="les lieux des environs qu'aucun point ne touche")
+    ca.add_argument("centre", nargs="?", default="gare",
+                    help="cle de point ou lieu lon,lat (defaut : gare)")
+    ca.add_argument("--rayon", type=int, default=composition.RAYON_M,
+                    help="en metres (defaut : %d)" % composition.RAYON_M)
+    ca.add_argument("--ecart", type=int, default=composition.ECART_CONNU_M,
+                    help="distance minimale a tout point connu, en metres "
+                         "(defaut : %d)" % composition.ECART_CONNU_M)
+    ca.add_argument("--hors-ligne", action="store_true")
+    ca.set_defaults(fonction=cherche_des_candidats)
 
     a = sous.add_parser("accroche", help="ou le routeur rattache les points")
     a.add_argument("cles", nargs="*", help="points a verifier, tous par defaut")

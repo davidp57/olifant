@@ -28,7 +28,7 @@ rien.
 
 ### Le contrôle qualité
 
-Le routeur peut se tromper sans le dire. Quatre contrôles tournent à chaque
+Le routeur peut se tromper sans le dire. Cinq contrôles tournent à chaque
 calcul et signalent, avant qu'on parte marcher :
 
 - **l'étape rattachée ailleurs** — un point posé au milieu d'un bois sur une vue
@@ -40,14 +40,23 @@ calcul et signalent, avant qu'on parte marcher :
 - **le bitume** — au-delà de 45 %, le parcours est signalé. Une boucle
   marquée `ville` s'autorise 65 % : il n'existe pas de 5 km sans trottoir au
   départ du centre de Metz, et juger ces boucles-là au seuil de la campagne
-  reviendrait à signaler tout le lot, donc à ne plus rien signaler.
+  reviendrait à signaler tout le lot, donc à ne plus rien signaler ;
+- **la branche** — ce bout de tracé qu'on parcourt à l'aller et au retour pour
+  aller toucher un lieu planté à l'écart. Le contrôle du recouvrement ne
+  l'attrape pas — 300 m aller-retour sur 13 km font 5 % — et ça se voit très
+  bien sur la carte, en deux traits superposés. Au-delà de 250 m, le parcours
+  est signalé.
 
-Un cinquième défaut ne se mesure pas au calcul mais se refuse à la
-composition : **la branche**, ce bout de tracé qu'on parcourt à l'aller et au
-retour pour aller toucher un lieu planté à l'écart. Le contrôle du
-recouvrement ne l'attrape pas — 300 m aller-retour sur 13 km font 5 % — et ça
-se voit très bien sur la carte, en deux traits superposés. Les dix balades
-courtes ont été composées en refusant toute branche de plus de 250 m.
+La branche s'est longtemps refusée à l'œil, au moment de composer : les dix
+balades courtes l'ont été ainsi, et mesurées après coup, la plus longue fait
+216 m. Le contrôle a été ajouté quand une branche de 450 m, vers le fort de
+Saint-Julien, n'a été vue que sur la carte. Mesurés à leur tour, dix parcours
+composés avant lui en portent une, jusqu'à 2,4 km pour la vallée de la
+Canner : ils sont signalés à chaque calcul.
+
+Le bout refait **au départ** d'une boucle n'est pas une branche : c'est la
+liaison, le chemin pour rejoindre la boucle, qu'on prend forcément dans les
+deux sens. Elle est mesurée, pas reprochée.
 
 ## Les parcours
 
@@ -131,14 +140,19 @@ Celles-là ont été cherchées pour **passer là où aucun autre parcours ne
 passe**. Les lieux candidats ont été relevés dans OpenStreetMap — parcs, bois,
 forts, points de vue à moins de cinq kilomètres du Centre Pompidou — en ne
 gardant que ceux qu'aucune boucle ne touchait. La colonne « neuf » mesure la
-part du tracé à plus de 40 m de tous les autres parcours.
+part du tracé à plus de 40 m des vingt-trois parcours d'avant.
+
+La boucle de Montigny a été retouchée après coup : la première version visait
+la plaine de la Vacquinière depuis le château de Courcelles et en revenait par
+le même chemin, une branche de 300 m. Prise dans l'autre sens, elle n'en a
+plus.
 
 | parcours | départ | distance | D+ | chemins | bitume | neuf |
 |---|---|---|---|---|---|---|
-| Les hauts de Saint-Julien et le bois de Grimont | Pompidou | 13,4 km | 193 m | 41 % | 14 % | 88 % |
+| Les hauts de Saint-Julien et le bois de Grimont | Pompidou | 13,4 km | 193 m | 41 % | 14 % | 89 % |
 | Saint-Julien et Grimont | Parmentiers | 12,3 km | 164 m | 27 % | 25 % | 83 % |
-| Grange-aux-Bois et les lacs du Technopôle | Pompidou | 14,1 km | 117 m | 33 % | 31 % | 58 % |
-| Les parcs de Montigny et le château de Courcelles | Pompidou | 9,6 km | 32 m | 13 % | 27 % | 61 % |
+| Grange-aux-Bois et les lacs du Technopôle | Pompidou | 14,1 km | 117 m | 33 % | 31 % | 59 % |
+| Les parcs de Montigny et le château de Courcelles | Pompidou | 10,1 km | 31 m | 16 % | 25 % | 66 % |
 
 Les deux départs du Pompidou vers l'est font leur premier kilomètre, ou
 kilomètre et demi, à l'aller et au retour : c'est le chemin pour rejoindre la
@@ -167,6 +181,38 @@ python -m olifant accroche bois-macabee
 
 `essaie` mesure une suite d'étapes et ne l'enregistre pas ; `accroche` dit à
 quelle distance le routeur rattache un point, et donne les coordonnées corrigées.
+
+`essaie` en dit plus que les cinq contrôles :
+
+```
+ 13.4 km  D+ 193 m  chemin  41%  bitume  14%  route  46%  balise   8%  repasse  13%
+neuf  89%  (hors des 25 parcours connus)
+liaison 1651 m, faite a l'aller et au retour
+
+  Centre Pompidou-Metz, pa -> Parc Marie et Mathias      3.6 km  (x1.3 le vol d'oiseau)
+  ...
+```
+
+- **neuf** : la part du tracé à plus de 40 m de tous les parcours du fichier.
+  Sans elle, on recompose sans le voir une boucle qu'on a déjà. Pour retoucher
+  un parcours existant, `--sauf <id>` l'écarte de la comparaison.
+- **chaque tronçon**, et combien de fois il est plus long que la ligne droite.
+  Au-delà de deux fois, il bute sur un obstacle — une rivière, des voies
+  ferrées, une rocade — et c'est l'étape à déplacer.
+- **les branches** de plus de 100 m, avec leurs coordonnées, avant même
+  qu'elles dépassent le seuil.
+
+Une étape peut s'écrire `lon,lat` au lieu d'une clé : on essaie un lieu avant
+de lui donner un nom dans le fichier.
+
+```bash
+python -m olifant candidats pompidou --rayon 5000
+```
+
+`candidats` répond à la question d'avant : où aller qu'on ne connaît pas
+déjà. Il demande à OpenStreetMap les parcs, bois, forts, ruines et points de
+vue autour d'un point, et ne garde que ceux à plus de 500 m de tout point du
+fichier. Une requête Overpass, gardée sur disque comme les autres.
 
 ### Consulter
 
@@ -405,7 +451,8 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 |---|---|
 | `data/parcours.yaml` | le seul fichier écrit à la main |
 | `olifant/routage.py` | BRouter, cache disque, réessais patients |
-| `olifant/qualite.py` | les quatre contrôles, et leurs seuils |
+| `olifant/qualite.py` | les cinq contrôles, et leurs seuils |
+| `olifant/composition.py` | où aller, par où ça passe, ce qui est neuf |
 | `olifant/jalons.py` | à quel kilomètre tombe chaque étape |
 | `olifant/reperes.py` | ce qu'OSM sait autour des étapes |
 | `olifant/tuiles.py` | le fond de carte à emporter |
@@ -423,7 +470,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-151 tests, sans réseau.
+168 tests, sans réseau.
 
 ## Un mot sur les services publics
 

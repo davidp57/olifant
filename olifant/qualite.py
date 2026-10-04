@@ -17,13 +17,21 @@ Chaque controle repond a une facon precise de se faire avoir :
 - le bitume : le routeur a trouve une route, elle est plus directe, il la prend.
   Le seuil depend du terrain : une boucle marquee « ville » s'autorise plus de
   revetement dur qu'une boucle de campagne, parce qu'il n'existe pas de 5 km
-  sans trottoir au depart du centre de Metz.
+  sans trottoir au depart du centre de Metz ;
+- la branche : un bout de trace qu'on parcourt a l'aller puis au retour pour
+  aller toucher un lieu plante a l'ecart. Le recouvrement ne l'attrape pas --
+  300 m aller-retour sur 13 km n'en font que 5 % -- et pourtant ca se voit
+  tres bien sur la carte, en deux traits superposes. Le bout refait au depart
+  d'une boucle n'en est pas une : c'est le chemin pour rejoindre la boucle,
+  qu'on prend forcement dans les deux sens. On l'appelle la liaison, on la
+  mesure, on ne la reproche pas.
 """
 
 from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
+from itertools import accumulate
 
 from .modele import Parcours, Point, Trace, distance_m
 
@@ -40,6 +48,26 @@ BITUME_MAX = 45.0          # part de revetement dur, en %
 BITUME_MAX_VILLE = 65.0
 RECOUVREMENT_MAX = 25.0    # part de la trace parcourue deux fois, en %
 MAILLE_M = 30              # taille de la maille qui detecte le recouvrement
+# Les dix balades courtes ont ete composees en refusant, a l'oeil, toute branche
+# de plus de 250 m ; mesuree apres coup, la plus longue fait 216 m.
+BRANCHE_MAX_M = 250
+REPASSE_M = 20             # deux points de trace plus proches sont le meme lieu
+# En deca de cette distance le long de la trace, se retrouver au meme endroit
+# n'est pas repasser : c'est la pointe d'un demi-tour, ou un virage serre.
+DETOUR_MIN_M = 60
+
+
+@dataclass
+class Branche:
+    """Un bout de trace qu'on refait plus loin, souvent en sens inverse."""
+
+    metres: float        # longueur du bout parcouru deux fois
+    depuis_m: float      # ou il commence, en metres depuis le depart
+    lonlat: tuple[float, float]
+
+    @property
+    def km(self) -> float:
+        return self.depuis_m / 1000
 
 
 @dataclass
@@ -53,6 +81,8 @@ class Bilan:
     recouvrement: float
     boucle_ouverte_m: float
     etapes_loin: list[tuple[str, float]] = field(default_factory=list)
+    liaison_m: float = 0.0
+    branches: list[Branche] = field(default_factory=list)
     alertes: list[str] = field(default_factory=list)
 
     @property
@@ -83,6 +113,7 @@ def juge(parcours: Parcours, trace: Trace, points: dict[str, Point]) -> Bilan:
         boucle_ouverte_m=ouverture,
         etapes_loin=[(cle, d) for cle, d in ecarts if d > ETAPE_LOIN_M],
     )
+    bilan.liaison_m, bilan.branches = branches(trace, boucle=parcours.boucle)
     for cle, distance in bilan.etapes_loin:
         bilan.alertes.append(
             "l'etape « %s » est a %d m de la trace : le routeur l'a rattachee "
@@ -99,6 +130,11 @@ def juge(parcours: Parcours, trace: Trace, points: dict[str, Point]) -> Bilan:
         bilan.alertes.append(
             "%d %% du parcours est fait deux fois : c'est un aller-retour deguise"
             % round(bilan.recouvrement))
+    for branche in bilan.branches:
+        if branche.metres > BRANCHE_MAX_M:
+            bilan.alertes.append(
+                "une branche de %d m au km %.1f : on la parcourt a l'aller et "
+                "au retour" % (branche.metres, branche.km))
     return bilan
 
 
@@ -149,3 +185,54 @@ def recouvrement(trace: Trace, maille_m: int = MAILLE_M) -> float:
         else:
             vues.setdefault(case, i)
     return 100 * refait / total if total else 0.0
+
+
+def branches(trace: Trace, boucle: bool = True) -> tuple[float, list[Branche]]:
+    """La liaison d'une boucle, et les bouts de trace qu'on refait ailleurs.
+
+    Un point est « repris » si la trace repasse a moins de REPASSE_M de lui
+    plus loin -- et pas juste apres, ce qui serait la pointe d'un demi-tour.
+    Refaire le meme chemin, c'est repasser par les memes noeuds OSM ; la
+    tolerance absorbe les chemins doubles et les arrondis du routeur.
+
+    Chaque bout repris n'est compte qu'une fois, a l'aller. Sur une boucle,
+    celui qui part du depart est la liaison ; les autres sont des branches.
+    """
+    pts = trace.points
+    if len(pts) < 3:
+        return 0.0, []
+    cumuls = [0.0, *accumulate(distance_m(a, b) for a, b in zip(pts, pts[1:]))]
+    pas_lat = REPASSE_M / 111320
+    pas_lon = REPASSE_M / (111320 * max(math.cos(math.radians(pts[0][1])), 0.1))
+    case = lambda p: (int(p[0] // pas_lon), int(p[1] // pas_lat))
+    grille: dict[tuple[int, int], list[int]] = {}
+    for j, p in enumerate(pts):
+        grille.setdefault(case(p), []).append(j)
+
+    def repris(i: int) -> bool:
+        x, y = case(pts[i])
+        return any(j > i and cumuls[j] - cumuls[i] > DETOUR_MIN_M
+                   and distance_m(pts[i], pts[j]) < REPASSE_M
+                   for dx in (-1, 0, 1) for dy in (-1, 0, 1)
+                   for j in grille.get((x + dx, y + dy), ()))
+
+    marques = [repris(i) for i in range(len(pts))]
+    liaison, trouvees = 0.0, []
+    i = 0
+    while i < len(pts) - 1:
+        if not marques[i]:
+            i += 1
+            continue
+        fin = i
+        while fin + 1 < len(pts) - 1 and marques[fin + 1]:
+            fin += 1
+        # D'un point repris au dernier : un point isole -- le depart qu'on
+        # retrouve a l'arrivee, un carrefour traverse deux fois -- ne pese rien.
+        metres = cumuls[fin] - cumuls[i]
+        if metres and boucle and i == 0:
+            liaison = metres
+        elif metres:
+            trouvees.append(Branche(metres=metres, depuis_m=cumuls[i],
+                                    lonlat=(pts[i][0], pts[i][1])))
+        i = fin + 1
+    return liaison, trouvees

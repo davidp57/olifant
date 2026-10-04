@@ -7908,7 +7908,7 @@
   {
    "id": "parcs-de-montigny",
    "nom": "Les parcs de Montigny et le chateau de Courcelles",
-   "resume": "Une boucle de petites rues qui saute de parc en parc : Sainte-Chretienne, Prevert, la Clairiere, le chateau de Courcelles et le jardin botanique. Plus de rues que de chemins, mais aucune grande avenue.",
+   "resume": "Une boucle de petites rues qui saute de parc en parc : Sainte-Chretienne, Prevert, la Clairiere, la Vacquiniere, le chateau de Courcelles et le jardin botanique. Plus de rues que de chemins, mais aucune grande avenue.",
    "acces": "a pied",
    "parking": "",
    "themes": [
@@ -7916,10 +7916,10 @@
     "patrimoine"
    ],
    "couleur": "#5B7F3A",
-   "km": 9.6,
-   "montee": 32,
-   "chemin": 13,
-   "bitume": 27,
+   "km": 10.1,
+   "montee": 31,
+   "chemin": 16,
+   "bitume": 25,
    "route": 59,
    "balise": 7,
    "depart": "Centre Pompidou-Metz, parvis",
@@ -8003,7 +8003,7 @@
      "lat": 49.09621,
      "depart": false,
      "km": 2.0,
-     "part": 21,
+     "part": 19,
      "reperes": [
       {
        "genre": "eau",
@@ -8072,7 +8072,7 @@
      "lat": 49.09415,
      "depart": false,
      "km": 4.3,
-     "part": 44,
+     "part": 42,
      "reperes": [
       {
        "genre": "ravitaillement",
@@ -8142,7 +8142,7 @@
      "lat": 49.10025,
      "depart": false,
      "km": 5.3,
-     "part": 56,
+     "part": 53,
      "reperes": [
       {
        "genre": "ravitaillement",
@@ -8203,14 +8203,40 @@
      ]
     },
     {
+     "cle": "vacquiniere",
+     "nom": "Plaine de la Vacquiniere",
+     "note": "",
+     "lon": 6.15601,
+     "lat": 49.10543,
+     "depart": false,
+     "km": 6.5,
+     "part": 65,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.15537,
+       "lat": 49.105272,
+       "distance_m": 50
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.15644,
+       "lat": 49.106204,
+       "distance_m": 92
+      }
+     ]
+    },
+    {
      "cle": "courcelles",
      "nom": "Parc du chateau de Courcelles",
      "note": "",
      "lon": 6.15731,
      "lat": 49.10337,
      "depart": false,
-     "km": 5.9,
-     "part": 62,
+     "km": 7.4,
+     "part": 73,
      "reperes": [
       {
        "genre": "eau",
@@ -8271,40 +8297,14 @@
      ]
     },
     {
-     "cle": "vacquiniere",
-     "nom": "Plaine de la Vacquiniere",
-     "note": "",
-     "lon": 6.15601,
-     "lat": 49.10543,
-     "depart": false,
-     "km": 6.8,
-     "part": 71,
-     "reperes": [
-      {
-       "genre": "eau",
-       "nom": "Point d'eau",
-       "lon": 6.15537,
-       "lat": 49.105272,
-       "distance_m": 50
-      },
-      {
-       "genre": "commodite",
-       "nom": "Toilettes",
-       "lon": 6.15644,
-       "lat": 49.106204,
-       "distance_m": 92
-      }
-     ]
-    },
-    {
      "cle": "botanique",
      "nom": "Jardin botanique de Metz",
      "note": "",
      "lon": 6.16064,
      "lat": 49.10468,
      "depart": false,
-     "km": 7.4,
-     "part": 77,
+     "km": 7.9,
+     "part": 78,
      "reperes": [
       {
        "genre": "eau",

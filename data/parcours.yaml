@@ -872,7 +872,7 @@ parcours:
              esplanade-lac, saulcy, parmentiers]
 
   # --- trois boucles d'une matinee, 10 a 14 km, hors des sentiers connus --
-  # Composees pour passer la ou aucun autre parcours ne passe : de 58 a 88 %
+  # Composees pour passer la ou aucun autre parcours ne passe : de 59 a 89 %
   # du trace est a plus de 40 m de tous les autres.
 
   - id: saint-julien-grimont
@@ -919,7 +919,8 @@ parcours:
     couleur: 5B7F3A
     resume: >-
       Une boucle de petites rues qui saute de parc en parc : Sainte-Chretienne,
-      Prevert, la Clairiere, le chateau de Courcelles et le jardin botanique.
+      Prevert, la Clairiere, la Vacquiniere, le chateau de Courcelles et le
+      jardin botanique.
       Plus de rues que de chemins, mais aucune grande avenue.
-    etapes: [pompidou, ste-chretienne, prevert, clairiere, courcelles,
-             vacquiniere, botanique, pompidou]
+    etapes: [pompidou, ste-chretienne, prevert, clairiere, vacquiniere,
+             courcelles, botanique, pompidou]

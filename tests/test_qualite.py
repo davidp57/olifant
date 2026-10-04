@@ -8,7 +8,7 @@ import math
 import pytest
 
 from olifant.modele import Parcours, Point, Segment, Trace
-from olifant.qualite import juge, recouvrement
+from olifant.qualite import branches, juge, recouvrement
 
 
 def point(cle, lon, lat):
@@ -133,3 +133,53 @@ def test_la_distance_est_bien_en_metres():
     # Un centieme de degre de latitude vaut a peu pres 1111 m partout.
     assert distance_m((6.0, 49.0), (6.0, 49.01)) == pytest.approx(1111, abs=5)
     assert distance_m((6.0, 49.0), (6.0, 49.0)) == 0
+
+
+def carre(origine=(6.10, 49.10), cote=0.02):
+    """Une boucle carree sans rien de refait, a parcourir dans le sens direct."""
+    x, y = origine
+    return (ligne((x, y), (x + cote, y)) + ligne((x + cote, y), (x + cote, y + cote))[1:]
+            + ligne((x + cote, y + cote), (x, y + cote))[1:]
+            + ligne((x, y + cote), (x, y))[1:])
+
+
+class TestBranches:
+    def test_une_boucle_franche_n_a_ni_liaison_ni_branche(self):
+        assert branches(Trace("x", "p", carre(), [])) == (0.0, [])
+
+    def test_trouve_le_cul_de_sac_et_sa_longueur(self):
+        # Au milieu du premier cote, un crochet de 600 m vers le sud, et retour.
+        boucle = carre()
+        milieu = boucle[20]
+        crochet = ligne(milieu[:2], (milieu[0], milieu[1] - 0.0054), pas=12)
+        trace = Trace("x", "p", boucle[:20] + crochet + list(reversed(crochet))[1:]
+                      + boucle[21:], [])
+        liaison, trouvees = branches(trace)
+        assert liaison == 0.0
+        assert len(trouvees) == 1
+        # La pointe du demi-tour n'est pas comptee : on mesure un peu moins.
+        assert trouvees[0].metres == pytest.approx(600, abs=60)
+
+    def test_le_chemin_pour_rejoindre_la_boucle_est_une_liaison(self):
+        approche = ligne((6.08, 49.10), (6.10, 49.10), pas=20)
+        trace = Trace("x", "p", approche + carre()[1:] + list(reversed(approche))[1:], [])
+        liaison, trouvees = branches(trace, boucle=True)
+        assert liaison == pytest.approx(1460, abs=100)
+        assert trouvees == []
+
+    def test_hors_d_une_boucle_le_debut_refait_est_une_branche(self):
+        approche = ligne((6.08, 49.10), (6.10, 49.10), pas=20)
+        trace = Trace("x", "p", approche + carre()[1:] + list(reversed(approche))[1:], [])
+        liaison, trouvees = branches(trace, boucle=False)
+        assert liaison == 0.0 and len(trouvees) == 1
+
+    def test_le_jugement_signale_une_longue_branche(self):
+        boucle = carre()
+        milieu = boucle[20]
+        crochet = ligne(milieu[:2], (milieu[0], milieu[1] - 0.0054), pas=12)
+        points = {"a": point("a", 6.10, 49.10)}
+        trace = Trace("essai", "p", boucle[:20] + crochet + list(reversed(crochet))[1:]
+                      + boucle[21:], [Segment(10000, {"highway": "path"})])
+        bilan = juge(Parcours(id="e", nom="e", etapes=["a", "b", "a"]), trace,
+                     {**points, "b": point("b", 6.12, 49.10)})
+        assert any("branche" in a for a in bilan.alertes)
