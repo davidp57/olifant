@@ -312,8 +312,16 @@ def _fichier(chemin: Path, type_mime: str, telechargement: bool = False) -> File
     # Le nom vient de l'URL : on verifie qu'on ne sort pas du dossier servi.
     if not chemin.resolve().is_relative_to(SORTIE.resolve()) or not chemin.exists():
         raise HTTPException(404, "Ce fichier n'existe pas ; a-t-on lance le calcul ?")
+    # « no-cache » oblige le navigateur a redemander a chaque fois. Starlette
+    # ne repond pas 304 : les traces repartent en entier, 400 Ko, comme le
+    # catalogue le fait deja -- c'est le prix d'etre a jour. Sans lui, un
+    # fichier qui porte une date de modification est garde d'office : le
+    # navigateur l'estime frais pendant un dixieme de son age. Apres un
+    # deploiement, le telephone affichait les nouvelles boucles du catalogue,
+    # qui n'a pas de date, mais pas leurs traces, servies depuis son cache.
     return FileResponse(chemin, media_type=type_mime,
-                        filename=chemin.name if telechargement else None)
+                        filename=chemin.name if telechargement else None,
+                        headers={"Cache-Control": "no-cache"})
 
 
 # ---------------------------------------------------------------- ecriture

@@ -100,10 +100,15 @@ function gardable(reponse){
   return reponse.ok || (reponse.type === "opaque" && reponse.status === 0);
 }
 
+/* « Le reseau d'abord » passe par le cache HTTP du navigateur, qui peut
+   repondre a la place du reseau : un fichier servi avec une date de
+   modification et sans consigne y est juge frais pendant un dixieme de son
+   age. Les traces d'avant un deploiement y survivaient des jours, et les
+   nouvelles boucles s'affichaient sans trace. On exige donc de revalider. */
 async function reseauDAbord(requete, nomDuCache){
   const cache = await caches.open(nomDuCache);
   try{
-    const reponse = await fetch(requete);
+    const reponse = await fetch(requete, {cache: "no-cache"});
     if (reponse.ok) cache.put(requete, reponse.clone());
     return reponse;
   }catch(e){
@@ -168,7 +173,7 @@ async function emporte(parcours, urls){
   // rien -- on aurait un fond de carte et aucune trace a suivre dessus.
   await Promise.allSettled(["/api/parcours", "/api/traces.geojson", "/api/fond"]
     .map(async url => {
-      const reponse = await fetch(url);
+      const reponse = await fetch(url, {cache: "no-cache"});
       if (reponse.ok) await donnees.put(url, reponse);
     }));
 
