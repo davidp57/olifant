@@ -1,6 +1,6 @@
 {
  "titre": "Olifant",
- "accroche": "Boucles de 10 a 15 km autour de Metz, et dix balades d'une heure au depart de la rue des Parmentiers. Celles qui partent a pied se retrouvent sur le parvis de la gare ; les autres demandent une demi-heure de voiture. Deux trajets en plus, qui vont aux commerces de Borny a pied.",
+ "accroche": "Boucles de 10 a 15 km autour de Metz, et dix balades d'une heure au depart de la rue des Parmentiers. Celles qui partent a pied se retrouvent sur le parvis de la gare ; les autres demandent une demi-heure de voiture. Deux trajets en plus, qui vont aux commerces de Borny a pied, et trois boucles d'une matinee qui partent du Centre Pompidou vers des quartiers que les autres ne traversent pas.",
  "parcours": [
   {
    "id": "seille-borny",
@@ -7110,6 +7110,1259 @@
        "lat": 49.12001,
        "distance_m": 15,
        "combien": 3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "saint-julien-grimont",
+   "nom": "Les hauts de Saint-Julien et le bois de Grimont",
+   "resume": "La seule boucle a pied qui monte vraiment : on grimpe la cote de Saint-Julien par le parc Marie et Mathias, on longe le fort, on traverse le bois de Grimont, et on redescend par Saint-Julien et le parc Marthe Cohn. Le premier kilometre et demi, jusqu'a Bellecroix, se fait a l'aller et au retour.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "foret",
+    "relief"
+   ],
+   "couleur": "#8C3B2E",
+   "km": 13.4,
+   "montee": 193,
+   "chemin": 41,
+   "bitume": 14,
+   "route": 46,
+   "balise": 8,
+   "depart": "Centre Pompidou-Metz, parvis",
+   "etapes": [
+    {
+     "cle": "pompidou",
+     "nom": "Centre Pompidou-Metz, parvis",
+     "note": "Point de rendez-vous, sur le parvis des Droits de l'Homme, a deux pas de la gare.",
+     "lon": 6.1811,
+     "lat": 49.1084,
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.177696,
+       "lat": 49.107739,
+       "distance_m": 258,
+       "combien": 5
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.179587,
+       "lat": 49.110434,
+       "distance_m": 252
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Yozora",
+       "lon": 6.181822,
+       "lat": 49.107917,
+       "distance_m": 75
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Umé",
+       "lon": 6.18193,
+       "lat": 49.10794,
+       "distance_m": 79
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Piopa Lasagna-Caffé",
+       "lon": 6.18063,
+       "lat": 49.107574,
+       "distance_m": 98
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Milano",
+       "lon": 6.181289,
+       "lat": 49.107149,
+       "distance_m": 140
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.181155,
+       "lat": 49.108448,
+       "distance_m": 7,
+       "combien": 2
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.181425,
+       "lat": 49.108319,
+       "distance_m": 25,
+       "combien": 3
+      }
+     ]
+    },
+    {
+     "cle": "marie-mathias",
+     "nom": "Parc Marie et Mathias",
+     "note": "Au pied de la cote de Saint-Julien.",
+     "lon": 6.19605,
+     "lat": 49.13037,
+     "depart": false,
+     "km": 3.6,
+     "part": 27,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie Pâtisserie Marc Muller",
+       "lon": 6.197814,
+       "lat": 49.130352,
+       "distance_m": 128
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "F&A Lino",
+       "lon": 6.198222,
+       "lat": 49.13038,
+       "distance_m": 158
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Medusa",
+       "lon": 6.199435,
+       "lat": 49.132162,
+       "distance_m": 317
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Bistro des Canailles",
+       "lon": 6.195571,
+       "lat": 49.127197,
+       "distance_m": 354
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Break",
+       "lon": 6.194991,
+       "lat": 49.127175,
+       "distance_m": 364
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Les Moulins Bleus",
+       "lon": 6.198603,
+       "lat": 49.133425,
+       "distance_m": 387
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.19515,
+       "lat": 49.12699,
+       "distance_m": 381
+      }
+     ]
+    },
+    {
+     "cle": "lisiere-fort",
+     "nom": "Fort de Saint-Julien, lisiere",
+     "note": "Le chemin qui longe le fort par le nord. Le point est pose sur le chemin plutot que dans le fort : y entrer obligeait a revenir sur ses pas.",
+     "lon": 6.2072,
+     "lat": 49.1415,
+     "depart": false,
+     "km": 5.5,
+     "part": 41,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.205363,
+       "lat": 49.138238,
+       "distance_m": 387
+      }
+     ]
+    },
+    {
+     "cle": "bois-grimont",
+     "nom": "Bois de Grimont",
+     "note": "Bois de coteau au nord-est, vue sur la vallee de la Moselle.",
+     "lon": 6.219099,
+     "lat": 49.143424,
+     "depart": false,
+     "km": 6.8,
+     "part": 51,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Chateau",
+       "lon": 6.219786,
+       "lat": 49.143195,
+       "distance_m": 56
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix de chemin",
+       "lon": 6.216162,
+       "lat": 49.141775,
+       "distance_m": 282
+      }
+     ]
+    },
+    {
+     "cle": "pedagogique",
+     "nom": "Espace naturel pedagogique, Saint-Julien",
+     "note": "",
+     "lon": 6.21507,
+     "lat": 49.13159,
+     "depart": false,
+     "km": 8.6,
+     "part": 64
+    },
+    {
+     "cle": "marthe-cohn",
+     "nom": "Parc Marthe Cohn",
+     "note": "",
+     "lon": 6.20891,
+     "lat": 49.12349,
+     "depart": false,
+     "km": 10.0,
+     "part": 75,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.20583,
+       "lat": 49.120697,
+       "distance_m": 383
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "L'Epicerie",
+       "lon": 6.203456,
+       "lat": 49.123544,
+       "distance_m": 397
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "saint-julien-grimont-parmentiers",
+   "nom": "Saint-Julien et Grimont, depuis la rue des Parmentiers",
+   "resume": "La meme boucle prise de chez soi : un kilometre de moins, et plus rien en double.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "foret",
+    "relief"
+   ],
+   "couleur": "#B5654F",
+   "km": 12.3,
+   "montee": 164,
+   "chemin": 27,
+   "bitume": 25,
+   "route": 47,
+   "balise": 13,
+   "depart": "Rue des Parmentiers, Metz",
+   "etapes": [
+    {
+     "cle": "parmentiers",
+     "nom": "Rue des Parmentiers, Metz",
+     "note": "Depart des deux boucles vers Borny, dans la Nouvelle Ville. A dix minutes a pied de la gare, dont il partage les commodites.",
+     "lon": 6.17687,
+     "lat": 49.115387,
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.174459,
+       "lat": 49.116194,
+       "distance_m": 197,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Baratin",
+       "lon": 6.176598,
+       "lat": 49.115105,
+       "distance_m": 37
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Piaf",
+       "lon": 6.177539,
+       "lat": 49.115883,
+       "distance_m": 74
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie Mougel",
+       "lon": 6.177615,
+       "lat": 49.115852,
+       "distance_m": 75
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "verdura",
+       "lon": 6.177312,
+       "lat": 49.116004,
+       "distance_m": 76
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Les Copains d'Abord",
+       "lon": 6.175917,
+       "lat": 49.114896,
+       "distance_m": 88
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Megama",
+       "lon": 6.17618,
+       "lat": 49.11483,
+       "distance_m": 80
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.179258,
+       "lat": 49.114953,
+       "distance_m": 180,
+       "combien": 4
+      }
+     ]
+    },
+    {
+     "cle": "marie-mathias",
+     "nom": "Parc Marie et Mathias",
+     "note": "Au pied de la cote de Saint-Julien.",
+     "lon": 6.19605,
+     "lat": 49.13037,
+     "depart": false,
+     "km": 2.6,
+     "part": 21,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie Pâtisserie Marc Muller",
+       "lon": 6.197814,
+       "lat": 49.130352,
+       "distance_m": 128
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "F&A Lino",
+       "lon": 6.198222,
+       "lat": 49.13038,
+       "distance_m": 158
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Medusa",
+       "lon": 6.199435,
+       "lat": 49.132162,
+       "distance_m": 317
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Bistro des Canailles",
+       "lon": 6.195571,
+       "lat": 49.127197,
+       "distance_m": 354
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Break",
+       "lon": 6.194991,
+       "lat": 49.127175,
+       "distance_m": 364
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Les Moulins Bleus",
+       "lon": 6.198603,
+       "lat": 49.133425,
+       "distance_m": 387
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.19515,
+       "lat": 49.12699,
+       "distance_m": 381
+      }
+     ]
+    },
+    {
+     "cle": "lisiere-fort",
+     "nom": "Fort de Saint-Julien, lisiere",
+     "note": "Le chemin qui longe le fort par le nord. Le point est pose sur le chemin plutot que dans le fort : y entrer obligeait a revenir sur ses pas.",
+     "lon": 6.2072,
+     "lat": 49.1415,
+     "depart": false,
+     "km": 4.6,
+     "part": 37,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.205363,
+       "lat": 49.138238,
+       "distance_m": 387
+      }
+     ]
+    },
+    {
+     "cle": "bois-grimont",
+     "nom": "Bois de Grimont",
+     "note": "Bois de coteau au nord-est, vue sur la vallee de la Moselle.",
+     "lon": 6.219099,
+     "lat": 49.143424,
+     "depart": false,
+     "km": 5.9,
+     "part": 48,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Chateau",
+       "lon": 6.219786,
+       "lat": 49.143195,
+       "distance_m": 56
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix de chemin",
+       "lon": 6.216162,
+       "lat": 49.141775,
+       "distance_m": 282
+      }
+     ]
+    },
+    {
+     "cle": "pedagogique",
+     "nom": "Espace naturel pedagogique, Saint-Julien",
+     "note": "",
+     "lon": 6.21507,
+     "lat": 49.13159,
+     "depart": false,
+     "km": 7.6,
+     "part": 62
+    },
+    {
+     "cle": "marthe-cohn",
+     "nom": "Parc Marthe Cohn",
+     "note": "",
+     "lon": 6.20891,
+     "lat": 49.12349,
+     "depart": false,
+     "km": 9.1,
+     "part": 74,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.20583,
+       "lat": 49.120697,
+       "distance_m": 383
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "L'Epicerie",
+       "lon": 6.203456,
+       "lat": 49.123544,
+       "distance_m": 397
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grange-aux-bois-lacs",
+   "nom": "Grange-aux-Bois et les lacs du Technopole",
+   "resume": "Par Plantieres et le fort de Queuleu, puis la ceinture verte jusqu'a Grange-aux-Bois, la Roseraie et le lac Ariane ; retour par le Technopole et le lac Symphonie. Le premier kilometre se fait a l'aller et au retour.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "eau",
+    "ville"
+   ],
+   "couleur": "#2F6690",
+   "km": 14.1,
+   "montee": 117,
+   "chemin": 33,
+   "bitume": 31,
+   "route": 36,
+   "balise": 12,
+   "depart": "Centre Pompidou-Metz, parvis",
+   "etapes": [
+    {
+     "cle": "pompidou",
+     "nom": "Centre Pompidou-Metz, parvis",
+     "note": "Point de rendez-vous, sur le parvis des Droits de l'Homme, a deux pas de la gare.",
+     "lon": 6.1811,
+     "lat": 49.1084,
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.177696,
+       "lat": 49.107739,
+       "distance_m": 258,
+       "combien": 5
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.179587,
+       "lat": 49.110434,
+       "distance_m": 252
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Yozora",
+       "lon": 6.181822,
+       "lat": 49.107917,
+       "distance_m": 75
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Umé",
+       "lon": 6.18193,
+       "lat": 49.10794,
+       "distance_m": 79
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Piopa Lasagna-Caffé",
+       "lon": 6.18063,
+       "lat": 49.107574,
+       "distance_m": 98
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Milano",
+       "lon": 6.181289,
+       "lat": 49.107149,
+       "distance_m": 140
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.181155,
+       "lat": 49.108448,
+       "distance_m": 7,
+       "combien": 2
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.181425,
+       "lat": 49.108319,
+       "distance_m": 25,
+       "combien": 3
+      }
+     ]
+    },
+    {
+     "cle": "pierre-simon",
+     "nom": "Square Pierre Simon, Plantieres",
+     "note": "",
+     "lon": 6.19685,
+     "lat": 49.10356,
+     "depart": false,
+     "km": 1.7,
+     "part": 12,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.197089,
+       "lat": 49.103536,
+       "distance_m": 18
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Carrefour City",
+       "lon": 6.195634,
+       "lat": 49.105644,
+       "distance_m": 248
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Lucas Simon",
+       "lon": 6.197868,
+       "lat": 49.10102,
+       "distance_m": 292
+      }
+     ]
+    },
+    {
+     "cle": "queuleu",
+     "nom": "Fort de Queuleu",
+     "note": "Fort du XIXe siecle, memorial de la Resistance. Le bois autour est ouvert et sillonne de chemins.",
+     "lon": 6.195434,
+     "lat": 49.098452,
+     "depart": false,
+     "km": 2.5,
+     "part": 18,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Cantine",
+       "lon": 6.200035,
+       "lat": 49.096738,
+       "distance_m": 385
+      }
+     ]
+    },
+    {
+     "cle": "vallon",
+     "nom": "Parc du Vallon",
+     "note": "",
+     "lon": 6.21693,
+     "lat": 49.09596,
+     "depart": false,
+     "km": 4.7,
+     "part": 34,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "La Belle Époque",
+       "lon": 6.220166,
+       "lat": 49.09578,
+       "distance_m": 236
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Beef & Co",
+       "lon": 6.220692,
+       "lat": 49.095284,
+       "distance_m": 284
+      }
+     ]
+    },
+    {
+     "cle": "ariane",
+     "nom": "Lac Ariane",
+     "note": "",
+     "lon": 6.23573,
+     "lat": 49.09555,
+     "depart": false,
+     "km": 6.6,
+     "part": 47,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Epicerie",
+       "lon": 6.238221,
+       "lat": 49.097328,
+       "distance_m": 268
+      }
+     ]
+    },
+    {
+     "cle": "roseraie",
+     "nom": "Parc de la Roseraie, Grange-aux-Bois",
+     "note": "",
+     "lon": 6.24291,
+     "lat": 49.09579,
+     "depart": false,
+     "km": 7.2,
+     "part": 51,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Parc de l'église",
+       "lon": 6.243135,
+       "lat": 49.095979,
+       "distance_m": 27
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Paul",
+       "lon": 6.243917,
+       "lat": 49.09291,
+       "distance_m": 329
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Carrefour Express",
+       "lon": 6.243983,
+       "lat": 49.092701,
+       "distance_m": 352
+      }
+     ]
+    },
+    {
+     "cle": "symphonie",
+     "nom": "Lac Symphonie",
+     "note": "",
+     "lon": 6.21711,
+     "lat": 49.10352,
+     "depart": false,
+     "km": 10.2,
+     "part": 73,
+     "reperes": [
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.214832,
+       "lat": 49.103367,
+       "distance_m": 167
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Les Rives du Lac",
+       "lon": 6.219566,
+       "lat": 49.104923,
+       "distance_m": 237
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Mama Mia Pizza",
+       "lon": 6.212244,
+       "lat": 49.103718,
+       "distance_m": 355
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Restaurant brasserie du lycée Raymond Mondon",
+       "lon": 6.212605,
+       "lat": 49.105023,
+       "distance_m": 368
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Paul",
+       "lon": 6.212064,
+       "lat": 49.103729,
+       "distance_m": 368
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Restaurant pédagogique du lycée Raymond Mondon",
+       "lon": 6.21272,
+       "lat": 49.105386,
+       "distance_m": 381
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Restaurant d'application du lycée Raymond Mondon",
+       "lon": 6.212896,
+       "lat": 49.105781,
+       "distance_m": 397
+      }
+     ]
+    },
+    {
+     "cle": "technopole",
+     "nom": "Technopole, square Simon-Louis Freres",
+     "note": "Allees plantees du Technopole, autour du plan d'eau Symphonie.",
+     "lon": 6.202193,
+     "lat": 49.111498,
+     "depart": false,
+     "km": 11.9,
+     "part": 85,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.202898,
+       "lat": 49.113366,
+       "distance_m": 214
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.203335,
+       "lat": 49.11279,
+       "distance_m": 166
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Foyer des Élèves",
+       "lon": 6.206448,
+       "lat": 49.111302,
+       "distance_m": 311
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Monument",
+       "lon": 6.198921,
+       "lat": 49.108862,
+       "distance_m": 378
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "parcs-de-montigny",
+   "nom": "Les parcs de Montigny et le chateau de Courcelles",
+   "resume": "Une boucle de petites rues qui saute de parc en parc : Sainte-Chretienne, Prevert, la Clairiere, le chateau de Courcelles et le jardin botanique. Plus de rues que de chemins, mais aucune grande avenue.",
+   "acces": "a pied",
+   "parking": "",
+   "themes": [
+    "ville",
+    "patrimoine"
+   ],
+   "couleur": "#5B7F3A",
+   "km": 9.6,
+   "montee": 32,
+   "chemin": 13,
+   "bitume": 27,
+   "route": 59,
+   "balise": 7,
+   "depart": "Centre Pompidou-Metz, parvis",
+   "etapes": [
+    {
+     "cle": "pompidou",
+     "nom": "Centre Pompidou-Metz, parvis",
+     "note": "Point de rendez-vous, sur le parvis des Droits de l'Homme, a deux pas de la gare.",
+     "lon": 6.1811,
+     "lat": 49.1084,
+     "depart": true,
+     "km": 0.0,
+     "part": 0,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.177696,
+       "lat": 49.107739,
+       "distance_m": 258,
+       "combien": 5
+      },
+      {
+       "genre": "vue",
+       "nom": "Tour",
+       "lon": 6.179587,
+       "lat": 49.110434,
+       "distance_m": 252
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Yozora",
+       "lon": 6.181822,
+       "lat": 49.107917,
+       "distance_m": 75
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Umé",
+       "lon": 6.18193,
+       "lat": 49.10794,
+       "distance_m": 79
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Piopa Lasagna-Caffé",
+       "lon": 6.18063,
+       "lat": 49.107574,
+       "distance_m": 98
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Milano",
+       "lon": 6.181289,
+       "lat": 49.107149,
+       "distance_m": 140
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.181155,
+       "lat": 49.108448,
+       "distance_m": 7,
+       "combien": 2
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.181425,
+       "lat": 49.108319,
+       "distance_m": 25,
+       "combien": 3
+      }
+     ]
+    },
+    {
+     "cle": "ste-chretienne",
+     "nom": "Parc Sainte-Chretienne",
+     "note": "",
+     "lon": 6.17345,
+     "lat": 49.09621,
+     "depart": false,
+     "km": 2.0,
+     "part": 21,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.173624,
+       "lat": 49.096415,
+       "distance_m": 26,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "La République",
+       "lon": 6.173318,
+       "lat": 49.099198,
+       "distance_m": 332
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Carrefour Express",
+       "lon": 6.174626,
+       "lat": 49.099243,
+       "distance_m": 348
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Chapelle Sainte-Chrétienne",
+       "lon": 6.172683,
+       "lat": 49.097225,
+       "distance_m": 126
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix Saint-André",
+       "lon": 6.175422,
+       "lat": 49.096209,
+       "distance_m": 144
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.172376,
+       "lat": 49.098038,
+       "distance_m": 218
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix Saint-Clément",
+       "lon": 6.173407,
+       "lat": 49.098296,
+       "distance_m": 232
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Croix Sainte-Agathe",
+       "lon": 6.169747,
+       "lat": 49.097372,
+       "distance_m": 299
+      }
+     ]
+    },
+    {
+     "cle": "prevert",
+     "nom": "Parc Jacques Prevert, Montigny",
+     "note": "",
+     "lon": 6.1549,
+     "lat": 49.09415,
+     "depart": false,
+     "km": 4.3,
+     "part": 44,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Orth Drinks",
+       "lon": 6.15585,
+       "lat": 49.092348,
+       "distance_m": 212
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie Dudot",
+       "lon": 6.151989,
+       "lat": 49.093796,
+       "distance_m": 216
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Epicerie",
+       "lon": 6.155416,
+       "lat": 49.091862,
+       "distance_m": 257,
+       "combien": 2
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Café de l'Étoile",
+       "lon": 6.15162,
+       "lat": 49.09301,
+       "distance_m": 270
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Viande Délice",
+       "lon": 6.158498,
+       "lat": 49.095558,
+       "distance_m": 305
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.154988,
+       "lat": 49.094556,
+       "distance_m": 46,
+       "combien": 2
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Mille Lieux",
+       "lon": 6.156293,
+       "lat": 49.093957,
+       "distance_m": 104
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Les Compagnons de la Libération",
+       "lon": 6.156685,
+       "lat": 49.093496,
+       "distance_m": 149
+      }
+     ]
+    },
+    {
+     "cle": "clairiere",
+     "nom": "La Clairiere, Montigny",
+     "note": "",
+     "lon": 6.15282,
+     "lat": 49.10025,
+     "depart": false,
+     "km": 5.3,
+     "part": 56,
+     "reperes": [
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Stromboli",
+       "lon": 6.152593,
+       "lat": 49.100064,
+       "distance_m": 26
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Le Virginie",
+       "lon": 6.153678,
+       "lat": 49.100035,
+       "distance_m": 67
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Carrefour City",
+       "lon": 6.153809,
+       "lat": 49.100525,
+       "distance_m": 78
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Boulangerie-pâtisserie Emmanuel Streiff",
+       "lon": 6.154147,
+       "lat": 49.100259,
+       "distance_m": 97
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Pasta in Festa",
+       "lon": 6.151585,
+       "lat": 49.099707,
+       "distance_m": 108
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Bar Moderne",
+       "lon": 6.154958,
+       "lat": 49.100786,
+       "distance_m": 167
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "L'Une et l'Autre",
+       "lon": 6.15278,
+       "lat": 49.100252,
+       "distance_m": 3
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Arrosoir des jardins sous la fontaine",
+       "lon": 6.151447,
+       "lat": 49.101305,
+       "distance_m": 154
+      }
+     ]
+    },
+    {
+     "cle": "courcelles",
+     "nom": "Parc du chateau de Courcelles",
+     "note": "",
+     "lon": 6.15731,
+     "lat": 49.10337,
+     "depart": false,
+     "km": 5.9,
+     "part": 62,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.158144,
+       "lat": 49.103181,
+       "distance_m": 64
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Restaurant du Parc",
+       "lon": 6.158071,
+       "lat": 49.103515,
+       "distance_m": 58
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Tip Top Market",
+       "lon": 6.158415,
+       "lat": 49.102003,
+       "distance_m": 172
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Pince à linge géante",
+       "lon": 6.15711,
+       "lat": 49.103545,
+       "distance_m": 24
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Oeuvre",
+       "lon": 6.157355,
+       "lat": 49.102956,
+       "distance_m": 46
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Château de Courcelles",
+       "lon": 6.158018,
+       "lat": 49.102978,
+       "distance_m": 68
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Les Trois Grâces",
+       "lon": 6.158204,
+       "lat": 49.103194,
+       "distance_m": 68
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.157467,
+       "lat": 49.102709,
+       "distance_m": 74
+      }
+     ]
+    },
+    {
+     "cle": "vacquiniere",
+     "nom": "Plaine de la Vacquiniere",
+     "note": "",
+     "lon": 6.15601,
+     "lat": 49.10543,
+     "depart": false,
+     "km": 6.8,
+     "part": 71,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.15537,
+       "lat": 49.105272,
+       "distance_m": 50
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.15644,
+       "lat": 49.106204,
+       "distance_m": 92
+      }
+     ]
+    },
+    {
+     "cle": "botanique",
+     "nom": "Jardin botanique de Metz",
+     "note": "",
+     "lon": 6.16064,
+     "lat": 49.10468,
+     "depart": false,
+     "km": 7.4,
+     "part": 77,
+     "reperes": [
+      {
+       "genre": "eau",
+       "nom": "Point d'eau",
+       "lon": 6.160714,
+       "lat": 49.10495,
+       "distance_m": 31,
+       "combien": 2
+      },
+      {
+       "genre": "halte",
+       "nom": "Abri",
+       "lon": 6.159038,
+       "lat": 49.104519,
+       "distance_m": 118
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Buvette du Jardin Botanique",
+       "lon": 6.15922,
+       "lat": 49.104001,
+       "distance_m": 128
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Basilic & Co",
+       "lon": 6.16182,
+       "lat": 49.103596,
+       "distance_m": 148
+      },
+      {
+       "genre": "ravitaillement",
+       "nom": "Carrefour Express",
+       "lon": 6.162725,
+       "lat": 49.104675,
+       "distance_m": 152
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Le cerf aux abois",
+       "lon": 6.162085,
+       "lat": 49.104292,
+       "distance_m": 114
+      },
+      {
+       "genre": "patrimoine",
+       "nom": "Charles Delestraint",
+       "lon": 6.160357,
+       "lat": 49.105857,
+       "distance_m": 133
+      },
+      {
+       "genre": "commodite",
+       "nom": "Toilettes",
+       "lon": 6.159153,
+       "lat": 49.104052,
+       "distance_m": 129,
+       "combien": 2
       }
      ]
     }

@@ -10,7 +10,9 @@ meta:
     Boucles de 10 a 15 km autour de Metz, et dix balades d'une heure au
     depart de la rue des Parmentiers. Celles qui partent a pied se retrouvent
     sur le parvis de la gare ; les autres demandent une demi-heure de voiture.
-    Deux trajets en plus, qui vont aux commerces de Borny a pied.
+    Deux trajets en plus, qui vont aux commerces de Borny a pied, et trois
+    boucles d'une matinee qui partent du Centre Pompidou vers des quartiers
+    que les autres ne traversent pas.
 
 points:
 
@@ -507,6 +509,81 @@ points:
     lat: 49.113000
     note: L'entree du parc du cote de Grigy, par les allees en terre.
 
+  # --- trois boucles d'une matinee, hors des quartiers deja parcourus ----
+  # Lieux releves dans OpenStreetMap parmi ceux qu'aucun parcours ne touchait.
+  pompidou:
+    nom: Centre Pompidou-Metz, parvis
+    lon: 6.181100
+    lat: 49.108400
+    note: >-
+      Point de rendez-vous, sur le parvis des Droits de l'Homme, a deux pas
+      de la gare.
+  marie-mathias:
+    nom: Parc Marie et Mathias
+    lon: 6.196050
+    lat: 49.130370
+    note: Au pied de la cote de Saint-Julien.
+  lisiere-fort:
+    nom: Fort de Saint-Julien, lisiere
+    lon: 6.207200
+    lat: 49.141500
+    note: >-
+      Le chemin qui longe le fort par le nord. Le point est pose sur le
+      chemin plutot que dans le fort : y entrer obligeait a revenir sur ses
+      pas.
+  pedagogique:
+    nom: Espace naturel pedagogique, Saint-Julien
+    lon: 6.215070
+    lat: 49.131590
+  marthe-cohn:
+    nom: Parc Marthe Cohn
+    lon: 6.208910
+    lat: 49.123490
+  pierre-simon:
+    nom: Square Pierre Simon, Plantieres
+    lon: 6.196850
+    lat: 49.103560
+  vallon:
+    nom: Parc du Vallon
+    lon: 6.216930
+    lat: 49.095960
+  ariane:
+    nom: Lac Ariane
+    lon: 6.235730
+    lat: 49.095550
+  roseraie:
+    nom: Parc de la Roseraie, Grange-aux-Bois
+    lon: 6.242910
+    lat: 49.095790
+  symphonie:
+    nom: Lac Symphonie
+    lon: 6.217110
+    lat: 49.103520
+  ste-chretienne:
+    nom: Parc Sainte-Chretienne
+    lon: 6.173450
+    lat: 49.096210
+  prevert:
+    nom: Parc Jacques Prevert, Montigny
+    lon: 6.154900
+    lat: 49.094150
+  clairiere:
+    nom: La Clairiere, Montigny
+    lon: 6.152820
+    lat: 49.100250
+  courcelles:
+    nom: Parc du chateau de Courcelles
+    lon: 6.157310
+    lat: 49.103370
+  vacquiniere:
+    nom: Plaine de la Vacquiniere
+    lon: 6.156010
+    lat: 49.105430
+  botanique:
+    nom: Jardin botanique de Metz
+    lon: 6.160640
+    lat: 49.104680
+
 parcours:
 
   # Les cinq boucles ci-dessous sont calees sur des mesures, pas sur des
@@ -793,3 +870,56 @@ parcours:
       de trottoir a l'aller, l'eau tout le retour, et rien en double.
     etapes: [parmentiers, gare, jean-moulin, maud-huy, esplanade,
              esplanade-lac, saulcy, parmentiers]
+
+  # --- trois boucles d'une matinee, 10 a 14 km, hors des sentiers connus --
+  # Composees pour passer la ou aucun autre parcours ne passe : de 58 a 88 %
+  # du trace est a plus de 40 m de tous les autres.
+
+  - id: saint-julien-grimont
+    nom: Les hauts de Saint-Julien et le bois de Grimont
+    acces: a pied
+    themes: [foret, relief]
+    couleur: 8C3B2E
+    resume: >-
+      La seule boucle a pied qui monte vraiment : on grimpe la cote de
+      Saint-Julien par le parc Marie et Mathias, on longe le fort, on traverse
+      le bois de Grimont, et on redescend par Saint-Julien et le parc Marthe
+      Cohn. Le premier kilometre et demi, jusqu'a Bellecroix, se fait a
+      l'aller et au retour.
+    etapes: [pompidou, marie-mathias, lisiere-fort, bois-grimont, pedagogique,
+             marthe-cohn, pompidou]
+
+  - id: saint-julien-grimont-parmentiers
+    nom: Saint-Julien et Grimont, depuis la rue des Parmentiers
+    acces: a pied
+    themes: [foret, relief]
+    couleur: B5654F
+    resume: >-
+      La meme boucle prise de chez soi : un kilometre de moins, et plus rien
+      en double.
+    etapes: [parmentiers, marie-mathias, lisiere-fort, bois-grimont, pedagogique,
+             marthe-cohn, parmentiers]
+
+  - id: grange-aux-bois-lacs
+    nom: Grange-aux-Bois et les lacs du Technopole
+    acces: a pied
+    themes: [eau, ville]
+    couleur: 2F6690
+    resume: >-
+      Par Plantieres et le fort de Queuleu, puis la ceinture verte jusqu'a
+      Grange-aux-Bois, la Roseraie et le lac Ariane ; retour par le Technopole
+      et le lac Symphonie. Le premier kilometre se fait a l'aller et au retour.
+    etapes: [pompidou, pierre-simon, queuleu, vallon, ariane, roseraie,
+             symphonie, technopole, pompidou]
+
+  - id: parcs-de-montigny
+    nom: Les parcs de Montigny et le chateau de Courcelles
+    acces: a pied
+    themes: [ville, patrimoine]
+    couleur: 5B7F3A
+    resume: >-
+      Une boucle de petites rues qui saute de parc en parc : Sainte-Chretienne,
+      Prevert, la Clairiere, le chateau de Courcelles et le jardin botanique.
+      Plus de rues que de chemins, mais aucune grande avenue.
+    etapes: [pompidou, ste-chretienne, prevert, clairiere, courcelles,
+             vacquiniere, botanique, pompidou]

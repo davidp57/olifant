@@ -51,7 +51,7 @@ courtes ont été composées en refusant toute branche de plus de 250 m.
 
 ## Les parcours
 
-Vingt-trois parcours. Les cinq premiers partent du parvis de la gare de Metz :
+Vingt-sept parcours. Les cinq premiers partent du parvis de la gare de Metz :
 abrité, un café ouvert tôt, et tout le monde sait où c'est.
 
 | parcours | distance | D+ | chemins | balisé |
@@ -124,6 +124,28 @@ chemin à l'envers. Les deux options sont là, au choix.
 Le second sort exprès du cadre : il déclenche l'alerte « aller-retour déguisé »
 du contrôle qualité, et c'est voulu. Quand le but est le but, la boucle n'est
 pas toujours ce qu'on cherche.
+
+### Trois boucles d'une matinée, hors des sentiers connus
+
+Celles-là ont été cherchées pour **passer là où aucun autre parcours ne
+passe**. Les lieux candidats ont été relevés dans OpenStreetMap — parcs, bois,
+forts, points de vue à moins de cinq kilomètres du Centre Pompidou — en ne
+gardant que ceux qu'aucune boucle ne touchait. La colonne « neuf » mesure la
+part du tracé à plus de 40 m de tous les autres parcours.
+
+| parcours | départ | distance | D+ | chemins | bitume | neuf |
+|---|---|---|---|---|---|---|
+| Les hauts de Saint-Julien et le bois de Grimont | Pompidou | 13,4 km | 193 m | 41 % | 14 % | 88 % |
+| Saint-Julien et Grimont | Parmentiers | 12,3 km | 164 m | 27 % | 25 % | 83 % |
+| Grange-aux-Bois et les lacs du Technopôle | Pompidou | 14,1 km | 117 m | 33 % | 31 % | 58 % |
+| Les parcs de Montigny et le château de Courcelles | Pompidou | 9,6 km | 32 m | 13 % | 27 % | 61 % |
+
+Les deux départs du Pompidou vers l'est font leur premier kilomètre, ou
+kilomètre et demi, à l'aller et au retour : c'est le chemin pour rejoindre la
+boucle, pas une branche. Deux directions ont été essayées puis écartées : le
+sud par la Seille et le fort de Saint-Privat, déjà parcouru aux deux tiers par
+*La Seille en amont*, et le nord vers Woippy et le fort Gambetta — 35 % de
+bitume et de longs détours pour franchir la Moselle.
 
 ## Utiliser
 
@@ -216,7 +238,7 @@ application installée comme Iphigénie.
 #### Le mode marche
 
 Sur téléphone, le bouton **Marcher** d'une boucle donne l'écran entier à la
-carte, cadrée sur cette boucle — et non sur les treize, comme le fait l'onglet
+carte, cadrée sur cette boucle — et non sur toutes, comme le fait l'onglet
 « La carte ». Les chiffres du suivi passent dans un bandeau en surimpression,
 que l'on **escamote d'un appui n'importe où sur la carte** : on alterne entre
 savoir où l'on en est et voir le chemin, et le second veut toute la place. Le
@@ -251,8 +273,8 @@ garde tout.
 
 D'où deux dispositifs, l'un sur le serveur, l'autre dans le navigateur.
 
-**Le fond voyage dans l'image**, récupéré au moment de la construction : 1154
-carreaux pour les vingt-trois boucles, du zoom 13 au zoom 16. Les dix balades
+**Le fond voyage dans l'image**, récupéré au moment de la construction : 1263
+carreaux pour les vingt-sept boucles, du zoom 13 au zoom 16. Les dix balades
 courtes n'en ont presque rien coûté — elles tournent dans un couloir que les
 boucles au départ de la gare traversaient déjà. Un cache d'Actions évite de
 les reprendre à chaque push — seul un changement de traces en redemande.
@@ -309,7 +331,7 @@ Les jeter à chaque déploiement ferait reperdre le téléchargement pour rien.
 ### Relever ce qu'il y a autour des étapes
 
 ```bash
-python -m olifant reperes                     # les vingt-trois boucles
+python -m olifant reperes                     # les vingt-sept boucles
 python -m olifant reperes canner --hors-ligne # une seule, depuis le cache
 ```
 
@@ -414,7 +436,7 @@ Deux décisions viennent de là. Le relevé des repères ne demande plus les arb
 ni les bancs : à eux seuls, ils représentaient jusqu'à 589 et 401 réponses pour
 un seul parcours, l'essentiel du volume, sans rien apprendre à qui marche. Et le
 fond de carte emporté se limite au couloir des traces et s'arrête au zoom 16 —
-1154 carreaux pour les vingt-trois boucles, pris une seule fois à raison d'un
+1263 carreaux pour les vingt-sept boucles, pris une seule fois à raison d'un
 par seconde. C'est un usage personnel et borné, pas une aspiration ; si vous
 élargissez les zooms ou la marge, le compte grimpe vite
 (`--compte-seulement` le dit avant de rien télécharger).
