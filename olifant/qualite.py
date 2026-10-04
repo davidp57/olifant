@@ -55,6 +55,7 @@ REPASSE_M = 20             # deux points de trace plus proches sont le meme lieu
 # En deca de cette distance le long de la trace, se retrouver au meme endroit
 # n'est pas repasser : c'est la pointe d'un demi-tour, ou un virage serre.
 DETOUR_MIN_M = 60
+POINTE_ETAPE_M = 200       # une etape plus loin du demi-tour n'en est pas le but
 
 
 @dataclass
@@ -64,6 +65,8 @@ class Branche:
     metres: float        # longueur du bout parcouru deux fois
     depuis_m: float      # ou il commence, en metres depuis le depart
     lonlat: tuple[float, float]
+    pointe: tuple[float, float] = (0.0, 0.0)   # ou l'on fait demi-tour
+    vers: str = ""       # l'etape qu'on va y toucher, s'il y en a une
 
     @property
     def km(self) -> float:
@@ -114,6 +117,8 @@ def juge(parcours: Parcours, trace: Trace, points: dict[str, Point]) -> Bilan:
         etapes_loin=[(cle, d) for cle, d in ecarts if d > ETAPE_LOIN_M],
     )
     bilan.liaison_m, bilan.branches = branches(trace, boucle=parcours.boucle)
+    for branche in bilan.branches:
+        branche.vers = _etape_au_bout(branche, parcours, points)
     for cle, distance in bilan.etapes_loin:
         bilan.alertes.append(
             "l'etape « %s » est a %d m de la trace : le routeur l'a rattachee "
@@ -131,7 +136,7 @@ def juge(parcours: Parcours, trace: Trace, points: dict[str, Point]) -> Bilan:
             "%d %% du parcours est fait deux fois : c'est un aller-retour deguise"
             % round(bilan.recouvrement))
     for branche in bilan.branches:
-        if branche.metres > BRANCHE_MAX_M:
+        if branche.metres > BRANCHE_MAX_M and branche.vers not in parcours.branches_voulues:
             bilan.alertes.append(
                 "une branche de %d m au km %.1f : on la parcourt a l'aller et "
                 "au retour" % (branche.metres, branche.km))
@@ -233,6 +238,21 @@ def branches(trace: Trace, boucle: bool = True) -> tuple[float, list[Branche]]:
             liaison = metres
         elif metres:
             trouvees.append(Branche(metres=metres, depuis_m=cumuls[i],
-                                    lonlat=(pts[i][0], pts[i][1])))
+                                    lonlat=(pts[i][0], pts[i][1]),
+                                    pointe=(pts[fin][0], pts[fin][1])))
         i = fin + 1
     return liaison, trouvees
+
+
+def _etape_au_bout(branche: Branche, parcours: Parcours,
+                   points: dict[str, Point]) -> str:
+    """L'etape vers laquelle mene la branche, ou rien si aucune n'est au bout.
+
+    Une branche se compose presque toujours pour aller toucher un lieu : il
+    est la ou l'on fait demi-tour, a peu pres -- la pointe meme n'est pas
+    comptee, et l'etape peut etre accrochee a quelques dizaines de metres.
+    """
+    proches = [(distance_m(branche.pointe, points[c].lonlat), c)
+               for c in dict.fromkeys(parcours.etapes)]
+    ecart, cle = min(proches, default=(math.inf, ""))
+    return cle if ecart <= POINTE_ETAPE_M else ""

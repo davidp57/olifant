@@ -37,6 +37,7 @@ def charge(chemin: Path) -> Recueil:
             acces=p.get("acces", "a pied"), parking=p.get("parking", ""),
             resume=p.get("resume", ""), themes=list(p.get("themes") or []),
             couleur=p.get("couleur", "3388ff"),
+            branches_voulues=dict(p.get("branches_voulues") or {}),
         )
         for p in (brut.get("parcours") or [])
     ]
@@ -57,3 +58,7 @@ def _verifie(points: dict[str, Point], parcours: list[Parcours]) -> None:
                              % (p.id, ", ".join(sorted(set(inconnus)))))
         if len(p.etapes) < 2:
             raise ValueError("parcours « %s » : il faut au moins deux etapes" % p.id)
+        egarees = [c for c in p.branches_voulues if c not in p.etapes]
+        if egarees:
+            raise ValueError("parcours « %s » : branche voulue vers %s, qui n'est "
+                             "pas une de ses etapes" % (p.id, ", ".join(egarees)))

@@ -39,6 +39,10 @@ class Parcours:
     resume: str = ""
     themes: list[str] = field(default_factory=list)
     couleur: str = "3388ff"
+    # Les etapes qu'on va toucher en sachant qu'on en revient par le meme
+    # chemin, et pourquoi : le but du trajet, un monument, un belvedere. La
+    # branche qui y mene est mesuree, mais plus reprochee.
+    branches_voulues: dict[str, str] = field(default_factory=dict)
 
     @property
     def boucle(self) -> bool:

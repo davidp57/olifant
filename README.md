@@ -51,8 +51,13 @@ La branche s'est longtemps refusée à l'œil, au moment de composer : les dix
 balades courtes l'ont été ainsi, et mesurées après coup, la plus longue fait
 216 m. Le contrôle a été ajouté quand une branche de 450 m, vers le fort de
 Saint-Julien, n'a été vue que sur la carte. Mesurés à leur tour, dix parcours
-composés avant lui en portent une, jusqu'à 2,4 km pour la vallée de la
-Canner : ils sont signalés à chaque calcul.
+composés avant lui en portaient une, jusqu'à 2,4 km pour la vallée de la
+Canner. Six ont été recomposés : une étape plantée au fond d'un cul-de-sac —
+Lorry, le parc Schuman, Vaux, la ferme de Mazagran — a laissé place à un lieu
+voisin sur un chemin qui continue. Les quatre autres vont où ils vont exprès :
+le centre commercial de Borny, les arches de Jouy et le belvédère de la Fraze,
+la hêtraie de Hombourg, qu'on ne rejoint que par le chemin du retour. Leurs
+branches sont déclarées voulues (voir *Ajouter un parcours*).
 
 Le bout refait **au départ** d'une boucle n'est pas une branche : c'est la
 liaison, le chemin pour rejoindre la boucle, qu'on prend forcément dans les
@@ -67,9 +72,9 @@ abrité, un café ouvert tôt, et tout le monde sait où c'est.
 |---|---|---|---|---|
 | La Seille et le fort de Queuleu | 10,3 km | 61 m | 47 % | — |
 | Les bois de l'est | 12,3 km | 71 m | 38 % | 17 % |
-| Les deux rives | 13,1 km | 20 m | 32 % | 18 % |
-| La Seille en amont | 15,2 km | 31 m | 54 % | — |
-| Le versant de Plappeville | 15,8 km | 160 m | 33 % | 21 % |
+| Les deux rives | 14,2 km | 28 m | 42 % | 28 % |
+| La Seille en amont | 15,4 km | 32 m | 55 % | — |
+| Le versant de Plappeville | 13,8 km | 132 m | 38 % | 18 % |
 
 Les six suivants demandent un quart d'heure à trois quarts d'heure de voiture
 pour rejoindre le départ. Elles quittent la ville, et ça se voit : presque pas
@@ -77,12 +82,12 @@ de bitume, beaucoup plus de dénivelé, et des tronçons déjà balisés.
 
 | parcours | départ | distance | D+ | chemins | balisé |
 |---|---|---|---|---|---|
-| Le tour du Mont Saint-Quentin | Scy-Chazelles | 10,8 km | 284 m | 42 % | 38 % |
+| Le tour du Mont Saint-Quentin | Scy-Chazelles | 10,0 km | 273 m | 53 % | 16 % |
 | La vallée de la Canner | Kédange-sur-Canner | 15,0 km | 249 m | 87 % | 8 % |
-| Les côtes de Jussy | Sainte-Ruffine | 15,2 km | 341 m | 50 % | 29 % |
+| Les côtes de Jussy | Sainte-Ruffine | 11,8 km | 285 m | 51 % | 20 % |
 | Les pelouses de Montenach | Sierck-les-Bains | 15,5 km | 330 m | 54 % | 57 % |
 | L'aqueduc et la corniche de la Fraze | Ars-sur-Moselle | 15,7 km | 208 m | 68 % | 51 % |
-| Le tour du vallon de Gorze | Gorze | 14,8 km | 222 m | 68 % | — |
+| Le tour du vallon de Gorze | Gorze | 12,8 km | 188 m | 64 % | 10 % |
 
 ### Dix balades d'une heure, au départ de la rue des Parmentiers
 
@@ -459,6 +464,20 @@ La distance, le dénivelé et la part de chemin **ne se saisissent pas** : ils s
 mesurés. Composer avec `essaie` jusqu'à ce que la distance et le pourcentage de
 chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 
+Une branche peut être voulue : on va voir l'aqueduc, on monte au belvédère, on
+va faire ses courses. On la déclare sur le parcours, avec l'étape qu'elle va
+toucher et la raison :
+
+```yaml
+  - id: aqueduc-corniche
+    etapes: [ars, jouy-aqueduc, dornot, roches-fraze, croix-st-clement, ancy, ars]
+    branches_voulues:
+      jouy-aqueduc: on y va pour les arches, et on en revient
+```
+
+Elle reste mesurée, mais n'est plus signalée : une alerte qui sonne à chaque
+calcul pour une chose voulue, plus personne ne la lit.
+
 ## Structure
 
 | | |
@@ -484,7 +503,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-170 tests, sans réseau.
+172 tests, sans réseau.
 
 ## Un mot sur les services publics
 
