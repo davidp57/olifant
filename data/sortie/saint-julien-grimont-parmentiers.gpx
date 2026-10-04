@@ -5,9 +5,9 @@
      xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
   <metadata><name>Saint-Julien et Grimont, depuis la rue des Parmentiers</name><desc>12.3 km. D+ 164 m. 27 % de chemins. La meme boucle prise de chez soi : un kilometre de moins, et plus rien en double.</desc></metadata>
   <wpt lat="49.1153870" lon="6.1768700"><name>Rue des Parmentiers, Metz</name><desc>Depart des deux boucles vers Borny, dans la Nouvelle Ville. A dix minutes a pied de la gare, dont il partage les commodites.</desc></wpt>
-  <wpt lat="49.1303700" lon="6.1960500"><name>Parc Marie et Mathias</name><desc>Petit parc au pied de la cote de Saint-Julien.</desc></wpt>
+  <wpt lat="49.1303700" lon="6.1960500"><name>Parc Marie et Mathias</name><desc>Au pied de la cote de Saint-Julien.</desc></wpt>
   <wpt lat="49.1415000" lon="6.2072000"><name>Fort de Saint-Julien, lisiere</name><desc>Le chemin qui longe le fort par le nord. Le point est pose sur le chemin plutot que dans le fort : y entrer obligeait a revenir sur ses pas.</desc></wpt>
-  <wpt lat="49.1434200" lon="6.2191000"><name>Bois de Grimont</name><desc>Le hameau de Grimont, a la sortie du bois.</desc></wpt>
+  <wpt lat="49.1434240" lon="6.2190990"><name>Bois de Grimont</name><desc>Bois de coteau au nord-est, vue sur la vallee de la Moselle.</desc></wpt>
   <wpt lat="49.1315900" lon="6.2150700"><name>Espace naturel pedagogique, Saint-Julien</name></wpt>
   <wpt lat="49.1234900" lon="6.2089100"><name>Parc Marthe Cohn</name></wpt>
   <trk><name>Saint-Julien et Grimont, depuis la rue des Parmentiers</name><trkseg>
@@ -315,7 +315,6 @@
     <trkpt lat="49.1433460" lon="6.2187200"><ele>253.2</ele></trkpt>
     <trkpt lat="49.1434060" lon="6.2188750"><ele>253.0</ele></trkpt>
     <trkpt lat="49.1434230" lon="6.2189850"><ele>253.0</ele></trkpt>
-    <trkpt lat="49.1434240" lon="6.2190990"><ele>253.0</ele></trkpt>
     <trkpt lat="49.1434240" lon="6.2190990"><ele>253.0</ele></trkpt>
     <trkpt lat="49.1434230" lon="6.2189850"><ele>253.0</ele></trkpt>
     <trkpt lat="49.1434060" lon="6.2188750"><ele>253.0</ele></trkpt>

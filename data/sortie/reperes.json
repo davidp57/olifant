@@ -5448,7 +5448,7 @@
     "lon": 6.181425,
     "lat": 49.108319,
     "distance_m": 25,
-    "combien": 2
+    "combien": 3
    }
   ],
   "marie-mathias": [
@@ -5502,7 +5502,16 @@
     "distance_m": 381
    }
   ],
-  "grimont": [
+  "lisiere-fort": [
+   {
+    "genre": "patrimoine",
+    "nom": "Memorial",
+    "lon": 6.205363,
+    "lat": 49.138238,
+    "distance_m": 387
+   }
+  ],
+  "bois-grimont": [
    {
     "genre": "patrimoine",
     "nom": "Chateau",
@@ -5515,7 +5524,7 @@
     "nom": "Croix de chemin",
     "lon": 6.216162,
     "lat": 49.141775,
-    "distance_m": 281
+    "distance_m": 282
    }
   ],
   "marthe-cohn": [
@@ -5656,7 +5665,7 @@
     "distance_m": 387
    }
   ],
-  "grimont": [
+  "bois-grimont": [
    {
     "genre": "patrimoine",
     "nom": "Chateau",
@@ -5669,7 +5678,7 @@
     "nom": "Croix de chemin",
     "lon": 6.216162,
     "lat": 49.141775,
-    "distance_m": 281
+    "distance_m": 282
    }
   ],
   "marthe-cohn": [

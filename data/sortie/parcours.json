@@ -7201,14 +7201,14 @@
        "lon": 6.181425,
        "lat": 49.108319,
        "distance_m": 25,
-       "combien": 2
+       "combien": 3
       }
      ]
     },
     {
      "cle": "marie-mathias",
      "nom": "Parc Marie et Mathias",
-     "note": "Petit parc au pied de la cote de Saint-Julien.",
+     "note": "Au pied de la cote de Saint-Julien.",
      "lon": 6.19605,
      "lat": 49.13037,
      "depart": false,
@@ -7274,14 +7274,23 @@
      "lat": 49.1415,
      "depart": false,
      "km": 5.5,
-     "part": 41
+     "part": 41,
+     "reperes": [
+      {
+       "genre": "patrimoine",
+       "nom": "Memorial",
+       "lon": 6.205363,
+       "lat": 49.138238,
+       "distance_m": 387
+      }
+     ]
     },
     {
-     "cle": "grimont",
+     "cle": "bois-grimont",
      "nom": "Bois de Grimont",
-     "note": "Le hameau de Grimont, a la sortie du bois.",
-     "lon": 6.2191,
-     "lat": 49.14342,
+     "note": "Bois de coteau au nord-est, vue sur la vallee de la Moselle.",
+     "lon": 6.219099,
+     "lat": 49.143424,
      "depart": false,
      "km": 6.8,
      "part": 51,
@@ -7298,7 +7307,7 @@
        "nom": "Croix de chemin",
        "lon": 6.216162,
        "lat": 49.141775,
-       "distance_m": 281
+       "distance_m": 282
       }
      ]
     },
@@ -7432,7 +7441,7 @@
     {
      "cle": "marie-mathias",
      "nom": "Parc Marie et Mathias",
-     "note": "Petit parc au pied de la cote de Saint-Julien.",
+     "note": "Au pied de la cote de Saint-Julien.",
      "lon": 6.19605,
      "lat": 49.13037,
      "depart": false,
@@ -7510,11 +7519,11 @@
      ]
     },
     {
-     "cle": "grimont",
+     "cle": "bois-grimont",
      "nom": "Bois de Grimont",
-     "note": "Le hameau de Grimont, a la sortie du bois.",
-     "lon": 6.2191,
-     "lat": 49.14342,
+     "note": "Bois de coteau au nord-est, vue sur la vallee de la Moselle.",
+     "lon": 6.219099,
+     "lat": 49.143424,
      "depart": false,
      "km": 5.9,
      "part": 48,
@@ -7531,7 +7540,7 @@
        "nom": "Croix de chemin",
        "lon": 6.216162,
        "lat": 49.141775,
-       "distance_m": 281
+       "distance_m": 282
       }
      ]
     },

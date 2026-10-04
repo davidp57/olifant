@@ -522,7 +522,7 @@ points:
     nom: Parc Marie et Mathias
     lon: 6.196050
     lat: 49.130370
-    note: Petit parc au pied de la cote de Saint-Julien.
+    note: Au pied de la cote de Saint-Julien.
   lisiere-fort:
     nom: Fort de Saint-Julien, lisiere
     lon: 6.207200
@@ -531,11 +531,6 @@ points:
       Le chemin qui longe le fort par le nord. Le point est pose sur le
       chemin plutot que dans le fort : y entrer obligeait a revenir sur ses
       pas.
-  grimont:
-    nom: Bois de Grimont
-    lon: 6.219100
-    lat: 49.143420
-    note: Le hameau de Grimont, a la sortie du bois.
   pedagogique:
     nom: Espace naturel pedagogique, Saint-Julien
     lon: 6.215070
@@ -877,7 +872,7 @@ parcours:
              esplanade-lac, saulcy, parmentiers]
 
   # --- trois boucles d'une matinee, 10 a 14 km, hors des sentiers connus --
-  # Composees pour passer la ou aucun autre parcours ne passe : de 61 a 88 %
+  # Composees pour passer la ou aucun autre parcours ne passe : de 58 a 88 %
   # du trace est a plus de 40 m de tous les autres.
 
   - id: saint-julien-grimont
@@ -891,7 +886,7 @@ parcours:
       le bois de Grimont, et on redescend par Saint-Julien et le parc Marthe
       Cohn. Le premier kilometre et demi, jusqu'a Bellecroix, se fait a
       l'aller et au retour.
-    etapes: [pompidou, marie-mathias, lisiere-fort, grimont, pedagogique,
+    etapes: [pompidou, marie-mathias, lisiere-fort, bois-grimont, pedagogique,
              marthe-cohn, pompidou]
 
   - id: saint-julien-grimont-parmentiers
@@ -902,7 +897,7 @@ parcours:
     resume: >-
       La meme boucle prise de chez soi : un kilometre de moins, et plus rien
       en double.
-    etapes: [parmentiers, marie-mathias, lisiere-fort, grimont, pedagogique,
+    etapes: [parmentiers, marie-mathias, lisiere-fort, bois-grimont, pedagogique,
              marthe-cohn, parmentiers]
 
   - id: grange-aux-bois-lacs
