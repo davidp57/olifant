@@ -1649,7 +1649,9 @@ async function charge(){
   }
   catalogue = await reponse.json();
   if (!traces){
-    traces = await (await fetch("/api/traces.geojson")).json();
+    // Sans le service worker -- premiere visite --, c'est cette demande qui
+    // doit passer outre une vieille copie du cache HTTP (voir sw.js).
+    traces = await (await fetch("/api/traces.geojson", {cache: "no-cache"})).json();
     traces.features.forEach(f => {
       couches[f.properties.id] = L.geoJSON(f, {
         style: {color: f.properties.couleur, weight: 4, opacity: .95},

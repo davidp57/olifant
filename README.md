@@ -371,6 +371,13 @@ elle a été servie : si le serveur en annonce une autre, elle propose de
 recharger — sans le faire d'autorité, parce que quelqu'un peut être en train de
 marcher en suivant la carte.
 
+Le catalogue et les traces, eux, sont **redemandés à chaque ouverture** :
+ni le navigateur ni le service worker ne s'en contentent d'une vieille copie.
+Ce n'était pas le cas des traces, servies avec une date de modification et
+sans consigne : le navigateur les jugeait fraîches pendant un dixième de leur
+âge, et après un déploiement les nouvelles boucles apparaissaient dans la
+liste sans leur trace sur la carte.
+
 Les carreaux, eux, survivent aux mises à jour : leur cache n'est pas versionné.
 Les jeter à chaque déploiement ferait reperdre le téléchargement pour rien.
 
@@ -470,7 +477,7 @@ chemin conviennent, puis inscrire les étapes retenues et relancer `calcule`.
 python -m pytest
 ```
 
-169 tests, sans réseau.
+170 tests, sans réseau.
 
 ## Un mot sur les services publics
 

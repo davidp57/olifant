@@ -37,6 +37,13 @@ class TestLecture:
             assert 0 <= p["chemin"] <= 100
             assert p["etapes"] and p["etapes"][0]["depart"] is True
 
+    def test_les_traces_se_revalident_a_chaque_fois(self, client):
+        # Sans consigne, le navigateur garde un fichier date et sert ses
+        # anciennes traces aux nouvelles boucles du catalogue.
+        reponse = client.get("/api/traces.geojson")
+        assert reponse.status_code == 200
+        assert reponse.headers["cache-control"] == "no-cache"
+
     def test_le_gpx_se_telecharge(self, client):
         reponse = client.get("/telecharge/%s.gpx" % premier_parcours(client))
         assert reponse.status_code == 200
