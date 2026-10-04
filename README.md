@@ -232,6 +232,13 @@ Choisir une boucle fait entrer en **consultation**, aux deux tailles d'écran :
 la liste et les filtres s'effacent, la boucle prend toute la place, et un lien
 ramène en arrière. Tant qu'on regarde celle-ci, le reste n'a rien à dire.
 
+Chaque boucle a sa propre adresse, `http://votre-nas:8137/#saint-julien-grimont` :
+c'est celle que montre le navigateur quand la boucle est ouverte, et il suffit
+de la partager depuis son menu. Le lien ouvre directement la boucle, cadrée
+sur la carte, et le retour mène à la liste. Il s'ouvre aussi hors réseau sur
+un téléphone qui a déjà la page — mais pour être ouvert ailleurs, le NAS doit
+être joignable de là où l'on clique.
+
 Les filtres « à pied / en voiture » et le tri sont retenus d'une visite à
 l'autre. Dans la liste, une boucle se résume à sa distance, son dénivelé et sa
 jauge de revêtement : de quoi choisir sans lire. Le reste — résumé, étapes,
