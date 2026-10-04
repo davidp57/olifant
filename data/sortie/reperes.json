@@ -636,27 +636,13 @@
     "distance_m": 297
    }
   ],
-  "schuman": [
+  "prairies-pelt": [
    {
-    "genre": "ravitaillement",
-    "nom": "Priscilla & Rémi Pruvost",
-    "lon": 6.141489,
-    "lat": 49.100426,
-    "distance_m": 73
-   },
-   {
-    "genre": "ravitaillement",
-    "nom": "Restaurant Aime",
-    "lon": 6.144456,
-    "lat": 49.09752,
-    "distance_m": 366
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Saint-Christophe",
-    "lon": 6.142493,
-    "lat": 49.096873,
-    "distance_m": 353
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.129341,
+    "lat": 49.103029,
+    "distance_m": 171
    }
   ]
  },
@@ -779,6 +765,43 @@
     "lon": 6.181425,
     "lat": 49.108319,
     "distance_m": 320
+   }
+  ],
+  "parc-nec": [
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie Pegoraro",
+    "lon": 6.160142,
+    "lat": 49.060883,
+    "distance_m": 227
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Boulangerie",
+    "lon": 6.160687,
+    "lat": 49.059548,
+    "distance_m": 270
+   },
+   {
+    "genre": "ravitaillement",
+    "nom": "Carrefour Express",
+    "lon": 6.159507,
+    "lat": 49.058766,
+    "distance_m": 392
+   },
+   {
+    "genre": "patrimoine",
+    "nom": "Croix de chemin",
+    "lon": 6.166402,
+    "lat": 49.061881,
+    "distance_m": 242
+   },
+   {
+    "genre": "commodite",
+    "nom": "Toilettes",
+    "lon": 6.161282,
+    "lat": 49.061044,
+    "distance_m": 142
    }
   ],
   "montigny": [
@@ -999,55 +1022,20 @@
     "distance_m": 355
    }
   ],
-  "lorry": [
-   {
-    "genre": "ravitaillement",
-    "nom": "Bistrot Sous la Vigne",
-    "lon": 6.121859,
-    "lat": 49.14268,
-    "distance_m": 114
-   },
-   {
-    "genre": "ravitaillement",
-    "nom": "Boulangerie",
-    "lon": 6.118221,
-    "lat": 49.141626,
-    "distance_m": 231
-   },
+  "fort-decaen": [
    {
     "genre": "patrimoine",
-    "nom": "Calvaire de la Grand'Rue",
-    "lon": 6.121004,
-    "lat": 49.142311,
-    "distance_m": 98
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Fort",
-    "lon": 6.124127,
-    "lat": 49.143419,
-    "distance_m": 270
+    "nom": "Fort Decaen",
+    "lon": 6.124674,
+    "lat": 49.13787,
+    "distance_m": 0
    },
    {
     "genre": "patrimoine",
     "nom": "Calvaire",
     "lon": 6.122505,
     "lat": 49.140986,
-    "distance_m": 280
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Chapelle Carré de Malberg",
-    "lon": 6.116055,
-    "lat": 49.141637,
-    "distance_m": 359
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Calvaire du Château",
-    "lon": 6.115659,
-    "lat": 49.141662,
-    "distance_m": 383
+    "distance_m": 381
    }
   ]
  },
@@ -1059,13 +1047,6 @@
     "lon": 6.112376,
     "lat": 49.11337,
     "distance_m": 264
-   },
-   {
-    "genre": "ravitaillement",
-    "nom": "Au Petit Tonneau",
-    "lon": 6.113235,
-    "lat": 49.114436,
-    "distance_m": 397
    }
   ],
   "quentin": [
@@ -1122,60 +1103,49 @@
     "distance_m": 355
    }
   ],
-  "lorry": [
+  "fort-plappeville": [
    {
-    "genre": "ravitaillement",
-    "nom": "Bistrot Sous la Vigne",
-    "lon": 6.121859,
-    "lat": 49.14268,
-    "distance_m": 114
+    "genre": "vue",
+    "nom": "Tour",
+    "lon": 6.116115,
+    "lat": 49.135064,
+    "distance_m": 159
    },
    {
-    "genre": "ravitaillement",
-    "nom": "Boulangerie",
-    "lon": 6.118221,
-    "lat": 49.141626,
-    "distance_m": 231
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Calvaire de la Grand'Rue",
-    "lon": 6.121004,
-    "lat": 49.142311,
-    "distance_m": 98
+    "genre": "vue",
+    "nom": "Point de vue",
+    "lon": 6.118708,
+    "lat": 49.130554,
+    "distance_m": 386
    },
    {
     "genre": "patrimoine",
-    "nom": "Fort",
-    "lon": 6.124127,
-    "lat": 49.143419,
-    "distance_m": 270
-   },
+    "nom": "Fort de Plappeville",
+    "lon": 6.116282,
+    "lat": 49.133644,
+    "distance_m": 0
+   }
+  ],
+  "lessy": [
    {
     "genre": "patrimoine",
-    "nom": "Calvaire",
-    "lon": 6.122505,
-    "lat": 49.140986,
-    "distance_m": 280
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Chapelle Carré de Malberg",
-    "lon": 6.116055,
-    "lat": 49.141637,
-    "distance_m": 359
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Calvaire du Château",
-    "lon": 6.115659,
-    "lat": 49.141662,
-    "distance_m": 383
+    "nom": "Croix de chemin",
+    "lon": 6.096538,
+    "lat": 49.118331,
+    "distance_m": 216,
+    "combien": 2
    }
   ]
  },
  "cotes-jussy": {
   "sainte-ruffine": [
+   {
+    "genre": "eau",
+    "nom": "Point d'eau",
+    "lon": 6.092905,
+    "lat": 49.106519,
+    "distance_m": 262
+   },
    {
     "genre": "patrimoine",
     "nom": "Memorial",
@@ -1191,38 +1161,6 @@
     "distance_m": 349
    }
   ],
-  "jussy": [
-   {
-    "genre": "patrimoine",
-    "nom": "Croix de chemin",
-    "lon": 6.086056,
-    "lat": 49.101223,
-    "distance_m": 84
-   }
-  ],
-  "vaux": [
-   {
-    "genre": "ravitaillement",
-    "nom": "Au Bon Bouillon",
-    "lon": 6.08057,
-    "lat": 49.093185,
-    "distance_m": 104
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Château de Vaux",
-    "lon": 6.081169,
-    "lat": 49.094465,
-    "distance_m": 50
-   },
-   {
-    "genre": "patrimoine",
-    "nom": "Monument aux morts",
-    "lon": 6.07963,
-    "lat": 49.094211,
-    "distance_m": 83
-   }
-  ],
   "scy": [
    {
     "genre": "ravitaillement",
@@ -1230,13 +1168,6 @@
     "lon": 6.112376,
     "lat": 49.11337,
     "distance_m": 264
-   },
-   {
-    "genre": "ravitaillement",
-    "nom": "Au Petit Tonneau",
-    "lon": 6.113235,
-    "lat": 49.114436,
-    "distance_m": 397
    }
   ],
   "quentin": [
@@ -1287,6 +1218,15 @@
     "lon": 6.082005,
     "lat": 49.106744,
     "distance_m": 74
+   }
+  ],
+  "jussy": [
+   {
+    "genre": "patrimoine",
+    "nom": "Croix de chemin",
+    "lon": 6.086056,
+    "lat": 49.101223,
+    "distance_m": 84
    }
   ]
  },

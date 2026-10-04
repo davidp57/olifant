@@ -173,6 +173,24 @@ class TestBranches:
         liaison, trouvees = branches(trace, boucle=False)
         assert liaison == 0.0 and len(trouvees) == 1
 
+    def test_une_branche_voulue_est_mesuree_mais_pas_reprochee(self):
+        # Le crochet mene a « belvedere » : on y va pour lui, et on le dit.
+        boucle = carre()
+        milieu = boucle[20]
+        bout = (milieu[0], milieu[1] - 0.0054)
+        crochet = ligne(milieu[:2], bout, pas=12)
+        trace = Trace("essai", "p", boucle[:20] + crochet + list(reversed(crochet))[1:]
+                      + boucle[21:], [Segment(10000, {"highway": "path"})])
+        points = {"a": point("a", 6.10, 49.10), "belvedere": point("belvedere", *bout)}
+        def jugement(voulues):
+            return juge(Parcours(id="e", nom="e", etapes=["a", "belvedere", "a"],
+                                 branches_voulues=voulues), trace, points)
+        reproche, assume = jugement({}), jugement({"belvedere": "la vue"})
+        assert [b.vers for b in assume.branches] == ["belvedere"]
+        assert any("branche" in a for a in reproche.alertes)
+        assert not any("branche" in a for a in assume.alertes)
+        assert assume.branches[0].metres == reproche.branches[0].metres
+
     def test_le_jugement_signale_une_longue_branche(self):
         boucle = carre()
         milieu = boucle[20]

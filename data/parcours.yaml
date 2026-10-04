@@ -584,6 +584,27 @@ points:
     lon: 6.160640
     lat: 49.104680
 
+  # --- pour refermer les boucles sans branche ---------------------------
+  # Releves dans OpenStreetMap quand le controle des branches a montre que
+  # Lorry, le parc Schuman, Vaux et la ferme de Mazagran ne se quittaient
+  # que par le chemin d'arrivee.
+  fort-decaen:
+    nom: Fort Decaen
+    lon: 6.124670
+    lat: 49.137870
+  fort-plappeville:
+    nom: Fort de Plappeville
+    lon: 6.116280
+    lat: 49.133640
+  prairies-pelt:
+    nom: Prairies Jean-Marie Pelt
+    lon: 6.131690
+    lat: 49.103060
+  graoully:
+    nom: Foret domaniale du Graoully
+    lon: 6.006440
+    lat: 49.040330
+
 parcours:
 
   # Les cinq boucles ci-dessous sont calees sur des mesures, pas sur des
@@ -600,6 +621,8 @@ parcours:
       on rentre par le plus court. La seule boucle qui ne se referme pas sur
       la campagne.
     etapes: [parmentiers, parc-seille, borny-commerces, parmentiers]
+    branches_voulues:
+      borny-commerces: c'est le but du trajet
 
   - id: borny-direct
     nom: Borny par le plus court
@@ -641,8 +664,9 @@ parcours:
     couleur: 316E7C
     resume: >-
       La Moselle dans les deux sens : on descend par l'Esplanade et l'ile du
-      Saulcy, on remonte par les bras morts de Longeville et le parc Schuman.
-    etapes: [gare, esplanade, saulcy, grand-patural, longeville, schuman, gare]
+      Saulcy, on remonte par les bras morts de Longeville et les prairies
+      Jean-Marie Pelt.
+    etapes: [gare, esplanade, saulcy, grand-patural, longeville, prairies-pelt, gare]
 
   - id: seille-amont
     nom: La Seille en amont
@@ -651,9 +675,9 @@ parcours:
     couleur: 5A6E2F
     resume: >-
       La plus verte du lot : plein sud le long de la Seille jusqu'aux prairies
-      inondables de Marly, retour par les jardins de Montigny. Plate de bout
-      en bout.
-    etapes: [gare, parc-seille, seille-marly, montigny, gare]
+      inondables de Marly et au parc du Nec, retour par les jardins de
+      Montigny. Plate de bout en bout.
+    etapes: [gare, parc-seille, parc-nec, montigny, gare]
 
   - id: cote-plappeville
     nom: Le versant de Plappeville
@@ -661,10 +685,10 @@ parcours:
     themes: [relief, patrimoine]
     couleur: B8862A
     resume: >-
-      La plus longue, et la seule qui monte vraiment : on gagne la cote par le
-      Ban-Saint-Martin, on traverse le village vigneron de Plappeville et les
-      vergers de Lorry, on redescend plein est.
-    etapes: [gare, saulcy, grand-patural, plappeville, lorry, gare]
+      La seule boucle de la gare qui monte vraiment : on gagne la cote par le
+      Ban-Saint-Martin, on traverse le village vigneron de Plappeville, on
+      passe au fort Decaen et on redescend plein est.
+    etapes: [gare, saulcy, grand-patural, plappeville, fort-decaen, gare]
 
   # Les cinq boucles suivantes demandent une voiture pour rejoindre le depart.
   # Memes mesures, meme exigence : 10 a 15 km, moins d'un quart du trace
@@ -677,9 +701,9 @@ parcours:
     themes: [relief, foret, patrimoine]
     couleur: 8C4A2F
     resume: >-
-      Le sommet et son fort en ruine, puis les deux villages vignerons du
-      versant nord.
-    etapes: [scy, quentin, plappeville, lorry, scy]
+      Le sommet et son fort en ruine, puis Plappeville et son fort, et le
+      retour en balcon par Lessy.
+    etapes: [scy, quentin, plappeville, fort-plappeville, lessy, scy]
 
   - id: cotes-jussy
     nom: Les cotes de Jussy
@@ -690,7 +714,7 @@ parcours:
     resume: >-
       Le versant ouest de la cote, vignes en bas et hetraie en haut, jusqu'au
       sommet du Saint-Quentin ; retour en balcon par Lessy et Rozerieulles.
-    etapes: [sainte-ruffine, jussy, vaux, scy, quentin, lessy, rozerieulles,
+    etapes: [sainte-ruffine, scy, quentin, lessy, rozerieulles, jussy,
              sainte-ruffine]
 
   - id: aqueduc-corniche
@@ -704,6 +728,9 @@ parcours:
       Moselle et le plateau boise ou passait l'aqueduc, retour par les villages
       viticoles.
     etapes: [ars, jouy-aqueduc, dornot, roches-fraze, croix-st-clement, ancy, ars]
+    branches_voulues:
+      jouy-aqueduc: on y va pour les arches, et on en revient
+      roches-fraze: le belvedere est au bout du rocher
 
   - id: canner
     nom: La vallee de la Canner
@@ -715,6 +742,11 @@ parcours:
       Une hetraie et une riviere tranquille, le plus forestier du lot et le
       plus plat.
     etapes: [kedange, hombourg, foret-hombourg, kedange]
+    # Recomposee sans branche, la boucle perdait la hetraie, seize points de
+    # chemin et cent metres de denivele : on garde les deux.
+    branches_voulues:
+      hombourg: le chemin de la vallee est le seul entre Kedange et Hombourg
+      foret-hombourg: la hetraie est au bout du chemin
 
   - id: montenach
     nom: Les pelouses de Montenach
@@ -737,9 +769,10 @@ parcours:
     resume: >-
       L'abbaye, la source qui alimentait l'aqueduc romain, puis le tour complet
       du vallon par les plateaux : montee au nord, plateau ouest, retour par le
-      sud et un dernier belvedere avant de redescendre au village.
+      sud et la foret du Graoully, et un dernier belvedere avant de
+      redescendre au village.
     etapes: [gorze, abbaye-gorze, source-bouillons, saint-thiebaut, croix-sergent,
-             labauville, mazagran, vue-gorze, gorze]
+             labauville, graoully, vue-gorze, gorze]
 
   # --- dix balades courtes au depart de la rue des Parmentiers -----------
   #

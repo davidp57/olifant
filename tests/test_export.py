@@ -107,6 +107,16 @@ class TestChargement:
         orphelins = sorted(set(recueil.points) - utilises)
         assert isinstance(orphelins, list)
 
+    def test_une_branche_voulue_doit_mener_a_une_etape(self, tmp_path):
+        fichier = tmp_path / "p.yaml"
+        fichier.write_text(
+            "points:\n  a: {nom: A, lon: 6.0, lat: 49.0}\n"
+            "  b: {nom: B, lon: 6.1, lat: 49.0}\n"
+            "parcours:\n  - {id: x, nom: X, etapes: [a, b, a],"
+            " branches_voulues: {ailleurs: pour voir}}\n", encoding="utf-8")
+        with pytest.raises(ValueError, match="ailleurs"):
+            charge(fichier)
+
     def test_une_etape_inconnue_est_refusee_tout_de_suite(self, tmp_path):
         fichier = tmp_path / "p.yaml"
         fichier.write_text(
