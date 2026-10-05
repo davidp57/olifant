@@ -295,17 +295,17 @@ application installée comme Iphigénie.
 
 #### Le mode marche
 
-Sur téléphone, le bouton **Marcher** d'une boucle donne l'écran entier à la
-carte, cadrée sur cette boucle — et non sur toutes, comme le fait l'onglet
-« La carte ». Les chiffres du suivi passent dans un bandeau en surimpression,
-que l'on **escamote d'un appui n'importe où sur la carte** : on alterne entre
-savoir où l'on en est et voir le chemin, et le second veut toute la place. Le
-suivi démarre en même temps s'il ne tournait pas.
+Sur téléphone, le bouton **Marcher** d'une boucle donne l'écran entier à la carte, cadrée sur cette boucle — et non sur toutes, comme le fait l'onglet « La carte ».
+Rien ne s'y superpose qu'un bouton **Retour** en haut à droite : les chiffres du suivi restent dans la fiche, à un appui de là.
+Le retour du navigateur fait la même chose, y compris le glisser depuis le bord gauche sur iPhone.
+Le suivi démarre en même temps s'il ne tournait pas.
 
-En marchant, un appui sur une trace n'ouvre plus la boucle correspondante : on
-a le pouce sur l'écran et les traces passent dessous. **Quitter la marche**
-rend la fiche sans arrêter le suivi ; seuls le retour à la liste et le
-changement de boucle l'arrêtent, puisque la position n'y veut plus rien dire.
+Le point de position passe au **gris** quand il n'a pas été rafraîchi depuis trente secondes : le GPS s'est tu, et la position affichée est ancienne.
+Dans la fiche, une ligne dit l'âge du dernier point (« Position d'il y a 12 s »), et la panne du GPS s'il y en a une.
+Au retour de l'écran verrouillé, le suivi de position est relancé à neuf : Safari sur iPhone ne le reprend pas toujours de lui-même.
+
+En marchant, un appui sur une trace n'ouvre plus la boucle correspondante : on a le pouce sur l'écran et les traces passent dessous.
+Quitter la marche rend la fiche sans arrêter le suivi ; seuls le retour à la liste et le changement de boucle l'arrêtent, puisque la position n'y veut plus rien dire.
 
 Le mode n'existe pas sur grand écran : c'est le téléphone qu'on a dans la main
 sur le sentier, et lui seul manque de place.
