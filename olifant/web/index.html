@@ -609,6 +609,9 @@ async function entreEnMarche(){
   }
   if (couches[choisi]) cadre(couches[choisi].getBounds());
   if (veille === null) await basculeLeSuivi();
+  // Le suivi n'a pas pu demarrer (pas de HTTPS, pas de GPS) : la raison est
+  // ecrite dans la fiche, et le plein ecran n'a pas de quoi l'afficher.
+  if (veille === null) sortDeLaMarche();
 }
 
 /* En sortir ne l'arrete pas : on regarde le detail d'une etape, puis on
@@ -621,10 +624,12 @@ function quitteLaMarche(){
   if (dernierSuivi) ecritLeSuivi(dernierSuivi);
 }
 
-document.getElementById("btn-quitter-marche").addEventListener("click", () => {
+function sortDeLaMarche(){
   if (history.state && history.state.marche) history.back();
   else quitteLaMarche();
-});
+}
+
+document.getElementById("btn-quitter-marche").addEventListener("click", sortDeLaMarche);
 
 /* Le verrou d'ecran lache des que la page passe en arriere-plan -- une
    notification, l'ecran qu'on eteint a la main en marchant -- et le
@@ -1203,6 +1208,12 @@ function echecDeSuivi(erreur){
     derniereErreur = cause; afficheLeSuivi(); return;
   }
   ecritLeSuivi(`<b>Sans position</b><p>${secu(cause)}</p>`);
+  // Le plein ecran du mode marche n'a pas de texte : un refus y laisserait une
+  // carte sans point ni explication, on rend la fiche qui la porte. Une panne
+  // passagere, elle, s'annonce sans faire quitter la carte.
+  if (document.body.dataset.vue === "marche"){
+    if (erreur.code === 1) sortDeLaMarche(); else flash(cause);
+  }
 }
 
 /* L'age du dernier point. Un GPS qui se tait ne previent pas : sans cette
